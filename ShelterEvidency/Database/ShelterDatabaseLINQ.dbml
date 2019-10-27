@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ShelterDatabase" Class="ShelterDatabaseLINQDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Michal\source\repos\ShelterEvidency\ShelterEvidency\Database\ShelterDatabase.mdf;Integrated Security=True" SettingsObjectName="ShelterEvidency.Properties.Settings" SettingsPropertyName="ShelterDatabaseConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Animals" Member="Animals">
+    <Type Name="Animals">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ChipNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Birth" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Sex" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Species" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Breed" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CoatType" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="FurColor" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Breeds" Member="Breeds">
+    <Type Name="Breeds">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Breed" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Species" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CoatTypes" Member="CoatTypes">
+    <Type Name="CoatTypes">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CoatType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FurColors" Member="FurColors">
+    <Type Name="FurColors">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FurColor" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Species" Member="Species">
+    <Type Name="Species">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Stays" Member="Stays">
+    <Type Name="Stays">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Finish" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Animal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

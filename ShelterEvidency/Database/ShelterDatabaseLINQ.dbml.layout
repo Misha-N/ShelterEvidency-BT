@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="ShelterDatabaseLINQ">
+  <DataContextMoniker Name="/ShelterDatabaseLINQDataContext" />
+  <nestedChildShapes>
+    <classShape Id="6c204224-d718-4358-a0a6-408dea277a8f" absoluteBounds="0.75, 0.75, 2, 2.5401025390625005">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Animals" />
+      <nestedChildShapes>
+        <elementListCompartment Id="83fa19df-db96-4105-a406-e24e56b1e798" absoluteBounds="0.765, 1.21, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ffa6fe51-7e58-4f1f-ace9-013682de59b2" absoluteBounds="3.75, 0.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Breeds" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5ea546ec-ed89-4f14-95ce-c18c80015a97" absoluteBounds="3.765, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0428b3bc-6c21-4e62-9f1b-e8833a0294b7" absoluteBounds="3.75, 3.75, 2, 1.193992513020834">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/CoatTypes" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dd985c96-4391-43ac-8760-371b0e6567ae" absoluteBounds="3.765, 4.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d60310dc-788b-40a3-a489-b209ccef8013" absoluteBounds="0.75, 5.75, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/FurColors" />
+      <nestedChildShapes>
+        <elementListCompartment Id="71130ff8-ae6a-43a9-9c3a-38dcf4c905e3" absoluteBounds="0.765, 6.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d38d625d-48cd-4aaf-9c57-487d50c1f2f1" absoluteBounds="3.75, 5.75, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Species" />
+      <nestedChildShapes>
+        <elementListCompartment Id="60881b7d-3164-4232-af0a-1b8621dda87f" absoluteBounds="3.765, 6.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="361dc314-1652-4a6b-b33b-c6822e1a78de" absoluteBounds="6.75, 0.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Stays" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dcfb4352-1cdd-4c19-b68c-63aebd5b7a81" absoluteBounds="6.765, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

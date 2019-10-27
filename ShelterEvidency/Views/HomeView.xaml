@@ -1,0 +1,34 @@
+﻿<Window x:Class="ShelterEvidency.Views.HomeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ShelterEvidency.Views"
+        mc:Ignorable="d"
+        Title="HomeView" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="1">
+            <Button x:Name="LoadAddAnimalPage" Content="Přidat zvíře" Margin="2"/>
+            <Button x:Name="LoadSearchAnimalPage" Content="Vyhledat zvíře" Margin="2"/>
+            <Button Content="Přidat majitele" Margin="2"/>
+            <Button Content="Vyhledat majitele" Margin="2"/>
+            <Button Content="Statistiky" Margin="2"/>
+            <Button Content="Nastavení" Margin="2"/>
+        </StackPanel>
+        <Grid Grid.Row="1" Grid.Column="1" Margin="5">
+            <TextBlock Text="News" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="Diary"></TextBlock>
+            <ContentControl x:Name="ActiveItem" Grid.Column="1" Grid.Row="1"/>
+        </Grid>
+        
+    </Grid>
+</Window>
