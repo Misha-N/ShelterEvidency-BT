@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ShelterDatabase" Class="ShelterDatabaseLINQDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Michal\source\repos\ShelterEvidency\ShelterEvidency\Database\ShelterDatabase.mdf;Integrated Security=True" SettingsObjectName="ShelterEvidency.Properties.Settings" SettingsPropertyName="ShelterDatabaseConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database\ShelterDatabase.mdf;Integrated Security=True;Connect Timeout=30" SettingsObjectName="ShelterEvidency.Properties.Settings" SettingsPropertyName="ShelterDatabaseConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Animals" Member="Animals">
     <Type Name="Animals">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AnimalID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="ChipNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Birth" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -11,6 +11,8 @@
       <Column Name="Breed" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="CoatType" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Column Name="FurColor" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Image" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Animals_Stays" Member="Stays" ThisKey="AnimalID" OtherKey="AnimalID" Type="Stays" />
     </Type>
   </Table>
   <Table Name="dbo.Breeds" Member="Breeds">
@@ -32,6 +34,31 @@
       <Column Name="FurColor" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.People" Member="People">
+    <Type Name="People">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Adress" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="RoleID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Mail" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Note" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Roles" Member="Roles">
+    <Type Name="Roles">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RoleName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sexes" Member="Sexes">
+    <Type Name="Sexes">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Sex" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Species" Member="Species">
     <Type Name="Species">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -40,10 +67,11 @@
   </Table>
   <Table Name="dbo.Stays" Member="Stays">
     <Type Name="Stays">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Finish" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Animal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AnimalID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Animals_Stays" Member="Animals" ThisKey="AnimalID" OtherKey="AnimalID" Type="Animals" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

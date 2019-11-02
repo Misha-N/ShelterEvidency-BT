@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace ShelterEvidency.ViewModels
 {
-    public class SearchAnimalViewModel: Screen
+    public class SearchAnimalViewModel: Conductor<object>
     {
         private List<Database.Animals> _animals;
 
@@ -50,12 +50,51 @@ namespace ShelterEvidency.ViewModels
             }
         }
 
+        private Animals _selectedAnimal;
+
+        public Animals SelectedAnimal
+        {
+            get
+            {
+                return _selectedAnimal;
+            }
+            set
+            {
+                _selectedAnimal = value;
+                NotifyOfPropertyChange(() => SelectedAnimal);
+            }
+        }
+
+        private AnimalModel _allAnimals;
+
+        public AnimalModel AllAnimals
+        {
+            get
+            {
+                return _allAnimals;
+            }
+            set
+            {
+                _allAnimals = value;
+                NotifyOfPropertyChange(() => AllAnimals);
+            }
+        }
+
 
         public void Search()
         {
-            //MessageBox.Show(SearchValue);
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            Animals = db.Animals.Where(x => x.Name.Contains(SearchValue)).ToList();
+            Animals = AllAnimals.ReturnAllAnimals(SearchValue);
+        }
+
+        public void AddAnimal()
+        {
+            ActivateItem(new AddAnimalViewModel());
+        }
+
+        public void OpenEvidencyCard()
+        {
+            if (SelectedAnimal != null)
+                ActivateItem(new EvidencyCardViewModel(SelectedAnimal.AnimalID));
         }
 
 

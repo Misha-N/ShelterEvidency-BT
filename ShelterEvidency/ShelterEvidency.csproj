@@ -84,15 +84,50 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\AnimalModel.cs" />
-    <Compile Include="Models\StaticLists.cs" />
+    <Compile Include="Models\BreedModel.cs" />
+    <Compile Include="Models\CoatTypeModel.cs" />
+    <Compile Include="Models\FurColorModel.cs" />
+    <Compile Include="Models\PersonModel.cs" />
+    <Compile Include="Models\RoleModel.cs" />
+    <Compile Include="Models\SexModel.cs" />
+    <Compile Include="Models\SpeciesModel.cs" />
+    <Compile Include="Models\StayModel.cs" />
     <Compile Include="ViewModels\AddAnimalViewModel.cs" />
+    <Compile Include="ViewModels\AddPersonViewModel.cs" />
+    <Compile Include="ViewModels\AnimalViewModel.cs" />
+    <Compile Include="ViewModels\BasicInfoViewModel.cs" />
+    <Compile Include="ViewModels\ComboBoxSettingsViewModel.cs" />
+    <Compile Include="ViewModels\CostsViewModel.cs" />
+    <Compile Include="ViewModels\EvidencyCardViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\MedicalInfoViewModel.cs" />
     <Compile Include="ViewModels\SearchAnimalViewModel.cs" />
+    <Compile Include="ViewModels\SearchPersonViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\StaysViewModel.cs" />
     <Compile Include="Views\AddAnimalView.xaml.cs">
       <DependentUpon>AddAnimalView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddPersonView.xaml.cs">
+      <DependentUpon>AddPersonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BasicInfoView.xaml.cs">
+      <DependentUpon>BasicInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ComboBoxSettingsView.xaml.cs">
+      <DependentUpon>ComboBoxSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CostsView.xaml.cs">
+      <DependentUpon>CostsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EvidencyCardView.xaml.cs">
+      <DependentUpon>EvidencyCardView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MedicalInfoView.xaml.cs">
+      <DependentUpon>MedicalInfoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchAnimalView.xaml.cs">
       <DependentUpon>SearchAnimalView.xaml</DependentUpon>
@@ -107,7 +142,36 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ShelterDatabaseLINQ.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SearchPersonView.xaml.cs">
+      <DependentUpon>SearchPersonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StaysView.xaml.cs">
+      <DependentUpon>StaysView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\AddAnimalView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddPersonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BasicInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ComboBoxSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CostsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EvidencyCardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -115,7 +179,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MedicalInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SearchAnimalView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchPersonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StaysView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

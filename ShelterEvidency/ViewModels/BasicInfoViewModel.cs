@@ -1,37 +1,51 @@
 ﻿using Caliburn.Micro;
+using ShelterEvidency.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ShelterEvidency.Models;
-using System.Windows;
-using Microsoft.Win32;
-using System.Windows.Media.Imaging;
 
 namespace ShelterEvidency.ViewModels
 {
-    public class AddAnimalViewModel: Conductor<object>
+    public class BasicInfoViewModel: Screen
     {
-        private BitmapImage _animalImage;
+        private AnimalModel _animal;
 
-        public BitmapImage AnimalImage
-        {
-            get 
-            { 
-            return _animalImage; 
-            }
-            set
-            {
-                _animalImage = value;
-                NotifyOfPropertyChange(() => AnimalImage);
-            }
-        }
-
-        public AddAnimalViewModel()
+        public BasicInfoViewModel(int animalID)
         {
             SetLists();
             Animal = new AnimalModel();
+            Animal.GetAnimal(animalID);
+            AnimalID = animalID;
+        }
+
+        private int _animalID;
+
+        public int AnimalID
+        {
+            get
+            {
+                return _animalID;
+            }
+            set
+            {
+                _animalID = value;
+                NotifyOfPropertyChange(() => AnimalID);
+            }
+        }
+
+
+        public AnimalModel Animal
+        {
+            get
+            {
+                return _animal;
+            }
+            set
+            {
+                _animal = value;
+            }
         }
 
         #region List Setting
@@ -82,20 +96,6 @@ namespace ShelterEvidency.ViewModels
 
         #endregion
 
-
-        #region Properties
-        public string Sex
-        {
-            get
-            {
-                return Animal.Sex;
-            }
-            set
-            {
-                Animal.Sex = value;
-                NotifyOfPropertyChange(() => Sex);
-            }
-        } 
         public string Name
         {
             get
@@ -116,8 +116,20 @@ namespace ShelterEvidency.ViewModels
             }
             set
             {
-                Animal.ChipNumber = value;
+                Animal.ChipNumber= value;
                 NotifyOfPropertyChange(() => ChipNumber);
+            }
+        }
+        public string Sex
+        {
+            get
+            {
+                return Animal.Sex;
+            }
+            set
+            {
+                Animal.Sex = value;
+                NotifyOfPropertyChange(() => Sex);
             }
         }
         public string Species
@@ -144,18 +156,6 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => Breed);
             }
         }
-        public string FurColor
-        {
-            get
-            {
-                return Animal.FurColor;
-            }
-            set
-            {
-                Animal.FurColor = value;
-                NotifyOfPropertyChange(() => FurColor);
-            }
-        }
         public string CoatType
         {
             get
@@ -168,54 +168,23 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => CoatType);
             }
         }
-        #endregion
-
-
-        private AnimalModel _animal;
-
-        public AnimalModel Animal
+        public string FurColor
         {
             get
             {
-                return _animal;
+                return Animal.FurColor;
             }
             set
             {
-                _animal = value;
-                NotifyOfPropertyChange(() => Animal);
+                Animal.FurColor = value;
+                NotifyOfPropertyChange(() => FurColor);
             }
         }
 
-
-
-
-        public void SaveToDatabase()
+        public void UpdateAnimal()
         {
-            Animal.SaveAnimal();
-            MessageBox.Show(Animal.Name + " přidán do evidence.");
-            TryClose();
+            Animal.UpdateAnimal(AnimalID);
         }
-
-        public void LoadImage()
-        {
-            OpenFileDialog op = new OpenFileDialog();
-            op.Title = "Vyberte obrázek";
-            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-              "Portable Network Graphic (*.png)|*.png";
-            if (op.ShowDialog() == true)
-            {
-                AnimalImage = new BitmapImage(new Uri(op.FileName));
-            }
-        }
-
-
-        public void Cancel()
-        {
-            TryClose();
-        }
-        
-
 
     }
 }

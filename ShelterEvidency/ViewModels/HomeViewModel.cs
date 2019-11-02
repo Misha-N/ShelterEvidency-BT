@@ -18,5 +18,25 @@ namespace ShelterEvidency.ViewModels
         {
             ActivateItem(new SearchAnimalViewModel());
         }
+
+        public void LoadSearchPersonPage()
+        {
+            ActivateItem(new SearchPersonViewModel());
+        }
+
+        public void LoadAddPersonPage()
+        {
+            ActivateItem(new AddPersonViewModel());
+        }
+
+        public void LoadSettingsPAge()
+        {
+            ActivateItem(new SettingsViewModel());
+        }
+
+        public void Home()
+        {
+            ActivateItem(null);
+        }
     }
 }

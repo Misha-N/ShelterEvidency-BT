@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="ShelterEvidency.Views.ComboBoxSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ShelterEvidency.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel Background="White">
+        <GroupBox Header="Nastavení druhů:">
+            <StackPanel>
+                <DataGrid Margin="5" CanUserAddRows="False" ItemsSource="{Binding Path=SpeciesL, Mode=OneWay}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="114*"/>
+                        <ColumnDefinition Width="266*"/>
+                        <ColumnDefinition Width="191*"/>
+                        <ColumnDefinition Width="114*"/>
+                        <ColumnDefinition Width="115*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock TextWrapping="Wrap" Text="Název plemena:" Margin="5"/>
+                    <TextBox x:Name="NewSpeciesName" Grid.Column="1" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Grid.ColumnSpan="2"/>
+                    <Button x:Name="AddSpecies" Grid.Column="4" Content="Přidat"/>
+                </Grid>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Nastavení plemen:">
+            <StackPanel>
+                <DataGrid Margin="5" CanUserAddRows="False" ItemsSource="{Binding Path=Breeds, Mode=OneWay}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="114*"/>
+                        <ColumnDefinition Width="266*"/>
+                        <ColumnDefinition Width="191*"/>
+                        <ColumnDefinition Width="114*"/>
+                        <ColumnDefinition Width="115*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock TextWrapping="Wrap" Text="Název plemena:" Margin="5"/>
+                    <TextBox x:Name="NewBreedName" Grid.Column="1" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Grid.ColumnSpan="2"/>
+                    <ComboBox Grid.Column="3" Margin="5,0,5,5" ItemsSource="{Binding Path=SpeciesList, Mode=OneTime}" SelectedItem="{Binding Path=SelectedSpecies, Mode=OneWayToSource}"/>
+                    <Button x:Name="AddBreed" Grid.Column="4" Content="Přidat"/>
+                </Grid>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Nastavení druhů srsti:">
+            <StackPanel>
+                <DataGrid Margin="5" CanUserAddRows="False" ItemsSource="{Binding Path=CoatTypes, Mode=OneWay}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="114*"/>
+                        <ColumnDefinition Width="266*"/>
+                        <ColumnDefinition Width="191*"/>
+                        <ColumnDefinition Width="114*"/>
+                        <ColumnDefinition Width="115*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock TextWrapping="Wrap" Text="Název druhu srsti:" Margin="5"/>
+                    <TextBox x:Name="NewCoatTypeName" Grid.Column="1" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Grid.ColumnSpan="2"/>
+                    <Button x:Name="AddCoatType" Grid.Column="4" Content="Přidat"/>
+                </Grid>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Nastavení barev srsti:">
+            <StackPanel>
+                <DataGrid Margin="5" CanUserAddRows="False" ItemsSource="{Binding Path=FurColors, Mode=OneWay}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="114*"/>
+                        <ColumnDefinition Width="266*"/>
+                        <ColumnDefinition Width="191*"/>
+                        <ColumnDefinition Width="114*"/>
+                        <ColumnDefinition Width="115*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock TextWrapping="Wrap" Text="Název barvy srsti:" Margin="5"/>
+                    <TextBox x:Name="NewFurColorName" Grid.Column="1" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Grid.ColumnSpan="2"/>
+                    <Button x:Name="AddFurColor" Grid.Column="4" Content="Přidat"/>
+                </Grid>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Nastavení rolí:">
+            <StackPanel>
+                <DataGrid Margin="5" CanUserAddRows="False" ItemsSource="{Binding Path=Roles, Mode=OneWay}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="114*"/>
+                        <ColumnDefinition Width="266*"/>
+                        <ColumnDefinition Width="191*"/>
+                        <ColumnDefinition Width="114*"/>
+                        <ColumnDefinition Width="115*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock TextWrapping="Wrap" Text="Název role:" Margin="5"/>
+                    <TextBox x:Name="NewRoleName" Grid.Column="1" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Grid.ColumnSpan="2"/>
+                    <Button x:Name="AddRole" Grid.Column="4" Content="Přidat"/>
+                </Grid>
+            </StackPanel>
+        </GroupBox>
+    </StackPanel>
+</UserControl>

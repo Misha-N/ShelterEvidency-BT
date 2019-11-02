@@ -17,18 +17,21 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="1">
+            <Button x:Name="Home" Content="Úvod" Margin="2"/>
             <Button x:Name="LoadAddAnimalPage" Content="Přidat zvíře" Margin="2"/>
             <Button x:Name="LoadSearchAnimalPage" Content="Vyhledat zvíře" Margin="2"/>
-            <Button Content="Přidat majitele" Margin="2"/>
-            <Button Content="Vyhledat majitele" Margin="2"/>
+            <Button x:Name="LoadAddPersonPage" Content="Přidat osobu" Margin="2"/>
+            <Button x:Name="LoadSearchPersonPage" Content="Vyhledat osobu" Margin="2"/>
             <Button Content="Statistiky" Margin="2"/>
-            <Button Content="Nastavení" Margin="2"/>
+            <Button x:Name="LoadSettingsPage" Content="Nastavení" Margin="2"/>
         </StackPanel>
-        <Grid Grid.Row="1" Grid.Column="1" Margin="5">
-            <TextBlock Text="News" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Text="Diary"></TextBlock>
-            <ContentControl x:Name="ActiveItem" Grid.Column="1" Grid.Row="1"/>
-        </Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="1">
+            <Grid   Margin="5">
+                <TextBlock Text="News" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Text="Diary"></TextBlock>
+                <ContentControl x:Name="ActiveItem" Grid.Column="1" Grid.Row="1"/>
+            </Grid>
+        </ScrollViewer>
         
     </Grid>
 </Window>
