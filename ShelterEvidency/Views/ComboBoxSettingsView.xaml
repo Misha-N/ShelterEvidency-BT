@@ -9,7 +9,7 @@
     <StackPanel Background="White">
         <GroupBox Header="Nastavení druhů:">
             <StackPanel>
-                <DataGrid Margin="5" CanUserAddRows="False" ItemsSource="{Binding Path=SpeciesL, Mode=OneWay}"/>
+                <DataGrid Margin="5" CanUserAddRows="False" ItemsSource="{Binding Path=Species, Mode=OneWay}"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="114*"/>
@@ -38,7 +38,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock TextWrapping="Wrap" Text="Název plemena:" Margin="5"/>
                     <TextBox x:Name="NewBreedName" Grid.Column="1" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Grid.ColumnSpan="2"/>
-                    <ComboBox Grid.Column="3" Margin="5,0,5,5" ItemsSource="{Binding Path=SpeciesList, Mode=OneTime}" SelectedItem="{Binding Path=SelectedSpecies, Mode=OneWayToSource}"/>
+                    <ComboBox Grid.Column="3" Margin="5,0,5,5" ItemsSource="{Binding Path=Species, Mode=OneWay}" DisplayMemberPath="SpeciesName" SelectedValuePath="Id" SelectedValue="{Binding Path=NewBreedSpeciesID, Mode=OneWayToSource}"/>
                     <Button x:Name="AddBreed" Grid.Column="4" Content="Přidat"/>
                 </Grid>
             </StackPanel>

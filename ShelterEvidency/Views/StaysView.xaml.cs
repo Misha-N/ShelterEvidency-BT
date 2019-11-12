@@ -24,5 +24,10 @@ namespace ShelterEvidency.Views
         {
             InitializeComponent();
         }
+
+        private void DataGrid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            (sender as DataGrid).SelectedItem = null;
+        }
     }
 }

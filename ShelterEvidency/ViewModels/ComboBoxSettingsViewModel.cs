@@ -13,21 +13,52 @@ namespace ShelterEvidency.ViewModels
 {
     class ComboBoxSettingsViewModel: Conductor<object>
     {
-        public BreedModel Breed { get; set; }
-        public SpeciesModel Species { get; set; }
-        public RoleModel Role { get; set; }
-        public FurColorModel FurColor { get; set; }
-        public CoatTypeModel CoatType { get; set; }
+        #region Models        
+        private void SetModels()
+        {
+            NewBreed = new BreedModel();
+            NewSpecies = new SpeciesModel();
+            NewRole = new RoleModel();
+            NewCoatType = new CoatTypeModel();
+            NewFurColor = new FurColorModel();
+        }
+        public BreedModel NewBreed { get; set; }
+        public SpeciesModel NewSpecies { get; set; }
+        public RoleModel NewRole { get; set; }
+        public FurColorModel NewFurColor { get; set; }
+        public CoatTypeModel NewCoatType { get; set; }
+        #endregion
+        public ComboBoxSettingsViewModel()
+        {
+            SetModels();
+            //SetLists();
+        }
+
+
+        #region New Atributes
         public string NewBreedName
         {
             get
             {
-                return Breed.BreedName;
+                return NewBreed.BreedName;
             }
             set
             {
-                Breed.BreedName = value;
+                NewBreed.BreedName = value;
                 NotifyOfPropertyChange(() => NewBreedName);
+            }
+        }
+
+        public int NewBreedSpeciesID
+        {
+            get
+            {
+                return NewBreed.SpeciesID;
+            }
+            set
+            {
+                NewBreed.SpeciesID = value;
+                NotifyOfPropertyChange(() => NewBreedSpeciesID);
             }
         }
 
@@ -35,11 +66,11 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                return Species.SpeciesName;
+                return NewSpecies.SpeciesName;
             }
             set
             {
-                Species.SpeciesName = value;
+                NewSpecies.SpeciesName = value;
                 NotifyOfPropertyChange(() => NewSpeciesName);
             }
         }
@@ -48,11 +79,11 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                return Role.RoleName;
+                return NewRole.RoleName;
             }
             set
             {
-                Role.RoleName = value;
+                NewRole.RoleName = value;
                 NotifyOfPropertyChange(() => NewRoleName);
             }
         }
@@ -61,11 +92,11 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                return FurColor.FurColorName;
+                return NewFurColor.FurColorName;
             }
             set
             {
-                FurColor.FurColorName = value;
+                NewFurColor.FurColorName = value;
                 NotifyOfPropertyChange(() => NewFurColorName);
             }
         }
@@ -74,130 +105,85 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                return CoatType.CoatTypeName;
+                return NewCoatType.CoatTypeName;
             }
             set
             {
-                CoatType.CoatTypeName = value;
+                NewCoatType.CoatTypeName = value;
                 NotifyOfPropertyChange(() => NewCoatTypeName);
             }
         }
-        public List<string> SpeciesList { get; set; }
+        #endregion
 
-        public ComboBoxSettingsViewModel()
-        {
-            SetModels();
-            SetLists();
-        }
-        private void SetSpeciesList()
-        {
-            SpeciesModel speciesList = new SpeciesModel();
-            SpeciesList = speciesList.ReturnSpeciesList();
-        }
-        private void SetModels()
-        {
-            Breed = new BreedModel();
-            Species = new SpeciesModel();
-            Role = new RoleModel();
-            CoatType = new CoatTypeModel();
-            FurColor = new FurColorModel();
-        }
-
-        private void SetLists()
-        {
-            SetSpeciesList();
-        }
-
-        public string SelectedSpecies
+        #region Set Data Lists
+        public List<Database.Breeds> Breeds
         {
             get
             {
-                return Breed.Species.SpeciesName;
-            }
-            set
-            {
-                Breed.Species.SpeciesName = value;
-                NotifyOfPropertyChange(() => SelectedSpecies);
+                return BreedModel.ReturnBreeds();
             }
         }
-
-        public ObservableCollection<Breeds> Breeds
+        public List<Database.Species> Species
         {
             get
             {
-                return Breed.ReturnBreeds();
+                return SpeciesModel.ReturnSpecies();
             }
         }
-
-        public List<Database.Species> SpeciesL
-        {
-            get
-            {
-                return Species.ReturnSpecies();
-            }
-        }
-
         public List<Database.Roles> Roles
         {
             get
             {
-                return Role.ReturnRoles();
+                return RoleModel.ReturnRoles();
             }
         }
-
         public List<Database.FurColors> FurColors
         {
             get
             {
-                return FurColor.ReturnFurColors();
+                return FurColorModel.ReturnFurColors();
             }
         }
-
         public List<Database.CoatTypes> CoatTypes
         {
             get
             {
-                return CoatType.ReturnCoatTypes();
+                return CoatTypeModel.ReturnCoatTypes();
             }
         }
 
+        #endregion
 
-
-
-
+        #region Saving Methods
         public void AddBreed()
         {
-            Breed.SaveBreed();
-            MessageBox.Show(Breed.BreedName + " přidán do databáze.");
+            NewBreed.SaveBreed();
             NotifyOfPropertyChange(() => Breeds);
         }
 
         public void AddSpecies()
         {
-            Species.SaveSpecies();
-            MessageBox.Show(Breed.BreedName + " přidán do databáze.");
+            NewSpecies.SaveSpecies();
             NotifyOfPropertyChange(() => Species);
         }
 
         public void AddRole()
         {
-            Role.SaveRole();
-            MessageBox.Show(Breed.BreedName + " přidán do databáze.");
+            NewRole.SaveRole();
             NotifyOfPropertyChange(() => Roles);
         }
 
         public void AddFurColor()
         {
-            FurColor.SaveFurColor();
-            MessageBox.Show(Breed.BreedName + " přidán do databáze.");
+            NewFurColor.SaveFurColor();
             NotifyOfPropertyChange(() => FurColors);
         }
 
         public void AddCoatType()
         {
-            CoatType.SaveCoatType();
-            MessageBox.Show(Breed.BreedName + " přidán do databáze.");
+            NewCoatType.SaveCoatType();
             NotifyOfPropertyChange(() => CoatTypes);
         }
+        #endregion
     }
 }

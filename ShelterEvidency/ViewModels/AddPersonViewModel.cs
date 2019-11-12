@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using ShelterEvidency.Database;
 using ShelterEvidency.Models;
 using System;
 using System.Collections.Generic;
@@ -11,25 +12,24 @@ namespace ShelterEvidency.ViewModels
 {
     public class AddPersonViewModel: Conductor<object>
     {
-        public List<string> RoleList { get; private set; }
-
+        public PersonModel Person { get; set; }
+        public AdressModel Adress { get; set; }
         public AddPersonViewModel()
         {
             SetRoleList();
+            Adress = new AdressModel();
             Person = new PersonModel();
         }
 
+        #region List Setting
+        public List<Roles> RoleList { get; private set; }
         private void SetRoleList()
         {
-            RoleModel roleList = new RoleModel();
-            RoleList = roleList.ReturnRoleList();
+            RoleList = RoleModel.ReturnRoles();
         }
+        #endregion
 
-        public void Cancel()
-        {
-            TryClose();
-        }
-
+        #region Person Binded Atributes
         public string Title
         {
             get
@@ -42,8 +42,6 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => Title);
             }
         }
-
-
         public string FirstName
         {
             get
@@ -56,8 +54,6 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => FirstName);
             }
         }
-
-
         public string LastName
         {
             get
@@ -70,36 +66,18 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => LastName);
             }
         }
-
-        public string Role
+        public int Role
         {
             get
             {
-                return Person.Role.RoleName;
+                return Person.RoleID;
             }
             set
             {
-                Person.Role.RoleName = value;
+                Person.RoleID = value;
                 NotifyOfPropertyChange(() => Role);
             }
         }
-
-
-
-        public string Adress
-        {
-            get
-            {
-                return Person.Adress;
-            }
-            set
-            {
-                Person.Adress = value;
-                NotifyOfPropertyChange(() => Adress);
-            }
-        }
-
-
         public string Note
         {
             get
@@ -112,8 +90,6 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => Note);
             }
         }
-
-
         public string Phone
         {
             get
@@ -126,8 +102,6 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => Phone);
             }
         }
-
-
         public string Mail
         {
             get
@@ -140,37 +114,61 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => Mail);
             }
         }
+        #endregion
 
-        private PersonModel _person;
-
-        public PersonModel Person
+        #region Adress Binded Atributes  
+        public string City
         {
             get
             {
-                return _person;
+                return Adress.City;
             }
             set
             {
-                _person = value;
-                NotifyOfPropertyChange(() => Person);
-
+                Adress.City = value;
+                NotifyOfPropertyChange(() => City);
             }
         }
 
+        public string Street
+        {
+            get
+            {
+                return Adress.Street;
+            }
+            set
+            {
+                Adress.Street = value;
+                NotifyOfPropertyChange(() => Street);
+            }
+        }
 
-
+        public int Zip
+        {
+            get
+            {
+                return Adress.Zip;
+            }
+            set
+            {
+                Adress.Zip = value;
+                NotifyOfPropertyChange(() => Zip);
+            }
+        }
+        #endregion
         public void SaveToDatabase()
         {
             Person.SavePerson();
+            Adress.PersonID = Person.ID;
+            Adress.SaveAdress();
             MessageBox.Show(Person.FirstName + " " + Person.LastName + " přidán do evidence.");
             TryClose();
         }
 
-
-
-
-
-
+        public void Cancel()
+        {
+            TryClose();
+        }
 
     }
 }

@@ -7,21 +7,17 @@ using System.Threading.Tasks;
 
 namespace ShelterEvidency.Models
 {
-    class FurColorModel
+    public class FurColorModel
     {
+        #region Properties/Atributes
+        public int ID { get; set; }
         public string FurColorName { get; set; }
-        public List<string> ReturnFurColorList()
-        {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            return db.FurColors.Select(x => x.FurColor).ToList();
-        }
-
-        public List<FurColors> ReturnFurColors()
+        #endregion
+        public static List<FurColors> ReturnFurColors()
         {
             ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
             return db.FurColors.ToList();
         }
-
         public void SaveFurColor()
         {
             if (FurColorName != null)
@@ -30,10 +26,12 @@ namespace ShelterEvidency.Models
                 ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
                 FurColors furColor = new FurColors
                 {
-                    FurColor = FurColorName
+                    FurColorName = FurColorName
                 };
                 db.FurColors.InsertOnSubmit(furColor);
                 db.SubmitChanges();
+
+                ID = furColor.Id;
             }
 
         }

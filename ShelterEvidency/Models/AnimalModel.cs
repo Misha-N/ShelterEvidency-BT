@@ -3,78 +3,108 @@ using System;
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace ShelterEvidency.Models
 {
     public class AnimalModel
     {
+        #region Atributes/Properties
+        public int ID { get; set; }
         public string Name { get; set; }
         public string ChipNumber { get; set; }
-        public string Sex { get; set; }
-        public string Species { get; set; }
-        public string Breed { get; set; }
-        public string CoatType { get; set; }
-        public string FurColor { get; set; }
+        public DateTime? BirthDate { get; set; }
+        public int? SexID { get; set; }
+        public int? OwnerID { get; set; }
+        public int? NewOwnerID { get; set; }
+        public int? VetID { get; set; }
+        public int? SpeciesID { get; set; }
+        public int? BreedID { get; set; }
+        public int? CrossBreedID { get; set; }
+        public int? CoatTypeID { get; set; }
+        public int? FurColorID { get; set; }
+        public int? FeedRation { get; set; }
+        public string Note { get; set; }
+        #endregion
 
         public void SaveAnimal()
         {
             ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
 
             Animals animal = new Animals
-                {
-                    Name = Name,
-                    ChipNumber = ChipNumber,
-                    Sex = Sex,
-                    Species = Species,
-                    Breed = Breed,
-                    CoatType = CoatType,
-                    FurColor = FurColor
-                };
+            {
+                Name = Name,
+                ChipNumber = ChipNumber,
+                Birth = BirthDate,
+                SexID = SexID,
+                SpeciesID = SpeciesID,
+                BreedID = BreedID,
+                CrossBreedID = CrossBreedID,
+                CoatTypeID = CoatTypeID,
+                FurColorID = FurColorID,
+                OwnerID = OwnerID,
+                NewOwnerID = NewOwnerID,
+                VetID = VetID,
+                FeedRation = FeedRation,
+                Note = Note,
+            };
             db.Animals.InsertOnSubmit(animal);
             db.SubmitChanges();
-            
+
+            ID = animal.ID;
         }
 
-        public void UpdateAnimal(int animalID)
+        public void UpdateAnimal()
         {
             ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            Animals animal = db.Animals.FirstOrDefault(i => i.AnimalID == animalID);
+            Animals animal = db.Animals.FirstOrDefault(i => i.ID == ID);
 
             animal.Name = Name;
             animal.ChipNumber = ChipNumber;
-            animal.Sex = Sex;
-            animal.Species = Species;
-            animal.Breed = Breed;
-            animal.CoatType = CoatType;
-            animal.FurColor = FurColor;
+            animal.Birth = BirthDate;
+            animal.SexID = SexID;
+            animal.SpeciesID = SpeciesID;
+            animal.BreedID = BreedID;
+            animal.CrossBreedID = CrossBreedID;
+            animal.CoatTypeID = CoatTypeID;
+            animal.FurColorID = FurColorID;
+            animal.FeedRation = FeedRation;
+            animal.OwnerID = OwnerID;
+            animal.NewOwnerID = NewOwnerID;
+            animal.VetID = VetID;
+            animal.Note = Note;
 
             db.SubmitChanges();
         }
 
-        public void SetFromDatabase(Animals animal)
-        {
-            SetInformations(animal.Name, animal.ChipNumber, animal.Sex, animal.Species, animal.Breed, animal.CoatType, animal.FurColor);
-        }
-        public void SetInformations(string name, string chipNumber, string sex, string species, string breed, string coatType, string furColor)
-        {
-            Name = name;
-            ChipNumber = chipNumber;
-            Sex = sex;
-            Species = species;
-            Breed = breed;
-            CoatType = coatType;
-            FurColor = furColor;
-        }
 
         public void GetAnimal(int animalID)
         {
             ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            var animal = db.Animals.FirstOrDefault(i => i.AnimalID == animalID);
+            var animal = db.Animals.FirstOrDefault(i => i.ID == animalID);
             if (animal != null)
-                SetFromDatabase(animal);
+            {
+                ID = animal.ID;
+                Name = animal.Name;
+                ChipNumber = animal.ChipNumber;
+                BirthDate = animal.Birth;
+                SexID = animal.SexID;
+                SpeciesID = animal.SpeciesID;
+                BreedID = animal.BreedID;
+                CrossBreedID = animal.CrossBreedID;
+                CoatTypeID = animal.CoatTypeID;
+                FurColorID = animal.FurColorID;
+                FeedRation = animal.FeedRation;
+                OwnerID = animal.OwnerID;
+                NewOwnerID = animal.NewOwnerID;
+                VetID = animal.VetID;
+                Note = animal.Note;
+            }
         }
 
         public List<Animals> ReturnAllAnimals(string searchValue)
@@ -83,6 +113,6 @@ namespace ShelterEvidency.Models
             return db.Animals.Where(x => x.Name.Contains(searchValue)).ToList();
         }
 
-    }
+}
 
 }

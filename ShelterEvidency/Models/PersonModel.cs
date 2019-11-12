@@ -9,19 +9,16 @@ namespace ShelterEvidency.Models
 {
     public class PersonModel
     {
+        #region Properties/Atributes
+        public int ID { get; set; }
         public string Title { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public RoleModel Role { get; set; }
+        public int RoleID { get; set; }
         public string Phone { get; set; }
         public string Mail { get; set; }
         public string Note { get; set; }
-        public string Adress { get; set; }
-
-        public PersonModel()
-        {
-            Role = new RoleModel();
-        }
+        #endregion
 
         public void SavePerson()
         {
@@ -32,14 +29,15 @@ namespace ShelterEvidency.Models
                 Title = Title,
                 FirstName = FirstName,
                 LastName = LastName,
-                Adress = Adress,
                 Phone = Phone,
                 Mail = Mail,
                 Note = Note,
-                RoleID = Role.NameToID()
+                RoleID = RoleID
             };
             db.People.InsertOnSubmit(person);
             db.SubmitChanges();
+
+            ID = person.Id;
 
         }
 

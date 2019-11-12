@@ -12,7 +12,6 @@ namespace ShelterEvidency.ViewModels
     class EvidencyCardViewModel : Conductor<object>
     {
         private int _animalID;
-
         public int AnimalID
         {
             get
@@ -41,12 +40,12 @@ namespace ShelterEvidency.ViewModels
 
         public void MedicalInfo()
         {
-            ActivateItem(new MedicalInfoViewModel());
+            //ActivateItem(new MedicalInfoViewModel(AnimalID));
         }
 
         public void Costs()
         {
-            ActivateItem(new CostsViewModel());
+            //ActivateItem(new CostsViewModel(AnimalID));
         }
 
         public void Stays()

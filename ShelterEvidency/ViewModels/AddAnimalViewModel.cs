@@ -8,38 +8,32 @@ using ShelterEvidency.Models;
 using System.Windows;
 using Microsoft.Win32;
 using System.Windows.Media.Imaging;
+using System.Windows.Controls;
+using System.IO;
+using ShelterEvidency.Database;
 
 namespace ShelterEvidency.ViewModels
 {
     public class AddAnimalViewModel: Conductor<object>
     {
-        private BitmapImage _animalImage;
-
-        public BitmapImage AnimalImage
-        {
-            get 
-            { 
-            return _animalImage; 
-            }
-            set
-            {
-                _animalImage = value;
-                NotifyOfPropertyChange(() => AnimalImage);
-            }
-        }
+        public ImageModel Image { get; set; }
+        public AnimalModel Animal { get; set; }
+        public StayModel Stay { get; set; }
 
         public AddAnimalViewModel()
         {
             SetLists();
+            Image = new ImageModel();
             Animal = new AnimalModel();
+            Stay = new StayModel();
         }
 
         #region List Setting
-        public List<string> SexList { get; private set; }
-        public List<string> BreedList { get; private set; }
-        public List<string> SpeciesList { get; private set; }
-        public List<string> CoatTypeList { get; private set; }
-        public List<string> FurColorList { get; private set; }
+        public List<Sexes> SexList { get; private set; }
+        public List<Breeds> BreedList { get; private set; }
+        public List<Species> SpeciesList { get; private set; }
+        public List<CoatTypes> CoatTypeList { get; private set; }
+        public List<FurColors> FurColorList { get; private set; }
 
         private void SetLists()
         {
@@ -52,47 +46,41 @@ namespace ShelterEvidency.ViewModels
 
         private void SetSexList()
         {
-            SexModel sexList = new SexModel();
-            SexList = sexList.ReturnSexList();
+            SexList = SexModel.ReturnSexes();
         }
 
         private void SetBreedList()
         {
-            BreedModel breedList = new BreedModel();
-            BreedList = breedList.ReturnBreedList();
+            BreedList = BreedModel.ReturnBreeds();
         }
 
         private void SetSpeciesList()
         {
-            SpeciesModel speciesList = new SpeciesModel();
-            SpeciesList = speciesList.ReturnSpeciesList();
+            SpeciesList = SpeciesModel.ReturnSpecies();
         }
 
         private void SetCoatTypeList()
         {
-            CoatTypeModel coatTypeList = new CoatTypeModel();
-            CoatTypeList = coatTypeList.ReturnCoatTypeList();
+            CoatTypeList = CoatTypeModel.ReturnCoatTypes();
         }
 
         private void SetFurColorList()
         {
-            FurColorModel furColorList = new FurColorModel();
-            FurColorList = furColorList.ReturnFurColorList();
+            FurColorList = FurColorModel.ReturnFurColors();
         }
 
         #endregion
 
-
-        #region Properties
-        public string Sex
+        #region AddAnimal Atributes Bindings
+        public int? Sex
         {
             get
             {
-                return Animal.Sex;
+                return Animal.SexID;
             }
             set
             {
-                Animal.Sex = value;
+                Animal.SexID = value;
                 NotifyOfPropertyChange(() => Sex);
             }
         } 
@@ -120,82 +108,140 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => ChipNumber);
             }
         }
-        public string Species
+        public int? Species
         {
             get
             {
-                return Animal.Species;
+                return Animal.SpeciesID;
             }
             set
             {
-                Animal.Species = value;
+                Animal.SpeciesID = value;
                 NotifyOfPropertyChange(() => Species);
             }
         }
-        public string Breed
+        public int? Breed
         {
             get
             {
-                return Animal.Breed;
+                return Animal.BreedID;
             }
             set
             {
-                Animal.Breed = value;
+                Animal.BreedID = value;
                 NotifyOfPropertyChange(() => Breed);
             }
         }
-        public string FurColor
+        public int? CrossBreed
         {
             get
             {
-                return Animal.FurColor;
+                return Animal.CrossBreedID;
             }
             set
             {
-                Animal.FurColor = value;
+                Animal.CrossBreedID = value;
+                NotifyOfPropertyChange(() => CrossBreed);
+            }
+        }
+        public int? FurColor
+        {
+            get
+            {
+                return Animal.FurColorID;
+            }
+            set
+            {
+                Animal.FurColorID = value;
                 NotifyOfPropertyChange(() => FurColor);
             }
         }
-        public string CoatType
+        public int? CoatType
         {
             get
             {
-                return Animal.CoatType;
+                return Animal.CoatTypeID;
             }
             set
             {
-                Animal.CoatType = value;
+                Animal.CoatTypeID = value;
                 NotifyOfPropertyChange(() => CoatType);
+            }
+        }
+        public string Note
+        {
+            get
+            {
+                return Animal.Note;
+            }
+            set
+            {
+                Animal.Note = value;
+                NotifyOfPropertyChange(() => Note);
+            }
+        }
+        public DateTime? BirthDate
+        {
+            get
+            {
+                return Animal.BirthDate;
+            }
+            set
+            {
+                Animal.BirthDate = value;
+                NotifyOfPropertyChange(() => BirthDate);
+            }
+        }
+        public int? FeedRation
+        {
+            get
+            {
+                return Animal.FeedRation;
+            }
+            set
+            {
+                Animal.FeedRation = value;
+                NotifyOfPropertyChange(() => FeedRation);
+            }
+        }
+
+        public BitmapImage AnimalImage
+        {
+            get
+            {
+                return Image.Image;
+            }
+            set
+            {
+                Image.Image = value;
+                NotifyOfPropertyChange(() => AnimalImage);
             }
         }
         #endregion
 
-
-        private AnimalModel _animal;
-
-        public AnimalModel Animal
+        public DateTime? StayStartDate
         {
             get
             {
-                return _animal;
+                return Stay.StartDate;
             }
             set
             {
-                _animal = value;
-                NotifyOfPropertyChange(() => Animal);
+                Stay.StartDate = value;
+                NotifyOfPropertyChange(() => StayStartDate);
             }
         }
-
-
-
 
         public void SaveToDatabase()
         {
             Animal.SaveAnimal();
+            Stay.AnimalID = Animal.ID;
+            Image.AnimalID = Animal.ID;
+            Stay.SaveStay();
+            Image.SaveImage();
             MessageBox.Show(Animal.Name + " přidán do evidence.");
             TryClose();
         }
-
         public void LoadImage()
         {
             OpenFileDialog op = new OpenFileDialog();
@@ -205,17 +251,16 @@ namespace ShelterEvidency.ViewModels
               "Portable Network Graphic (*.png)|*.png";
             if (op.ShowDialog() == true)
             {
-                AnimalImage = new BitmapImage(new Uri(op.FileName));
+                Image.Image = new BitmapImage(new Uri(op.FileName));
+                Image.ImagePath = Path.GetFullPath(op.FileName);
             }
+
+            NotifyOfPropertyChange(() => AnimalImage);
         }
-
-
         public void Cancel()
         {
             TryClose();
         }
         
-
-
     }
 }

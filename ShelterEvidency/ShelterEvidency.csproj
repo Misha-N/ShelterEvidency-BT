@@ -83,18 +83,29 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\AdoptionModel.cs" />
+    <Compile Include="Models\AdressModel.cs" />
     <Compile Include="Models\AnimalModel.cs" />
     <Compile Include="Models\BreedModel.cs" />
     <Compile Include="Models\CoatTypeModel.cs" />
+    <Compile Include="Models\CostModel.cs" />
+    <Compile Include="Models\DeathModel.cs" />
+    <Compile Include="Models\DeathTypeModel.cs" />
+    <Compile Include="Models\DonationModel.cs" />
     <Compile Include="Models\FurColorModel.cs" />
+    <Compile Include="Models\ImageModel.cs" />
+    <Compile Include="Models\IncidentModel.cs" />
+    <Compile Include="Models\IncidentTypeModel.cs" />
+    <Compile Include="Models\MedicalRecordModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\SexModel.cs" />
     <Compile Include="Models\SpeciesModel.cs" />
+    <Compile Include="Models\EndTypeModel.cs" />
     <Compile Include="Models\StayModel.cs" />
+    <Compile Include="Models\WalkModel.cs" />
     <Compile Include="ViewModels\AddAnimalViewModel.cs" />
     <Compile Include="ViewModels\AddPersonViewModel.cs" />
-    <Compile Include="ViewModels\AnimalViewModel.cs" />
     <Compile Include="ViewModels\BasicInfoViewModel.cs" />
     <Compile Include="ViewModels\ComboBoxSettingsViewModel.cs" />
     <Compile Include="ViewModels\CostsViewModel.cs" />

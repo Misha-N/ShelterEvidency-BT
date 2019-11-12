@@ -33,13 +33,33 @@
         </StackPanel>
         <StackPanel Grid.Column="1">
             <TextBlock TextWrapping="Wrap" Text="Role:" Margin="5"/>
-            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=RoleList, Mode=OneTime}" SelectedItem="{Binding Path=Role, Mode=OneWayToSource}"/>
+            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=RoleList, Mode=OneWay}" DisplayMemberPath="RoleName" SelectedValuePath="Id" SelectedValue="{Binding Path=Role, Mode=OneWayToSource}"/>
 
-            <TextBlock TextWrapping="Wrap" Text="Adresa:" Margin="5"/>
-            <TextBox x:Name="Adress"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="100"/>
+            <GroupBox Header="Adresa:">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock TextWrapping="Wrap" Text="Město:" Margin="5"/>
+                            <TextBox x:Name="City"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Grid.Column="1"  TextWrapping="Wrap" Text="PSČ:" Margin="5"/>
+                            <TextBox x:Name="Zip" Grid.Column="1" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                        </StackPanel>
+                    </Grid>
+                    
+                    <TextBlock TextWrapping="Wrap" Text="Ulice a číslo domu:" Margin="5"/>
+                    <TextBox x:Name="Street"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                </StackPanel>
+            </GroupBox>
 
             <TextBlock TextWrapping="Wrap" Text="Poznámka:" Margin="5"/>
             <TextBox x:Name="Note"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="50"/>
+            
 
         </StackPanel>
 

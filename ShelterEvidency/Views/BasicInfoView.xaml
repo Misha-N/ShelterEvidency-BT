@@ -24,21 +24,21 @@
             <TextBox x:Name="ChipNumber"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=ChipNumber, Mode=TwoWay}"/>
 
             <TextBlock TextWrapping="Wrap" Text="Pohlaví:" Margin="5"/>
-            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=SexList, Mode=OneTime}" SelectedItem="{Binding Path=Sex, Mode=OneWayToSource}" IsSynchronizedWithCurrentItem="True"/>
+            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=SexList, Mode=OneTime}" DisplayMemberPath="SexName" SelectedValuePath="Id" SelectedValue="{Binding Path=Sex, Mode=OneWayToSource}" IsSynchronizedWithCurrentItem="True"/>
 
             <TextBlock TextWrapping="Wrap" Text="Druh:" Margin="5"/>
-            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=SpeciesList, Mode=OneTime}" SelectedItem="{Binding Path=Species, Mode=OneWayToSource}" IsSynchronizedWithCurrentItem="True"/>
+            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=SpeciesList, Mode=OneTime}" DisplayMemberPath="SpeciesName" SelectedValuePath="Id" SelectedValue="{Binding Path=Species, Mode=OneWayToSource}" IsSynchronizedWithCurrentItem="True"/>
 
         </StackPanel>
         <StackPanel Grid.Column="2">
             <TextBlock TextWrapping="Wrap" Text="Plemeno:" Margin="5"/>
-            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=BreedList, Mode=OneTime}" SelectedItem="{Binding Path=Breed, Mode=OneWayToSource}" IsSynchronizedWithCurrentItem="True"/>
+            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=BreedList, Mode=OneTime}" DisplayMemberPath="BreedName" SelectedValuePath="Id" SelectedValue="{Binding Path=Breed, Mode=OneWayToSource}" IsSynchronizedWithCurrentItem="True"/>
 
             <TextBlock TextWrapping="Wrap" Text="Typ srsti:" Margin="5"/>
-            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=CoatTypeList, Mode=OneTime}" SelectedItem="{Binding Path=CoatType, Mode=OneWayToSource}" IsSynchronizedWithCurrentItem="True"/>
+            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=CoatTypeList, Mode=OneTime}" DisplayMemberPath="CoatTypeName" SelectedValuePath="Id" SelectedValue="{Binding Path=CoatType, Mode=OneWayToSource}" IsSynchronizedWithCurrentItem="True"/>
             
             <TextBlock TextWrapping="Wrap" Text="Barva srsti:" Margin="5"/>
-            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=FurColorList, Mode=OneTime}" SelectedItem="{Binding Path=FurColor, Mode=OneWayToSource}" IsSynchronizedWithCurrentItem="True"/>
+            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=FurColorList, Mode=OneTime}" DisplayMemberPath="FurColorName" SelectedValuePath="Id" SelectedValue="{Binding Path=FurColor, Mode=OneWayToSource}" IsSynchronizedWithCurrentItem="True"/>
 
 
 
@@ -52,6 +52,7 @@
         </StackPanel>
         <Button x:Name="LoadImage" Content="Image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Margin="0,0,10,10"/>
         <Image Margin="10" Source="{Binding Path=AnimalImage}"/>
+        
         <StackPanel Grid.Column="1" Grid.Row="1">
             <TextBlock  HorizontalAlignment="Center"  Text="{Binding Path=Name, Mode=TwoWay}" VerticalAlignment="Center"/>
             <TextBlock  HorizontalAlignment="Center"  Text="{Binding Path=ChipNumber, Mode=TwoWay}" VerticalAlignment="Center"/>

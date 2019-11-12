@@ -7,17 +7,19 @@ using System.Threading.Tasks;
 
 namespace ShelterEvidency.Models
 {
-    public class SexModel
+    public class EndTypeModel
     {
         #region Properties/Atributes
         public int ID { get; set; }
-        public string SexName { get; set; }
+        public string EndTypeName { get; set; }
         #endregion
 
-        public static List<Sexes> ReturnSexes()
+        public static  List<EndTypes> ReturnEndTypes()
         {
             ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            return db.Sexes.ToList();
+            return db.EndTypes.ToList();
         }
+
+
     }
 }

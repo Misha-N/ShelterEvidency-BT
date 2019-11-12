@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 
 namespace ShelterEvidency.Models
 {
-    class CoatTypeModel
+    public class CoatTypeModel
     {
+        #region Properties/Atributes
+        public int ID { get; set; }
         public string CoatTypeName { get; set; }
-        public List<string> ReturnCoatTypeList()
-        {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            return db.CoatTypes.Select(x => x.CoatType).ToList();
-        }
+        #endregion
 
-        public List<CoatTypes> ReturnCoatTypes()
+
+        public static List<CoatTypes> ReturnCoatTypes()
         {
             ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
             return db.CoatTypes.ToList();
@@ -26,14 +25,15 @@ namespace ShelterEvidency.Models
         {
             if (CoatTypeName != null)
             {
-
                 ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
                 CoatTypes coatType = new CoatTypes
                 {
-                    CoatType = CoatTypeName
+                    CoatTypeName = CoatTypeName
                 };
                 db.CoatTypes.InsertOnSubmit(coatType);
                 db.SubmitChanges();
+
+                ID = coatType.Id;
             }
 
         }
