@@ -22,53 +22,47 @@ namespace ShelterEvidency.ViewModels
 
         public AddAnimalViewModel()
         {
-            SetLists();
             Image = new ImageModel();
             Animal = new AnimalModel();
             Stay = new StayModel();
         }
 
         #region List Setting
-        public List<Sexes> SexList { get; private set; }
-        public List<Breeds> BreedList { get; private set; }
-        public List<Species> SpeciesList { get; private set; }
-        public List<CoatTypes> CoatTypeList { get; private set; }
-        public List<FurColors> FurColorList { get; private set; }
-
-        private void SetLists()
+        public List<Database.Sexes> SexList
         {
-            SetSexList();
-            SetBreedList();
-            SetSpeciesList();
-            SetCoatTypeList();
-            SetFurColorList();
+            get
+            {
+                return SexModel.ReturnSexes();
+            }
         }
-
-        private void SetSexList()
+        public List<Database.Breeds> BreedList
         {
-            SexList = SexModel.ReturnSexes();
+            get
+            {
+                return BreedModel.ReturnBreeds(Species);
+            }
         }
-
-        private void SetBreedList()
+        public List<Database.Species> SpeciesList
         {
-            BreedList = BreedModel.ReturnBreeds();
+            get
+            {
+                return SpeciesModel.ReturnSpecies();
+            }
         }
-
-        private void SetSpeciesList()
+        public List<Database.CoatTypes> CoatTypeList
         {
-            SpeciesList = SpeciesModel.ReturnSpecies();
+            get
+            {
+                return CoatTypeModel.ReturnCoatTypes();
+            }
         }
-
-        private void SetCoatTypeList()
+        public List<Database.FurColors> FurColorList
         {
-            CoatTypeList = CoatTypeModel.ReturnCoatTypes();
+            get
+            {
+                return FurColorModel.ReturnFurColors();
+            }
         }
-
-        private void SetFurColorList()
-        {
-            FurColorList = FurColorModel.ReturnFurColors();
-        }
-
         #endregion
 
         #region AddAnimal Atributes Bindings
@@ -118,6 +112,7 @@ namespace ShelterEvidency.ViewModels
             {
                 Animal.SpeciesID = value;
                 NotifyOfPropertyChange(() => Species);
+                NotifyOfPropertyChange(() => BreedList);
             }
         }
         public int? Breed

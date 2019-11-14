@@ -13,12 +13,15 @@ namespace ShelterEvidency.Models
         #region Properties/Atributes
         public int ID { get; set; }
         public string BreedName { get; set; }
-        public int SpeciesID { get; set; }
+        public int? SpeciesID { get; set; }
         #endregion
-        public static List<Breeds> ReturnBreeds()
+        public static List<Breeds> ReturnBreeds(int? speciesID)
         {
             ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            return db.Breeds.ToList();
+            if (speciesID is null)
+                return db.Breeds.ToList();
+            else
+                return db.Breeds.Where(x => x.SpeciesID.Equals(speciesID)).ToList();
         }
         public void SaveBreed()
         {

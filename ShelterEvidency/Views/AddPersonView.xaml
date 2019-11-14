@@ -33,7 +33,7 @@
         </StackPanel>
         <StackPanel Grid.Column="1">
             <TextBlock TextWrapping="Wrap" Text="Role:" Margin="5"/>
-            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=RoleList, Mode=OneWay}" DisplayMemberPath="RoleName" SelectedValuePath="Id" SelectedValue="{Binding Path=Role, Mode=OneWayToSource}"/>
+            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=RoleList, Mode=OneWay}" DisplayMemberPath="RoleName" SelectedValuePath="Id" SelectedValue="{Binding Path=Role, Mode=TwoWay}"/>
 
             <GroupBox Header="Adresa:">
                 <StackPanel>

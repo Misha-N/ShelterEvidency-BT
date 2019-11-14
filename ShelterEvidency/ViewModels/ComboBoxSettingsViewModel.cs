@@ -49,7 +49,7 @@ namespace ShelterEvidency.ViewModels
             }
         }
 
-        public int NewBreedSpeciesID
+        public int? NewBreedSpeciesID
         {
             get
             {
@@ -120,7 +120,7 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                return BreedModel.ReturnBreeds();
+                return BreedModel.ReturnBreeds(null);
             }
         }
         public List<Database.Species> Species

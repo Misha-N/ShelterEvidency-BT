@@ -30,8 +30,10 @@
                 <StackPanel>
                     <TextBlock TextWrapping="Wrap" Text="Začátek:" Margin="5"/>
                     <DatePicker x:Name="Start" SelectedDate="{Binding Path= Start, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    
                     <TextBlock TextWrapping="Wrap" Text="Výsledek:" Margin="5"/>
-                    <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path= EndTypes, Mode=OneTime}" DisplayMemberPath="EndTypeName" SelectedValuePath="ID" SelectedValue="{Binding Path=EndType, Mode=OneWayToSource}" IsSynchronizedWithCurrentItem="True"/>
+                    <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path= EndTypes, Mode=OneTime}"  DisplayMemberPath="EndTypeName" SelectedValuePath="ID" SelectedValue="{Binding Path=EndType, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
+                    
                     <TextBlock TextWrapping="Wrap" Text="Konec:" Margin="5"/>
                     <DatePicker x:Name="Finish" SelectedDate="{Binding Path= Finish, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     <Button x:Name="UpdateStay" Content="Upravit"/>

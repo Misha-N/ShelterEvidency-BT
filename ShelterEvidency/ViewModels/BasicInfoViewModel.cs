@@ -17,7 +17,6 @@ namespace ShelterEvidency.ViewModels
         public ImageModel Image { get; set; }
         public BasicInfoViewModel(int animalID)
         {
-            SetLists();
             Animal = new AnimalModel();
             Animal.GetAnimal(animalID);
             Image = new ImageModel();
@@ -97,6 +96,18 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => Breed);
             }
         }
+        public DateTime? BirthDate
+        {
+            get
+            {
+                return Animal.BirthDate;
+            }
+            set
+            {
+                Animal.BirthDate = value;
+                NotifyOfPropertyChange(() => BirthDate);
+            }
+        }
         public int? CoatType
         {
             get
@@ -121,52 +132,47 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => FurColor);
             }
         }
-        
-        
-        
+
+
+
         #endregion
 
         #region List Setting
-        public List<Sexes> SexList { get; private set; }
-        public List<Breeds> BreedList { get; private set; }
-        public List<Species> SpeciesList { get; private set; }
-        public List<CoatTypes> CoatTypeList { get; private set; }
-        public List<FurColors> FurColorList { get; private set; }
-
-        private void SetLists()
+        public List<Database.Sexes> SexList
         {
-            SetSexList();
-            SetBreedList();
-            SetSpeciesList();
-            SetCoatTypeList();
-            SetFurColorList();
+            get
+            {
+                return SexModel.ReturnSexes();
+            }
         }
-
-        private void SetSexList()
+        public List<Database.Breeds> BreedList
         {
-            SexList = SexModel.ReturnSexes();
+            get
+            {
+                return BreedModel.ReturnBreeds(Species);
+            }
         }
-
-        private void SetBreedList()
+        public List<Database.Species> SpeciesList
         {
-            BreedList = BreedModel.ReturnBreeds();
+            get
+            {
+                return SpeciesModel.ReturnSpecies();
+            }
         }
-
-        private void SetSpeciesList()
+        public List<Database.CoatTypes> CoatTypeList
         {
-            SpeciesList = SpeciesModel.ReturnSpecies();
+            get
+            {
+                return CoatTypeModel.ReturnCoatTypes();
+            }
         }
-
-        private void SetCoatTypeList()
+        public List<Database.FurColors> FurColorList
         {
-            CoatTypeList = CoatTypeModel.ReturnCoatTypes();
+            get
+            {
+                return FurColorModel.ReturnFurColors();
+            }
         }
-
-        private void SetFurColorList()
-        {
-            FurColorList = FurColorModel.ReturnFurColors();
-        }
-
         #endregion
 
         public void UpdateAnimal()

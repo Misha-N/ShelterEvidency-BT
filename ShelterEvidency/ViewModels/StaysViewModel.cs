@@ -98,7 +98,6 @@ namespace ShelterEvidency.ViewModels
             }
         }
         #endregion
-
         public int? SelectedStayID
         {
             get
@@ -121,16 +120,33 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => SelectedStayID);
         }
 
-        private DateTime? _newStayDate;
+        public void UpdateStay()
+        {
+            if (SelectedStayID != null)
+            {
+                Stay.UpdateStay();
+                NotifyOfPropertyChange(() => AnimalStays);
+            }
+        }
+
+        public void CreateNewStay()
+        {
+            if (NewStayDate != null)
+            {
+                NewStay.AnimalID = AnimalID;
+                NewStay.SaveStay();
+            }
+            NotifyOfPropertyChange(() => AnimalStays);
+        }
         public DateTime? NewStayDate
         {
             get
             {
-                return _newStayDate;
+                return NewStay.StartDate;
             }
             set
             {
-                _newStayDate = value;
+                NewStay.StartDate = value;
                 NotifyOfPropertyChange(() => NewStayDate);
             }
         }

@@ -107,12 +107,38 @@ namespace ShelterEvidency.Models
             }
         }
 
-        public List<Animals> ReturnAllAnimals(string searchValue)
+        public static List<AnimalInfo> ReturnAnimals()
         {
             ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            return db.Animals.Where(x => x.Name.Contains(searchValue)).ToList();
+
+            var results = (from animal in db.Animals
+                           select new AnimalInfo
+                           {
+                                ID = animal.ID,
+                                Name = animal.Name,
+                                ChipNumber = animal.ChipNumber,
+                                BirthDate = animal.Birth,
+                                Sex = animal.Sexes.SexName,
+                                Species = animal.Species.SpeciesName,
+                                Breed = animal.Breeds.BreedName,
+                                CrossBreed = animal.Breeds1.BreedName,
+                                CoatType = animal.CoatTypes.CoatTypeName,
+                                FurColor = animal.FurColors.FurColorName,
+                                FeedRation = animal.FeedRation,
+                                Owner = animal.People.FirstName + " " + animal.People.LastName,
+                                NewOwner = animal.People1.FirstName + " " + animal.People.LastName,
+                                Vet = animal.People2.FirstName + " " + animal.People.LastName,
+                                Note = animal.Note
+                            }).ToList();
+            return results;
         }
 
-}
+        public static List<Animals> ReturnSpecificAnimals(string searchValue)
+        {
+            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
+            return db.Animals.ToList();
+        }
+
+    }
 
 }
