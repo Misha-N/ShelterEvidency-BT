@@ -14,7 +14,7 @@ namespace ShelterEvidency.Models
         public string Title { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int RoleID { get; set; }
+        public int? RoleID { get; set; }
         public string Phone { get; set; }
         public string Mail { get; set; }
         public string Note { get; set; }
@@ -41,5 +41,107 @@ namespace ShelterEvidency.Models
 
         }
 
+        public static List<PersonInfo> ReturnPeople()
+        {
+            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
+
+            var results = (from person in db.People
+                           select new PersonInfo
+                           {
+                               ID = person.Id,
+                               TitledFullName = person.Title.Trim() + " " + person.FirstName + " " + person.LastName,
+                               /*
+                               Title = person.Title,
+                               FirstName = person.FirstName,
+                               LastName = person.LastName,
+                               */
+                               Role = person.Roles.RoleName,
+                               Phone = person.Phone,
+                               Mail = person.Mail,
+                               Note = person.Note,
+
+                           }).ToList();
+            return results;
+        }
+
+
+        public static List<PersonInfo> ReturnSpecificPeople(string searchValue)
+        {
+            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
+
+            var results = (from person in db.People
+                           where ((person.LastName.Contains(searchValue)) ||
+                                  (person.Id.ToString().Equals(searchValue)) ||
+                                  (person.Roles.RoleName.Contains(searchValue)))
+                           select new PersonInfo
+                           {
+                               ID = person.Id,
+                               TitledFullName = person.Title.Trim() + " " + person.FirstName + " " + person.LastName,
+                               /*
+                               Title = person.Title,
+                               FirstName = person.FirstName,
+                               LastName = person.LastName,
+                               */
+                               Phone = person.Phone,
+                               Mail = person.Mail,
+                               Note = person.Note,
+                           }).ToList();
+            return results;
+        }
+
+        public void GetPerson(int personID)
+        {
+            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
+            var person = db.People.FirstOrDefault(i => i.Id == personID);
+            if (person != null)
+            {
+                ID = person.Id;
+                Title = person.Title;
+                FirstName = person.FirstName;
+                LastName = person.LastName;
+                RoleID = person.RoleID;
+                Phone = person.Phone;
+                Mail = person.Mail;
+                Note = person.Note;
+            }
+        }
+
+        public void UpdatePerson()
+        {
+            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
+            People person = db.People.FirstOrDefault(i => i.Id == ID);
+
+            person.Title = Title;
+            person.FirstName = FirstName;
+            person.LastName = LastName;
+            person.RoleID = RoleID;
+            person.Phone = Phone;
+            person.Mail = Mail;
+            person.Note = Note;
+
+            db.SubmitChanges();
+        }
+
+        public static List<PersonInfo> ReturnVets()
+        {
+            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
+
+            var results = (from person in db.People
+                           where ((person.RoleID.Equals(2)))
+                           select new PersonInfo
+                           {
+                               ID = person.Id,
+                               TitledFullName = person.Title.Trim() + " " + person.FirstName + " " + person.LastName,
+                               /*
+                               Title = person.Title,
+                               FirstName = person.FirstName,
+                               LastName = person.LastName,
+                               */
+                               Phone = person.Phone,
+                               Mail = person.Mail,
+                               Note = person.Note,
+                           }).ToList();
+            return results;
+        }
     }
 }

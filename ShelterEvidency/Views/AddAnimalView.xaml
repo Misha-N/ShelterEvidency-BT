@@ -52,7 +52,7 @@
             <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=CoatTypeList, Mode=OneWay}" DisplayMemberPath="CoatTypeName" SelectedValuePath="Id" SelectedValue="{Binding Path=CoatType, Mode=OneWayToSource}"/>
 
             <TextBlock TextWrapping="Wrap" Text="Krmná dávka (g):" Margin="5"/>
-            <TextBox x:Name="FeedRytion"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+            <TextBox x:Name="FeedRation"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
             <TextBlock TextWrapping="Wrap" Text="Poznámka:" Margin="5"/>
             <TextBox  x:Name="Note" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>

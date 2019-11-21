@@ -105,6 +105,7 @@
     <Compile Include="Models\EndTypeModel.cs" />
     <Compile Include="Models\StayModel.cs" />
     <Compile Include="Models\WalkModel.cs" />
+    <Compile Include="PersonInfo.cs" />
     <Compile Include="ViewModels\AddAnimalViewModel.cs" />
     <Compile Include="ViewModels\AddPersonViewModel.cs" />
     <Compile Include="ViewModels\BasicInfoViewModel.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="ViewModels\EvidencyCardViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\MedicalInfoViewModel.cs" />
+    <Compile Include="ViewModels\PersonInfoViewModel.cs" />
     <Compile Include="ViewModels\SearchAnimalViewModel.cs" />
     <Compile Include="ViewModels\SearchPersonViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
@@ -140,6 +142,9 @@
     </Compile>
     <Compile Include="Views\MedicalInfoView.xaml.cs">
       <DependentUpon>MedicalInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PersonInfoView.xaml.cs">
+      <DependentUpon>PersonInfoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchAnimalView.xaml.cs">
       <DependentUpon>SearchAnimalView.xaml</DependentUpon>
@@ -192,6 +197,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MedicalInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PersonInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

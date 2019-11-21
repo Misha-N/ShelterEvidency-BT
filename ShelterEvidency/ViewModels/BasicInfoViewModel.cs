@@ -36,6 +36,18 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => Image);
             }
         }
+        public int ID
+        {
+            get
+            {
+                return Animal.ID;
+            }
+            set
+            {
+                Animal.ID = value;
+                NotifyOfPropertyChange(() => ID);
+            }
+        }
         public string Name
         {
             get
@@ -96,6 +108,19 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => Breed);
             }
         }
+
+        public int? CrossBreed
+        {
+            get
+            {
+                return Animal.CrossBreedID;
+            }
+            set
+            {
+                Animal.CrossBreedID = value;
+                NotifyOfPropertyChange(() => CrossBreed);
+            }
+        }
         public DateTime? BirthDate
         {
             get
@@ -133,7 +158,30 @@ namespace ShelterEvidency.ViewModels
             }
         }
 
-
+        public int? FeedRation
+        {
+            get
+            {
+                return Animal.FeedRation;
+            }
+            set
+            {
+                Animal.FeedRation = value;
+                NotifyOfPropertyChange(() => FeedRation);
+            }
+        }
+        public string Note
+        {
+            get
+            {
+                return Animal.Note;
+            }
+            set
+            {
+                Animal.Note = value;
+                NotifyOfPropertyChange(() => Note);
+            }
+        }
 
         #endregion
 
@@ -179,6 +227,12 @@ namespace ShelterEvidency.ViewModels
         {
             Animal.UpdateAnimal();
         }
+
+        public void Cancel()
+        {
+            TryClose();
+        }
+
 
     }
 }

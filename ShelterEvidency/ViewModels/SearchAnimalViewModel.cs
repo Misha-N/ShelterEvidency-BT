@@ -12,16 +12,16 @@ namespace ShelterEvidency.ViewModels
 {
     public class SearchAnimalViewModel: Conductor<object>
     {
-
         public List<AnimalInfo> Animals
         {
             get
             {
-                //if (SearchValue == null)
+                if (SearchValue == null)
                     return AnimalModel.ReturnAnimals();
-                //else
-                    //return Search();
+                else
+                    return Search();
             }
+
         }
 
         private string _searchValue;
@@ -36,7 +36,7 @@ namespace ShelterEvidency.ViewModels
             {
                 _searchValue = value;
                 NotifyOfPropertyChange(() => SearchValue);
-                //Search();
+                NotifyOfPropertyChange(() => Animals);
             }
         }
 
@@ -71,10 +71,10 @@ namespace ShelterEvidency.ViewModels
         }
 
 
-        //public List<AnimalInfo> Search()
-        //{
-
-        //}
+        public List<AnimalInfo> Search()
+        {
+            return AnimalModel.ReturnSpecificAnimals(SearchValue);
+        }
 
         public void AddAnimal()
         {

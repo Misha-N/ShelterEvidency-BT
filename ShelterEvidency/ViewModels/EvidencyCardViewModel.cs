@@ -35,17 +35,17 @@ namespace ShelterEvidency.ViewModels
 
         public void BasicInfo()
         {
-                ActivateItem(new BasicInfoViewModel(AnimalID));
+            ActivateItem(new BasicInfoViewModel(AnimalID));
         }
 
         public void MedicalInfo()
         {
-            //ActivateItem(new MedicalInfoViewModel(AnimalID));
+            ActivateItem(new MedicalInfoViewModel(AnimalID));
         }
 
         public void Costs()
         {
-            //ActivateItem(new CostsViewModel(AnimalID));
+            ActivateItem(new CostsViewModel(AnimalID));
         }
 
         public void Stays()

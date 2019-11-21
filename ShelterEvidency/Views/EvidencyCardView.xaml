@@ -13,9 +13,13 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Button x:Name="BasicInfo" Content="Základní informace" Margin="2,0,0,0" Padding="2,0"/>
+            <Button x:Name="Stays"  Content="Pobyty" Margin="2,0,0,0" Padding="2,0"/>
             <Button x:Name="MedicalInfo" Content="Zdravotní informace" Margin="2,0,0,0" Padding="2,0"/>
             <Button x:Name="Costs" Content="Náklady" Margin="2,0,0,0" Padding="2,0"/>
-            <Button x:Name="Stays"  Content="Pobyty" Margin="2,0,0,0" Padding="2,0"/>
+            <Button x:Name="Incidents" Content="Incidenty" Margin="2,0,0,0" Padding="2,0"/>
+            <Button x:Name="Walks" Content="Venčení" Margin="2,0,0,0" Padding="2,0"/>
+            <Button x:Name="Documents" Content="Dokumenty" Margin="2,0,0,0" Padding="2,0"/>
+
             <TextBlock TextWrapping="Wrap" Text="{Binding Path=AnimalID}"/>
         </StackPanel>
 

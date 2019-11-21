@@ -1,5 +1,4 @@
 ﻿using Caliburn.Micro;
-using ShelterEvidency.Database;
 using ShelterEvidency.Models;
 using System;
 using System.Collections.Generic;
@@ -10,36 +9,31 @@ using System.Windows;
 
 namespace ShelterEvidency.ViewModels
 {
-    public class AddPersonViewModel: Conductor<object>
+    public class PersonInfoViewModel: Screen
     {
         public PersonModel Person { get; set; }
         public AdressModel Adress { get; set; }
-        public AddPersonViewModel()
+        public PersonInfoViewModel(int personID)
         {
-            SetRoleList();
-            Adress = new AdressModel();
             Person = new PersonModel();
+            Person.GetPerson(personID);
+            Adress = new AdressModel();
+            Adress.GetAdress(personID);
+
         }
 
-        #region List Setting
-        public List<Roles> RoleList { get; private set; }
-        private void SetRoleList()
-        {
-            RoleList = RoleModel.ReturnRoles();
-        }
-        #endregion
-
-        #region Person Binded Atributes
-        public string Title
+        #region Binded Properties
+       
+        public int ID
         {
             get
             {
-                return Person.Title;
+                return Person.ID;
             }
             set
             {
-                Person.Title = value;
-                NotifyOfPropertyChange(() => Title);
+                Person.ID = value;
+                NotifyOfPropertyChange(() => ID);
             }
         }
         public string FirstName
@@ -66,7 +60,7 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => LastName);
             }
         }
-        public int? Role
+        public int? RoleID
         {
             get
             {
@@ -75,19 +69,19 @@ namespace ShelterEvidency.ViewModels
             set
             {
                 Person.RoleID = value;
-                NotifyOfPropertyChange(() => Role);
+                NotifyOfPropertyChange(() => RoleID);
             }
         }
-        public string Note
+        public string Title
         {
             get
             {
-                return Person.Note;
+                return Person.Title;
             }
             set
             {
-                Person.Note = value;
-                NotifyOfPropertyChange(() => Note);
+                Person.Title = value;
+                NotifyOfPropertyChange(() => Title);
             }
         }
         public string Phone
@@ -102,6 +96,7 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => Phone);
             }
         }
+
         public string Mail
         {
             get
@@ -114,6 +109,30 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => Mail);
             }
         }
+        public string Note
+        {
+            get
+            {
+                return Person.Note;
+            }
+            set
+            {
+                Person.Note = value;
+                NotifyOfPropertyChange(() => Note);
+            }
+        }
+       
+        #endregion
+
+        #region List Setting
+        public List<Database.Roles> RoleList
+        {
+            get
+            {
+                return RoleModel.ReturnRoles();
+            }
+        }
+
         #endregion
 
         #region Adress Binded Atributes  
@@ -156,13 +175,12 @@ namespace ShelterEvidency.ViewModels
             }
         }
         #endregion
-        public void SaveToDatabase()
+
+        public void UpdatePerson()
         {
-            Person.SavePerson();
-            Adress.PersonID = Person.ID;
-            Adress.SaveAdress();
-            MessageBox.Show(Person.FirstName + " " + Person.LastName + " přidán do evidence.");
-            TryClose();
+            Person.UpdatePerson();
+            Adress.UpdateAdress();
+            MessageBox.Show("ok");
         }
 
         public void Cancel()
@@ -172,3 +190,4 @@ namespace ShelterEvidency.ViewModels
 
     }
 }
+

@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using ShelterEvidency.Database;
+using ShelterEvidency.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,26 +11,62 @@ namespace ShelterEvidency.ViewModels
 {
     public class SearchPersonViewModel: Conductor<object>
     {
-        private List<Database.People> _people;
-
-        public List<Database.People> People
+        public List<PersonInfo> People
         {
             get
             {
-                return _people;
+                if (SearchValue == null)
+                    return PersonModel.ReturnPeople();
+                else
+                    return Search();
+            }
+        }
+
+        private string _searchValue;
+
+        public string SearchValue
+        {
+            get
+            {
+                return _searchValue;
             }
             set
             {
-                _people = value;
+                _searchValue = value;
+                NotifyOfPropertyChange(() => SearchValue);
                 NotifyOfPropertyChange(() => People);
             }
         }
 
-        public SearchPersonViewModel()
-        {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            People = db.People.ToList();
+        private PersonInfo _selectedPerson;
 
+        public PersonInfo SelectedPerson
+        {
+            get
+            {
+                return _selectedPerson;
+            }
+            set
+            {
+                _selectedPerson = value;
+                NotifyOfPropertyChange(() => SelectedPerson);
+            }
+        }
+
+        public List<PersonInfo> Search()
+        {
+            return PersonModel.ReturnSpecificPeople(SearchValue);
+        }
+
+        public void AddPerson()
+        {
+            ActivateItem(new AddPersonViewModel());
+        }
+
+        public void OpenPersonInfo()
+        {
+            if (SelectedPerson != null)
+                ActivateItem(new PersonInfoViewModel(SelectedPerson.ID));
         }
 
     }

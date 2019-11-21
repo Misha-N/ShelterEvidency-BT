@@ -7,47 +7,47 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="12*"/>
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <GroupBox Header="Přidat nový pobyt:">
+                <StackPanel>
+                    <TextBlock TextWrapping="Wrap" Text="Datum:" Margin="5"/>
+                    <DatePicker SelectedDate="{Binding Path= NewStayDate, Mode=OneWayToSource}"/>
+                    <Button x:Name="CreateNewStay" Content="Přidat"/>
+                </StackPanel>
+            </GroupBox>
 
-        <GroupBox Header="Přidat nový pobyt:">
-                <StackPanel>
-                <TextBlock TextWrapping="Wrap" Text="Datum:" Margin="5"/>
-                <DatePicker SelectedDate="{Binding Path= NewStayDate, Mode=OneWayToSource}"/>
-                <Button x:Name="CreateNewStay" Content="Přidat"/>
-                </StackPanel>
-        </GroupBox>
-            
-        <GroupBox Header="Upravit pobyt zvířete:" Grid.Row="1">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <StackPanel>
-                    <TextBlock TextWrapping="Wrap" Text="Začátek:" Margin="5"/>
-                    <DatePicker x:Name="Start" SelectedDate="{Binding Path= Start, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    
-                    <TextBlock TextWrapping="Wrap" Text="Výsledek:" Margin="5"/>
-                    <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path= EndTypes, Mode=OneTime}"  DisplayMemberPath="EndTypeName" SelectedValuePath="ID" SelectedValue="{Binding Path=EndType, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
-                    
-                    <TextBlock TextWrapping="Wrap" Text="Konec:" Margin="5"/>
-                    <DatePicker x:Name="Finish" SelectedDate="{Binding Path= Finish, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                    <Button x:Name="UpdateStay" Content="Upravit"/>
-                    <TextBlock  HorizontalAlignment="Center"  Text="{Binding Path=Start, Mode=OneWay}" VerticalAlignment="Center"/>
-                    <TextBlock  HorizontalAlignment="Center"  Text="{Binding Path=Finish, Mode=OneWay}" VerticalAlignment="Center"/>
-                </StackPanel>
+            <GroupBox Header="Upravit pobyt zvířete:" Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBlock TextWrapping="Wrap" Text="Začátek:" Margin="5"/>
+                        <DatePicker x:Name="Start" SelectedDate="{Binding Path= Start, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock TextWrapping="Wrap" Text="Výsledek:" Margin="5"/>
+                        <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path= EndTypes, Mode=OneTime}"  DisplayMemberPath="EndTypeName" SelectedValuePath="ID" SelectedValue="{Binding Path=EndType, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
+
+                        <TextBlock TextWrapping="Wrap" Text="Konec:" Margin="5"/>
+                        <DatePicker x:Name="Finish" SelectedDate="{Binding Path= Finish, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                        <Button x:Name="UpdateStay" Content="Upravit"/>
+                        <TextBlock  HorizontalAlignment="Center"  Text="{Binding Path=Start, Mode=OneWay}" VerticalAlignment="Center"/>
+                        <TextBlock  HorizontalAlignment="Center"  Text="{Binding Path=Finish, Mode=OneWay}" VerticalAlignment="Center"/>
+                    </StackPanel>
                     <StackPanel Grid.Column="1">
                         <TextBlock TextWrapping="Wrap" Text="Poznámka:" Margin="5"/>
                         <TextBox  x:Name="Note"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="150"/>
                     </StackPanel>
                 </Grid>
-        </GroupBox>
+            </GroupBox>
+        </StackPanel>
 
-        <DataGrid Grid.Row="2" Margin="5" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" ItemsSource="{Binding Path=AnimalStays, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Id" SelectedValue="{Binding Path=SelectedStayID, Mode=OneWayToSource}"/>
+        <DataGrid Margin="5" Grid.Column="1" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" ItemsSource="{Binding Path=AnimalStays, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Id" SelectedValue="{Binding Path=SelectedStayID, Mode=OneWayToSource}"/>
 
     </Grid>
 </UserControl>

@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace ShelterEvidency.Views
 {
     /// <summary>
-    /// Interakční logika pro CostsView.xaml
+    /// Interakční logika pro PersonInfoView.xaml
     /// </summary>
-    public partial class CostsView : UserControl
+    public partial class PersonInfoView : UserControl
     {
-        public CostsView()
+        public PersonInfoView()
         {
             InitializeComponent();
         }
-
     }
 }

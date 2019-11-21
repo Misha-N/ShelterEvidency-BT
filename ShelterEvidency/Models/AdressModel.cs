@@ -15,9 +15,9 @@ namespace ShelterEvidency.Models
 
         public string Street { get; set; }
 
-        public int Zip { get; set; }
+        public int? Zip { get; set; }
 
-        public int PersonID { get; set; }
+        public int? PersonID { get; set; }
 
         #endregion
 
@@ -37,6 +37,33 @@ namespace ShelterEvidency.Models
 
             ID = adress.ID;
 
+        }
+
+        public void GetAdress(int personID)
+        {
+            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
+            var adress = db.Adresses.FirstOrDefault(i => i.PersonID == personID);
+            if (adress != null)
+            {
+                ID = adress.ID;
+                City = adress.City;
+                Street = adress.Street;
+                Zip = adress.Zip;
+                PersonID = adress.PersonID;
+            }
+        }
+
+        public void UpdateAdress()
+        {
+            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
+            Adresses adress = db.Adresses.FirstOrDefault(i => i.ID == ID);
+
+            adress.City = City;
+            adress.Street = Street;
+            adress.Zip = Zip;
+            adress.PersonID = PersonID;
+
+            db.SubmitChanges();
         }
     }
 }
