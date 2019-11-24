@@ -43,7 +43,7 @@
                     <TextBox x:Name="NewPrice" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
                     <TextBlock TextWrapping="Wrap" Text="Datum:" Margin="5"/>
-                    <DatePicker Margin="5,0,5,5" SelectedDate="{Binding Path=NewDate, Mode=OneWayToSource}"/>
+                    <DatePicker Margin="5,0,5,5" SelectedDate="{Binding Path=NewDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <TextBlock TextWrapping="Wrap" Text="Veterinář:" Margin="5"/>
                     <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=VetList, Mode=OneTime}" DisplayMemberPath="TitledFullName" SelectedValuePath="ID" SelectedValue="{Binding Path=NewVet, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>

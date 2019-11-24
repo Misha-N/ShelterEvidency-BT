@@ -78,7 +78,7 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => Sex);
             }
         } 
-        public string Name
+        public string AnimalName
         {
             get
             {
@@ -87,7 +87,7 @@ namespace ShelterEvidency.ViewModels
             set
             {
                 Animal.Name = value;
-                NotifyOfPropertyChange(() => Name);
+                NotifyOfPropertyChange(() => AnimalName);
             }
         }
         public string ChipNumber

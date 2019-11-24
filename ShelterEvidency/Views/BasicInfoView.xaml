@@ -39,7 +39,7 @@
         </StackPanel>
         <StackPanel Grid.Column="2" Grid.RowSpan="2">
             <TextBlock TextWrapping="Wrap" Text="Jméno:" Margin="5"/>
-            <TextBox x:Name="Name" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Name, Mode=TwoWay}"/>
+            <TextBox x:Name="AnimalName" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=AnimalName, Mode=TwoWay}"/>
 
             <TextBlock TextWrapping="Wrap" Text="Datum narození:" Margin="5"/>
             <DatePicker Margin="5,0,5,5" SelectedDate="{Binding Path= BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>

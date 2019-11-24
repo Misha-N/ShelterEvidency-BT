@@ -17,23 +17,27 @@ namespace ShelterEvidency.Models
 
         public static List<CoatTypes> ReturnCoatTypes()
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            return db.CoatTypes.ToList();
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                return db.CoatTypes.ToList();
+            }
         }
 
         public void SaveCoatType()
         {
             if (CoatTypeName != null)
             {
-                ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-                CoatTypes coatType = new CoatTypes
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    CoatTypeName = CoatTypeName
-                };
-                db.CoatTypes.InsertOnSubmit(coatType);
-                db.SubmitChanges();
+                    CoatTypes coatType = new CoatTypes
+                    {
+                        CoatTypeName = CoatTypeName
+                    };
+                    db.CoatTypes.InsertOnSubmit(coatType);
+                    db.SubmitChanges();
 
-                ID = coatType.Id;
+                    ID = coatType.Id;
+                }
             }
 
         }

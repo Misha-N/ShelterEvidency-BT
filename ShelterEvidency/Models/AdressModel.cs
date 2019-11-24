@@ -23,47 +23,52 @@ namespace ShelterEvidency.Models
 
         public void SaveAdress()
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-
-            Adresses adress = new Adresses
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                City = City,
-                Street = Street,
-                Zip = Zip,
-                PersonID = PersonID,
-            };
-            db.Adresses.InsertOnSubmit(adress);
-            db.SubmitChanges();
+                Adresses adress = new Adresses
+                {
+                    City = City,
+                    Street = Street,
+                    Zip = Zip,
+                    PersonID = PersonID,
+                };
+                db.Adresses.InsertOnSubmit(adress);
+                db.SubmitChanges();
 
-            ID = adress.ID;
+                ID = adress.ID;
+            }
 
         }
 
         public void GetAdress(int personID)
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            var adress = db.Adresses.FirstOrDefault(i => i.PersonID == personID);
-            if (adress != null)
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                ID = adress.ID;
-                City = adress.City;
-                Street = adress.Street;
-                Zip = adress.Zip;
-                PersonID = adress.PersonID;
+                var adress = db.Adresses.FirstOrDefault(i => i.PersonID == personID);
+                if (adress != null)
+                {
+                    ID = adress.ID;
+                    City = adress.City;
+                    Street = adress.Street;
+                    Zip = adress.Zip;
+                    PersonID = adress.PersonID;
+                }
             }
         }
 
         public void UpdateAdress()
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            Adresses adress = db.Adresses.FirstOrDefault(i => i.ID == ID);
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                Adresses adress = db.Adresses.FirstOrDefault(i => i.ID == ID);
 
-            adress.City = City;
-            adress.Street = Street;
-            adress.Zip = Zip;
-            adress.PersonID = PersonID;
+                adress.City = City;
+                adress.Street = Street;
+                adress.Zip = Zip;
+                adress.PersonID = PersonID;
 
-            db.SubmitChanges();
+                db.SubmitChanges();
+            }
         }
     }
 }

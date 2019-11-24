@@ -34,133 +34,140 @@ namespace ShelterEvidency.Models
 
         public void SaveAnimal()
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-
-            Animals animal = new Animals
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                Name = Name,
-                ChipNumber = ChipNumber,
-                Birth = BirthDate,
-                SexID = SexID,
-                SpeciesID = SpeciesID,
-                BreedID = BreedID,
-                CrossBreedID = CrossBreedID,
-                CoatTypeID = CoatTypeID,
-                FurColorID = FurColorID,
-                OwnerID = OwnerID,
-                NewOwnerID = NewOwnerID,
-                VetID = VetID,
-                FeedRation = FeedRation,
-                Note = Note,
-            };
-            db.Animals.InsertOnSubmit(animal);
-            db.SubmitChanges();
+                Animals animal = new Animals
+                {
+                    Name = Name,
+                    ChipNumber = ChipNumber,
+                    Birth = BirthDate,
+                    SexID = SexID,
+                    SpeciesID = SpeciesID,
+                    BreedID = BreedID,
+                    CrossBreedID = CrossBreedID,
+                    CoatTypeID = CoatTypeID,
+                    FurColorID = FurColorID,
+                    OwnerID = OwnerID,
+                    NewOwnerID = NewOwnerID,
+                    VetID = VetID,
+                    FeedRation = FeedRation,
+                    Note = Note,
+                };
+                db.Animals.InsertOnSubmit(animal);
+                db.SubmitChanges();
 
-            ID = animal.ID;
+                ID = animal.ID;
+            }
         }
 
         public void UpdateAnimal()
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            Animals animal = db.Animals.FirstOrDefault(i => i.ID == ID);
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                Animals animal = db.Animals.FirstOrDefault(i => i.ID == ID);
 
-            animal.Name = Name;
-            animal.ChipNumber = ChipNumber;
-            animal.Birth = BirthDate;
-            animal.SexID = SexID;
-            animal.SpeciesID = SpeciesID;
-            animal.BreedID = BreedID;
-            animal.CrossBreedID = CrossBreedID;
-            animal.CoatTypeID = CoatTypeID;
-            animal.FurColorID = FurColorID;
-            animal.FeedRation = FeedRation;
-            animal.OwnerID = OwnerID;
-            animal.NewOwnerID = NewOwnerID;
-            animal.VetID = VetID;
-            animal.Note = Note;
+                animal.Name = Name;
+                animal.ChipNumber = ChipNumber;
+                animal.Birth = BirthDate;
+                animal.SexID = SexID;
+                animal.SpeciesID = SpeciesID;
+                animal.BreedID = BreedID;
+                animal.CrossBreedID = CrossBreedID;
+                animal.CoatTypeID = CoatTypeID;
+                animal.FurColorID = FurColorID;
+                animal.FeedRation = FeedRation;
+                animal.OwnerID = OwnerID;
+                animal.NewOwnerID = NewOwnerID;
+                animal.VetID = VetID;
+                animal.Note = Note;
 
-            db.SubmitChanges();
+                db.SubmitChanges();
+            }
         }
 
 
         public void GetAnimal(int animalID)
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            var animal = db.Animals.FirstOrDefault(i => i.ID == animalID);
-            if (animal != null)
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                ID = animal.ID;
-                Name = animal.Name;
-                ChipNumber = animal.ChipNumber;
-                BirthDate = animal.Birth;
-                SexID = animal.SexID;
-                SpeciesID = animal.SpeciesID;
-                BreedID = animal.BreedID;
-                CrossBreedID = animal.CrossBreedID;
-                CoatTypeID = animal.CoatTypeID;
-                FurColorID = animal.FurColorID;
-                FeedRation = animal.FeedRation;
-                OwnerID = animal.OwnerID;
-                NewOwnerID = animal.NewOwnerID;
-                VetID = animal.VetID;
-                Note = animal.Note;
+                var animal = db.Animals.FirstOrDefault(i => i.ID == animalID);
+                if (animal != null)
+                {
+                    ID = animal.ID;
+                    Name = animal.Name;
+                    ChipNumber = animal.ChipNumber;
+                    BirthDate = animal.Birth;
+                    SexID = animal.SexID;
+                    SpeciesID = animal.SpeciesID;
+                    BreedID = animal.BreedID;
+                    CrossBreedID = animal.CrossBreedID;
+                    CoatTypeID = animal.CoatTypeID;
+                    FurColorID = animal.FurColorID;
+                    FeedRation = animal.FeedRation;
+                    OwnerID = animal.OwnerID;
+                    NewOwnerID = animal.NewOwnerID;
+                    VetID = animal.VetID;
+                    Note = animal.Note;
+                }
             }
         }
 
         public static List<AnimalInfo> ReturnAnimals()
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-
-            var results = (from animal in db.Animals
-                           select new AnimalInfo
-                           {
-                                ID = animal.ID,
-                                Name = animal.Name,
-                                ChipNumber = animal.ChipNumber,
-                                BirthDate = animal.Birth,
-                                Sex = animal.Sexes.SexName,
-                                Species = animal.Species.SpeciesName,
-                                Breed = animal.Breeds.BreedName,
-                                CrossBreed = animal.Breeds1.BreedName,
-                                CoatType = animal.CoatTypes.CoatTypeName,
-                                FurColor = animal.FurColors.FurColorName,
-                                FeedRation = animal.FeedRation,
-                                Owner = animal.People.FirstName + " " + animal.People.LastName,
-                                NewOwner = animal.People1.FirstName + " " + animal.People.LastName,
-                                Vet = animal.People2.FirstName + " " + animal.People.LastName,
-                                Note = animal.Note
-                            }).ToList();
-            return results;
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var results = (from animal in db.Animals
+                               select new AnimalInfo
+                               {
+                                    ID = animal.ID,
+                                    Name = animal.Name,
+                                    ChipNumber = animal.ChipNumber,
+                                    BirthDate = animal.Birth,
+                                    Sex = animal.Sexes.SexName,
+                                    Species = animal.Species.SpeciesName,
+                                    Breed = animal.Breeds.BreedName,
+                                    CrossBreed = animal.Breeds1.BreedName,
+                                    CoatType = animal.CoatTypes.CoatTypeName,
+                                    FurColor = animal.FurColors.FurColorName,
+                                    FeedRation = animal.FeedRation,
+                                    Owner = animal.People.FirstName + " " + animal.People.LastName,
+                                    NewOwner = animal.People1.FirstName + " " + animal.People.LastName,
+                                    Vet = animal.People2.FirstName + " " + animal.People.LastName,
+                                    Note = animal.Note
+                                }).ToList();
+                return results;
+            }
         }
 
         public static List<AnimalInfo> ReturnSpecificAnimals(string searchValue)
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-
-            var results = (from animal in db.Animals
-                           where ((animal.Name.Contains(searchValue)) ||
-                                  (animal.ID.ToString().Equals(searchValue)) ||
-                                  (animal.Species.SpeciesName.Contains(searchValue)) ||
-                                  (animal.Breeds.BreedName.Contains(searchValue)))
-                           select new AnimalInfo 
-                           {
-                               ID = animal.ID,
-                               Name = animal.Name,
-                               ChipNumber = animal.ChipNumber,
-                               BirthDate = animal.Birth,
-                               Sex = animal.Sexes.SexName,
-                               Species = animal.Species.SpeciesName,
-                               Breed = animal.Breeds.BreedName,
-                               CrossBreed = animal.Breeds1.BreedName,
-                               CoatType = animal.CoatTypes.CoatTypeName,
-                               FurColor = animal.FurColors.FurColorName,
-                               FeedRation = animal.FeedRation,
-                               Owner = animal.People.FirstName + " " + animal.People.LastName,
-                               NewOwner = animal.People1.FirstName + " " + animal.People.LastName,
-                               Vet = animal.People2.FirstName + " " + animal.People.LastName,
-                               Note = animal.Note
-                           }).ToList();
-            return results;
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var results = (from animal in db.Animals
+                               where ((animal.Name.Contains(searchValue)) ||
+                                      (animal.ID.ToString().Equals(searchValue)) ||
+                                      (animal.Species.SpeciesName.Contains(searchValue)) ||
+                                      (animal.Breeds.BreedName.Contains(searchValue)))
+                               select new AnimalInfo 
+                               {
+                                   ID = animal.ID,
+                                   Name = animal.Name,
+                                   ChipNumber = animal.ChipNumber,
+                                   BirthDate = animal.Birth,
+                                   Sex = animal.Sexes.SexName,
+                                   Species = animal.Species.SpeciesName,
+                                   Breed = animal.Breeds.BreedName,
+                                   CrossBreed = animal.Breeds1.BreedName,
+                                   CoatType = animal.CoatTypes.CoatTypeName,
+                                   FurColor = animal.FurColors.FurColorName,
+                                   FeedRation = animal.FeedRation,
+                                   Owner = animal.People.FirstName + " " + animal.People.LastName,
+                                   NewOwner = animal.People1.FirstName + " " + animal.People.LastName,
+                                   Vet = animal.People2.FirstName + " " + animal.People.LastName,
+                                   Note = animal.Note
+                               }).ToList();
+                return results;
+            }
         }
 
     }

@@ -22,6 +22,7 @@
             <Button x:Name="LoadSearchAnimalPage" Content="Vyhledat zvíře" Margin="2"/>
             <Button x:Name="LoadAddPersonPage" Content="Přidat osobu" Margin="2"/>
             <Button x:Name="LoadSearchPersonPage" Content="Vyhledat osobu" Margin="2"/>
+            <Button x:Name="LoadAdoptionsPage" Content="Adopce" Margin="2"/>
             <Button Content="Statistiky" Margin="2"/>
             <Button x:Name="LoadSettingsPage" Content="Nastavení" Margin="2"/>
         </StackPanel>

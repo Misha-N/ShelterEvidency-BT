@@ -52,5 +52,15 @@ namespace ShelterEvidency.ViewModels
         {
             ActivateItem(new StaysViewModel(AnimalID));
         }
+
+        public void Incidents()
+        {
+            ActivateItem(new IncidentsViewModel(AnimalID));
+        }
+
+        public void Walks()
+        {
+            ActivateItem(new WalksViewModel(AnimalID));
+        }
     }
 }

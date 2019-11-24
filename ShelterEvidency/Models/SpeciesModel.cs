@@ -16,8 +16,10 @@ namespace ShelterEvidency.Models
 
         public static List<Species> ReturnSpecies()
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            return db.Species.ToList();
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                return db.Species.ToList();
+            }
         }
 
 
@@ -25,16 +27,17 @@ namespace ShelterEvidency.Models
         {
             if (SpeciesName != null)
             {
-
-                ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-                Species species = new Species
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    SpeciesName = SpeciesName
-                };
-                db.Species.InsertOnSubmit(species);
-                db.SubmitChanges();
+                    Species species = new Species
+                    {
+                        SpeciesName = SpeciesName
+                    };
+                    db.Species.InsertOnSubmit(species);
+                    db.SubmitChanges();
 
-                ID = species.Id;
+                    ID = species.Id;
+                }
             }
 
         }

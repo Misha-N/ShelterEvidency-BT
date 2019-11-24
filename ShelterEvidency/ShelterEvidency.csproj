@@ -83,6 +83,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdoptionInfo.cs" />
     <Compile Include="AnimalInfo.cs" />
     <Compile Include="Models\AdoptionModel.cs" />
     <Compile Include="Models\AdressModel.cs" />
@@ -96,7 +97,6 @@
     <Compile Include="Models\FurColorModel.cs" />
     <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\IncidentModel.cs" />
-    <Compile Include="Models\IncidentTypeModel.cs" />
     <Compile Include="Models\MedicalRecordModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\RoleModel.cs" />
@@ -108,22 +108,33 @@
     <Compile Include="PersonInfo.cs" />
     <Compile Include="ViewModels\AddAnimalViewModel.cs" />
     <Compile Include="ViewModels\AddPersonViewModel.cs" />
+    <Compile Include="ViewModels\AdoptionCardViewModel.cs" />
+    <Compile Include="ViewModels\AdoptionsViewModel.cs" />
     <Compile Include="ViewModels\BasicInfoViewModel.cs" />
     <Compile Include="ViewModels\ComboBoxSettingsViewModel.cs" />
     <Compile Include="ViewModels\CostsViewModel.cs" />
+    <Compile Include="ViewModels\CreateAdoptionViewModel.cs" />
     <Compile Include="ViewModels\EvidencyCardViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\IncidentsViewModel.cs" />
     <Compile Include="ViewModels\MedicalInfoViewModel.cs" />
     <Compile Include="ViewModels\PersonInfoViewModel.cs" />
     <Compile Include="ViewModels\SearchAnimalViewModel.cs" />
     <Compile Include="ViewModels\SearchPersonViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\StaysViewModel.cs" />
+    <Compile Include="ViewModels\WalksViewModel.cs" />
     <Compile Include="Views\AddAnimalView.xaml.cs">
       <DependentUpon>AddAnimalView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddPersonView.xaml.cs">
       <DependentUpon>AddPersonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdoptionCardView.xaml.cs">
+      <DependentUpon>AdoptionCardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdoptionsView.xaml.cs">
+      <DependentUpon>AdoptionsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BasicInfoView.xaml.cs">
       <DependentUpon>BasicInfoView.xaml</DependentUpon>
@@ -134,11 +145,17 @@
     <Compile Include="Views\CostsView.xaml.cs">
       <DependentUpon>CostsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CreateAdoptionView.xaml.cs">
+      <DependentUpon>CreateAdoptionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EvidencyCardView.xaml.cs">
       <DependentUpon>EvidencyCardView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IncidentsView.xaml.cs">
+      <DependentUpon>IncidentsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MedicalInfoView.xaml.cs">
       <DependentUpon>MedicalInfoView.xaml</DependentUpon>
@@ -168,11 +185,22 @@
     <Compile Include="Views\StaysView.xaml.cs">
       <DependentUpon>StaysView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WalksView.xaml.cs">
+      <DependentUpon>WalksView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\AddAnimalView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddPersonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdoptionCardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdoptionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -188,11 +216,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CreateAdoptionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EvidencyCardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\IncidentsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -217,6 +253,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\StaysView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WalksView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

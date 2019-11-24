@@ -17,26 +17,30 @@ namespace ShelterEvidency.Models
         #endregion
         public static List<Breeds> ReturnBreeds(int? speciesID)
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            if (speciesID is null)
-                return db.Breeds.ToList();
-            else
-                return db.Breeds.Where(x => x.SpeciesID.Equals(speciesID)).ToList();
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                if (speciesID is null)
+                    return db.Breeds.ToList();
+                else
+                    return db.Breeds.Where(x => x.SpeciesID.Equals(speciesID)).ToList();
+            }
         }
         public void SaveBreed()
         {
             if (BreedName != null)
             {
-                ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-                Breeds breed = new Breeds
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    BreedName = BreedName, 
-                    SpeciesID = SpeciesID
-                };
-                db.Breeds.InsertOnSubmit(breed);
-                db.SubmitChanges();
+                    Breeds breed = new Breeds
+                    {
+                        BreedName = BreedName, 
+                        SpeciesID = SpeciesID
+                    };
+                    db.Breeds.InsertOnSubmit(breed);
+                    db.SubmitChanges();
 
-                ID = breed.Id;
+                    ID = breed.Id;
+                }
             }
         }
 

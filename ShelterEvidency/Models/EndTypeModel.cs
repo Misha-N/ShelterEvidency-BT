@@ -16,8 +16,10 @@ namespace ShelterEvidency.Models
 
         public static  List<EndTypes> ReturnEndTypes()
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            return db.EndTypes.ToList();
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                return db.EndTypes.ToList();
+            }
         }
 
 

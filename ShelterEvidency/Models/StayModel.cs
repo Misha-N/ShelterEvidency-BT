@@ -20,34 +20,39 @@ namespace ShelterEvidency.Models
 
         public void SaveStay()
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-
-            Stays stay = new Stays
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                AnimalID = AnimalID,
-                StartDate = StartDate,
-                FinishDate = FinishDate,
-                Note = Note,
-                EndTypeID = EndTypeID
-            };
-            db.Stays.InsertOnSubmit(stay);
-            db.SubmitChanges();
+                Stays stay = new Stays
+                {
+                    AnimalID = AnimalID,
+                    StartDate = StartDate,
+                    FinishDate = FinishDate,
+                    Note = Note,
+                    EndTypeID = EndTypeID
+                };
+                db.Stays.InsertOnSubmit(stay);
+                db.SubmitChanges();
+            }
 
         }
 
         public void GetStay(int? stayID)
         {
             ID = stayID;
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            var stay = db.Stays.FirstOrDefault(i => i.Id == stayID);
-            if (stay != null)
-                SetInformations(stay);
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var stay = db.Stays.FirstOrDefault(i => i.Id == stayID);
+                if (stay != null)
+                    SetInformations(stay);
+            }
         }
 
         public static List<Stays> GetAnimalStays(int animalID)
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            return db.Stays.Where(x => x.AnimalID.Equals(animalID)).ToList();
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                return db.Stays.Where(x => x.AnimalID.Equals(animalID)).ToList();
+            }
         }
 
         public void SetInformations(Stays stay)
@@ -61,15 +66,17 @@ namespace ShelterEvidency.Models
 
         public void UpdateStay()
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            Stays stay = db.Stays.FirstOrDefault(i => i.Id == ID);
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                Stays stay = db.Stays.FirstOrDefault(i => i.Id == ID);
 
-            stay.EndTypeID = EndTypeID;
-            stay.StartDate = StartDate;
-            stay.FinishDate = FinishDate;
-            stay.Note = Note;
+                stay.EndTypeID = EndTypeID;
+                stay.StartDate = StartDate;
+                stay.FinishDate = FinishDate;
+                stay.Note = Note;
 
-            db.SubmitChanges();
+                db.SubmitChanges();
+            }
         }
 
     }

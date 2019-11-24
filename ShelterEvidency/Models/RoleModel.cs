@@ -15,22 +15,26 @@ namespace ShelterEvidency.Models
         #endregion
         public static List<Roles> ReturnRoles()
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            return db.Roles.ToList();
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                return db.Roles.ToList();
+            }
         }
         public void SaveRole()
         {
             if (RoleName != null)
             {
-                ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-                Roles role = new Roles
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    RoleName = RoleName
-                };
-                db.Roles.InsertOnSubmit(role);
-                db.SubmitChanges();
+                    Roles role = new Roles
+                    {
+                        RoleName = RoleName
+                    };
+                    db.Roles.InsertOnSubmit(role);
+                    db.SubmitChanges();
 
-                ID = role.Id;
+                    ID = role.Id;
+                }
             }
 
         }

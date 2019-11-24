@@ -18,7 +18,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="1" Grid.RowSpan="2">
             <TextBlock TextWrapping="Wrap" Text="Jméno:" Margin="5"/>
-            <TextBox x:Name="Name" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+            <TextBox x:Name="AnimalName" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
             <TextBlock TextWrapping="Wrap" Text="Číslo čipu/tetování:" Margin="5"/>
             <TextBox x:Name="ChipNumber"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>

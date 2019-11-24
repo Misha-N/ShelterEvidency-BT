@@ -15,23 +15,27 @@ namespace ShelterEvidency.Models
         #endregion
         public static List<FurColors> ReturnFurColors()
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            return db.FurColors.ToList();
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                return db.FurColors.ToList();
+            }
         }
         public void SaveFurColor()
         {
             if (FurColorName != null)
             {
 
-                ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-                FurColors furColor = new FurColors
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    FurColorName = FurColorName
-                };
-                db.FurColors.InsertOnSubmit(furColor);
-                db.SubmitChanges();
+                    FurColors furColor = new FurColors
+                    {
+                        FurColorName = FurColorName
+                    };
+                    db.FurColors.InsertOnSubmit(furColor);
+                    db.SubmitChanges();
 
-                ID = furColor.Id;
+                    ID = furColor.Id;
+                }
             }
 
         }

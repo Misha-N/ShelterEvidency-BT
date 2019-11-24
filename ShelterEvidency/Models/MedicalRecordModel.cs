@@ -21,36 +21,41 @@ namespace ShelterEvidency.Models
 
         public void SaveMedicalRecord()
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-
-            MedicalRecords medicalRecord = new MedicalRecords
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                AnimalID = AnimalID,
-                RecordName = RecordName,
-                Description = Description,
-                CostID = CostID,
-                Date = Date,
-                VetID = VetID
-            };
-            db.MedicalRecords.InsertOnSubmit(medicalRecord);
-            db.SubmitChanges();
+                MedicalRecords medicalRecord = new MedicalRecords
+                {
+                    AnimalID = AnimalID,
+                    RecordName = RecordName,
+                    Description = Description,
+                    CostID = CostID,
+                    Date = Date,
+                    VetID = VetID
+                };
+                db.MedicalRecords.InsertOnSubmit(medicalRecord);
+                db.SubmitChanges();
 
-            ID = medicalRecord.Id;
+                ID = medicalRecord.Id;
+            }
         }
 
         public static List<MedicalRecords> GetAnimalMedicalRecords(int animalID)
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            return db.MedicalRecords.Where(x => x.AnimalID.Equals(animalID)).ToList();
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                return db.MedicalRecords.Where(x => x.AnimalID.Equals(animalID)).ToList();
+            }
         }
 
         public void GetMedicalRecord(int? medicalRecordID)
         {
             ID = medicalRecordID;
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            var medicalRecord = db.MedicalRecords.FirstOrDefault(i => i.Id == medicalRecordID);
-            if (medicalRecord != null)
-                SetInformations(medicalRecord);
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var medicalRecord = db.MedicalRecords.FirstOrDefault(i => i.Id == medicalRecordID);
+                if (medicalRecord != null)
+                    SetInformations(medicalRecord);
+            }
         }
         public void SetInformations(MedicalRecords medicalRecord)
         {
@@ -64,15 +69,17 @@ namespace ShelterEvidency.Models
 
         public void UpdateMedicalRecord()
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            MedicalRecords medicalRecord = db.MedicalRecords.FirstOrDefault(i => i.Id == ID);
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                MedicalRecords medicalRecord = db.MedicalRecords.FirstOrDefault(i => i.Id == ID);
 
-            medicalRecord.RecordName = RecordName;
-            medicalRecord.VetID = VetID;
-            medicalRecord.Description = Description;
-            medicalRecord.Date = Date;
+                medicalRecord.RecordName = RecordName;
+                medicalRecord.VetID = VetID;
+                medicalRecord.Description = Description;
+                medicalRecord.Date = Date;
 
-            db.SubmitChanges();
+                db.SubmitChanges();
+            }
         }
     }
 }

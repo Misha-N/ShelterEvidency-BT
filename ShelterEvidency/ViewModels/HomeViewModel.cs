@@ -29,9 +29,14 @@ namespace ShelterEvidency.ViewModels
             ActivateItem(new AddPersonViewModel());
         }
 
-        public void LoadSettingsPAge()
+        public void LoadSettingsPage()
         {
             ActivateItem(new SettingsViewModel());
+        }
+
+        public void LoadAdoptionsPage()
+        {
+            ActivateItem(new AdoptionsViewModel());
         }
 
         public void Home()

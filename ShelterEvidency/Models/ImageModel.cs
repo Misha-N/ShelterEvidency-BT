@@ -22,37 +22,41 @@ namespace ShelterEvidency.Models
         {
             if (ImagePath != null)
             {
-                ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-                Images img = new Images
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    AnimalID = AnimalID,
-                };
-                db.Images.InsertOnSubmit(img);
-                db.SubmitChanges();
+                    Images img = new Images
+                    {
+                        AnimalID = AnimalID,
+                    };
+                    db.Images.InsertOnSubmit(img);
+                    db.SubmitChanges();
 
-                string fileName = img.Id.ToString() + ".jpg";
-                string path = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "AnimalImages", fileName);
+                    string fileName = img.Id.ToString() + ".jpg";
+                    string path = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "AnimalImages", fileName);
 
-                System.IO.File.Copy(ImagePath, path, true);
+                    System.IO.File.Copy(ImagePath, path, true);
 
-                img.ImagePath = path;
+                    img.ImagePath = path;
 
-                db.SubmitChanges();
+                    db.SubmitChanges();
 
-                ID = img.Id;
+                    ID = img.Id;
+                }
             }
         }
 
         public void GetImage(int animalID)
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            var img = db.Images.FirstOrDefault(i => i.AnimalID == animalID);
-            if (img != null)
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                Image = new BitmapImage(new Uri(img.ImagePath));
-                ImagePath = img.ImagePath;
-                AnimalID = img.AnimalID;
-                ID = img.Id;
+                var img = db.Images.FirstOrDefault(i => i.AnimalID == animalID);
+                if (img != null)
+                {
+                    Image = new BitmapImage(new Uri(img.ImagePath));
+                    ImagePath = img.ImagePath;
+                    AnimalID = img.AnimalID;
+                    ID = img.Id;
+                }
             }
 
         }

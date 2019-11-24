@@ -16,8 +16,10 @@ namespace ShelterEvidency.Models
 
         public static List<Sexes> ReturnSexes()
         {
-            ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext();
-            return db.Sexes.ToList();
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                return db.Sexes.ToList();
+            }
         }
     }
 }
