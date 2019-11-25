@@ -15,7 +15,7 @@ namespace ShelterEvidency.Models
     public class AnimalModel
     {
         #region Atributes/Properties
-        public int ID { get; set; }
+        public int? ID { get; set; }
         public string Name { get; set; }
         public string ChipNumber { get; set; }
         public DateTime? BirthDate { get; set; }
@@ -112,6 +112,33 @@ namespace ShelterEvidency.Models
             }
         }
 
+        public static AnimalInfo GetAnimalInfo(int? animalID)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var animal = db.Animals.FirstOrDefault(i => i.ID == animalID);
+                if (animal != null)
+                {
+                    AnimalInfo info = new AnimalInfo
+                    {
+                        ID = animal.ID,
+                        Name = animal.Name,
+                        ChipNumber = animal.ChipNumber,
+                        BirthDate = animal.Birth,
+                        Sex = animal.Sexes.SexName,
+                        Species = animal.Species.SpeciesName,
+                        Breed = animal.Breeds.BreedName,
+                        CoatType = animal.CoatTypes.CoatTypeName,
+                        FurColor = animal.FurColors.FurColorName,
+
+                    };
+                    return info;
+                }
+                else
+                    return new AnimalInfo();
+            }
+        }
+
         public static List<AnimalInfo> ReturnAnimals()
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
@@ -131,8 +158,8 @@ namespace ShelterEvidency.Models
                                     FurColor = animal.FurColors.FurColorName,
                                     FeedRation = animal.FeedRation,
                                     Owner = animal.People.FirstName + " " + animal.People.LastName,
-                                    NewOwner = animal.People1.FirstName + " " + animal.People.LastName,
-                                    Vet = animal.People2.FirstName + " " + animal.People.LastName,
+                                    NewOwner = animal.People1.FirstName + " " + animal.People1.LastName,
+                                    Vet = animal.People2.FirstName + " " + animal.People2.LastName,
                                     Note = animal.Note
                                 }).ToList();
                 return results;
@@ -162,8 +189,8 @@ namespace ShelterEvidency.Models
                                    FurColor = animal.FurColors.FurColorName,
                                    FeedRation = animal.FeedRation,
                                    Owner = animal.People.FirstName + " " + animal.People.LastName,
-                                   NewOwner = animal.People1.FirstName + " " + animal.People.LastName,
-                                   Vet = animal.People2.FirstName + " " + animal.People.LastName,
+                                   NewOwner = animal.People1.FirstName + " " + animal.People1.LastName,
+                                   Vet = animal.People2.FirstName + " " + animal.People2.LastName,
                                    Note = animal.Note
                                }).ToList();
                 return results;

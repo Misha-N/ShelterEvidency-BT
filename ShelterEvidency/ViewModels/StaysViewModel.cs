@@ -73,18 +73,6 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => Finish);
             }
         }
-        public int? EndType
-        {
-            get
-            {
-                return Stay.EndTypeID;
-            }
-            set
-            {
-                Stay.EndTypeID = value;
-                NotifyOfPropertyChange(() => EndType);
-            }
-        }
         public string Note
         {
             get
@@ -95,6 +83,45 @@ namespace ShelterEvidency.ViewModels
             {
                 Stay.Note = value;
                 NotifyOfPropertyChange(() => Note);
+            }
+        }
+
+        public bool? Adopted
+        {
+            get
+            {
+                return Stay.Adopted;
+            }
+            set
+            {
+                Stay.Adopted = value;
+                NotifyOfPropertyChange(() => Adopted);
+            }
+        }
+
+        public bool? Escaped
+        {
+            get
+            {
+                return Stay.Escaped;
+            }
+            set
+            {
+                Stay.Escaped = value;
+                NotifyOfPropertyChange(() => Escaped);
+            }
+        }
+
+        public bool? Died
+        {
+            get
+            {
+                return Stay.Died;
+            }
+            set
+            {
+                Stay.Died = value;
+                NotifyOfPropertyChange(() => Escaped);
             }
         }
         #endregion
@@ -115,9 +142,11 @@ namespace ShelterEvidency.ViewModels
         {
             NotifyOfPropertyChange(() => Start);
             NotifyOfPropertyChange(() => Finish);
-            NotifyOfPropertyChange(() => EndType);
             NotifyOfPropertyChange(() => Note);
             NotifyOfPropertyChange(() => SelectedStayID);
+            NotifyOfPropertyChange(() => Adopted);
+            NotifyOfPropertyChange(() => Escaped);
+            NotifyOfPropertyChange(() => Died);
         }
 
         public void UpdateStay()

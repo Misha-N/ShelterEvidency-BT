@@ -80,22 +80,5 @@
             </StackPanel>
         </GroupBox>
 
-        <GroupBox Header="Nastavení rolí:">
-            <StackPanel>
-                <DataGrid Margin="5" CanUserAddRows="False" ItemsSource="{Binding Path=Roles, Mode=OneWay}"/>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="114*"/>
-                        <ColumnDefinition Width="266*"/>
-                        <ColumnDefinition Width="191*"/>
-                        <ColumnDefinition Width="114*"/>
-                        <ColumnDefinition Width="115*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock TextWrapping="Wrap" Text="Název role:" Margin="5"/>
-                    <TextBox x:Name="NewRoleName" Grid.Column="1" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Grid.ColumnSpan="2"/>
-                    <Button x:Name="AddRole" Grid.Column="4" Content="Přidat"/>
-                </Grid>
-            </StackPanel>
-        </GroupBox>
     </StackPanel>
 </UserControl>

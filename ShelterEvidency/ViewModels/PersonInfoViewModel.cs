@@ -12,13 +12,10 @@ namespace ShelterEvidency.ViewModels
     public class PersonInfoViewModel: Screen
     {
         public PersonModel Person { get; set; }
-        public AdressModel Adress { get; set; }
         public PersonInfoViewModel(int personID)
         {
             Person = new PersonModel();
             Person.GetPerson(personID);
-            Adress = new AdressModel();
-            Adress.GetAdress(personID);
 
         }
 
@@ -58,18 +55,6 @@ namespace ShelterEvidency.ViewModels
             {
                 Person.LastName = value;
                 NotifyOfPropertyChange(() => LastName);
-            }
-        }
-        public int? RoleID
-        {
-            get
-            {
-                return Person.RoleID;
-            }
-            set
-            {
-                Person.RoleID = value;
-                NotifyOfPropertyChange(() => RoleID);
             }
         }
         public string Title
@@ -121,30 +106,16 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => Note);
             }
         }
-       
-        #endregion
 
-        #region List Setting
-        public List<Database.Roles> RoleList
-        {
-            get
-            {
-                return RoleModel.ReturnRoles();
-            }
-        }
-
-        #endregion
-
-        #region Adress Binded Atributes  
         public string City
         {
             get
             {
-                return Adress.City;
+                return Person.AdressCity;
             }
             set
             {
-                Adress.City = value;
+                Person.AdressCity = value;
                 NotifyOfPropertyChange(() => City);
             }
         }
@@ -153,33 +124,99 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                return Adress.Street;
+                return Person.AdressStreet;
             }
             set
             {
-                Adress.Street = value;
+                Person.AdressStreet = value;
                 NotifyOfPropertyChange(() => Street);
             }
         }
-
-        public int? Zip
+        public string Zip
         {
             get
             {
-                return Adress.Zip;
+                return Person.AdressZip;
             }
             set
             {
-                Adress.Zip = value;
+                Person.AdressZip = value;
                 NotifyOfPropertyChange(() => Zip);
             }
         }
+
+        public bool? IsOwner
+        {
+            get
+            {
+                return Person.IsOwner;
+            }
+            set
+            {
+                Person.IsOwner = value;
+                NotifyOfPropertyChange(() => IsOwner);
+            }
+        }
+
+        public bool? IsVet
+        {
+            get
+            {
+                return Person.IsVet;
+            }
+            set
+            {
+                Person.IsVet = value;
+                NotifyOfPropertyChange(() => IsVet);
+            }
+        }
+
+        public bool? IsWalker
+        {
+            get
+            {
+                return Person.IsWalker;
+            }
+            set
+            {
+                Person.IsWalker = value;
+                NotifyOfPropertyChange(() => IsWalker);
+            }
+        }
+
+        public bool? IsSponsor
+        {
+            get
+            {
+                return Person.IsSponsor;
+            }
+            set
+            {
+                Person.IsSponsor = value;
+                NotifyOfPropertyChange(() => IsSponsor);
+            }
+        }
+
+        public bool? IsVolunteer
+        {
+            get
+            {
+                return Person.IsVolunteer;
+            }
+            set
+            {
+                Person.IsVolunteer = value;
+                NotifyOfPropertyChange(() => IsVolunteer);
+            }
+        }
+
+
         #endregion
+
 
         public void UpdatePerson()
         {
             Person.UpdatePerson();
-            Adress.UpdateAdress();
             MessageBox.Show("ok");
         }
 

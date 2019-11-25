@@ -24,13 +24,16 @@
         <GroupBox Grid.Row="1" Header="Základní informace o zvířeti:">
             <StackPanel>
                 <TextBlock TextWrapping="Wrap" Text="Identifikační číslo:" Margin="5"/>
-                <TextBox x:Name="ID" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=ID, Mode=OneWay}" IsReadOnly="True"/>
+                <TextBox x:Name="ID" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=ID, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
 
                 <TextBlock TextWrapping="Wrap" Text="Jméno:" Margin="5"/>
                 <TextBox x:Name="AnimalName" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=AnimalName, Mode=OneWay}" IsReadOnly="True"/>
 
                 <TextBlock TextWrapping="Wrap" Text="Číslo čipu:" Margin="5"/>
                 <TextBox x:Name="ChipNumber" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=ChipNumber, Mode=OneWay}" IsReadOnly="True"/>
+
+                <TextBlock TextWrapping="Wrap" Text="Datum narození:" Margin="5"/>
+                <TextBox x:Name="BirthDate" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=BirthDate, Mode=OneWay}" IsReadOnly="True"/>
 
                 <TextBlock TextWrapping="Wrap" Text="Pohlaví:" Margin="5"/>
                 <TextBox x:Name="Sex" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Sex, Mode=OneWay}" IsReadOnly="True"/>
@@ -50,6 +53,7 @@
             <TextBlock TextWrapping="Wrap" Text="Vybrat majitele:" Margin="5"/>
             <DataGrid Margin="5" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" ItemsSource="{Binding Path=Owners, Mode=OneWay}" SelectedItem="{Binding Path=SelectedOwner, Mode=OneWayToSource}" Height="400"/>
         </StackPanel>
+        
         <GroupBox Grid.Row="1" Grid.Column="1" Header="Základní informace o majiteli:">
             <StackPanel>
                 <TextBlock TextWrapping="Wrap" Text="Jméno a příjmení:" Margin="5"/>

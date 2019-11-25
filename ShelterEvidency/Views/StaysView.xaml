@@ -29,22 +29,27 @@
                     <StackPanel>
                         <TextBlock TextWrapping="Wrap" Text="Začátek:" Margin="5"/>
                         <DatePicker x:Name="Start" SelectedDate="{Binding Path= Start, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                        <TextBlock TextWrapping="Wrap" Text="Výsledek:" Margin="5"/>
-                        <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path= EndTypes, Mode=OneTime}"  DisplayMemberPath="EndTypeName" SelectedValuePath="ID" SelectedValue="{Binding Path=EndType, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
-
+                        
                         <TextBlock TextWrapping="Wrap" Text="Konec:" Margin="5"/>
                         <DatePicker x:Name="Finish" SelectedDate="{Binding Path= Finish, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                        <Button x:Name="UpdateStay" Content="Upravit"/>
-                        <TextBlock  HorizontalAlignment="Center"  Text="{Binding Path=Start, Mode=OneWay}" VerticalAlignment="Center"/>
-                        <TextBlock  HorizontalAlignment="Center"  Text="{Binding Path=Finish, Mode=OneWay}" VerticalAlignment="Center"/>
+
+                        <TextBlock TextWrapping="Wrap" Text="Výsledek:" Margin="5"/>
+                        <StackPanel Margin="5">
+                            <CheckBox Content="adopce" IsChecked="{Binding Path = Adopted, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                            <CheckBox Content="útěk" IsChecked="{Binding Path = Escaped, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                            <CheckBox Content="smrt" IsChecked="{Binding Path = Died, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                        </StackPanel>
+
                     </StackPanel>
                     <StackPanel Grid.Column="1">
                         <TextBlock TextWrapping="Wrap" Text="Poznámka:" Margin="5"/>
                         <TextBox  x:Name="Note"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="150"/>
                     </StackPanel>
+                    
                 </Grid>
+                
             </GroupBox>
+            <Button x:Name="UpdateStay" Content="Upravit"/>
         </StackPanel>
 
         <DataGrid Margin="5" Grid.Column="1" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" ItemsSource="{Binding Path=AnimalStays, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Id" SelectedValue="{Binding Path=SelectedStayID, Mode=OneWayToSource}"/>

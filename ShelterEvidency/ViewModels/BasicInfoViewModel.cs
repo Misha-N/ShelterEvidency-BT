@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace ShelterEvidency.ViewModels
@@ -36,7 +37,7 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => Image);
             }
         }
-        public int ID
+        public int? ID
         {
             get
             {
@@ -84,6 +85,19 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => Sex);
             }
         }
+
+        public int? Vet
+        {
+            get
+            {
+                return Animal.VetID;
+            }
+            set
+            {
+                Animal.VetID = value;
+                NotifyOfPropertyChange(() => Vet);
+            }
+        }
         public int? Species
         {
             get
@@ -94,6 +108,7 @@ namespace ShelterEvidency.ViewModels
             {
                 Animal.SpeciesID = value;
                 NotifyOfPropertyChange(() => Species);
+                NotifyOfPropertyChange(() => BreedList);
             }
         }
         public int? Breed
@@ -186,6 +201,15 @@ namespace ShelterEvidency.ViewModels
         #endregion
 
         #region List Setting
+
+        public List<PersonInfo> VetList
+        {
+            get
+            {
+                return PersonModel.ReturnVets();
+            }
+        }
+
         public List<Database.Sexes> SexList
         {
             get
@@ -226,12 +250,9 @@ namespace ShelterEvidency.ViewModels
         public void UpdateAnimal()
         {
             Animal.UpdateAnimal();
+            MessageBox.Show("updated");
         }
 
-        public void Cancel()
-        {
-            TryClose();
-        }
 
 
     }

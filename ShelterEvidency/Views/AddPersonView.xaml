@@ -32,9 +32,6 @@
 
         </StackPanel>
         <StackPanel Grid.Column="1">
-            <TextBlock TextWrapping="Wrap" Text="Role:" Margin="5"/>
-            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=RoleList, Mode=OneWay}" DisplayMemberPath="RoleName" SelectedValuePath="Id" SelectedValue="{Binding Path=Role, Mode=TwoWay}"/>
-
             <GroupBox Header="Adresa:">
                 <StackPanel>
                     <Grid>
@@ -54,6 +51,16 @@
                     
                     <TextBlock TextWrapping="Wrap" Text="Ulice a číslo domu:" Margin="5"/>
                     <TextBox x:Name="Street"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Role osoby:">
+                <StackPanel Margin="5">
+                    <CheckBox Content="majitel" IsChecked="{Binding Path = IsOwner, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                    <CheckBox Content="veterinář" IsChecked="{Binding Path = IsVet, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                    <CheckBox Content="venčitel" IsChecked="{Binding Path = IsWalker, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                    <CheckBox Content="sponzor" IsChecked="{Binding Path = IsSponsor, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                    <CheckBox Content="dobrovolník" IsChecked="{Binding Path = IsVolunteer, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
                 </StackPanel>
             </GroupBox>
 

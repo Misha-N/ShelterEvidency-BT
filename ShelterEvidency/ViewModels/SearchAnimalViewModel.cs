@@ -84,7 +84,7 @@ namespace ShelterEvidency.ViewModels
         public void OpenEvidencyCard()
         {
             if (SelectedAnimal != null)
-                ActivateItem(new EvidencyCardViewModel(SelectedAnimal.ID));
+                ActivateItem(new EvidencyCardViewModel((int)SelectedAnimal.ID));
         }
 
 

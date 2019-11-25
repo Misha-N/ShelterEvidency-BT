@@ -10,15 +10,35 @@ namespace ShelterEvidency.Models
     public class AdoptionModel
     {
         #region Properties/Atributes
-        public int ID { get; set; }
+        public int? ID { get; set; }
         public DateTime? Date { get; set; }
-        public int PersonID { get; set; }
-        public int AnimalID { get; set; }
+        public int? PersonID { get; set; }
+        public int? AnimalID { get; set; }
         public bool? Returned { get; set; }
         public DateTime? ReturnDate { get; set; }
         public string ReturnReason { get; set; }
 
         #endregion
+
+        public void SaveAdoption()
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                Adoptions adoption = new Adoptions
+                {
+                    AnimalID = AnimalID,
+                    PersonID = PersonID,
+                    Returned = false,
+                    ReturnDate = ReturnDate,
+                    ReturnReason = ReturnReason,
+                    Date = Date
+                };
+                db.Adoptions.InsertOnSubmit(adoption);
+                db.SubmitChanges();
+
+                ID = adoption.ID;
+            }
+        }
 
         public static List<AdoptionInfo> ReturnAdoptions()
         {
@@ -44,7 +64,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from adoption in db.Adoptions
-                           where ((adoption.Date.Equals(searchValue)) ||
+                           where ((adoption.Date.ToString().Contains(searchValue)) ||
                                   (adoption.ID.ToString().Equals(searchValue)) ||
                                   (adoption.Animals.Name.Contains(searchValue)) ||
                                   (adoption.People.LastName.Contains(searchValue)))
@@ -59,6 +79,41 @@ namespace ShelterEvidency.Models
                                ReturnReason = adoption.ReturnReason
                            }).ToList();
                 return results;
+            }
+        }
+
+        public void GetAdoption(int? adoptionID)
+        {
+            ID = adoptionID;
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var adoption = db.Adoptions.FirstOrDefault(i => i.ID == adoptionID);
+                if (adoption != null)
+                    SetInformations(adoption);
+            }
+        }
+
+        public void SetInformations(Adoptions adoption)
+        {
+            Date = adoption.Date;
+            PersonID = adoption.PersonID;
+            AnimalID = adoption.AnimalID;
+            Returned = adoption.Returned;
+            ReturnDate = adoption.ReturnDate;
+            ReturnReason = adoption.ReturnReason;
+        }
+
+        public void UpdateAdoption()
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                Adoptions adoption = db.Adoptions.FirstOrDefault(i => i.ID == ID);
+
+                adoption.Returned = Returned;
+                adoption.ReturnDate = ReturnDate;
+                adoption.ReturnReason = ReturnReason;
+
+                db.SubmitChanges();
             }
         }
     }

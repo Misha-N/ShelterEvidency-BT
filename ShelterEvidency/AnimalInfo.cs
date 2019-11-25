@@ -8,7 +8,7 @@ namespace ShelterEvidency
 {
     public class AnimalInfo
     {
-        public int ID { get; set; }
+        public int? ID { get; set; }
         public string Name { get; set; }
         public string ChipNumber { get; set; }
         public DateTime? BirthDate { get; set; }

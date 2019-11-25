@@ -59,9 +59,16 @@
     <Reference Include="Caliburn.Micro.Platform.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
     </Reference>
+    <Reference Include="PdfSharp, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -85,21 +92,19 @@
     </ApplicationDefinition>
     <Compile Include="AdoptionInfo.cs" />
     <Compile Include="AnimalInfo.cs" />
+    <Compile Include="DocumentManager.cs" />
     <Compile Include="Models\AdoptionModel.cs" />
-    <Compile Include="Models\AdressModel.cs" />
     <Compile Include="Models\AnimalModel.cs" />
     <Compile Include="Models\BreedModel.cs" />
     <Compile Include="Models\CoatTypeModel.cs" />
     <Compile Include="Models\CostModel.cs" />
     <Compile Include="Models\DeathModel.cs" />
-    <Compile Include="Models\DeathTypeModel.cs" />
     <Compile Include="Models\DonationModel.cs" />
     <Compile Include="Models\FurColorModel.cs" />
     <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\IncidentModel.cs" />
     <Compile Include="Models\MedicalRecordModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
-    <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\SexModel.cs" />
     <Compile Include="Models\SpeciesModel.cs" />
     <Compile Include="Models\EndTypeModel.cs" />
@@ -119,6 +124,7 @@
     <Compile Include="ViewModels\IncidentsViewModel.cs" />
     <Compile Include="ViewModels\MedicalInfoViewModel.cs" />
     <Compile Include="ViewModels\PersonInfoViewModel.cs" />
+    <Compile Include="ViewModels\RelatedPeopleViewModel.cs" />
     <Compile Include="ViewModels\SearchAnimalViewModel.cs" />
     <Compile Include="ViewModels\SearchPersonViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
@@ -162,6 +168,9 @@
     </Compile>
     <Compile Include="Views\PersonInfoView.xaml.cs">
       <DependentUpon>PersonInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RelatedPeopleView.xaml.cs">
+      <DependentUpon>RelatedPeopleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchAnimalView.xaml.cs">
       <DependentUpon>SearchAnimalView.xaml</DependentUpon>
@@ -237,6 +246,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PersonInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RelatedPeopleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

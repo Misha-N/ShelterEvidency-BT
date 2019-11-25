@@ -58,6 +58,11 @@ namespace ShelterEvidency.ViewModels
             ActivateItem(new IncidentsViewModel(AnimalID));
         }
 
+        public void People()
+        {
+            ActivateItem(new RelatedPeopleViewModel(AnimalID));
+        }
+
         public void Walks()
         {
             ActivateItem(new WalksViewModel(AnimalID));

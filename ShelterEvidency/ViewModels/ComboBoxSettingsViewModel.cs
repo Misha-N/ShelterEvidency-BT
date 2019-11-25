@@ -18,20 +18,17 @@ namespace ShelterEvidency.ViewModels
         {
             NewBreed = new BreedModel();
             NewSpecies = new SpeciesModel();
-            NewRole = new RoleModel();
             NewCoatType = new CoatTypeModel();
             NewFurColor = new FurColorModel();
         }
         public BreedModel NewBreed { get; set; }
         public SpeciesModel NewSpecies { get; set; }
-        public RoleModel NewRole { get; set; }
         public FurColorModel NewFurColor { get; set; }
         public CoatTypeModel NewCoatType { get; set; }
         #endregion
         public ComboBoxSettingsViewModel()
         {
             SetModels();
-            //SetLists();
         }
 
 
@@ -72,19 +69,6 @@ namespace ShelterEvidency.ViewModels
             {
                 NewSpecies.SpeciesName = value;
                 NotifyOfPropertyChange(() => NewSpeciesName);
-            }
-        }
-
-        public string NewRoleName
-        {
-            get
-            {
-                return NewRole.RoleName;
-            }
-            set
-            {
-                NewRole.RoleName = value;
-                NotifyOfPropertyChange(() => NewRoleName);
             }
         }
 
@@ -130,13 +114,6 @@ namespace ShelterEvidency.ViewModels
                 return SpeciesModel.ReturnSpecies();
             }
         }
-        public List<Database.Roles> Roles
-        {
-            get
-            {
-                return RoleModel.ReturnRoles();
-            }
-        }
         public List<Database.FurColors> FurColors
         {
             get
@@ -165,12 +142,6 @@ namespace ShelterEvidency.ViewModels
         {
             NewSpecies.SaveSpecies();
             NotifyOfPropertyChange(() => Species);
-        }
-
-        public void AddRole()
-        {
-            NewRole.SaveRole();
-            NotifyOfPropertyChange(() => Roles);
         }
 
         public void AddFurColor()

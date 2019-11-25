@@ -14,11 +14,27 @@ namespace ShelterEvidency.Models
         public string Title { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int? RoleID { get; set; }
         public string Phone { get; set; }
         public string Mail { get; set; }
         public string Note { get; set; }
+        public string AdressCity { get; set; }
+        public string AdressStreet { get; set; }
+        public string AdressZip { get; set; }
+        public bool? IsOwner { get; set; }
+        public bool? IsVet { get; set; }
+        public bool? IsWalker { get; set; }
+        public bool? IsSponsor { get; set; }
+        public bool? IsVolunteer { get; set; }
         #endregion
+
+        public PersonModel()
+        {
+            IsOwner = false;
+            IsSponsor = false;
+            IsVet = false;
+            IsWalker = false;
+            IsVolunteer = false;
+        }
 
         public void SavePerson()
         {
@@ -32,7 +48,15 @@ namespace ShelterEvidency.Models
                     Phone = Phone,
                     Mail = Mail,
                     Note = Note,
-                    RoleID = RoleID
+                    AdressCity = AdressCity,
+                    AdressStreet = AdressStreet,
+                    AdressZip = AdressZip,
+                    IsOwner = IsOwner,
+                    IsVet = IsVet,
+                    IsWalker = IsWalker,
+                    IsSponsor = IsSponsor,
+                    IsVolunteer = IsVolunteer
+
                 };
                 db.People.InsertOnSubmit(person);
                 db.SubmitChanges();
@@ -56,10 +80,17 @@ namespace ShelterEvidency.Models
                                    FirstName = person.FirstName,
                                    LastName = person.LastName,
                                    */
-                                   Role = person.Roles.RoleName,
                                    Phone = person.Phone,
                                    Mail = person.Mail,
                                    Note = person.Note,
+                                   AdressCity = person.AdressCity,
+                                   AdressStreet = person.AdressStreet,
+                                   AdressZip = person.AdressZip,
+                                   IsOwner = person.IsOwner,
+                                   IsVet = person.IsVet,
+                                   IsWalker = person.IsWalker,
+                                   IsSponsor = person.IsSponsor,
+                                   IsVolunteer = person.IsVolunteer
 
                                }).ToList();
                 return results;
@@ -73,8 +104,7 @@ namespace ShelterEvidency.Models
             {
                 var results = (from person in db.People
                                where ((person.LastName.Contains(searchValue)) ||
-                                      (person.Id.ToString().Equals(searchValue)) ||
-                                      (person.Roles.RoleName.Contains(searchValue)))
+                                      (person.Id.ToString().Equals(searchValue)))
                                select new PersonInfo
                                {
                                    ID = person.Id,
@@ -87,6 +117,14 @@ namespace ShelterEvidency.Models
                                    Phone = person.Phone,
                                    Mail = person.Mail,
                                    Note = person.Note,
+                                   AdressCity = person.AdressCity,
+                                   AdressStreet = person.AdressStreet,
+                                   AdressZip = person.AdressZip,
+                                   IsOwner = person.IsOwner,
+                                   IsVet = person.IsVet,
+                                   IsWalker = person.IsWalker,
+                                   IsSponsor = person.IsSponsor,
+                                   IsVolunteer = person.IsVolunteer
                                }).ToList();
                 return results;
             }
@@ -103,11 +141,53 @@ namespace ShelterEvidency.Models
                     Title = person.Title;
                     FirstName = person.FirstName;
                     LastName = person.LastName;
-                    RoleID = person.RoleID;
                     Phone = person.Phone;
                     Mail = person.Mail;
                     Note = person.Note;
+                    AdressCity = person.AdressCity;
+                    AdressStreet = person.AdressStreet;
+                    AdressZip = person.AdressZip;
+                    IsOwner = person.IsOwner;
+                    IsVet = person.IsVet;
+                    IsWalker = person.IsWalker;
+                    IsSponsor = person.IsSponsor;
+                    IsVolunteer = person.IsVolunteer;
                 }
+            }
+        }
+
+        public static PersonInfo GetPersonInfo(int? personID)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var person = db.People.FirstOrDefault(i => i.Id == personID);
+                if (person != null)
+                {
+                    PersonInfo info = new PersonInfo
+                    {
+                        ID = person.Id,
+                        TitledFullName = person.Title.Trim() + " " + person.FirstName + " " + person.LastName,
+                        /*
+                        Title = person.Title,
+                        FirstName = person.FirstName,
+                        LastName = person.LastName,
+                        */
+                        Phone = person.Phone,
+                        Mail = person.Mail,
+                        Note = person.Note,
+                        AdressCity = person.AdressCity,
+                        AdressStreet = person.AdressStreet,
+                        AdressZip = person.AdressZip,
+                        IsOwner = person.IsOwner,
+                        IsVet = person.IsVet,
+                        IsWalker = person.IsWalker,
+                        IsSponsor = person.IsSponsor,
+                        IsVolunteer = person.IsVolunteer
+                    };
+                    return info;
+                }
+                else
+                    return new PersonInfo();
             }
         }
 
@@ -120,10 +200,17 @@ namespace ShelterEvidency.Models
                 person.Title = Title;
                 person.FirstName = FirstName;
                 person.LastName = LastName;
-                person.RoleID = RoleID;
                 person.Phone = Phone;
                 person.Mail = Mail;
                 person.Note = Note;
+                person.AdressCity = AdressCity;
+                person.AdressStreet = AdressStreet;
+                person.AdressZip = AdressZip;
+                person.IsOwner = IsOwner;
+                person.IsSponsor = IsSponsor;
+                person.IsVet = IsVet;
+                person.IsWalker = IsWalker;
+                person.IsVolunteer = IsVolunteer;
 
                 db.SubmitChanges();
             }
@@ -134,7 +221,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from person in db.People
-                               where ((person.RoleID.Equals(2)))
+                               where ((person.IsVet.Equals(true)))
                                select new PersonInfo
                                {
                                    ID = person.Id,
@@ -147,6 +234,14 @@ namespace ShelterEvidency.Models
                                    Phone = person.Phone,
                                    Mail = person.Mail,
                                    Note = person.Note,
+                                   AdressCity = person.AdressCity,
+                                   AdressStreet = person.AdressStreet,
+                                   AdressZip = person.AdressZip,
+                                   IsOwner = person.IsOwner,
+                                   IsVet = person.IsVet,
+                                   IsWalker = person.IsWalker,
+                                   IsSponsor = person.IsSponsor,
+                                   IsVolunteer = person.IsVolunteer
                                }).ToList();
                 return results;
             }
@@ -157,7 +252,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from person in db.People
-                               where ((person.RoleID.Equals(5)))
+                               where ((person.IsWalker.Equals(true)))
                                select new PersonInfo
                                {
                                    ID = person.Id,
@@ -170,6 +265,14 @@ namespace ShelterEvidency.Models
                                    Phone = person.Phone,
                                    Mail = person.Mail,
                                    Note = person.Note,
+                                   AdressCity = person.AdressCity,
+                                   AdressStreet = person.AdressStreet,
+                                   AdressZip = person.AdressZip,
+                                   IsOwner = person.IsOwner,
+                                   IsVet = person.IsVet,
+                                   IsWalker = person.IsWalker,
+                                   IsSponsor = person.IsSponsor,
+                                   IsVolunteer = person.IsVolunteer
                                }).ToList();
                 return results;
             }
@@ -180,7 +283,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from person in db.People
-                               where ((person.RoleID.Equals(1)))
+                               where ((person.IsOwner.Equals(true)))
                                select new PersonInfo
                                {
                                    ID = person.Id,
@@ -193,6 +296,14 @@ namespace ShelterEvidency.Models
                                    Phone = person.Phone,
                                    Mail = person.Mail,
                                    Note = person.Note,
+                                   AdressCity = person.AdressCity,
+                                   AdressStreet = person.AdressStreet,
+                                   AdressZip = person.AdressZip,
+                                   IsOwner = person.IsOwner,
+                                   IsVet = person.IsVet,
+                                   IsWalker = person.IsWalker,
+                                   IsSponsor = person.IsSponsor,
+                                   IsVolunteer = person.IsVolunteer
                                }).ToList();
                 return results;
             }

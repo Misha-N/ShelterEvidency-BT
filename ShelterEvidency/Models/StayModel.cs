@@ -15,11 +15,20 @@ namespace ShelterEvidency.Models
         public DateTime? FinishDate { get; set; }
         public int? AnimalID { get; set; }
         public string Note { get; set; }
-        public int? EndTypeID { get; set; }
+        public bool? Adopted { get; set; }
+        public bool? Escaped { get; set; }
+        public bool? Died { get; set; }
         #endregion
 
-        public void SaveStay()
+        public StayModel()
         {
+            Adopted = false;
+            Escaped = false;
+            Died = false;
+        }
+
+        public void SaveStay()
+            {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 Stays stay = new Stays
@@ -28,7 +37,9 @@ namespace ShelterEvidency.Models
                     StartDate = StartDate,
                     FinishDate = FinishDate,
                     Note = Note,
-                    EndTypeID = EndTypeID
+                    Adopted = Adopted,
+                    Escaped = Escaped,
+                    Died = Died
                 };
                 db.Stays.InsertOnSubmit(stay);
                 db.SubmitChanges();
@@ -59,9 +70,11 @@ namespace ShelterEvidency.Models
         {
             StartDate = stay.StartDate;
             FinishDate = stay.FinishDate;
-            EndTypeID = stay.EndTypeID;
             AnimalID = stay.AnimalID;
             Note = stay.Note;
+            Adopted = stay.Adopted;
+            Escaped = stay.Escaped;
+            Died = stay.Died;
         }
 
         public void UpdateStay()
@@ -70,10 +83,12 @@ namespace ShelterEvidency.Models
             {
                 Stays stay = db.Stays.FirstOrDefault(i => i.Id == ID);
 
-                stay.EndTypeID = EndTypeID;
                 stay.StartDate = StartDate;
                 stay.FinishDate = FinishDate;
                 stay.Note = Note;
+                stay.Adopted = Adopted;
+                stay.Escaped = Escaped;
+                stay.Died = Died;
 
                 db.SubmitChanges();
             }

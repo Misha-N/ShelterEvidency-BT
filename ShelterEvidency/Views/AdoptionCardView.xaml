@@ -6,7 +6,91 @@
              xmlns:local="clr-namespace:ShelterEvidency.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Red">
-            
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Header="Základní informace o adoptovaném zvířeti:">
+            <StackPanel>
+                <TextBlock TextWrapping="Wrap" Text="Identifikační číslo:" Margin="5"/>
+                <TextBox x:Name="ID" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=ID, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+
+                <TextBlock TextWrapping="Wrap" Text="Jméno:" Margin="5"/>
+                <TextBox x:Name="AnimalName" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=AnimalName, Mode=OneWay}" IsReadOnly="True"/>
+
+                <TextBlock TextWrapping="Wrap" Text="Číslo čipu:" Margin="5"/>
+                <TextBox x:Name="ChipNumber" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=ChipNumber, Mode=OneWay}" IsReadOnly="True"/>
+
+                <TextBlock TextWrapping="Wrap" Text="Datum narození:" Margin="5"/>
+                <TextBox x:Name="BirthDate" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=BirthDate, Mode=OneWay}" IsReadOnly="True"/>
+
+                <TextBlock TextWrapping="Wrap" Text="Pohlaví:" Margin="5"/>
+                <TextBox x:Name="Sex" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Sex, Mode=OneWay}" IsReadOnly="True"/>
+
+                <TextBlock TextWrapping="Wrap" Text="Druh:" Margin="5"/>
+                <TextBox x:Name="Species" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Species, Mode=OneWay}" IsReadOnly="True"/>
+
+                <TextBlock TextWrapping="Wrap" Text="Plemeno:" Margin="5"/>
+                <TextBox x:Name="Breed" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Breed, Mode=OneWay}" IsReadOnly="True"/>
+
+                <TextBlock TextWrapping="Wrap" Text="Barva srsti:" Margin="5"/>
+                <TextBox x:Name="FurColor" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=FurColor, Mode=OneWay}" IsReadOnly="True"/>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Grid.Column="1" Header="Základní informace o majiteli:">
+            <StackPanel>
+                <TextBlock TextWrapping="Wrap" Text="Jméno a příjmení:" Margin="5"/>
+                <TextBox x:Name="FullName" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=FullName, Mode=OneWay}" IsReadOnly="True"/>
+
+                <TextBlock TextWrapping="Wrap" Text="Telefon:" Margin="5"/>
+                <TextBox x:Name="Phone" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Phone, Mode=OneWay}" IsReadOnly="True"/>
+
+                <TextBlock TextWrapping="Wrap" Text="E-mail:" Margin="5"/>
+                <TextBox x:Name="Mail" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Mail, Mode=OneWay}" IsReadOnly="True"/>
+
+                <GroupBox Header="Adresa:">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock TextWrapping="Wrap" Text="Město:" Margin="5"/>
+                                <TextBox x:Name="City"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Grid.Column="1"  TextWrapping="Wrap" Text="PSČ:" Margin="5"/>
+                                <TextBox x:Name="Zip" Grid.Column="1" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <TextBlock TextWrapping="Wrap" Text="Ulice a číslo domu:" Margin="5"/>
+                        <TextBox x:Name="Street"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                    </StackPanel>
+                </GroupBox>
+
+            </StackPanel>
+        </GroupBox>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
+
+            <CheckBox Content="Zvíře vráceno z adopce" IsChecked="{Binding Path = Returned, Mode = TwoWay}" Margin="0,10" IsThreeState="False"/>
+            <GroupBox Header="Informace o vrácení" IsEnabled="{Binding Path = Returned}">
+                <StackPanel>
+                    <TextBlock TextWrapping="Wrap" Text="Datum vrácení:" Margin="5"/>
+                    <DatePicker Margin="5,0,5,5" SelectedDate="{Binding Path=ReturnDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock TextWrapping="Wrap" Text="Důvod vrácení:" Margin="5"/>
+                    <TextBox  x:Name="ReturnReason" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                </StackPanel>
+            </GroupBox>
+            <Button x:Name="SaveToDatabase" Content="Uložit" Grid.Column="2" Grid.Row="1" Width="75" Margin="5,0,5,5"/>
+        </StackPanel>
     </Grid>
 </UserControl>

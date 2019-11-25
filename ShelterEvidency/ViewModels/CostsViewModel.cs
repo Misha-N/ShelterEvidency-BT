@@ -125,7 +125,6 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => Price);
             NotifyOfPropertyChange(() => Date);
             NotifyOfPropertyChange(() => SelectedCost);
-
         }
 
         public void UpdateCost()
