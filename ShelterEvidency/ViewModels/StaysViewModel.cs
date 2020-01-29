@@ -40,13 +40,6 @@ namespace ShelterEvidency.ViewModels
                 return StayModel.GetAnimalStays(AnimalID);
             }
         }
-        public List<Database.EndTypes> EndTypes
-        {
-            get
-            {
-                return EndTypeModel.ReturnEndTypes();
-            }
-        }
 
         #region Selected stay bindings
         public DateTime? Start

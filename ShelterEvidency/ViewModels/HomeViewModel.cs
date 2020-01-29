@@ -1,14 +1,18 @@
 ﻿using Caliburn.Micro;
+using ShelterEvidency.Database;
+using ShelterEvidency.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.ViewModels
 {
     public class HomeViewModel: Conductor<object>
     {
+        #region Page Loading functions
         public void LoadAddAnimalPage()
         {
             ActivateItem(new AddAnimalViewModel());
@@ -42,6 +46,60 @@ namespace ShelterEvidency.ViewModels
         public void Home()
         {
             ActivateItem(null);
+        }
+
+        #endregion
+
+        public HomeViewModel()
+        {
+            DiaryModel = new DiaryModel();
+        }
+        public DiaryModel DiaryModel { get; set; }
+
+        #region Properties/Attributes
+
+        public DateTime? SelectedDate
+        {
+            get
+            {
+                return DiaryModel.Date;
+            }
+            set
+            {
+                DiaryModel.Date = value;
+                NotifyOfPropertyChange(() => SelectedDate);
+                NotifyOfPropertyChange(() => RecordList);
+            }
+        }
+
+        public string DiaryRecord
+        {
+            get
+            {
+                return DiaryModel.Record;
+            }
+            set
+            {
+                DiaryModel.Record = value;
+                NotifyOfPropertyChange(() => DiaryRecord);
+            }
+        }
+        public List<DiaryRecords> RecordList
+        {
+            get
+            {
+                return DiaryModel.GetDiaryRecords(SelectedDate);
+            }
+        }
+
+        #endregion
+
+        public void CreateDiaryRecord()
+        {
+            DiaryModel.SaveDiaryRecord();
+            DiaryModel = new DiaryModel();
+            NotifyOfPropertyChange(() => RecordList);
+            NotifyOfPropertyChange(() => DiaryRecord);
         }
     }
 }

@@ -1,197 +1,191 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14.625, 14.625" name="ShelterDatabaseLINQ">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 15, 16.25" name="ShelterDatabaseLINQ">
   <DataContextMoniker Name="/ShelterDatabaseLINQDataContext" />
   <nestedChildShapes>
-    <classShape Id="7be83f21-b19a-46f8-987c-fbdc96e11b56" absoluteBounds="0.75, 12.625, 2, 1.3862939453124987">
-      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Breeds" />
-      <nestedChildShapes>
-        <elementListCompartment Id="02598199-a194-4e0c-b49d-ae5332e9dd5e" absoluteBounds="0.765, 13.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="af6ec8b8-8b24-45e2-b404-64d43b2f6856" absoluteBounds="0.75, 4.75, 2, 1.1939925130208344">
-      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/CoatTypes" />
-      <nestedChildShapes>
-        <elementListCompartment Id="43121674-1a0c-445a-bf31-8630dd817730" absoluteBounds="0.765, 5.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="48651651-e205-4dd8-b9f5-896ae6687d98" absoluteBounds="6.75, 6.75, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Deaths" />
-      <nestedChildShapes>
-        <elementListCompartment Id="579f455d-bcc5-4f0c-8f7c-c4b205ef90b2" absoluteBounds="6.765, 7.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="fd2a9d7a-60c6-474b-b216-b512fbe17a28" absoluteBounds="9.75, 0.75, 2, 1.1939925130208335">
-      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/DeathTypes" />
-      <nestedChildShapes>
-        <elementListCompartment Id="196d4d6c-7c2d-4e28-8180-55b610361757" absoluteBounds="9.765, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="f73d04f0-a5bc-4efa-82cb-314bd590beb2" absoluteBounds="9.75, 2.75, 2, 1.7708968098958327">
-      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Donations" />
-      <nestedChildShapes>
-        <elementListCompartment Id="29503537-def1-469a-80fb-2bc385deb2f4" absoluteBounds="9.765, 3.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="a24112ec-8f54-4d56-9108-bd832bb64e12" absoluteBounds="3.75, 9.75, 2, 1.3862939453124987">
-      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/EndTypes" />
-      <nestedChildShapes>
-        <elementListCompartment Id="78849dcf-fcd4-480b-8189-95f9f41b8657" absoluteBounds="3.765, 10.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="74c7ca9f-aee2-4b42-9328-801d5caee4f5" absoluteBounds="0.75, 6.75, 2, 1.1939925130208344">
-      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/FurColors" />
-      <nestedChildShapes>
-        <elementListCompartment Id="b327f571-bdde-4ddb-a453-cb0a119f4ea7" absoluteBounds="0.765, 7.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="6e397b68-5cae-45d7-afdf-50379846c3cc" absoluteBounds="9.75, 5.75, 2, 1.3862939453125005">
-      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Images" />
-      <nestedChildShapes>
-        <elementListCompartment Id="a286e695-7474-4f22-a958-39657e9fee7e" absoluteBounds="9.765, 6.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="aef12b06-550a-4420-9659-2143a9f40579" absoluteBounds="9.75, 8.75, 2, 1.3862939453124987">
-      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/IncidentTypes" />
-      <nestedChildShapes>
-        <elementListCompartment Id="c7d5e8cd-453f-48b2-8073-3dc4924bfc0e" absoluteBounds="9.765, 9.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="f242a2c6-5f69-4319-befa-0ab708b58af6" absoluteBounds="9.75, 11.75, 2, 2.1554996744791666">
-      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/MedicalRecords" />
-      <nestedChildShapes>
-        <elementListCompartment Id="344180e9-5aa0-4b31-90c9-267fcaa8abef" absoluteBounds="9.765, 12.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="caacfb8f-2392-4b11-a1db-3ffaa4edaf50" absoluteBounds="0.75, 8.75, 2, 1.1939925130208344">
-      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Sexes" />
-      <nestedChildShapes>
-        <elementListCompartment Id="64192573-8c17-4772-b850-dc6cb7ffc825" absoluteBounds="0.765, 9.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="723475b8-cf6f-45ad-9351-40b765d97b70" absoluteBounds="0.75, 10.625, 2, 1.1939925130208344">
-      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Species" />
-      <nestedChildShapes>
-        <elementListCompartment Id="d6e482ce-bb90-43c5-ba7c-6d4be0216363" absoluteBounds="0.765, 11.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="33d9cf42-7174-495e-b8e8-f20b03e448b0" absoluteBounds="7.5, 4, 2, 1.9631982421875">
-      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Costs" />
-      <nestedChildShapes>
-        <elementListCompartment Id="b90cc783-2b1b-470a-aac6-299e6ac54aeb" absoluteBounds="7.515, 4.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="d48ac566-09dd-4f72-97b9-b0b382e05f6d" absoluteBounds="6.875, 9.625, 2, 1.7708968098958331">
-      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Incidents" />
-      <nestedChildShapes>
-        <elementListCompartment Id="95693d90-57d8-48f2-bafa-04101ce64d51" absoluteBounds="6.89, 10.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="b0d62e1d-39be-4e02-8576-1b74b0c14cf8" absoluteBounds="5.625, 12.625, 2, 1.7708968098958331">
-      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Walks" />
-      <nestedChildShapes>
-        <elementListCompartment Id="92cda035-adbf-4d61-8438-b9a38ee206cb" absoluteBounds="5.64, 13.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="263cc900-21fc-4d46-ad6d-d597f70b23c0" absoluteBounds="4.25, 6.25, 2, 2.1554996744791666">
+    <classShape Id="29e1e2a7-535e-4730-8c79-ce97db9f46fb" absoluteBounds="3.5, 3.75, 2, 2.1554996744791666">
       <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Adoptions" />
       <nestedChildShapes>
-        <elementListCompartment Id="62e22ec2-4cc3-418e-afd7-c218695f31fc" absoluteBounds="4.265, 6.71, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="ff9009b0-1eb9-4359-9686-e35c80ede168" absoluteBounds="3.515, 4.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="8db623ef-bf8f-4d31-a556-c9184324cc07" absoluteBounds="0.5, 0.625, 2, 3.8862125651041666">
-      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/People" />
-      <nestedChildShapes>
-        <elementListCompartment Id="50b84273-26ab-45b8-913c-2af347e55f7e" absoluteBounds="0.51499999999999968, 1.085, 1.9700000000000002, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(0.59375 : 4.51121256510417); (0.59375 : 6.46875); (4.25 : 6.46875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/People/People_Adoptions" />
-      <nodes>
-        <classShapeMoniker Id="8db623ef-bf8f-4d31-a556-c9184324cc07" />
-        <classShapeMoniker Id="263cc900-21fc-4d46-ad6d-d597f70b23c0" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="0a657862-ea78-45df-a360-09a010972148" absoluteBounds="12.375, 4.625, 2, 2.3478011067708335">
-      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Stays" />
-      <nestedChildShapes>
-        <elementListCompartment Id="65c17f83-52b8-4511-8501-1883da73837c" absoluteBounds="12.39, 5.085, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="1136194d-e3f3-4f37-89e2-af0214cead0b" absoluteBounds="4.75, 0.75, 2, 4.4631168619791666">
+    <classShape Id="55fe263f-b883-41b2-9290-8dcaea0050af" absoluteBounds="6.5, 2.625, 2, 4.4631168619791666">
       <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Animals" />
       <nestedChildShapes>
-        <elementListCompartment Id="c4afddf7-c6d1-4a26-b177-5f771ec06634" absoluteBounds="4.765, 1.21, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="6b7e9a80-a6b9-4935-b80a-745adbd1a351" absoluteBounds="6.515, 3.085, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.5 : 5.21311686197917); (5.5 : 6.25)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <classShape Id="65962dfd-d634-4304-b6ce-4b18d7ef7431" absoluteBounds="3.75, 14.625, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Breeds" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e1645a7d-9bbb-4e66-a216-e92dede920fb" absoluteBounds="3.765, 15.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="184e2171-07d8-42ae-8566-3651de0c09c8" absoluteBounds="3.75, 6.875, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/CoatTypes" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d07ed1c0-8c59-4c8e-bb36-517ad59495ae" absoluteBounds="3.765, 7.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="bbde658d-0a6a-4c3d-9687-4a6701d38e57" absoluteBounds="6.75, 8.75, 2, 1.9631982421874987">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Costs" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f2c7f6ef-8b7b-4a1b-9247-1f9f7539a52f" absoluteBounds="6.765, 9.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fc86df3b-f9ca-4778-9ed5-29ec123c870b" absoluteBounds="0.75, 0.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Deaths" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a51b82fa-a814-45bc-ad45-792831ff635d" absoluteBounds="0.765, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="20d23138-acc9-45a6-a7ec-052f10a15564" absoluteBounds="9.75, 0.75, 2, 1.7708968098958329">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Donations" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1b166a6d-4a63-4192-b3a8-fca17915f744" absoluteBounds="9.765, 1.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="228417e9-e875-4b51-b55e-7f351bab3a14" absoluteBounds="9.75, 3.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Documents" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9a2439dd-df90-4545-8451-e763aab28250" absoluteBounds="9.765, 4.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d7d6e7b6-e2bf-4a39-ab75-2cd50b72df2e" absoluteBounds="3.75, 8.75, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/FurColors" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ca0284a1-1a1f-40b4-a67a-c9c7700f9cc0" absoluteBounds="3.765, 9.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1ef659fb-8f54-4fe7-a984-6adc3a3d360e" absoluteBounds="9.75, 6.75, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Images" />
+      <nestedChildShapes>
+        <elementListCompartment Id="322ec50f-b84e-43a6-a23e-5e40714af278" absoluteBounds="9.765, 7.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="66c53e36-aff8-4e25-a468-d5468a4a6185" absoluteBounds="9.75, 9.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/MedicalRecords" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e997ebdc-8c38-4d2e-bf64-a55f4735b0b4" absoluteBounds="9.765, 10.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6e5925d9-1abc-4c35-bee3-c8bfae54a149" absoluteBounds="12.75, 0.75, 2, 1.7708968098958329">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Incidents" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7424b4dd-7785-4e16-8196-b0c095af3e6c" absoluteBounds="12.765, 1.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4e63a0a4-c461-40f3-a8c4-a940ff2960f3" absoluteBounds="0.75, 2.875, 2, 3.8862125651041666">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/People" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d1613142-f5ec-4874-bbb9-41cef58bd009" absoluteBounds="0.765, 3.335, 1.9700000000000002, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7b35fae9-f02b-4de9-94ca-c7dd922edaef" absoluteBounds="3.75, 10.75, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Sexes" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b20cc659-3779-4312-9131-0f926aa5e7c5" absoluteBounds="3.765, 11.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="68b4f948-be33-471a-b53d-1116c1bcde9a" absoluteBounds="12.75, 3.75, 2, 2.347801106770834">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Stays" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9fa6d90a-66db-4463-87cc-da7a6337fd1c" absoluteBounds="12.765, 4.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c84b5b8e-91db-4062-9f79-bd9c1fc15249" absoluteBounds="6.75, 12.75, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Walks" />
+      <nestedChildShapes>
+        <elementListCompartment Id="47f1037e-b7a9-4d39-b976-b3b2eb7eab64" absoluteBounds="6.765, 13.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3fd60f2a-2d45-497f-ace3-a7d6c25e22c1" absoluteBounds="3.75, 12.625, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Species" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b93d6089-df6f-421c-a99d-0bd80de9d73f" absoluteBounds="3.765, 13.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.5 : 4.82774983723958); (5.5 : 4.82774983723958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/Animals/Animals_Adoptions" />
       <nodes>
-        <classShapeMoniker Id="1136194d-e3f3-4f37-89e2-af0214cead0b" />
-        <classShapeMoniker Id="263cc900-21fc-4d46-ad6d-d597f70b23c0" />
+        <classShapeMoniker Id="55fe263f-b883-41b2-9290-8dcaea0050af" />
+        <classShapeMoniker Id="29e1e2a7-535e-4730-8c79-ce97db9f46fb" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 12.6793843778546); (3.40625 : 12.0231343778546); (3.40625 : 2.98155843098958); (4.75 : 2.98155843098958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.75 : 15.3181469726562); (6.59375 : 15.3181469726562); (6.59375 : 7.08811686197917)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/Breeds/Breeds_Animals" />
       <nodes>
-        <classShapeMoniker Id="7be83f21-b19a-46f8-987c-fbdc96e11b56" />
-        <classShapeMoniker Id="1136194d-e3f3-4f37-89e2-af0214cead0b" />
+        <classShapeMoniker Id="65962dfd-d634-4304-b6ce-4b18d7ef7431" />
+        <classShapeMoniker Id="55fe263f-b883-41b2-9290-8dcaea0050af" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 4.98155843098958); (4.75 : 4.98155843098958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/CoatTypes/CoatTypes_Animals" />
-      <nodes>
-        <classShapeMoniker Id="af6ec8b8-8b24-45e2-b404-64d43b2f6856" />
-        <classShapeMoniker Id="1136194d-e3f3-4f37-89e2-af0214cead0b" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.72760602088341 : 12.625); (3.125 : 12.2276060208834); (3.125 : 2.83452721549479); (4.75 : 2.83452721549479)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.75 : 14.9403209863281); (6.5624975 : 14.9403209863281); (6.5624975 : 7.08811686197917)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/Breeds/Breeds_Animals1" />
       <nodes>
-        <classShapeMoniker Id="7be83f21-b19a-46f8-987c-fbdc96e11b56" />
-        <classShapeMoniker Id="1136194d-e3f3-4f37-89e2-af0214cead0b" />
+        <classShapeMoniker Id="65962dfd-d634-4304-b6ce-4b18d7ef7431" />
+        <classShapeMoniker Id="55fe263f-b883-41b2-9290-8dcaea0050af" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 6.78214495227364); (3.06607443490112 : 6.46607051737252 : JumpStart); (3.18392556509888 : 6.34821938717476 : JumpEnd); (3.28125 : 6.25089495227364); (3.28125 : 1.76101160774739); (4.75 : 1.76101160774739)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.75 : 7.6098071875); (6.04166666666667 : 7.6098071875 : JumpStart); (6.20833333333333 : 7.6098071875 : JumpEnd); (6.44791541666667 : 7.6098071875 : JumpStart); (6.64583083333333 : 7.6098071875 : JumpEnd); (7.5781275 : 7.6098071875); (7.5781275 : 7.08811686197917)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/CoatTypes/CoatTypes_Animals" />
+      <nodes>
+        <classShapeMoniker Id="184e2171-07d8-42ae-8566-3651de0c09c8" />
+        <classShapeMoniker Id="55fe263f-b883-41b2-9290-8dcaea0050af" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 8.75); (6.125 : 8.375); (6.125 : 5.98918534960938); (6.5 : 5.98918534960938)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/FurColors/FurColors_Animals" />
       <nodes>
-        <classShapeMoniker Id="74c7ca9f-aee2-4b42-9328-801d5caee4f5" />
-        <classShapeMoniker Id="1136194d-e3f3-4f37-89e2-af0214cead0b" />
+        <classShapeMoniker Id="d7d6e7b6-e2bf-4a39-ab75-2cd50b72df2e" />
+        <classShapeMoniker Id="55fe263f-b883-41b2-9290-8dcaea0050af" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 3.80888549804687); (3.04166666666667 : 3.80888549804687 : JumpStart); (3.48958333333333 : 3.80888549804687 : JumpEnd); (4.75 : 3.80888549804687)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 4.82774983723958); (3.5 : 4.82774983723958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/People/People_Adoptions" />
+      <nodes>
+        <classShapeMoniker Id="4e63a0a4-c461-40f3-a8c4-a940ff2960f3" />
+        <classShapeMoniker Id="29e1e2a7-535e-4730-8c79-ce97db9f46fb" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 3.1484375); (6.5 : 3.1484375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/People/People_Animals" />
       <nodes>
-        <classShapeMoniker Id="8db623ef-bf8f-4d31-a556-c9184324cc07" />
-        <classShapeMoniker Id="1136194d-e3f3-4f37-89e2-af0214cead0b" />
+        <classShapeMoniker Id="4e63a0a4-c461-40f3-a8c4-a940ff2960f3" />
+        <classShapeMoniker Id="55fe263f-b883-41b2-9290-8dcaea0050af" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 1.1930058038737); (4.75 : 1.1930058038737)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 6.43769895735677); (6.04166666666667 : 6.43769895735677 : JumpStart); (6.20833333333333 : 6.43769895735677 : JumpEnd); (6.5 : 6.43769895735677)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/People/People_Animals1" />
       <nodes>
-        <classShapeMoniker Id="8db623ef-bf8f-4d31-a556-c9184324cc07" />
-        <classShapeMoniker Id="1136194d-e3f3-4f37-89e2-af0214cead0b" />
+        <classShapeMoniker Id="4e63a0a4-c461-40f3-a8c4-a940ff2960f3" />
+        <classShapeMoniker Id="55fe263f-b883-41b2-9290-8dcaea0050af" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 9.21875); (3.32291666666667 : 9.21875 : JumpStart); (3.48958333333333 : 9.21875 : JumpEnd); (6.29166416666667 : 9.21875 : JumpStart); (6.45833083333333 : 9.21875 : JumpEnd); (6.5 : 9.21875); (6.5 : 5.21311686197917)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/Sexes/Sexes_Animals" />
-      <nodes>
-        <classShapeMoniker Id="caacfb8f-2392-4b11-a1db-3ffaa4edaf50" />
-        <classShapeMoniker Id="1136194d-e3f3-4f37-89e2-af0214cead0b" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 11.5088932291667); (6.3749975 : 11.5088932291667); (6.3749975 : 5.21311686197917)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/Species/Species_Animals" />
-      <nodes>
-        <classShapeMoniker Id="723475b8-cf6f-45ad-9351-40b765d97b70" />
-        <classShapeMoniker Id="1136194d-e3f3-4f37-89e2-af0214cead0b" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 2.29776941162109); (4.75 : 2.29776941162109)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 3.546875); (6.5 : 3.546875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/People/People_Animals2" />
       <nodes>
-        <classShapeMoniker Id="8db623ef-bf8f-4d31-a556-c9184324cc07" />
-        <classShapeMoniker Id="1136194d-e3f3-4f37-89e2-af0214cead0b" />
+        <classShapeMoniker Id="4e63a0a4-c461-40f3-a8c4-a940ff2960f3" />
+        <classShapeMoniker Id="55fe263f-b883-41b2-9290-8dcaea0050af" />
       </nodes>
     </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 11.3469962565104); (6.44791541666667 : 11.3469962565104 : JumpStart); (6.61458208333333 : 11.3469962565104 : JumpEnd); (6.6250025 : 11.3469962565104); (6.6250025 : 7.08811686197917)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/Sexes/Sexes_Animals" />
+      <nodes>
+        <classShapeMoniker Id="7b35fae9-f02b-4de9-94ca-c7dd922edaef" />
+        <classShapeMoniker Id="55fe263f-b883-41b2-9290-8dcaea0050af" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 12.65625); (6.53124875 : 12.65625); (6.53124875 : 7.08811686197917)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/Species/Species_Animals" />
+      <nodes>
+        <classShapeMoniker Id="3fd60f2a-2d45-497f-ace3-a7d6c25e22c1" />
+        <classShapeMoniker Id="55fe263f-b883-41b2-9290-8dcaea0050af" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="63e681a0-06ad-4064-9153-3030de471130" absoluteBounds="4.5, 1.125, 2, 1.3862939453125">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/DiaryRecords" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4932e98c-11c2-45dd-819a-081721e4ea24" absoluteBounds="4.515, 1.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

@@ -99,7 +99,7 @@
     <Compile Include="Models\CoatTypeModel.cs" />
     <Compile Include="Models\CostModel.cs" />
     <Compile Include="Models\DeathModel.cs" />
-    <Compile Include="Models\DonationModel.cs" />
+    <Compile Include="Models\DiaryModel.cs" />
     <Compile Include="Models\FurColorModel.cs" />
     <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\IncidentModel.cs" />
@@ -107,7 +107,6 @@
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\SexModel.cs" />
     <Compile Include="Models\SpeciesModel.cs" />
-    <Compile Include="Models\EndTypeModel.cs" />
     <Compile Include="Models\StayModel.cs" />
     <Compile Include="Models\WalkModel.cs" />
     <Compile Include="PersonInfo.cs" />
@@ -317,6 +316,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>ShelterDatabase.mdf</DependentUpon>
     </Content>
+    <Content Include="Graphic\untitled.svg" />
+    <SplashScreen Include="LoadingScreen.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

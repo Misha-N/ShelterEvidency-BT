@@ -23,5 +23,7 @@ namespace ShelterEvidency
         public string FurColor { get; set; }
         public int? FeedRation { get; set; }
         public string Note { get; set; }
+
+        public bool? Castration { get; set; }
     }
 }

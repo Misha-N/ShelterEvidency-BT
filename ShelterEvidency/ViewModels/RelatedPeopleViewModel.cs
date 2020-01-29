@@ -17,7 +17,8 @@ namespace ShelterEvidency.ViewModels
             Animal = new AnimalModel();
             Animal.GetAnimal(animalID);
             Vet = new PersonModel();
-            Vet.GetPerson((int)Animal.VetID);
+            if(Animal.VetID != null)
+                Vet.GetPerson((int)Animal.VetID);
         }
 
         #region Binded Vet Properties
@@ -26,14 +27,20 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
+                if (Animal.VetID != null)
                     return Vet.Title.Trim() + " " + Vet.FirstName + " " + Vet.LastName;
+                else
+                    return null;
             }
         }
         public string VetPhone
         {
             get
             {
+                if (Animal.VetID != null)
                     return Vet.Phone;
+                else
+                    return null;
             }
         }
 
@@ -41,7 +48,10 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
+                if (Animal.VetID != null)
                     return Vet.Mail;
+                else
+                    return null;
             }
         }
 
@@ -49,7 +59,10 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
+                if (Animal.VetID != null)
                     return Vet.AdressCity;
+                else
+                    return null;
             }
         }
 
@@ -57,14 +70,20 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
+                if (Animal.VetID != null)
                     return Vet.AdressStreet;
+                else
+                    return null;
             }
         }
         public string VetZip
         {
             get
             {
+                if (Animal.VetID != null)
                     return Vet.AdressZip;
+                else
+                    return null;
             }
         }
 

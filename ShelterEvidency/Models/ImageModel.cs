@@ -49,7 +49,7 @@ namespace ShelterEvidency.Models
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                var img = db.Images.FirstOrDefault(i => i.AnimalID == animalID);
+                var img = db.Images.OrderByDescending(x => x.Id).FirstOrDefault(i => i.AnimalID == animalID);
                 if (img != null)
                 {
                     Image = new BitmapImage(new Uri(img.ImagePath));
@@ -59,6 +59,15 @@ namespace ShelterEvidency.Models
                 }
             }
 
+        }
+
+        public void UpdateImage()
+        {
+            if (ImagePath != null)
+            {
+                SaveImage();
+
+            }
         }
     }
 }

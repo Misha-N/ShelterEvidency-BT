@@ -30,7 +30,14 @@ namespace ShelterEvidency.Models
         public int? FurColorID { get; set; }
         public int? FeedRation { get; set; }
         public string Note { get; set; }
+
+        public bool? Castration { get; set; }
         #endregion
+
+        public AnimalModel()
+        {
+            Castration = false;
+        }
 
         public void SaveAnimal()
         {
@@ -52,6 +59,7 @@ namespace ShelterEvidency.Models
                     VetID = VetID,
                     FeedRation = FeedRation,
                     Note = Note,
+                    Castration = Castration
                 };
                 db.Animals.InsertOnSubmit(animal);
                 db.SubmitChanges();
@@ -80,6 +88,7 @@ namespace ShelterEvidency.Models
                 animal.NewOwnerID = NewOwnerID;
                 animal.VetID = VetID;
                 animal.Note = Note;
+                animal.Castration = Castration;
 
                 db.SubmitChanges();
             }
@@ -108,6 +117,7 @@ namespace ShelterEvidency.Models
                     NewOwnerID = animal.NewOwnerID;
                     VetID = animal.VetID;
                     Note = animal.Note;
+                    Castration = animal.Castration;
                 }
             }
         }
@@ -130,6 +140,7 @@ namespace ShelterEvidency.Models
                         Breed = animal.Breeds.BreedName,
                         CoatType = animal.CoatTypes.CoatTypeName,
                         FurColor = animal.FurColors.FurColorName,
+                        Castration = animal.Castration
 
                     };
                     return info;
@@ -160,7 +171,8 @@ namespace ShelterEvidency.Models
                                     Owner = animal.People.FirstName + " " + animal.People.LastName,
                                     NewOwner = animal.People1.FirstName + " " + animal.People1.LastName,
                                     Vet = animal.People2.FirstName + " " + animal.People2.LastName,
-                                    Note = animal.Note
+                                    Note = animal.Note,
+                                    Castration = animal.Castration
                                 }).ToList();
                 return results;
             }
@@ -191,7 +203,8 @@ namespace ShelterEvidency.Models
                                    Owner = animal.People.FirstName + " " + animal.People.LastName,
                                    NewOwner = animal.People1.FirstName + " " + animal.People1.LastName,
                                    Vet = animal.People2.FirstName + " " + animal.People2.LastName,
-                                   Note = animal.Note
+                                   Note = animal.Note,
+                                   Castration = animal.Castration
                                }).ToList();
                 return results;
             }

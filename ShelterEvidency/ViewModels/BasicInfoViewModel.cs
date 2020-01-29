@@ -1,8 +1,10 @@
 ﻿using Caliburn.Micro;
+using Microsoft.Win32;
 using ShelterEvidency.Database;
 using ShelterEvidency.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -198,6 +200,19 @@ namespace ShelterEvidency.ViewModels
             }
         }
 
+        public bool? Castration
+        {
+            get
+            {
+                return Animal.Castration;
+            }
+            set
+            {
+                Animal.Castration = value;
+                NotifyOfPropertyChange(() => Castration);
+            }
+        }
+
         #endregion
 
         #region List Setting
@@ -247,9 +262,26 @@ namespace ShelterEvidency.ViewModels
         }
         #endregion
 
+        public void LoadImage()
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Vyberte obrázek";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == true)
+            {
+                Image.Image = new BitmapImage(new Uri(op.FileName));
+                Image.ImagePath = Path.GetFullPath(op.FileName);
+                Image.AnimalID = Animal.ID;
+            }
+
+            NotifyOfPropertyChange(() => AnimalImage);
+        }
         public void UpdateAnimal()
         {
             Animal.UpdateAnimal();
+            Image.UpdateImage();
             MessageBox.Show("updated");
         }
 

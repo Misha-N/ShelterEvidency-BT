@@ -200,6 +200,19 @@ namespace ShelterEvidency.ViewModels
             }
         }
 
+        public bool? Castration
+        {
+            get
+            {
+                return Animal.Castration;
+            }
+            set
+            {
+                Animal.Castration = value;
+                NotifyOfPropertyChange(() => Castration);
+            }
+        }
+
         public BitmapImage AnimalImage
         {
             get
