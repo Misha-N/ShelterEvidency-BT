@@ -213,6 +213,19 @@ namespace ShelterEvidency.ViewModels
             }
         }
 
+        public bool? InShelter
+        {
+            get
+            {
+                return Animal.InShelter;
+            }
+            set
+            {
+                Animal.InShelter = value;
+                NotifyOfPropertyChange(() => InShelter);
+            }
+        }
+
         #endregion
 
         #region List Setting

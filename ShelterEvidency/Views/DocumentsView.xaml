@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="ShelterEvidency.Views.DocumentsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ShelterEvidency.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid x:Name="documentDatagrid" AutoGenerateColumns="False" ColumnWidth="*" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" SelectedValuePath="FullName" ItemsSource="{Binding Path=Documents, Mode=OneWay}" SelectedValue="{Binding Path=SelectedDocumentPath, Mode=OneWayToSource}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Name}" Header="Jméno"/>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Extension}" Header="Typ"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBlock  HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Text="{Binding Path=SelectedDocumentPath, Mode=TwoWay}" />
+
+        <StackPanel Grid.Column="1" Margin="10,200">
+            <GroupBox Header="Možnosti vybraného dokumentu:">
+                <StackPanel>
+                    <Button x:Name="Open"  Content="Otevřít" />
+                    <Button x:Name="Print" Content="Vytisknout" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Další možnosti:">
+                <StackPanel>
+                    <Button x:Name="LoadNewDocument"  Content="Přidat nový dokument" />
+                    <Button x:Name="GenerateEvidencyCard"  Content="Generovat evidenční kartu" />
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+
+
+
+    </Grid>
+</UserControl>

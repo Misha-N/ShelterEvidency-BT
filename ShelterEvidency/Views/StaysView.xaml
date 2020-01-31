@@ -52,7 +52,7 @@
             <Button x:Name="UpdateStay" Content="Upravit"/>
         </StackPanel>
 
-        <DataGrid Margin="5" Grid.Column="1" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" ItemsSource="{Binding Path=AnimalStays, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Id" SelectedValue="{Binding Path=SelectedStayID, Mode=OneWayToSource}"/>
+        <DataGrid Margin="5" Grid.Column="1" ColumnWidth="*" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" ItemsSource="{Binding Path=AnimalStays, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Id" SelectedValue="{Binding Path=SelectedStayID, Mode=OneWayToSource}"/>
 
     </Grid>
 </UserControl>

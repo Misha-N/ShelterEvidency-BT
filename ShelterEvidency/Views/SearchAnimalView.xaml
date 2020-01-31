@@ -19,7 +19,7 @@
             <Button x:Name="AddAnimal" Content="Přidat" Margin="5" Width="75"/>
             <Button x:Name="OpenEvidencyCard" Content="Evidenční karta" Margin="5"/>
         </StackPanel>
-        <DataGrid Grid.Row="1" Margin="5" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" ItemsSource="{Binding Path=Animals, Mode=OneWay}" SelectedItem="{Binding Path=SelectedAnimal, Mode=OneWayToSource}"/>
+        <DataGrid Grid.Row="1" Margin="5" ColumnWidth="*" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" ItemsSource="{Binding Path=Animals, Mode=OneWay}" SelectedItem="{Binding Path=SelectedAnimal, Mode=OneWayToSource}"/>
         <ContentControl x:Name="ActiveItem" Grid.RowSpan="2"/>
 
     </Grid>

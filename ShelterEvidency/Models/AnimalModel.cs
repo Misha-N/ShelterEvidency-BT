@@ -30,13 +30,16 @@ namespace ShelterEvidency.Models
         public int? FurColorID { get; set; }
         public int? FeedRation { get; set; }
         public string Note { get; set; }
-
         public bool? Castration { get; set; }
+        public bool? InShelter { get; set; }
+        public string FolderPath { get; set; }
+
         #endregion
 
         public AnimalModel()
         {
             Castration = false;
+            InShelter = true;
         }
 
         public void SaveAnimal()
@@ -59,12 +62,18 @@ namespace ShelterEvidency.Models
                     VetID = VetID,
                     FeedRation = FeedRation,
                     Note = Note,
-                    Castration = Castration
+                    Castration = Castration,
+                    InShelter = InShelter,
+                    FolderPath = FolderPath
+
                 };
                 db.Animals.InsertOnSubmit(animal);
                 db.SubmitChanges();
 
                 ID = animal.ID;
+
+                CreateDocumentFolder();
+                UpdateAnimal();
             }
         }
 
@@ -89,6 +98,8 @@ namespace ShelterEvidency.Models
                 animal.VetID = VetID;
                 animal.Note = Note;
                 animal.Castration = Castration;
+                animal.InShelter = InShelter;
+                animal.FolderPath = FolderPath;
 
                 db.SubmitChanges();
             }
@@ -118,6 +129,8 @@ namespace ShelterEvidency.Models
                     VetID = animal.VetID;
                     Note = animal.Note;
                     Castration = animal.Castration;
+                    InShelter = animal.InShelter;
+                    FolderPath = animal.FolderPath;
                 }
             }
         }
@@ -140,7 +153,9 @@ namespace ShelterEvidency.Models
                         Breed = animal.Breeds.BreedName,
                         CoatType = animal.CoatTypes.CoatTypeName,
                         FurColor = animal.FurColors.FurColorName,
-                        Castration = animal.Castration
+                        Castration = animal.Castration,
+                        InShelter = animal.InShelter,
+                        FolderPath = animal.FolderPath,
 
                     };
                     return info;
@@ -172,8 +187,10 @@ namespace ShelterEvidency.Models
                                     NewOwner = animal.People1.FirstName + " " + animal.People1.LastName,
                                     Vet = animal.People2.FirstName + " " + animal.People2.LastName,
                                     Note = animal.Note,
-                                    Castration = animal.Castration
-                                }).ToList();
+                                    Castration = animal.Castration,
+                                    InShelter = animal.InShelter,
+                                    FolderPath = animal.FolderPath,
+                               }).ToList();
                 return results;
             }
         }
@@ -204,9 +221,29 @@ namespace ShelterEvidency.Models
                                    NewOwner = animal.People1.FirstName + " " + animal.People1.LastName,
                                    Vet = animal.People2.FirstName + " " + animal.People2.LastName,
                                    Note = animal.Note,
-                                   Castration = animal.Castration
+                                   Castration = animal.Castration,
+                                   InShelter = animal.InShelter,
+                                   FolderPath = animal.FolderPath,
                                }).ToList();
                 return results;
+            }
+        }
+
+        public void CreateDocumentFolder()
+        {
+            System.IO.Directory.CreateDirectory("AnimalDocuments");
+            string currentPath = Directory.GetCurrentDirectory() + "\\AnimalDocuments";
+            if (!Directory.Exists(Path.Combine(currentPath, ID.ToString())))
+                Directory.CreateDirectory(Path.Combine(currentPath, ID.ToString()));
+            FolderPath = Path.Combine(currentPath, ID.ToString());
+        }
+
+        public static string ReturnFolder(int? animalID)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var folder = db.Animals.FirstOrDefault(i => i.ID == animalID);
+                return folder.FolderPath;
             }
         }
 

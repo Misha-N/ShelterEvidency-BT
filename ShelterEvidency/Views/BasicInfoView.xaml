@@ -62,6 +62,8 @@
 
             <CheckBox Content="kastrát" IsChecked="{Binding Path = Castration, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
 
+            <CheckBox Content="v útulku" IsChecked="{Binding Path = InShelter, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+
 
         </StackPanel>
 

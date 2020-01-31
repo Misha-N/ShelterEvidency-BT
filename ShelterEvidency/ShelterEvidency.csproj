@@ -118,6 +118,7 @@
     <Compile Include="ViewModels\ComboBoxSettingsViewModel.cs" />
     <Compile Include="ViewModels\CostsViewModel.cs" />
     <Compile Include="ViewModels\CreateAdoptionViewModel.cs" />
+    <Compile Include="ViewModels\DocumentsViewModel.cs" />
     <Compile Include="ViewModels\EvidencyCardViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\IncidentsViewModel.cs" />
@@ -152,6 +153,9 @@
     </Compile>
     <Compile Include="Views\CreateAdoptionView.xaml.cs">
       <DependentUpon>CreateAdoptionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DocumentsView.xaml.cs">
+      <DependentUpon>DocumentsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EvidencyCardView.xaml.cs">
       <DependentUpon>EvidencyCardView.xaml</DependentUpon>
@@ -225,6 +229,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CreateAdoptionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DocumentsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

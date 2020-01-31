@@ -11,7 +11,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <DataGrid Grid.Column="1" Margin="5" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" SelectedValuePath="Id" ItemsSource="{Binding Path=AnimalMedicalRecords, Mode=OneWay}" SelectedValue="{Binding Path=SelectedMedicalRecord, Mode=OneWayToSource}"/>
+        <DataGrid Grid.Column="1" Margin="5" SelectionMode="Single" ColumnWidth="*" SelectionUnit="FullRow" CanUserAddRows="False" SelectedValuePath="Id" ItemsSource="{Binding Path=AnimalMedicalRecords, Mode=OneWay}" SelectedValue="{Binding Path=SelectedMedicalRecord, Mode=OneWayToSource}"/>
         <StackPanel Margin="5">
             <GroupBox Header="Upravit vybraný záznam:">
                 <StackPanel>

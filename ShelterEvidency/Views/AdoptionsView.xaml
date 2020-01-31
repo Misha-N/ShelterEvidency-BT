@@ -19,7 +19,7 @@
             <Button x:Name="CreateAdoption" Content="Vytvořit novou adopci" Margin="5"/>
             <Button x:Name="OpenAdoption" Content="Upravit vybranou adopci" Margin="5"/>
         </StackPanel>
-        <DataGrid Grid.Row="1" Margin="5" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" ItemsSource="{Binding Path=Adoptions, Mode=OneWay}" SelectedItem="{Binding Path=SelectedAdoption, Mode=OneWayToSource}"/>
+        <DataGrid Grid.Row="1" Margin="5" ColumnWidth="*" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" ItemsSource="{Binding Path=Adoptions, Mode=OneWay}" SelectedItem="{Binding Path=SelectedAdoption, Mode=OneWayToSource}"/>
         <ContentControl x:Name="ActiveItem" Grid.RowSpan="2"/>
 
     </Grid>
