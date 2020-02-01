@@ -70,6 +70,11 @@ namespace ShelterEvidency.ViewModels
                 ActivateItem(new AdoptionCardViewModel(SelectedAdoption.ID));
         }
 
+        public void UpdateAdoptions()
+        {
+            NotifyOfPropertyChange(() => Adoptions);
+        }
+
     }
 }
 

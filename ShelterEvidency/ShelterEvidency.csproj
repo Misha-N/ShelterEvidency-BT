@@ -66,6 +66,7 @@
       <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.Charting.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
@@ -100,6 +101,7 @@
     <Compile Include="Models\CostModel.cs" />
     <Compile Include="Models\DeathModel.cs" />
     <Compile Include="Models\DiaryModel.cs" />
+    <Compile Include="Models\DonationModel.cs" />
     <Compile Include="Models\FurColorModel.cs" />
     <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\IncidentModel.cs" />
@@ -107,6 +109,7 @@
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\SexModel.cs" />
     <Compile Include="Models\SpeciesModel.cs" />
+    <Compile Include="Models\StatisticModel.cs" />
     <Compile Include="Models\StayModel.cs" />
     <Compile Include="Models\WalkModel.cs" />
     <Compile Include="PersonInfo.cs" />
@@ -119,6 +122,7 @@
     <Compile Include="ViewModels\CostsViewModel.cs" />
     <Compile Include="ViewModels\CreateAdoptionViewModel.cs" />
     <Compile Include="ViewModels\DocumentsViewModel.cs" />
+    <Compile Include="ViewModels\EconomyViewModel.cs" />
     <Compile Include="ViewModels\EvidencyCardViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\IncidentsViewModel.cs" />
@@ -128,6 +132,7 @@
     <Compile Include="ViewModels\SearchAnimalViewModel.cs" />
     <Compile Include="ViewModels\SearchPersonViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\StatisticsViewModel.cs" />
     <Compile Include="ViewModels\StaysViewModel.cs" />
     <Compile Include="ViewModels\WalksViewModel.cs" />
     <Compile Include="Views\AddAnimalView.xaml.cs">
@@ -156,6 +161,9 @@
     </Compile>
     <Compile Include="Views\DocumentsView.xaml.cs">
       <DependentUpon>DocumentsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EconomyView.xaml.cs">
+      <DependentUpon>EconomyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EvidencyCardView.xaml.cs">
       <DependentUpon>EvidencyCardView.xaml</DependentUpon>
@@ -193,6 +201,9 @@
     </Compile>
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatisticsView.xaml.cs">
+      <DependentUpon>StatisticsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StaysView.xaml.cs">
       <DependentUpon>StaysView.xaml</DependentUpon>
@@ -236,6 +247,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\EconomyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EvidencyCardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -269,6 +284,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatisticsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -41,8 +41,8 @@
             <Button x:Name="LoadAddPersonPage" Content="Přidat osobu" />
             <Button x:Name="LoadSearchPersonPage" Content="Vyhledat osobu" />
             <Button x:Name="LoadAdoptionsPage" Content="Adopce" />
-            <Button x:Name="LoadDonationsPage" Content="Finance" />
-            <Button Content="Statistiky" />
+            <Button x:Name="LoadEconomyPage" Content="Finance" />
+            <Button x:Name="LoadStatisticsPage" Content="Statistiky" />
             <Button x:Name="LoadSettingsPage" Content="Nastavení" />
         </StackPanel>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="1">

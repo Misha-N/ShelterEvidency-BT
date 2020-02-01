@@ -23,7 +23,6 @@ namespace ShelterEvidency.ViewModels
             Animal = AnimalModel.GetAnimalInfo(Adoption.AnimalID);
             Person = new PersonInfo();
             Person = PersonModel.GetPersonInfo(Adoption.PersonID);
-
         }
 
         #region Binded Animal Properties
@@ -197,7 +196,13 @@ namespace ShelterEvidency.ViewModels
 
         public void SaveToDatabase()
         {
+            if (Returned == false)
+            {
+                ReturnDate = null;
+                ReturnReason = null;
+            }
             Adoption.UpdateAdoption();
+
             MessageBox.Show("updated");
             TryClose();
         }

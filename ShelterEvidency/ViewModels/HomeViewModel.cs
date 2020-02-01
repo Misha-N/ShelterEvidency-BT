@@ -43,6 +43,16 @@ namespace ShelterEvidency.ViewModels
             ActivateItem(new AdoptionsViewModel());
         }
 
+        public void LoadStatisticsPage()
+        {
+            ActivateItem(new StatisticsViewModel());
+        }
+
+        public void LoadEconomyPage()
+        {
+            ActivateItem(new EconomyViewModel());
+        }
+
         public void Home()
         {
             ActivateItem(null);
@@ -96,8 +106,10 @@ namespace ShelterEvidency.ViewModels
 
         public void CreateDiaryRecord()
         {
+            DateTime? recordDate = DiaryModel.Date;
             DiaryModel.SaveDiaryRecord();
             DiaryModel = new DiaryModel();
+            DiaryModel.Date = recordDate;
             NotifyOfPropertyChange(() => RecordList);
             NotifyOfPropertyChange(() => DiaryRecord);
         }

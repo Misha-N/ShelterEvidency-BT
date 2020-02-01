@@ -33,16 +33,5 @@ namespace ShelterEvidency.Properties {
                 return ((string)(this["ShelterDatabaseConnectionString"]));
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database\\Shel" +
-            "terDatabase.mdf;Integrated Security=True;Connect Timeout=30")]
-        public string ShelterDatabaseConnectionString1 {
-            get {
-                return ((string)(this["ShelterDatabaseConnectionString1"]));
-            }
-        }
     }
 }

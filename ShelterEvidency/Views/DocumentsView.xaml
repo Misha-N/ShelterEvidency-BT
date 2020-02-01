@@ -26,6 +26,7 @@
                 <StackPanel>
                     <Button x:Name="Open"  Content="Otevřít" />
                     <Button x:Name="Print" Content="Vytisknout" />
+                    <Button x:Name="Delete" Content="Smazat" />
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="Další možnosti:">

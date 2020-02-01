@@ -81,6 +81,11 @@ namespace ShelterEvidency.ViewModels
             ActivateItem(new AddAnimalViewModel());
         }
 
+        public void UpdateAnimals()
+        {
+            NotifyOfPropertyChange(() => Animals);
+        }
+
         public void OpenEvidencyCard()
         {
             if (SelectedAnimal != null)

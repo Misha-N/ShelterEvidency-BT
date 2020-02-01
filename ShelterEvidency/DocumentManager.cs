@@ -67,6 +67,14 @@ namespace ShelterEvidency
             p.Start();
         }
 
+        public static void DeleteDocument(string path)
+        {
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+            }
+        }
+
         public static void LoadNewAnimalDocument(int animalID)
         {
             string path = AnimalModel.ReturnFolder(animalID);

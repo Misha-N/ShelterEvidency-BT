@@ -65,6 +65,15 @@ namespace ShelterEvidency.ViewModels
                 DocumentManager.PrintDocument(SelectedDocumentPath);
         }
 
+        public void Delete()
+        {
+            if (SelectedDocumentPath != null)
+            {
+                DocumentManager.DeleteDocument(SelectedDocumentPath);
+                NotifyOfPropertyChange(() => Documents);
+            }
+        }
+
         public void LoadNewDocument()
         {
             DocumentManager.LoadNewAnimalDocument(AnimalID);

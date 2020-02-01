@@ -63,6 +63,11 @@ namespace ShelterEvidency.ViewModels
             ActivateItem(new AddPersonViewModel());
         }
 
+        public void UpdatePeople()
+        {
+            NotifyOfPropertyChange(() => People);
+        }
+
         public void OpenPersonInfo()
         {
             if (SelectedPerson != null)

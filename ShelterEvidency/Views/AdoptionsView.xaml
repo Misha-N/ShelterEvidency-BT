@@ -18,6 +18,7 @@
             <TextBlock TextWrapping="Wrap" Text="{Binding Path=SelectedAdoption}"/>
             <Button x:Name="CreateAdoption" Content="Vytvořit novou adopci" Margin="5"/>
             <Button x:Name="OpenAdoption" Content="Upravit vybranou adopci" Margin="5"/>
+            <Button x:Name="UpdateAdoptions" Content="Aktualizovat" Margin="5"/>
         </StackPanel>
         <DataGrid Grid.Row="1" Margin="5" ColumnWidth="*" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" ItemsSource="{Binding Path=Adoptions, Mode=OneWay}" SelectedItem="{Binding Path=SelectedAdoption, Mode=OneWayToSource}"/>
         <ContentControl x:Name="ActiveItem" Grid.RowSpan="2"/>

@@ -18,6 +18,7 @@
             <TextBlock TextWrapping="Wrap" Text="{Binding Path=SelectedPerson}"/>
             <Button x:Name="AddPerson" Content="Přidat" Margin="5" Width="75"/>
             <Button x:Name="OpenPersonInfo" Content="Detail" Margin="5"/>
+            <Button x:Name="UpdatePeople" Content="Aktualizovat" Margin="5"/>
         </StackPanel>
         <DataGrid Grid.Row="1" Margin="5" ColumnWidth="*" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" ItemsSource="{Binding Path=People, Mode=OneWay}" SelectedItem="{Binding Path=SelectedPerson, Mode=OneWayToSource}"/>
         <ContentControl x:Name="ActiveItem" Grid.RowSpan="2"/>
