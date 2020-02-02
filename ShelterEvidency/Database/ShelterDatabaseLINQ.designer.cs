@@ -45,9 +45,6 @@ namespace ShelterEvidency.Database
     partial void InsertDeaths(Deaths instance);
     partial void UpdateDeaths(Deaths instance);
     partial void DeleteDeaths(Deaths instance);
-    partial void InsertDonations(Donations instance);
-    partial void UpdateDonations(Donations instance);
-    partial void DeleteDonations(Donations instance);
     partial void InsertDocuments(Documents instance);
     partial void UpdateDocuments(Documents instance);
     partial void DeleteDocuments(Documents instance);
@@ -84,6 +81,9 @@ namespace ShelterEvidency.Database
     partial void InsertAnimals(Animals instance);
     partial void UpdateAnimals(Animals instance);
     partial void DeleteAnimals(Animals instance);
+    partial void InsertDonations(Donations instance);
+    partial void UpdateDonations(Donations instance);
+    partial void DeleteDonations(Donations instance);
     #endregion
 		
 		public ShelterDatabaseLINQDataContext() : 
@@ -153,14 +153,6 @@ namespace ShelterEvidency.Database
 			get
 			{
 				return this.GetTable<Deaths>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Donations> Donations
-		{
-			get
-			{
-				return this.GetTable<Donations>();
 			}
 		}
 		
@@ -257,6 +249,14 @@ namespace ShelterEvidency.Database
 			get
 			{
 				return this.GetTable<Animals>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Donations> Donations
+		{
+			get
+			{
+				return this.GetTable<Donations>();
 			}
 		}
 	}
@@ -1096,164 +1096,6 @@ namespace ShelterEvidency.Database
 					this._Descriprion = value;
 					this.SendPropertyChanged("Descriprion");
 					this.OnDescriprionChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Donations")]
-	public partial class Donations : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private System.Nullable<int> _DonatorID;
-		
-		private System.Nullable<int> _Amount;
-		
-		private string _Description;
-		
-		private string _DonationName;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnDonatorIDChanging(System.Nullable<int> value);
-    partial void OnDonatorIDChanged();
-    partial void OnAmountChanging(System.Nullable<int> value);
-    partial void OnAmountChanged();
-    partial void OnDescriptionChanging(string value);
-    partial void OnDescriptionChanged();
-    partial void OnDonationNameChanging(string value);
-    partial void OnDonationNameChanged();
-    #endregion
-		
-		public Donations()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DonatorID", DbType="Int")]
-		public System.Nullable<int> DonatorID
-		{
-			get
-			{
-				return this._DonatorID;
-			}
-			set
-			{
-				if ((this._DonatorID != value))
-				{
-					this.OnDonatorIDChanging(value);
-					this.SendPropertyChanging();
-					this._DonatorID = value;
-					this.SendPropertyChanged("DonatorID");
-					this.OnDonatorIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Int")]
-		public System.Nullable<int> Amount
-		{
-			get
-			{
-				return this._Amount;
-			}
-			set
-			{
-				if ((this._Amount != value))
-				{
-					this.OnAmountChanging(value);
-					this.SendPropertyChanging();
-					this._Amount = value;
-					this.SendPropertyChanged("Amount");
-					this.OnAmountChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(MAX)")]
-		public string Description
-		{
-			get
-			{
-				return this._Description;
-			}
-			set
-			{
-				if ((this._Description != value))
-				{
-					this.OnDescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._Description = value;
-					this.SendPropertyChanged("Description");
-					this.OnDescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DonationName", DbType="NVarChar(50)")]
-		public string DonationName
-		{
-			get
-			{
-				return this._DonationName;
-			}
-			set
-			{
-				if ((this._DonationName != value))
-				{
-					this.OnDonationNameChanging(value);
-					this.SendPropertyChanging();
-					this._DonationName = value;
-					this.SendPropertyChanged("DonationName");
-					this.OnDonationNameChanged();
 				}
 			}
 		}
@@ -4197,6 +4039,188 @@ namespace ShelterEvidency.Database
 		{
 			this.SendPropertyChanging();
 			entity.Animals = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Donations")]
+	public partial class Donations : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private System.Nullable<int> _DonatorID;
+		
+		private System.Nullable<int> _Amount;
+		
+		private string _Description;
+		
+		private string _DonationName;
+		
+		private System.Nullable<System.DateTime> _Date;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnDonatorIDChanging(System.Nullable<int> value);
+    partial void OnDonatorIDChanged();
+    partial void OnAmountChanging(System.Nullable<int> value);
+    partial void OnAmountChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    partial void OnDonationNameChanging(string value);
+    partial void OnDonationNameChanged();
+    partial void OnDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateChanged();
+    #endregion
+		
+		public Donations()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DonatorID", DbType="Int")]
+		public System.Nullable<int> DonatorID
+		{
+			get
+			{
+				return this._DonatorID;
+			}
+			set
+			{
+				if ((this._DonatorID != value))
+				{
+					this.OnDonatorIDChanging(value);
+					this.SendPropertyChanging();
+					this._DonatorID = value;
+					this.SendPropertyChanged("DonatorID");
+					this.OnDonatorIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Int")]
+		public System.Nullable<int> Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this.OnAmountChanging(value);
+					this.SendPropertyChanging();
+					this._Amount = value;
+					this.SendPropertyChanged("Amount");
+					this.OnAmountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(MAX)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DonationName", DbType="NVarChar(50)")]
+		public string DonationName
+		{
+			get
+			{
+				return this._DonationName;
+			}
+			set
+			{
+				if ((this._DonationName != value))
+				{
+					this.OnDonationNameChanging(value);
+					this.SendPropertyChanging();
+					this._DonationName = value;
+					this.SendPropertyChanged("DonationName");
+					this.OnDonationNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Date
+		{
+			get
+			{
+				return this._Date;
+			}
+			set
+			{
+				if ((this._Date != value))
+				{
+					this.OnDateChanging(value);
+					this.SendPropertyChanging();
+					this._Date = value;
+					this.SendPropertyChanged("Date");
+					this.OnDateChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

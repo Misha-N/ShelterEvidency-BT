@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="ShelterEvidency.Views.GeneralCostsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ShelterEvidency.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Grid.Column="1" Margin="5" ColumnWidth="*" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" SelectedValuePath="Id" ItemsSource="{Binding Path=AnimalCosts, Mode=OneWay}" SelectedValue="{Binding Path=SelectedCost, Mode=OneWayToSource}" />
+        <StackPanel Margin="5">
+            <GroupBox Header="Upravit vybraný náklad:">
+                <StackPanel>
+                    <TextBlock TextWrapping="Wrap" Text="Název:" Margin="5"/>
+                    <TextBox x:Name="CostName" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=CostName, Mode=TwoWay}"/>
+
+                    <TextBlock TextWrapping="Wrap" Text="Částka:" Margin="5"/>
+                    <TextBox x:Name="Price" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Price, Mode=TwoWay}"/>
+
+                    <TextBlock TextWrapping="Wrap" Text="Datum:" Margin="5"/>
+                    <DatePicker Margin="5,0,5,5" SelectedDate="{Binding Path=Date, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <TextBlock TextWrapping="Wrap" Text="Popis:" Margin="5"/>
+                    <TextBox x:Name="Description" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="50" Text="{Binding Path=Description, Mode=TwoWay}"/>
+
+                    <Button x:Name="UpdateCost" Content="Upravit"/>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Přidat nový náklad:">
+                <StackPanel>
+                    <TextBlock TextWrapping="Wrap" Text="Název:" Margin="5"/>
+                    <TextBox x:Name="NewCostName" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=NewCostName, Mode=TwoWay}"/>
+
+                    <TextBlock TextWrapping="Wrap" Text="Částka:" Margin="5"/>
+                    <TextBox x:Name="NewPrice" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=NewPrice, Mode=TwoWay}"/>
+
+                    <TextBlock TextWrapping="Wrap" Text="Datum:" Margin="5"/>
+                    <DatePicker Margin="5,0,5,5" SelectedDate="{Binding Path=NewDate, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <TextBlock TextWrapping="Wrap" Text="Popis:" Margin="5"/>
+                    <TextBox x:Name="NewDescription" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="50" Text="{Binding Path=NewDescription, Mode=TwoWay}"/>
+
+                    <Button x:Name="CreateNewCost" Content="Přidat"/>
+                </StackPanel>
+            </GroupBox>
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

@@ -122,8 +122,10 @@
     <Compile Include="ViewModels\CostsViewModel.cs" />
     <Compile Include="ViewModels\CreateAdoptionViewModel.cs" />
     <Compile Include="ViewModels\DocumentsViewModel.cs" />
+    <Compile Include="ViewModels\DonationsViewModel.cs" />
     <Compile Include="ViewModels\EconomyViewModel.cs" />
     <Compile Include="ViewModels\EvidencyCardViewModel.cs" />
+    <Compile Include="ViewModels\GeneralCostsViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\IncidentsViewModel.cs" />
     <Compile Include="ViewModels\MedicalInfoViewModel.cs" />
@@ -162,11 +164,17 @@
     <Compile Include="Views\DocumentsView.xaml.cs">
       <DependentUpon>DocumentsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DonationsView.xaml.cs">
+      <DependentUpon>DonationsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EconomyView.xaml.cs">
       <DependentUpon>EconomyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EvidencyCardView.xaml.cs">
       <DependentUpon>EvidencyCardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GeneralCostsView.xaml.cs">
+      <DependentUpon>GeneralCostsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
@@ -247,11 +255,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\DonationsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EconomyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EvidencyCardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GeneralCostsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

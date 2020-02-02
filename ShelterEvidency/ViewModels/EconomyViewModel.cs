@@ -7,7 +7,21 @@ using System.Threading.Tasks;
 
 namespace ShelterEvidency.ViewModels
 {
-    class EconomyViewModel: Screen
+    class EconomyViewModel: Conductor<object>
     {
+        public EconomyViewModel()
+        {
+            Costs();
+        }
+
+        public void Costs()
+        {
+            ActivateItem(new GeneralCostsViewModel(null));
+        }
+
+        public void Donations()
+        {
+            ActivateItem(new DonationsViewModel());
+        }
     }
 }

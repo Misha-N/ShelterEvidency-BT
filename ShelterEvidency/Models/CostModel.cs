@@ -38,11 +38,20 @@ namespace ShelterEvidency.Models
             }
         }
 
-        public static List<Costs> GetAnimalCosts(int animalID)
+        public static List<Costs> GetAnimalCosts(int? animalID)
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 return db.Costs.Where(x => x.AnimalID.Equals(animalID)).ToList();
+            }
+        }
+
+
+        public static List<Costs> GetAllCosts()
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                return db.Costs.ToList();
             }
         }
 

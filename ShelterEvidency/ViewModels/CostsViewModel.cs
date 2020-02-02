@@ -10,8 +10,8 @@ namespace ShelterEvidency.ViewModels
 {
     public class CostsViewModel: Screen
     {
-        private int _animalID;
-        public int AnimalID
+        private int? _animalID;
+        public int? AnimalID
         {
             get
             {
@@ -26,13 +26,13 @@ namespace ShelterEvidency.ViewModels
 
         public CostModel Cost { get; set; }
         public CostModel NewCost { get; set; }
-        public CostsViewModel(int animalID)
+        public CostsViewModel(int? animalID)
         {
             AnimalID = animalID;
             Cost = new CostModel();
             NewCost = new CostModel();
         }
-        public List<Database.Costs> AnimalCosts
+        public virtual List<Database.Costs> AnimalCosts
         {
             get
             {
