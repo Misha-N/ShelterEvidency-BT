@@ -55,6 +55,14 @@ namespace ShelterEvidency.Models
             }
         }
 
+        public static List<Costs> GetDatedCosts(DateTime? since, DateTime? to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                return db.Costs.Where(x => x.Date >= since && x.Date <= to).ToList();
+            }
+        }
+
         public void GetCost(int? costID)
         {
             ID = costID;

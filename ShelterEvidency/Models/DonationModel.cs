@@ -20,7 +20,7 @@ namespace ShelterEvidency.Models
 
         #endregion
 
-        public void SaveCost()
+        public void SaveDonation()
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
@@ -44,6 +44,14 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 return db.Donations.ToList();
+            }
+        }
+
+        public static List<Donations> GetDatedDonations(DateTime? since, DateTime? to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                return db.Donations.Where(x => x.Date >= since && x.Date <= to).ToList();
             }
         }
 

@@ -212,10 +212,10 @@ namespace ShelterEvidency.ViewModels
                 NewCost.SaveCost();
             }
             NotifyOfPropertyChange(() => AnimalCosts);
-            ClearNewStay();
+            ClearNewCost();
         }
 
-        public void ClearNewStay()
+        public void ClearNewCost()
         {
             NewCost = new CostModel();
             NotifyOfPropertyChange(() => NewCost);

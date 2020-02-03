@@ -41,7 +41,7 @@
             <Button x:Name="LoadAddPersonPage" Content="Přidat osobu" />
             <Button x:Name="LoadSearchPersonPage" Content="Vyhledat osobu" />
             <Button x:Name="LoadAdoptionsPage" Content="Adopce" />
-            <Button x:Name="LoadEconomyPage" Content="Finance" />
+            <Button x:Name="LoadEconomyPage" Content="Finance a příspěvky" />
             <Button x:Name="LoadStatisticsPage" Content="Statistiky" />
             <Button x:Name="LoadSettingsPage" Content="Nastavení" />
         </StackPanel>

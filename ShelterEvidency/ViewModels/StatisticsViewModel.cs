@@ -19,5 +19,32 @@ namespace ShelterEvidency.ViewModels
             }
 
         }
+
+        public int SuccessfullyAdoptedAnimals
+        {
+            get
+            {
+                return StatisticModel.SuccessfullyAdoptedAnimals();
+            }
+
+        }
+
+        public int? TotalCosts
+        {
+            get
+            {
+                return StatisticModel.TotalCosts();
+            }
+
+        }
+
+        public int? TotalDonations
+        {
+            get
+            {
+                return StatisticModel.TotalDonations();
+            }
+
+        }
     }
 }

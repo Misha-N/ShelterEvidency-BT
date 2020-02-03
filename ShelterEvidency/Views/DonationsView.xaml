@@ -6,7 +6,69 @@
              xmlns:local="clr-namespace:ShelterEvidency.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="#FFE800FF">
-            
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock TextWrapping="Wrap" Text="Od:" Margin="5"/>
+                <DatePicker Margin="5,0,5,5" SelectedDate="{Binding Path=Since, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock TextWrapping="Wrap" Text="Do:" Margin="5"/>
+                <DatePicker Margin="5,0,5,5" SelectedDate="{Binding Path=To, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}"/>
+                <Button x:Name="Filter" Content="Filtrovat"/>
+            </StackPanel>
+            <DataGrid Grid.Column="1" Margin="5" ColumnWidth="*" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" SelectedValuePath="ID" ItemsSource="{Binding Path=Donations, Mode=OneWay}" SelectedValue="{Binding Path=SelectedDonation, Mode=OneWayToSource}" />
+        </StackPanel>
+        
+        <StackPanel Margin="5">
+            <GroupBox Header="Upravit vybraný sponzorský dar:">
+                <StackPanel>
+                    <TextBlock TextWrapping="Wrap" Text="Název:" Margin="5"/>
+                    <TextBox x:Name="CostName" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=DonationName, Mode=TwoWay}"/>
+
+                    <TextBlock TextWrapping="Wrap" Text="Částka:" Margin="5"/>
+                    <TextBox x:Name="Price" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Amount, Mode=TwoWay}"/>
+
+                    <TextBlock TextWrapping="Wrap" Text="Datum:" Margin="5"/>
+                    <DatePicker Margin="5,0,5,5" SelectedDate="{Binding Path=Date, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <TextBlock TextWrapping="Wrap" Text="Sponzor:" Margin="5"/>
+                    <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=DonatorList, Mode=OneTime}" DisplayMemberPath="TitledFullName" SelectedValuePath="ID" SelectedValue="{Binding Path=Donator, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
+
+
+                    <TextBlock TextWrapping="Wrap" Text="Popis:" Margin="5"/>
+                    <TextBox x:Name="Description" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="50" Text="{Binding Path=Description, Mode=TwoWay}"/>
+
+                    <Button x:Name="UpdateDonation" Content="Upravit"/>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Přidat nový sponzorský dar:">
+                <StackPanel>
+                    <TextBlock TextWrapping="Wrap" Text="Název:" Margin="5"/>
+                    <TextBox x:Name="NewCostName" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=NewDonationName, Mode=TwoWay}"/>
+
+                    <TextBlock TextWrapping="Wrap" Text="Částka:" Margin="5"/>
+                    <TextBox x:Name="NewPrice" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=NewAmount, Mode=TwoWay}"/>
+
+                    <TextBlock TextWrapping="Wrap" Text="Datum:" Margin="5"/>
+                    <DatePicker Margin="5,0,5,5" SelectedDate="{Binding Path=NewDate, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <TextBlock TextWrapping="Wrap" Text="Sponzor:" Margin="5"/>
+                    <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=DonatorList, Mode=OneTime}" DisplayMemberPath="TitledFullName" SelectedValuePath="ID" SelectedValue="{Binding Path=NewDonator, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
+
+
+                    <TextBlock TextWrapping="Wrap" Text="Popis:" Margin="5"/>
+                    <TextBox x:Name="NewDescription" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="50" Text="{Binding Path=NewDescription, Mode=TwoWay}"/>
+
+                    <Button x:Name="CreateNewDonation" Content="Přidat"/>
+                </StackPanel>
+            </GroupBox>
+
+        </StackPanel>
+
     </Grid>
 </UserControl>

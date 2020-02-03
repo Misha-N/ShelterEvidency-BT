@@ -18,8 +18,46 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                return CostModel.GetAllCosts();
+                if(Since != null && To != null)
+                    return CostModel.GetDatedCosts(Since, To);
+                else
+                    return CostModel.GetAllCosts();
             }
+        }
+
+        public void Filter()
+        {
+            NotifyOfPropertyChange(() => AnimalCosts);
+        }
+
+        private DateTime? _since;
+        public DateTime? Since
+        {
+            get
+            {
+                return _since;
+            }
+            set
+            {
+                _since = value;
+                NotifyOfPropertyChange(() => Since);
+            }
+
+        }
+
+        private DateTime? _to;
+        public DateTime? To
+        {
+            get
+            {
+                return _to;
+            }
+            set
+            {
+                _to = value;
+                NotifyOfPropertyChange(() => To);
+            }
+
         }
 
     }

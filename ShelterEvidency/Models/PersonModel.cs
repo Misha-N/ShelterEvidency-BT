@@ -247,6 +247,37 @@ namespace ShelterEvidency.Models
             }
         }
 
+        public static List<PersonInfo> ReturnDonators()
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var results = (from person in db.People
+                               where ((person.IsSponsor.Equals(true)))
+                               select new PersonInfo
+                               {
+                                   ID = person.Id,
+                                   TitledFullName = person.Title.Trim() + " " + person.FirstName + " " + person.LastName,
+                                   /*
+                                   Title = person.Title,
+                                   FirstName = person.FirstName,
+                                   LastName = person.LastName,
+                                   */
+                                   Phone = person.Phone,
+                                   Mail = person.Mail,
+                                   Note = person.Note,
+                                   AdressCity = person.AdressCity,
+                                   AdressStreet = person.AdressStreet,
+                                   AdressZip = person.AdressZip,
+                                   IsOwner = person.IsOwner,
+                                   IsVet = person.IsVet,
+                                   IsWalker = person.IsWalker,
+                                   IsSponsor = person.IsSponsor,
+                                   IsVolunteer = person.IsVolunteer
+                               }).ToList();
+                return results;
+            }
+        }
+
         public static List<PersonInfo> ReturnWalkers()
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())

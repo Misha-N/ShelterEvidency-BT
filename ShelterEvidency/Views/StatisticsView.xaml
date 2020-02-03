@@ -7,8 +7,38 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-        <TextBox x:Name="AnimalsInShelterSum" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="50" Text="{Binding Path=AnimalsInShelterSum, Mode=OneWay}"/>
+        <StackPanel>
+            <TextBlock TextWrapping="Wrap" Text="Zvířat v útulku:" Margin="5"/>
+            <TextBlock x:Name="AnimalsInShelterSum" Margin="5" Text="{Binding Path=AnimalsInShelterSum, Mode=OneWay}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <TextBlock TextWrapping="Wrap" Text="Úspěšně adoptovaných zvířat:" Margin="5"/>
+            <TextBlock x:Name="SuccessfullyAdoptedAnimals" Margin="5" Text="{Binding Path=SuccessfullyAdoptedAnimals, Mode=OneWay}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2">
+            <TextBlock TextWrapping="Wrap" Text="Celkové náklady:" Margin="5"/>
+            <TextBlock x:Name="TotalCosts" Margin="5" Text="{Binding Path=TotalCosts, Mode=OneWay}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="3">
+            <TextBlock TextWrapping="Wrap" Text="Celkové příspěvky:" Margin="5"/>
+            <TextBlock x:Name="TotalDonations" Margin="5" Text="{Binding Path=TotalDonations, Mode=OneWay}"/>
+        </StackPanel>
 
 
     </Grid>
