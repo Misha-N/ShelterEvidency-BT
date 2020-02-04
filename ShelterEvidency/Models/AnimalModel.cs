@@ -29,6 +29,7 @@ namespace ShelterEvidency.Models
         public int? CoatTypeID { get; set; }
         public int? FurColorID { get; set; }
         public int? FeedRation { get; set; }
+        public int? Weight { get; set; }
         public string Note { get; set; }
         public bool? Castration { get; set; }
         public bool? InShelter { get; set; }
@@ -61,6 +62,7 @@ namespace ShelterEvidency.Models
                     NewOwnerID = NewOwnerID,
                     VetID = VetID,
                     FeedRation = FeedRation,
+                    Weight = Weight,
                     Note = Note,
                     Castration = Castration,
                     InShelter = InShelter,
@@ -93,6 +95,7 @@ namespace ShelterEvidency.Models
                 animal.CoatTypeID = CoatTypeID;
                 animal.FurColorID = FurColorID;
                 animal.FeedRation = FeedRation;
+                animal.Weight = Weight;
                 animal.OwnerID = OwnerID;
                 animal.NewOwnerID = NewOwnerID;
                 animal.VetID = VetID;
@@ -106,7 +109,7 @@ namespace ShelterEvidency.Models
         }
 
 
-        public void GetAnimal(int animalID)
+        public void GetAnimal(int? animalID)
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
@@ -124,6 +127,7 @@ namespace ShelterEvidency.Models
                     CoatTypeID = animal.CoatTypeID;
                     FurColorID = animal.FurColorID;
                     FeedRation = animal.FeedRation;
+                    Weight = animal.Weight;
                     OwnerID = animal.OwnerID;
                     NewOwnerID = animal.NewOwnerID;
                     VetID = animal.VetID;
@@ -183,6 +187,7 @@ namespace ShelterEvidency.Models
                                     CoatType = animal.CoatTypes.CoatTypeName,
                                     FurColor = animal.FurColors.FurColorName,
                                     FeedRation = animal.FeedRation,
+                                    Weight = animal.Weight,
                                     Owner = animal.People.FirstName + " " + animal.People.LastName,
                                     NewOwner = animal.People1.FirstName + " " + animal.People1.LastName,
                                     Vet = animal.People2.FirstName + " " + animal.People2.LastName,
@@ -217,6 +222,7 @@ namespace ShelterEvidency.Models
                                    CoatType = animal.CoatTypes.CoatTypeName,
                                    FurColor = animal.FurColors.FurColorName,
                                    FeedRation = animal.FeedRation,
+                                   Weight = animal.Weight,
                                    Owner = animal.People.FirstName + " " + animal.People.LastName,
                                    NewOwner = animal.People1.FirstName + " " + animal.People1.LastName,
                                    Vet = animal.People2.FirstName + " " + animal.People2.LastName,
@@ -245,6 +251,22 @@ namespace ShelterEvidency.Models
                 var folder = db.Animals.FirstOrDefault(i => i.ID == animalID);
                 return folder.FolderPath;
             }
+        }
+
+        public void Adopt(int adoptedBy)
+        {
+            InShelter = false;
+            NewOwnerID = adoptedBy;
+            UpdateAnimal();
+
+        }
+
+        public void Return()
+        {
+            InShelter = true;
+            NewOwnerID = null;
+            UpdateAnimal();
+
         }
 
     }

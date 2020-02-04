@@ -14,14 +14,13 @@ namespace ShelterEvidency.ViewModels
         public AnimalModel Animal { get; set; }
         public PersonModel Owner { get; set; }
         public AdoptionModel Adoption { get; set; }
-
         public CreateAdoptionViewModel()
         {
+            SelectedAnimal = Animals.FirstOrDefault();
+            SelectedOwner = Owners.FirstOrDefault();
             Animal = new AnimalModel();
             Owner = new PersonModel();
             Adoption = new AdoptionModel();
-            SelectedAnimal = new AnimalInfo();
-            SelectedOwner = new PersonInfo();
         }
 
         #region List setting
@@ -63,16 +62,16 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                return _selectedAnimal;
+                 return _selectedAnimal;
             }
             set
             {
                 _selectedAnimal = value;
                 AnimalSelection();
-                NotifyOfPropertyChange(() => SelectedAnimal);
             }
         }
-        
+
+
         private void OwnerSelection()
         {
             NotifyOfPropertyChange(() => FullName);
@@ -97,96 +96,50 @@ namespace ShelterEvidency.ViewModels
         }
 
         #region Binded Animal Properties
-        
+
         public int? ID
         {
             get
             {
-                if (SelectedAnimal == null)
-                   return Animal.ID;
-                else
-                    return SelectedAnimal.ID;
+                return SelectedAnimal.ID;
             }
-            set
-            {
-                SelectedAnimal.ID = value;
-                NotifyOfPropertyChange(() => ID);
-            }
+
         }
-        
+
         public string AnimalName
         {
             get
             {
-                if (SelectedAnimal == null)
-                    return Animal.Name;
-                else
-                    return SelectedAnimal.Name;
+                 return SelectedAnimal.Name;
             }
-            set
-            {
-                SelectedAnimal.Name = value;
-                NotifyOfPropertyChange(() => AnimalName);
-            }
+
         }
         public string ChipNumber
         {
             get
             {
-                if (SelectedAnimal == null)
-                    return Animal.ChipNumber;
-                else
-                    return SelectedAnimal.ChipNumber;
-            }
-            set
-            {
-                SelectedAnimal.ChipNumber = value;
-                NotifyOfPropertyChange(() => ChipNumber);
+                 return SelectedAnimal.ChipNumber;
             }
         }
         public string Sex
         {
             get
             {
-                if (SelectedAnimal == null)
-                    return Animal.SexID.ToString();
-                else
-                    return SelectedAnimal.Sex;
-            }
-            set
-            {
-                SelectedAnimal.Sex = value;
-                NotifyOfPropertyChange(() => Sex);
+                 return SelectedAnimal.Sex;
             }
         }
         public string Species
         {
             get
             {
-                if (SelectedAnimal == null)
-                    return Animal.SpeciesID.ToString();
-                else
-                    return SelectedAnimal.Species;
-            }
-            set
-            {
-                SelectedAnimal.Species = value;
-                NotifyOfPropertyChange(() => Species);
+                return SelectedAnimal.Species;
             }
         }
         public string Breed
         {
             get
             {
-                if (SelectedAnimal == null)
-                    return Animal.BreedID.ToString();
-                else
-                    return SelectedAnimal.Breed;
-            }
-            set
-            {
-                SelectedAnimal.Breed = value;
-                NotifyOfPropertyChange(() => Breed);
+                 return SelectedAnimal.Breed;
             }
         }
 
@@ -194,45 +147,21 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                if (SelectedAnimal == null)
-                    return Animal.BirthDate;
-                else
-                    return SelectedAnimal.BirthDate;
-            }
-            set
-            {
-                SelectedAnimal.BirthDate = value;
-                NotifyOfPropertyChange(() => BirthDate);
+                 return SelectedAnimal.BirthDate;
             }
         }
         public string CoatType
         {
             get
             {
-                if (SelectedAnimal == null)
-                    return Animal.CoatTypeID.ToString();
-                else
-                    return SelectedAnimal.CoatType;
-            }
-            set
-            {
-                SelectedAnimal.CoatType = value;
-                NotifyOfPropertyChange(() => CoatType);
+                 return SelectedAnimal.CoatType;
             }
         }
         public string FurColor
         {
             get
             {
-                if (SelectedAnimal == null)
-                    return Animal.FurColorID.ToString();
-                else
-                    return SelectedAnimal.FurColor;
-            }
-            set
-            {
-                SelectedAnimal.FurColor = value;
-                NotifyOfPropertyChange(() => FurColor);
+                 return SelectedAnimal.FurColor;
             }
         }
 
@@ -244,30 +173,14 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                if (SelectedOwner == null)
-                    return Owner.FirstName;
-                else
-                    return SelectedOwner.TitledFullName;
-            }
-            set
-            {
-                SelectedOwner.TitledFullName = value;
-                NotifyOfPropertyChange(() => FullName);
+                 return SelectedOwner.TitledFullName;
             }
         }
         public string Phone
         {
             get
             {
-                if (SelectedOwner == null)
-                    return Owner.Phone;
-                else
-                    return SelectedOwner.Phone;
-            }
-            set
-            {
-                SelectedOwner.Phone = value;
-                NotifyOfPropertyChange(() => Phone);
+                return SelectedOwner.Phone;
             }
         }
 
@@ -275,15 +188,7 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                if (SelectedOwner == null)
-                    return Owner.Mail;
-                else
-                    return SelectedOwner.Mail;
-            }
-            set
-            {
-                SelectedOwner.Mail = value;
-                NotifyOfPropertyChange(() => Mail);
+                 return SelectedOwner.Mail;
             }
         }
 
@@ -291,15 +196,7 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                if (SelectedOwner == null)
-                    return Owner.AdressCity;
-                else
-                    return SelectedOwner.AdressCity;
-            }
-            set
-            {
-                SelectedOwner.AdressCity = value;
-                NotifyOfPropertyChange(() => City);
+                 return SelectedOwner.AdressCity;
             }
         }
 
@@ -307,30 +204,15 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                if (SelectedOwner == null)
-                    return Owner.AdressStreet;
-                else
-                    return SelectedOwner.AdressStreet;
+                 return SelectedOwner.AdressStreet;
             }
-            set
-            {
-                SelectedOwner.AdressStreet = value;
-                NotifyOfPropertyChange(() => Street);
-            }
+
         }
         public string Zip
         {
             get
             {
-                if (SelectedOwner == null)
-                    return Owner.AdressZip;
-                else
-                    return SelectedOwner.AdressZip;
-            }
-            set
-            {
-                SelectedOwner.AdressZip = value;
-                NotifyOfPropertyChange(() => Zip);
+                 return SelectedOwner.AdressZip;
             }
         }
 
@@ -354,9 +236,13 @@ namespace ShelterEvidency.ViewModels
             {
                 Owner.GetPerson(SelectedOwner.ID);
                 Adoption.PersonID = SelectedOwner.ID;
+
                 Animal.GetAnimal((int)SelectedAnimal.ID);
                 Adoption.AnimalID = SelectedAnimal.ID;
+
+                Animal.Adopt(SelectedOwner.ID);
                 Adoption.SaveAdoption();
+
                 DocumentManager.CreateAdoptionList(Animal, Owner, Adoption);
                 TryClose();
             }

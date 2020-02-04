@@ -114,7 +114,6 @@
     <Compile Include="Models\WalkModel.cs" />
     <Compile Include="PersonInfo.cs" />
     <Compile Include="ViewModels\AddAnimalViewModel.cs" />
-    <Compile Include="ViewModels\AddPersonViewModel.cs" />
     <Compile Include="ViewModels\AdoptionCardViewModel.cs" />
     <Compile Include="ViewModels\AdoptionsViewModel.cs" />
     <Compile Include="ViewModels\BasicInfoViewModel.cs" />
@@ -139,9 +138,6 @@
     <Compile Include="ViewModels\WalksViewModel.cs" />
     <Compile Include="Views\AddAnimalView.xaml.cs">
       <DependentUpon>AddAnimalView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AddPersonView.xaml.cs">
-      <DependentUpon>AddPersonView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AdoptionCardView.xaml.cs">
       <DependentUpon>AdoptionCardView.xaml</DependentUpon>
@@ -220,10 +216,6 @@
       <DependentUpon>WalksView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AddAnimalView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\AddPersonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -359,7 +351,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>ShelterDatabase.mdf</DependentUpon>
     </Content>
-    <Content Include="Graphic\untitled.svg" />
+    <Content Include="LoadingScreen.svg" />
     <SplashScreen Include="LoadingScreen.png" />
   </ItemGroup>
   <ItemGroup>

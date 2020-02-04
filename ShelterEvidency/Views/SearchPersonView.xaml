@@ -10,18 +10,92 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <TextBlock TextWrapping="Wrap" Text="Vyhledávání:" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBox x:Name="SearchValue" TextWrapping="Wrap" Margin="5,5,5,5" Width="400" VerticalContentAlignment="Center"/>
             <TextBlock TextWrapping="Wrap" Text="{Binding Path=SearchValue}"/>
             <TextBlock TextWrapping="Wrap" Text="{Binding Path=SelectedPerson}"/>
-            <Button x:Name="AddPerson" Content="Přidat" Margin="5" Width="75"/>
             <Button x:Name="OpenPersonInfo" Content="Detail" Margin="5"/>
             <Button x:Name="UpdatePeople" Content="Aktualizovat" Margin="5"/>
         </StackPanel>
-        <DataGrid Grid.Row="1" Margin="5" ColumnWidth="*" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" ItemsSource="{Binding Path=People, Mode=OneWay}" SelectedItem="{Binding Path=SelectedPerson, Mode=OneWayToSource}"/>
-        <ContentControl x:Name="ActiveItem" Grid.RowSpan="2"/>
+
+        <DataGrid Grid.Row="1" Margin="5" ColumnWidth="*" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" ItemsSource="{Binding Path=People, Mode=OneWay}" SelectedItem="{Binding Path=SelectedPerson, Mode=OneWayToSource}" Height="450"/>
+
+        <Grid Background="White" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock TextWrapping="Wrap" Text="Titul:" Margin="5"/>
+                <TextBox x:Name="Title" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                <TextBlock TextWrapping="Wrap" Text="Jméno:" Margin="5"/>
+                <TextBox x:Name="FirstName" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                <TextBlock TextWrapping="Wrap" Text="Příjmení:" Margin="5"/>
+                <TextBox x:Name="LastName"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                <TextBlock TextWrapping="Wrap" Text="Telefon:" Margin="5"/>
+                <TextBox x:Name="Phone"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                <TextBlock TextWrapping="Wrap" Text="E-mail:" Margin="5"/>
+                <TextBox x:Name="Mail"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <GroupBox Header="Adresa:">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock TextWrapping="Wrap" Text="Město:" Margin="5"/>
+                                <TextBox x:Name="City"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Grid.Column="1"  TextWrapping="Wrap" Text="PSČ:" Margin="5"/>
+                                <TextBox x:Name="Zip" Grid.Column="1" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <TextBlock TextWrapping="Wrap" Text="Ulice a číslo domu:" Margin="5"/>
+                        <TextBox x:Name="Street"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Role osoby:">
+                    <StackPanel Margin="5">
+                        <CheckBox Content="majitel" IsChecked="{Binding Path = IsOwner, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                        <CheckBox Content="veterinář" IsChecked="{Binding Path = IsVet, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                        <CheckBox Content="venčitel" IsChecked="{Binding Path = IsWalker, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                        <CheckBox Content="sponzor" IsChecked="{Binding Path = IsSponsor, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                        <CheckBox Content="dobrovolník" IsChecked="{Binding Path = IsVolunteer, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <TextBlock TextWrapping="Wrap" Text="Poznámka:" Margin="5"/>
+                <TextBox x:Name="Note"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="50"/>
+
+
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Orientation="Horizontal">
+                <Button x:Name="SaveToDatabase" Content="Uložit" Grid.Column="2" Grid.Row="1" Width="75" />
+            </StackPanel>
+
+        </Grid>
+
+        <ContentControl x:Name="ActiveItem" Grid.RowSpan="3"/>
+        
 
     </Grid>
 </UserControl>

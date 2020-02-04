@@ -100,6 +100,32 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => Vet);
             }
         }
+
+        public int? Owner
+        {
+            get
+            {
+                return Animal.OwnerID;
+            }
+            set
+            {
+                Animal.OwnerID = value;
+                NotifyOfPropertyChange(() => Owner);
+            }
+        }
+
+        public int? NewOwner
+        {
+            get
+            {
+                return Animal.NewOwnerID;
+            }
+            set
+            {
+                Animal.NewOwnerID = value;
+                NotifyOfPropertyChange(() => NewOwner);
+            }
+        }
         public int? Species
         {
             get
@@ -187,6 +213,19 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => FeedRation);
             }
         }
+
+        public int? Weight
+        {
+            get
+            {
+                return Animal.Weight;
+            }
+            set
+            {
+                Animal.Weight = value;
+                NotifyOfPropertyChange(() => Weight);
+            }
+        }
         public string Note
         {
             get
@@ -235,6 +274,14 @@ namespace ShelterEvidency.ViewModels
             get
             {
                 return PersonModel.ReturnVets();
+            }
+        }
+
+        public List<PersonInfo> OwnerList
+        {
+            get
+            {
+                return PersonModel.ReturnOwners();
             }
         }
 

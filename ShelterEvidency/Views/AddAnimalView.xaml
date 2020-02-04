@@ -29,6 +29,9 @@
             <TextBlock TextWrapping="Wrap" Text="Datum narození (odhad):" Margin="5"/>
             <DatePicker Margin="5,0,5,5" SelectedDate="{Binding Path=BirthDate, Mode=OneWayToSource}" SelectedDateFormat="Short"/>
 
+            <TextBlock TextWrapping="Wrap" Text="Váha (kg):" Margin="5"/>
+            <TextBox x:Name="Weight"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
             <CheckBox Content="kastrát" IsChecked="{Binding Path = Castration, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
 
         </StackPanel>

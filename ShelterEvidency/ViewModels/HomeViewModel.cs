@@ -23,14 +23,9 @@ namespace ShelterEvidency.ViewModels
             ActivateItem(new SearchAnimalViewModel());
         }
 
-        public void LoadSearchPersonPage()
+        public void LoadPersonPage()
         {
             ActivateItem(new SearchPersonViewModel());
-        }
-
-        public void LoadAddPersonPage()
-        {
-            ActivateItem(new AddPersonViewModel());
         }
 
         public void LoadSettingsPage()

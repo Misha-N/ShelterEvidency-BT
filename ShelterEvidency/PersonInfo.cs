@@ -9,13 +9,9 @@ namespace ShelterEvidency
     public class PersonInfo
     {
         public int ID { get; set; }
-
-        /*
         public string Title { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        */
-        public string TitledFullName { get; set; }
         public string Phone { get; set; }
         public string Mail { get; set; }
         public string Note { get; set; }
@@ -27,5 +23,19 @@ namespace ShelterEvidency
         public bool? IsWalker { get; set; }
         public bool? IsSponsor { get; set; }
         public bool? IsVolunteer { get; set; }
+
+        private string _titledFullName;
+        public string TitledFullName
+        {
+            get
+            {
+                string titledFullName = Title + " " + FirstName + " " + LastName;
+                return titledFullName;
+            }
+            set
+            {
+                _titledFullName = value;
+            }
+        }
     }
 }

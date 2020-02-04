@@ -29,6 +29,16 @@ namespace ShelterEvidency.Models
 
         public PersonModel()
         {
+            Title = null;
+            FirstName = null;
+            LastName = null;
+            Phone = null;
+            Mail = null;
+            Note = null;
+            AdressCity = null;
+            AdressStreet = null;
+            AdressZip = null;
+            Title = null;
             IsOwner = false;
             IsSponsor = false;
             IsVet = false;
@@ -74,12 +84,9 @@ namespace ShelterEvidency.Models
                                select new PersonInfo
                                {
                                    ID = person.Id,
-                                   TitledFullName = person.Title.Trim() + " " + person.FirstName + " " + person.LastName,
-                                   /*
                                    Title = person.Title,
                                    FirstName = person.FirstName,
                                    LastName = person.LastName,
-                                   */
                                    Phone = person.Phone,
                                    Mail = person.Mail,
                                    Note = person.Note,
@@ -108,12 +115,9 @@ namespace ShelterEvidency.Models
                                select new PersonInfo
                                {
                                    ID = person.Id,
-                                   TitledFullName = person.Title.Trim() + " " + person.FirstName + " " + person.LastName,
-                                   /*
                                    Title = person.Title,
                                    FirstName = person.FirstName,
                                    LastName = person.LastName,
-                                   */
                                    Phone = person.Phone,
                                    Mail = person.Mail,
                                    Note = person.Note,
@@ -166,12 +170,9 @@ namespace ShelterEvidency.Models
                     PersonInfo info = new PersonInfo
                     {
                         ID = person.Id,
-                        TitledFullName = person.Title.Trim() + " " + person.FirstName + " " + person.LastName,
-                        /*
                         Title = person.Title,
                         FirstName = person.FirstName,
                         LastName = person.LastName,
-                        */
                         Phone = person.Phone,
                         Mail = person.Mail,
                         Note = person.Note,
@@ -225,12 +226,9 @@ namespace ShelterEvidency.Models
                                select new PersonInfo
                                {
                                    ID = person.Id,
-                                   TitledFullName = person.Title.Trim() + " " + person.FirstName + " " + person.LastName,
-                                   /*
                                    Title = person.Title,
                                    FirstName = person.FirstName,
                                    LastName = person.LastName,
-                                   */
                                    Phone = person.Phone,
                                    Mail = person.Mail,
                                    Note = person.Note,
@@ -256,12 +254,9 @@ namespace ShelterEvidency.Models
                                select new PersonInfo
                                {
                                    ID = person.Id,
-                                   TitledFullName = person.Title.Trim() + " " + person.FirstName + " " + person.LastName,
-                                   /*
                                    Title = person.Title,
                                    FirstName = person.FirstName,
                                    LastName = person.LastName,
-                                   */
                                    Phone = person.Phone,
                                    Mail = person.Mail,
                                    Note = person.Note,
@@ -287,12 +282,9 @@ namespace ShelterEvidency.Models
                                select new PersonInfo
                                {
                                    ID = person.Id,
-                                   TitledFullName = person.Title.Trim() + " " + person.FirstName + " " + person.LastName,
-                                   /*
                                    Title = person.Title,
                                    FirstName = person.FirstName,
                                    LastName = person.LastName,
-                                   */
                                    Phone = person.Phone,
                                    Mail = person.Mail,
                                    Note = person.Note,
@@ -318,12 +310,9 @@ namespace ShelterEvidency.Models
                                select new PersonInfo
                                {
                                    ID = person.Id,
-                                   TitledFullName = person.Title.Trim() + " " + person.FirstName + " " + person.LastName,
-                                   /*
                                    Title = person.Title,
                                    FirstName = person.FirstName,
                                    LastName = person.LastName,
-                                   */
                                    Phone = person.Phone,
                                    Mail = person.Mail,
                                    Note = person.Note,

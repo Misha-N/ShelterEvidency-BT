@@ -22,9 +22,11 @@ namespace ShelterEvidency
         public string CoatType { get; set; }
         public string FurColor { get; set; }
         public int? FeedRation { get; set; }
+        public int? Weight { get; set; }
         public string Note { get; set; }
         public bool? Castration { get; set; }
         public string FolderPath { get; set; }
         public bool? InShelter { get; set; }
+
     }
 }

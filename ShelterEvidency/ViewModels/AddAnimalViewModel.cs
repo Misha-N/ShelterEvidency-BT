@@ -127,6 +127,19 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => Breed);
             }
         }
+
+        public int? Weight
+        {
+            get
+            {
+                return Animal.Weight;
+            }
+            set
+            {
+                Animal.Weight = value;
+                NotifyOfPropertyChange(() => Weight);
+            }
+        }
         public int? CrossBreed
         {
             get

@@ -38,8 +38,7 @@
             <Button x:Name="Home" Content="Úvod"/>
             <Button x:Name="LoadAddAnimalPage" Content="Přidat zvíře" />
             <Button x:Name="LoadSearchAnimalPage" Content="Vyhledat zvíře" />
-            <Button x:Name="LoadAddPersonPage" Content="Přidat osobu" />
-            <Button x:Name="LoadSearchPersonPage" Content="Vyhledat osobu" />
+            <Button x:Name="LoadPersonPage" Content="Osoby" />
             <Button x:Name="LoadAdoptionsPage" Content="Adopce" />
             <Button x:Name="LoadEconomyPage" Content="Finance a příspěvky" />
             <Button x:Name="LoadStatisticsPage" Content="Statistiky" />

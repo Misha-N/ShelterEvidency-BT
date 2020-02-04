@@ -18,7 +18,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel>
             <TextBlock TextWrapping="Wrap" Text="Vybrat zvíře:" Margin="5"/>
-            <DataGrid Margin="5" ColumnWidth="*" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False"  ItemsSource="{Binding Path=Animals, Mode=OneWay}" SelectedItem="{Binding Path=SelectedAnimal, Mode=OneWayToSource}" Height="400"/>
+            <DataGrid Margin="5" ColumnWidth="*" SelectionMode="Single" SelectionUnit="FullRow" IsSynchronizedWithCurrentItem="True" CanUserAddRows="False" ItemsSource="{Binding Path=Animals, Mode=OneWay}" SelectedItem="{Binding Path=SelectedAnimal, Mode=TwoWay}" Height="400"/>
         </StackPanel>
 
         <GroupBox Grid.Row="1" Header="Základní informace o zvířeti:">
@@ -51,7 +51,7 @@
 
         <StackPanel Grid.Column="2">
             <TextBlock TextWrapping="Wrap" Text="Vybrat majitele:" Margin="5"/>
-            <DataGrid Margin="5" ColumnWidth="*" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" ItemsSource="{Binding Path=Owners, Mode=OneWay}" SelectedItem="{Binding Path=SelectedOwner, Mode=OneWayToSource}" Height="400"/>
+            <DataGrid Margin="5" ColumnWidth="*" SelectionMode="Single" SelectionUnit="FullRow" IsSynchronizedWithCurrentItem="True" CanUserAddRows="False" ItemsSource="{Binding Path=Owners, Mode=OneWay}" SelectedItem="{Binding Path=SelectedOwner, Mode=TwoWay}" Height="400"/>
         </StackPanel>
         
         <GroupBox Grid.Row="1" Grid.Column="1" Header="Základní informace o majiteli:">

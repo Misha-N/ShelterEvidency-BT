@@ -39,6 +39,12 @@
             <TextBlock TextWrapping="Wrap" Text="Veterinář:" Margin="5"/>
             <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=VetList, Mode=OneWay}" DisplayMemberPath="TitledFullName" SelectedValuePath="ID" SelectedValue="{Binding Path=Vet, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
 
+            <TextBlock TextWrapping="Wrap" Text="Původní majitel:" Margin="5"/>
+            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=OwnerList, Mode=OneWay}" DisplayMemberPath="TitledFullName" SelectedValuePath="ID" SelectedValue="{Binding Path=Owner, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
+
+            <TextBlock TextWrapping="Wrap" Text="Nový majitel:" Margin="5"/>
+            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=OwnerList, Mode=OneWay}" DisplayMemberPath="TitledFullName" SelectedValuePath="ID" SelectedValue="{Binding Path=NewOwner, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
+
         </StackPanel>
         <StackPanel Grid.Column="2" Grid.RowSpan="2">
             <TextBlock TextWrapping="Wrap" Text="Jméno:" Margin="5"/>
@@ -56,6 +62,9 @@
 
             <TextBlock TextWrapping="Wrap" Text="Krmná dávka (g):" Margin="5"/>
             <TextBox x:Name="FeedRation"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=FeedRation, Mode=TwoWay}"/>
+
+            <TextBlock TextWrapping="Wrap" Text="Váha (kg):" Margin="5"/>
+            <TextBox x:Name="Weight"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Weight, Mode=TwoWay}"/>
 
             <TextBlock TextWrapping="Wrap" Text="Poznámka:" Margin="5"/>
             <TextBox  x:Name="Note" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Note, Mode=TwoWay}"/>

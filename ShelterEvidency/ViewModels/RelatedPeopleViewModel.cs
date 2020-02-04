@@ -12,14 +12,26 @@ namespace ShelterEvidency.ViewModels
     {
         public AnimalModel Animal { get; set; }
         public PersonModel Vet { get; set; }
+        public PersonModel Owner { get; set; }
+        public PersonModel NewOwner { get; set; }
         public RelatedPeopleViewModel(int animalID)
         {
             Animal = new AnimalModel();
             Animal.GetAnimal(animalID);
+
             Vet = new PersonModel();
             if(Animal.VetID != null)
                 Vet.GetPerson((int)Animal.VetID);
+
+            Owner = new PersonModel();
+            if (Animal.OwnerID != null)
+                Owner.GetPerson((int)Animal.OwnerID);
+
+            NewOwner = new PersonModel();
+            if (Animal.NewOwnerID != null)
+                NewOwner.GetPerson((int)Animal.NewOwnerID);
         }
+
 
         #region Binded Vet Properties
 
@@ -27,20 +39,14 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                if (Animal.VetID != null)
-                    return Vet.Title.Trim() + " " + Vet.FirstName + " " + Vet.LastName;
-                else
-                    return null;
+                 return Vet.Title + " " + Vet.FirstName + " " + Vet.LastName;
             }
         }
         public string VetPhone
         {
             get
             {
-                if (Animal.VetID != null)
-                    return Vet.Phone;
-                else
-                    return null;
+                 return Vet.Phone;
             }
         }
 
@@ -48,10 +54,7 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                if (Animal.VetID != null)
-                    return Vet.Mail;
-                else
-                    return null;
+                 return Vet.Mail;
             }
         }
 
@@ -59,10 +62,7 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                if (Animal.VetID != null)
-                    return Vet.AdressCity;
-                else
-                    return null;
+                 return Vet.AdressCity;
             }
         }
 
@@ -70,20 +70,120 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                if (Animal.VetID != null)
-                    return Vet.AdressStreet;
-                else
-                    return null;
+                 return Vet.AdressStreet;
             }
         }
         public string VetZip
         {
             get
             {
-                if (Animal.VetID != null)
-                    return Vet.AdressZip;
-                else
-                    return null;
+                 return Vet.AdressZip;
+            }
+        }
+
+        #endregion
+        
+        #region Binded ExOwner Properties
+
+        public string ExFullName
+        {
+            get
+            {
+                 return Owner.Title + " " + Owner.FirstName + " " + Owner.LastName;
+            }
+        }
+        public string ExPhone
+        {
+            get
+            {
+                 return Owner.Phone;
+            }
+        }
+
+        public string ExMail
+        {
+            get
+            {
+                 return Owner.Mail;
+            }
+        }
+
+        public string ExCity
+        {
+            get
+            {
+
+                 return Owner.AdressCity;
+
+            }
+        }
+
+        public string ExStreet
+        {
+            get
+            {
+
+                 return Owner.AdressStreet;
+
+            }
+        }
+        public string ExZip
+        {
+            get
+            {
+
+                 return Owner.AdressZip;
+
+            }
+        }
+
+        #endregion
+    
+        #region Binded NewOwner Properties
+
+        public string FullName
+        {
+            get
+            {
+                 return NewOwner.Title + " " + NewOwner.FirstName + " " + NewOwner.LastName;
+            }
+        }
+        public string Phone
+        {
+            get
+            {
+                 return NewOwner.Phone;
+            }
+        }
+
+        public string Mail
+        {
+            get
+            {
+                 return NewOwner.Mail;
+            }
+        }
+
+        public string City
+        {
+            get
+            {
+                 return NewOwner.AdressCity;
+            }
+        }
+
+        public string Street
+        {
+            get
+            {
+                 return NewOwner.AdressStreet;
+            }
+        }
+        public string Zip
+        {
+            get
+            {
+                 return NewOwner.AdressZip;
             }
         }
 
