@@ -4,9 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShelterEvidency.Views"
+             Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -18,8 +21,6 @@
                 <DataGridTextColumn IsReadOnly="True" Binding="{Binding Extension}" Header="Typ"/>
             </DataGrid.Columns>
         </DataGrid>
-
-        <TextBlock  HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Text="{Binding Path=SelectedDocumentPath, Mode=TwoWay}" />
 
         <StackPanel Grid.Column="1" Margin="10,200">
             <GroupBox Header="Možnosti vybraného dokumentu:">

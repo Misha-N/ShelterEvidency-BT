@@ -78,7 +78,7 @@ namespace ShelterEvidency.ViewModels
 
         public void AddAnimal()
         {
-            ActivateItem(new AddAnimalViewModel());
+            ActivateItem(new AddAnimalViewModel(this));
         }
 
         public void UpdateAnimals()

@@ -14,8 +14,11 @@ namespace ShelterEvidency.ViewModels
         public AnimalModel Animal { get; set; }
         public PersonModel Owner { get; set; }
         public AdoptionModel Adoption { get; set; }
-        public CreateAdoptionViewModel()
+
+        private readonly AdoptionsViewModel prnt;
+        public CreateAdoptionViewModel(AdoptionsViewModel parent)
         {
+            prnt = parent;
             SelectedAnimal = Animals.FirstOrDefault();
             SelectedOwner = Owners.FirstOrDefault();
             Animal = new AnimalModel();
@@ -244,6 +247,7 @@ namespace ShelterEvidency.ViewModels
                 Adoption.SaveAdoption();
 
                 DocumentManager.CreateAdoptionList(Animal, Owner, Adoption);
+                prnt.UpdateAdoptions();
                 TryClose();
             }
             else

@@ -20,8 +20,11 @@ namespace ShelterEvidency.ViewModels
         public AnimalModel Animal { get; set; }
         public StayModel Stay { get; set; }
 
-        public AddAnimalViewModel()
+        readonly SearchAnimalViewModel prnt;
+
+        public AddAnimalViewModel(SearchAnimalViewModel parent = null)
         {
+            prnt = parent;
             Image = new ImageModel();
             Animal = new AnimalModel();
             Stay = new StayModel();
@@ -261,6 +264,8 @@ namespace ShelterEvidency.ViewModels
             Stay.SaveStay();
             Image.SaveImage();
             MessageBox.Show(Animal.Name + " přidán do evidence.");
+            if(prnt != null)
+                prnt.UpdateAnimals();
             TryClose();
         }
         public void LoadImage()

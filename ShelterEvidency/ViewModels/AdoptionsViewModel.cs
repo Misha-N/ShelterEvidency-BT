@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ShelterEvidency.ViewModels
 {
-    class AdoptionsViewModel: Conductor<object>
+    public class AdoptionsViewModel: Conductor<object>
     {
         public List<AdoptionInfo> Adoptions
         {
@@ -61,7 +61,7 @@ namespace ShelterEvidency.ViewModels
 
         public void CreateAdoption()
         {
-            ActivateItem(new CreateAdoptionViewModel());
+            ActivateItem(new CreateAdoptionViewModel(this));
         }
 
         public void OpenAdoption()
