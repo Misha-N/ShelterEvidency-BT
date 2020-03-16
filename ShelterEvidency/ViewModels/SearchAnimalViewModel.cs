@@ -3,6 +3,7 @@ using ShelterEvidency.Database;
 using ShelterEvidency.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,17 +13,57 @@ namespace ShelterEvidency.ViewModels
 {
     public class SearchAnimalViewModel: Conductor<object>
     {
-        public List<AnimalInfo> Animals
+        public SearchAnimalViewModel()
+        {
+        }
+
+
+        protected override void OnViewReady(object view)
+        {
+            base.OnViewReady(view);
+            Task.Run(() => LoadData());
+        }
+
+
+        private async void LoadData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            Animals = await Task.Run(() => AnimalModel.ReturnAnimals());
+            IsWorking = false;
+        }
+
+        private bool _isWorking;
+
+         public bool IsWorking
         {
             get
             {
-                if (SearchValue == null)
-                    return AnimalModel.ReturnAnimals();
-                else
-                    return Search();
+                return _isWorking;
             }
-
+            set
+            {
+                _isWorking = value;
+                NotifyOfPropertyChange(() => IsWorking);
+            }
         }
+
+        private BindableCollection<AnimalInfo> _animals;
+
+        public BindableCollection<AnimalInfo> Animals
+        {
+            get 
+            { 
+                return _animals; 
+            }
+            set 
+            { 
+                _animals = value;
+                NotifyOfPropertyChange(() => Animals);
+            }
+        }
+
+        /*
 
         private string _searchValue;
 
@@ -54,27 +95,13 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => SelectedAnimal);
             }
         }
-
-        private AnimalModel _allAnimals;
-
-        public AnimalModel AllAnimals
-        {
-            get
-            {
-                return _allAnimals;
-            }
-            set
-            {
-                _allAnimals = value;
-                NotifyOfPropertyChange(() => AllAnimals);
-            }
-        }
-
+        
 
         public List<AnimalInfo> Search()
         {
             return AnimalModel.ReturnSpecificAnimals(SearchValue);
         }
+        */
 
         public void AddAnimal()
         {
@@ -86,11 +113,13 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => Animals);
         }
 
+        /*
         public void OpenEvidencyCard()
         {
             if (SelectedAnimal != null)
                 ActivateItem(new EvidencyCardViewModel((int)SelectedAnimal.ID));
         }
+        */
 
 
 

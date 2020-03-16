@@ -1,14 +1,11 @@
-﻿using ShelterEvidency.Database;
+﻿using Caliburn.Micro;
+using ShelterEvidency.Database;
 using System;
 using System.Collections.Generic;
-using System.Data.Linq;
-using System.Data.Linq.Mapping;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Media.Imaging;
 
 namespace ShelterEvidency.Models
 {
@@ -169,11 +166,12 @@ namespace ShelterEvidency.Models
             }
         }
 
-        public static List<AnimalInfo> ReturnAnimals()
+        public static BindableCollection<AnimalInfo> ReturnAnimals()
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                var results = (from animal in db.Animals
+                var results =
+                    (from animal in db.Animals
                                select new AnimalInfo
                                {
                                     ID = animal.ID,
@@ -195,8 +193,10 @@ namespace ShelterEvidency.Models
                                     Castration = animal.Castration,
                                     InShelter = animal.InShelter,
                                     FolderPath = animal.FolderPath,
-                               }).ToList();
-                return results;
+                               });
+                
+
+                return new BindableCollection<AnimalInfo>(results);
             }
         }
 

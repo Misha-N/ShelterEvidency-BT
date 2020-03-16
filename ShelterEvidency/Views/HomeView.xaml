@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:helpers="clr-namespace:ShelterEvidency.Helpers"
+        xml:lang="cs"
         mc:Ignorable="d"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -23,6 +25,11 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="70"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+
+        <helpers:InvertBooleanConverter  x:Key="boolConvert"/>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+
+
     </Window.Resources>
 
     <Window.Triggers>
@@ -33,6 +40,7 @@
             <BeginStoryboard Storyboard="{StaticResource CloseMenu}"/>
         </EventTrigger>
     </Window.Triggers>
+
     <Grid>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -43,11 +51,12 @@
                 <RowDefinition Height="60"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="1" x:Name="GridMain" Margin="100,5,20,5">
+            <Grid Grid.Row="1" x:Name="GridMain" Margin="100,10,20,10">
                 <ContentControl x:Name="ActiveItem" Grid.RowSpan="2"/>
             </Grid>
 
-            <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="True" >
+            <materialDesign:Card Grid.Column="1" Grid.Row="1">
+                <DockPanel LastChildFill="True" >
                 <Viewbox DockPanel.Dock="Top" Margin="10" MaxHeight="400">
                     <Calendar SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </Viewbox>
@@ -66,11 +75,18 @@
                         </Button>
                     </Grid>
                 </GroupBox>
-                <TextBlock Margin="15" DockPanel.Dock="Top" Style="{StaticResource MaterialDesignHeadline6TextBlock}">Dnešní poznámky:</TextBlock>
-                <DataGrid ItemsSource="{Binding Path=RecordList, Mode=OneWay}" Margin="0,10,0,0" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False"/>
+                <TextBlock Margin="10" DockPanel.Dock="Top" Style="{StaticResource MaterialDesignHeadline6TextBlock}">Dnešní poznámky:</TextBlock>
+                <DataGrid Margin="10" ItemsSource="{Binding Path=RecordList, Mode=OneWay}" VerticalAlignment="Stretch" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Datum" Binding="{Binding Date, StringFormat=\{0:dd.MM.yyyy\}}"/>
+                        <DataGridTextColumn Header="Záznam" Binding="{Binding Record}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </DockPanel>
+            </materialDesign:Card>
 
-            <Grid Grid.ColumnSpan="2" VerticalAlignment="Center">
+            <materialDesign:ColorZone Mode="Accent" Grid.Row="0" Grid.ColumnSpan="2" Height="60" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                <Grid VerticalAlignment="Center">
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FFACACAC"/>
                 </Grid.Effect>
@@ -85,6 +101,7 @@
                     </materialDesign:PopupBox>
                 </StackPanel>
             </Grid>
+            </materialDesign:ColorZone>
 
 
         </Grid>
@@ -124,7 +141,7 @@
                         </TransformGroup>
                     </Grid.RenderTransform>
 
-                    <ListView x:Name="ListViewMenu" Foreground="White" Background="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListView IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}" x:Name="ListViewMenu" Foreground="White" Background="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
                         <Button x:Name="Home" Height="60"  Padding="14,4,16,4">
                             <Grid Width="225">
@@ -206,77 +223,15 @@
 
             </StackPanel>
         </Grid>
+
+        <ProgressBar
+                Visibility="{Binding IsWorking, Converter={StaticResource VisibleIfTrueConverter}}"
+              Style="{StaticResource MaterialDesignCircularProgressBar}"
+              Value="0"
+              Height="50"
+              Width="50"
+              IsIndeterminate="True" />
+
     </Grid>
 
-    <!--
-    <Grid Margin="5">
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="4*"/>
-        </Grid.ColumnDefinitions>
-
-        <StackPanel VerticalAlignment="Center">
-            <StackPanel.Resources>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="FontWeight" Value="Bold"/>
-                    <Setter Property="FontSize" Value="25"/>
-                </Style>
-            </StackPanel.Resources>
-            <TextBlock Text="Shelter Management" HorizontalAlignment="Center"/>
-            <TextBlock Text="Software" HorizontalAlignment="Center" />
-        </StackPanel>
-
-        <StackPanel Grid.Row="1" >
-            <Button x:Name="Home" Content="Úvod"/>
-            <Button x:Name="LoadAddAnimalPage" Content="Přidat zvíře" />
-            <Button x:Name="LoadSearchAnimalPage" Content="Vyhledat zvíře" />
-            <Button x:Name="LoadPersonPage" Content="Osoby" />
-            <Button x:Name="LoadAdoptionsPage" Content="Adopce" />
-            <Button x:Name="LoadEconomyPage" Content="Finance a příspěvky" />
-            <Button x:Name="LoadStatisticsPage" Content="Statistiky" />
-            <Button x:Name="LoadSettingsPage" Content="Nastavení" />
-        </StackPanel>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="1">
-            <Grid   Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-
-                <Grid Grid.ColumnSpan="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                        <Viewbox>
-                            <Calendar Margin="15" SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        </Viewbox>
-                        <GroupBox Header="Přidat poznámku na vybraný den:">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="5*"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <TextBox x:Name="DiaryRecord" Text="{Binding Path=DiaryRecord, Mode=TwoWay}"/>
-                                <Button x:Name="CreateDiaryRecord" Content="OK" Grid.Column="1"/>
-                            </Grid>
-                        </GroupBox>
-                        <DataGrid ItemsSource="{Binding Path=RecordList, Mode=OneWay}" Margin="0,10,0,0" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False"/>
-                    </StackPanel>
-
-                </Grid>
-
-                <ContentControl x:Name="ActiveItem" Margin="0,0,10,0"/>
-            </Grid>
-        </ScrollViewer>
-    </Grid>
-    
-    -->
 </Window>

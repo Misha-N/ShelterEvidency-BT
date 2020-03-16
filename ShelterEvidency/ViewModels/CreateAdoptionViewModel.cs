@@ -19,7 +19,7 @@ namespace ShelterEvidency.ViewModels
         public CreateAdoptionViewModel(AdoptionsViewModel parent)
         {
             prnt = parent;
-            SelectedAnimal = Animals.FirstOrDefault();
+            //SelectedAnimal = Animals.FirstOrDefault();
             SelectedOwner = Owners.FirstOrDefault();
             Animal = new AnimalModel();
             Owner = new PersonModel();
@@ -27,13 +27,15 @@ namespace ShelterEvidency.ViewModels
         }
 
         #region List setting
-        public List<AnimalInfo> Animals
+        /*
+        public Binda<AnimalInfo> Animals
         {
             get
             {
                     return AnimalModel.ReturnAnimals();
             }
         }
+        */
         public List<PersonInfo> Owners
         {
             get

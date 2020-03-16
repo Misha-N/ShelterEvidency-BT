@@ -1,4 +1,5 @@
-﻿using ShelterEvidency.Database;
+﻿using Caliburn.Micro;
+using ShelterEvidency.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace ShelterEvidency.Models
     {
         #region Properties/Atributes
         public int ID { get; set; }
-        public DateTime? Date { get; set; }
+        public DateTime Date { get; set; }
         public string Record { get; set; }
         #endregion
 
@@ -20,6 +21,7 @@ namespace ShelterEvidency.Models
             Date = DateTime.Today;
         }
 
+        #region Methods
         public void SaveDiaryRecord()
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
@@ -35,13 +37,14 @@ namespace ShelterEvidency.Models
                 ID = diaryRecord.Id;
             }
         }
-
-        public static List<DiaryRecords> GetDiaryRecords(DateTime? selectedDate)
+        public static BindableCollection<DiaryRecords> GetDiaryRecords(DateTime selectedDate)
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                return db.DiaryRecords.Where(x => x.Date.Equals(selectedDate)).ToList();
+                BindableCollection<DiaryRecords> result = new BindableCollection<DiaryRecords>(db.DiaryRecords.Where(x => x.Date.Equals(selectedDate)));
+                return result;
             }
         }
+        #endregion
     }
 }

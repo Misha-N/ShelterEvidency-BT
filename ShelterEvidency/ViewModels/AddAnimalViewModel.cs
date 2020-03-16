@@ -270,11 +270,13 @@ namespace ShelterEvidency.ViewModels
         }
         public void LoadImage()
         {
-            OpenFileDialog op = new OpenFileDialog();
-            op.Title = "Vyberte obrázek";
-            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+            OpenFileDialog op = new OpenFileDialog
+            {
+               Title = "Vyberte obrázek",
+               Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
               "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-              "Portable Network Graphic (*.png)|*.png";
+              "Portable Network Graphic (*.png)|*.png"
+            };
             if (op.ShowDialog() == true)
             {
                 Image.Image = new BitmapImage(new Uri(op.FileName));
