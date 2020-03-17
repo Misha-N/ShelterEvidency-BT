@@ -52,30 +52,29 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="1" x:Name="GridMain" Margin="100,10,20,10">
-                <ContentControl x:Name="ActiveItem" Grid.RowSpan="2"/>
+                <ContentControl x:Name="ActiveItem"/>
             </Grid>
 
             <materialDesign:Card Grid.Column="1" Grid.Row="1">
                 <DockPanel LastChildFill="True" >
-                <Viewbox DockPanel.Dock="Top" Margin="10" MaxHeight="400">
-                    <Calendar SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                </Viewbox>
-                <GroupBox Margin="10" DockPanel.Dock="Top" Header="Přidat poznámku na vybraný den:">
-                    <Grid>
+                    <Viewbox DockPanel.Dock="Top" Margin="10" MaxHeight="400">
+                        <Calendar SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Viewbox>
+                    <Grid DockPanel.Dock="Top" Margin="10" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5*"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBox x:Name="DiaryRecord" Text="{Binding Path=DiaryRecord, Mode=TwoWay}" Margin="0,0,10,0"/>
-                        <Button x:Name="CreateDiaryRecord" Width="25" Height="25" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Grid.Column="1">
+                        <TextBox x:Name="DiaryRecord" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Přidat poznámku na vybrané datum"  Text="{Binding Path=DiaryRecord, Mode=TwoWay}" FontSize="14"/>
+                            <Button x:Name="CreateDiaryRecord" Width="25" Height="25" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Grid.Column="1">
                             <materialDesign:PackIcon
                                 Kind="Plus"
                                 Height="20"
                                 Width="20" />
                         </Button>
                     </Grid>
-                </GroupBox>
-                <TextBlock Margin="10" DockPanel.Dock="Top" Style="{StaticResource MaterialDesignHeadline6TextBlock}">Dnešní poznámky:</TextBlock>
+                    
+                <TextBlock Margin="10" DockPanel.Dock="Top" Style="{StaticResource MaterialDesignHeadline6TextBlock}">Poznámky:</TextBlock>
                 <DataGrid Margin="10" ItemsSource="{Binding Path=RecordList, Mode=OneWay}" VerticalAlignment="Stretch" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Datum" Binding="{Binding Date, StringFormat=\{0:dd.MM.yyyy\}}"/>
@@ -86,7 +85,7 @@
             </materialDesign:Card>
 
             <materialDesign:ColorZone Mode="Accent" Grid.Row="0" Grid.ColumnSpan="2" Height="60" materialDesign:ShadowAssist.ShadowDepth="Depth2">
-                <Grid VerticalAlignment="Center">
+                <Grid VerticalAlignment="Center" Height="60">
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FFACACAC"/>
                 </Grid.Effect>
@@ -226,7 +225,7 @@
 
         <ProgressBar
                 Visibility="{Binding IsWorking, Converter={StaticResource VisibleIfTrueConverter}}"
-              Style="{StaticResource MaterialDesignCircularProgressBar}"
+                Style="{StaticResource MaterialDesignCircularProgressBar}"
               Value="0"
               Height="50"
               Width="50"

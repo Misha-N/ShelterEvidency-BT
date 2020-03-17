@@ -102,7 +102,9 @@
     <Compile Include="AdoptionInfo.cs" />
     <Compile Include="AnimalInfo.cs" />
     <Compile Include="DocumentManager.cs" />
+    <Compile Include="Helpers\BoolToValueConverter.cs" />
     <Compile Include="Helpers\InvertBooleanConverter.cs" />
+    <Compile Include="Helpers\RandomStringGenerator.cs" />
     <Compile Include="Models\AdoptionModel.cs" />
     <Compile Include="Models\AnimalModel.cs" />
     <Compile Include="Models\BreedModel.cs" />

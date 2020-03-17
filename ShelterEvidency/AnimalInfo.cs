@@ -26,6 +26,7 @@ namespace ShelterEvidency
         public string Note { get; set; }
         public bool? Castration { get; set; }
         public string FolderPath { get; set; }
+        public string ImagePath { get; set; }
         public bool? InShelter { get; set; }
 
     }

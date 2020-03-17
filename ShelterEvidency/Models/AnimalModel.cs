@@ -31,6 +31,7 @@ namespace ShelterEvidency.Models
         public bool? Castration { get; set; }
         public bool? InShelter { get; set; }
         public string FolderPath { get; set; }
+        public string ImagePath { get; set; }
 
         #endregion
 
@@ -63,7 +64,8 @@ namespace ShelterEvidency.Models
                     Note = Note,
                     Castration = Castration,
                     InShelter = InShelter,
-                    FolderPath = FolderPath
+                    FolderPath = FolderPath,
+                    ImagePath = ImagePath
 
                 };
                 db.Animals.InsertOnSubmit(animal);
@@ -100,6 +102,7 @@ namespace ShelterEvidency.Models
                 animal.Castration = Castration;
                 animal.InShelter = InShelter;
                 animal.FolderPath = FolderPath;
+                animal.ImagePath = ImagePath;
 
                 db.SubmitChanges();
             }
@@ -132,6 +135,7 @@ namespace ShelterEvidency.Models
                     Castration = animal.Castration;
                     InShelter = animal.InShelter;
                     FolderPath = animal.FolderPath;
+                    ImagePath = animal.ImagePath;
                 }
             }
         }
@@ -157,6 +161,7 @@ namespace ShelterEvidency.Models
                         Castration = animal.Castration,
                         InShelter = animal.InShelter,
                         FolderPath = animal.FolderPath,
+                        ImagePath = animal.ImagePath
 
                     };
                     return info;
@@ -193,6 +198,7 @@ namespace ShelterEvidency.Models
                                     Castration = animal.Castration,
                                     InShelter = animal.InShelter,
                                     FolderPath = animal.FolderPath,
+                                    ImagePath = animal.ImagePath
                                });
                 
 
@@ -200,7 +206,7 @@ namespace ShelterEvidency.Models
             }
         }
 
-        public static List<AnimalInfo> ReturnSpecificAnimals(string searchValue)
+        public static BindableCollection<AnimalInfo> ReturnSpecificAnimals(string searchValue)
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
@@ -230,8 +236,9 @@ namespace ShelterEvidency.Models
                                    Castration = animal.Castration,
                                    InShelter = animal.InShelter,
                                    FolderPath = animal.FolderPath,
+                                   ImagePath = animal.ImagePath
                                }).ToList();
-                return results;
+                return new BindableCollection<AnimalInfo>(results);
             }
         }
 

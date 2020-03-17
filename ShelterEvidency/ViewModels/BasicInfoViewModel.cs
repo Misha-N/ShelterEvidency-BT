@@ -15,7 +15,7 @@ namespace ShelterEvidency.ViewModels
 {
     public class BasicInfoViewModel: Screen
     {
-
+        #region Initialize
         public AnimalModel Animal { get; set; }
         public ImageModel Image { get; set; }
         public BasicInfoViewModel(int animalID)
@@ -23,8 +23,47 @@ namespace ShelterEvidency.ViewModels
             Animal = new AnimalModel();
             Animal.GetAnimal(animalID);
             Image = new ImageModel();
-            Image.GetImage(animalID);
+            Image.GetImage(Animal.ImagePath);
         }
+
+        protected override void OnViewReady(object view)
+        {
+            base.OnViewReady(view);
+            Task.Run(() => LoadData());
+        }
+
+
+        private async void LoadData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
+            {
+                SexList = SexModel.ReturnSexes();
+                SpeciesList = SpeciesModel.ReturnSpecies();
+                BreedList = BreedModel.ReturnBreeds(null);
+                CoatTypeList = CoatTypeModel.ReturnCoatTypes();
+                FurColorList = FurColorModel.ReturnFurColors();
+            });
+            IsWorking = false;
+        }
+
+        private bool _isWorking;
+
+        public bool IsWorking
+        {
+            get
+            {
+                return _isWorking;
+            }
+            set
+            {
+                _isWorking = value;
+                NotifyOfPropertyChange(() => IsWorking);
+            }
+        }
+
+        #endregion
 
         #region Binded Properties
         public BitmapImage AnimalImage
@@ -285,39 +324,73 @@ namespace ShelterEvidency.ViewModels
             }
         }
 
-        public List<Database.Sexes> SexList
+        private BindableCollection<Database.Sexes> _sexlist;
+        public BindableCollection<Database.Sexes> SexList
         {
             get
             {
-                return SexModel.ReturnSexes();
+                return _sexlist;
+            }
+            set
+            {
+                _sexlist = value;
+                NotifyOfPropertyChange(() => SexList);
             }
         }
-        public List<Database.Breeds> BreedList
+
+        private BindableCollection<Database.Breeds> _breedlist;
+        public BindableCollection<Database.Breeds> BreedList
         {
             get
             {
-                return BreedModel.ReturnBreeds(Species);
+                return _breedlist;
+            }
+            set
+            {
+                _breedlist = value;
+                NotifyOfPropertyChange(() => BreedList);
             }
         }
-        public List<Database.Species> SpeciesList
+
+        private BindableCollection<Database.Species> _specieslist;
+        public BindableCollection<Database.Species> SpeciesList
         {
             get
             {
-                return SpeciesModel.ReturnSpecies();
+                return _specieslist;
+            }
+            set
+            {
+                _specieslist = value;
+                NotifyOfPropertyChange(() => SpeciesList);
             }
         }
-        public List<Database.CoatTypes> CoatTypeList
+
+        private BindableCollection<Database.CoatTypes> _coattypelist;
+        public BindableCollection<Database.CoatTypes> CoatTypeList
         {
             get
             {
-                return CoatTypeModel.ReturnCoatTypes();
+                return _coattypelist;
+            }
+            set
+            {
+                _coattypelist = value;
+                NotifyOfPropertyChange(() => CoatTypeList);
             }
         }
-        public List<Database.FurColors> FurColorList
+
+        private BindableCollection<Database.FurColors> _furcolorlist;
+        public BindableCollection<Database.FurColors> FurColorList
         {
             get
             {
-                return FurColorModel.ReturnFurColors();
+                return _furcolorlist;
+            }
+            set
+            {
+                _furcolorlist = value;
+                NotifyOfPropertyChange(() => FurColorList);
             }
         }
         #endregion
@@ -333,15 +406,14 @@ namespace ShelterEvidency.ViewModels
             {
                 Image.Image = new BitmapImage(new Uri(op.FileName));
                 Image.ImagePath = Path.GetFullPath(op.FileName);
-                Image.AnimalID = Animal.ID;
             }
 
             NotifyOfPropertyChange(() => AnimalImage);
         }
         public void UpdateAnimal()
         {
+            Animal.ImagePath = Image.SaveImage();
             Animal.UpdateAnimal();
-            Image.UpdateImage();
             MessageBox.Show("updated");
         }
 

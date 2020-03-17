@@ -13,6 +13,7 @@ namespace ShelterEvidency.ViewModels
 {
     class ComboBoxSettingsViewModel: Conductor<object>
     {
+        /*
         #region Models        
         private void SetModels()
         {
@@ -156,5 +157,7 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => CoatTypes);
         }
         #endregion
+        */
     }
+
 }

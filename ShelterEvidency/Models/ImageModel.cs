@@ -1,4 +1,5 @@
 ﻿using ShelterEvidency.Database;
+using ShelterEvidency.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,60 +14,41 @@ namespace ShelterEvidency.Models
     {
         #region Properties/Atributes
         public BitmapImage Image { get; set; }
-        public int ID { get; set; }
-        public int? AnimalID { get; set; }
         public string ImagePath { get; set; }
         #endregion
 
-        public void SaveImage()
+        public string SaveImage()
         {
             if (ImagePath != null)
             {
-                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                string path, fileName;
+
+                while (true)
                 {
-                    Images img = new Images
+                    try
                     {
-                        AnimalID = AnimalID,
-                    };
-                    db.Images.InsertOnSubmit(img);
-                    db.SubmitChanges();
-
-                    string fileName = img.Id.ToString() + ".jpg";
-                    string path = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "AnimalImages", fileName);
-
-                    System.IO.File.Copy(ImagePath, path, true);
-
-                    img.ImagePath = path;
-
-                    db.SubmitChanges();
-
-                    ID = img.Id;
+                        fileName = RandomStringGenerator.RandomString(10) + ".jpg";
+                        path = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "AnimalImages", fileName);
+                        System.IO.File.Copy(ImagePath, path);
+                        return path;
+                    }
+                    catch (IOException e)
+                    {
+                        throw e;
+                    }
                 }
+
             }
+            else
+                return "";
         }
 
-        public void GetImage(int animalID)
+        public void GetImage(string imagePath)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            if(imagePath != null)
             {
-                var img = db.Images.OrderByDescending(x => x.Id).FirstOrDefault(i => i.AnimalID == animalID);
-                if (img != null)
-                {
-                    Image = new BitmapImage(new Uri(img.ImagePath));
-                    ImagePath = img.ImagePath;
-                    AnimalID = img.AnimalID;
-                    ID = img.Id;
-                }
-            }
-
-        }
-
-        public void UpdateImage()
-        {
-            if (ImagePath != null)
-            {
-                SaveImage();
-
+                ImagePath = imagePath;
+                Image = new BitmapImage(new Uri(ImagePath));
             }
         }
     }

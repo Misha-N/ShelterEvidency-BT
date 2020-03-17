@@ -1,4 +1,5 @@
-﻿using ShelterEvidency.Database;
+﻿using Caliburn.Micro;
+using ShelterEvidency.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,11 @@ namespace ShelterEvidency.Models
         #endregion
 
 
-        public static List<CoatTypes> ReturnCoatTypes()
+        public static BindableCollection<CoatTypes> ReturnCoatTypes()
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                return db.CoatTypes.ToList();
+                return new  BindableCollection<CoatTypes>(db.CoatTypes);
             }
         }
 

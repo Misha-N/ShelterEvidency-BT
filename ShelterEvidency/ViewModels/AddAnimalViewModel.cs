@@ -16,6 +16,7 @@ namespace ShelterEvidency.ViewModels
 {
     public class AddAnimalViewModel: Conductor<object>
     {
+        #region Initialization
         public ImageModel Image { get; set; }
         public AnimalModel Animal { get; set; }
         public StayModel Stay { get; set; }
@@ -30,40 +31,113 @@ namespace ShelterEvidency.ViewModels
             Stay = new StayModel();
         }
 
+        protected override void OnViewReady(object view)
+        {
+            base.OnViewReady(view);
+            Task.Run(() => LoadData());
+        }
+
+
+        private async void LoadData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
+            {
+                SexList = SexModel.ReturnSexes();
+                SpeciesList = SpeciesModel.ReturnSpecies();
+                BreedList = BreedModel.ReturnBreeds(null);
+                CoatTypeList = CoatTypeModel.ReturnCoatTypes();
+                FurColorList = FurColorModel.ReturnFurColors();
+            });
+            IsWorking = false;
+        }
+
+        private volatile bool _isWorking;
+        public bool IsWorking
+        {
+            get
+            {
+                return _isWorking;
+            }
+            set
+            {
+                _isWorking = value;
+                NotifyOfPropertyChange(() => IsWorking);
+            }
+        }
+
+        #endregion
+
         #region List Setting
-        public List<Database.Sexes> SexList
+
+        private BindableCollection<Database.Sexes> _sexlist;
+        public BindableCollection<Database.Sexes> SexList
         {
             get
             {
-                return SexModel.ReturnSexes();
+                return _sexlist;
+            }
+            set
+            {
+                _sexlist = value;
+                NotifyOfPropertyChange(() => SexList);
             }
         }
-        public List<Database.Breeds> BreedList
+
+        private BindableCollection<Database.Breeds> _breedlist;
+        public BindableCollection<Database.Breeds> BreedList
         {
             get
             {
-                return BreedModel.ReturnBreeds(Species);
+                return _breedlist;
+            }
+            set
+            {
+                _breedlist = value;
+                NotifyOfPropertyChange(() => BreedList);
             }
         }
-        public List<Database.Species> SpeciesList
+
+        private BindableCollection<Database.Species> _specieslist;
+        public BindableCollection<Database.Species> SpeciesList
         {
             get
             {
-                return SpeciesModel.ReturnSpecies();
+                return _specieslist;
+            }
+            set
+            {
+                _specieslist = value;
+                NotifyOfPropertyChange(() => SpeciesList);
             }
         }
-        public List<Database.CoatTypes> CoatTypeList
+
+        private BindableCollection<Database.CoatTypes> _coattypelist;
+        public BindableCollection<Database.CoatTypes> CoatTypeList
         {
             get
             {
-                return CoatTypeModel.ReturnCoatTypes();
+                return _coattypelist;
+            }
+            set
+            {
+                _coattypelist = value;
+                NotifyOfPropertyChange(() => CoatTypeList);
             }
         }
-        public List<Database.FurColors> FurColorList
+
+        private BindableCollection<Database.FurColors> _furcolorlist;
+        public BindableCollection<Database.FurColors> FurColorList
         {
             get
             {
-                return FurColorModel.ReturnFurColors();
+                return _furcolorlist;
+            }
+            set
+            {
+                _furcolorlist = value;
+                NotifyOfPropertyChange(() => FurColorList);
             }
         }
         #endregion
@@ -115,7 +189,7 @@ namespace ShelterEvidency.ViewModels
             {
                 Animal.SpeciesID = value;
                 NotifyOfPropertyChange(() => Species);
-                NotifyOfPropertyChange(() => BreedList);
+                UpdateBreeds(value);
             }
         }
         public int? Breed
@@ -243,6 +317,7 @@ namespace ShelterEvidency.ViewModels
         }
         #endregion
 
+        #region Stay Bindings
         public DateTime? StayStartDate
         {
             get
@@ -256,13 +331,26 @@ namespace ShelterEvidency.ViewModels
             }
         }
 
+        #endregion
+
+        #region Methods
+
+        private async void UpdateBreeds(int? speciesID)
+        {
+            await Task.Run(() =>
+            {
+                BreedList = BreedModel.ReturnBreeds(speciesID);
+                NotifyOfPropertyChange(() => Breed);
+                NotifyOfPropertyChange(() => CrossBreed);
+            });
+        }
+
         public void SaveToDatabase()
         {
+            Animal.ImagePath = Image.SaveImage();
             Animal.SaveAnimal();
             Stay.AnimalID = Animal.ID;
-            Image.AnimalID = Animal.ID;
             Stay.SaveStay();
-            Image.SaveImage();
             MessageBox.Show(Animal.Name + " přidán do evidence.");
             if(prnt != null)
                 prnt.UpdateAnimals();
@@ -289,6 +377,8 @@ namespace ShelterEvidency.ViewModels
         {
             TryClose();
         }
-        
+
+        #endregion
+
     }
 }

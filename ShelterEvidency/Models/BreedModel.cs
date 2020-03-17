@@ -1,4 +1,5 @@
-﻿using ShelterEvidency.Database;
+﻿using Caliburn.Micro;
+using ShelterEvidency.Database;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,14 +16,14 @@ namespace ShelterEvidency.Models
         public string BreedName { get; set; }
         public int? SpeciesID { get; set; }
         #endregion
-        public static List<Breeds> ReturnBreeds(int? speciesID)
+        public static BindableCollection<Breeds> ReturnBreeds(int? speciesID)
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 if (speciesID is null)
-                    return db.Breeds.ToList();
+                    return new BindableCollection<Breeds>(db.Breeds);
                 else
-                    return db.Breeds.Where(x => x.SpeciesID.Equals(speciesID)).ToList();
+                    return  new BindableCollection<Breeds>(db.Breeds.Where(x => x.SpeciesID.Equals(speciesID)));
             }
         }
         public void SaveBreed()

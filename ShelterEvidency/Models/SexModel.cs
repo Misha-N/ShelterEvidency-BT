@@ -1,4 +1,5 @@
-﻿using ShelterEvidency.Database;
+﻿using Caliburn.Micro;
+using ShelterEvidency.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,11 @@ namespace ShelterEvidency.Models
         public string SexName { get; set; }
         #endregion
 
-        public static List<Sexes> ReturnSexes()
+        public static BindableCollection<Sexes> ReturnSexes()
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                return db.Sexes.ToList();
+                return new BindableCollection<Sexes>(db.Sexes);
             }
         }
     }

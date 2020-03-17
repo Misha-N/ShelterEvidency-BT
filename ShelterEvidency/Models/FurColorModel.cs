@@ -1,4 +1,5 @@
-﻿using ShelterEvidency.Database;
+﻿using Caliburn.Micro;
+using ShelterEvidency.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,11 @@ namespace ShelterEvidency.Models
         public int ID { get; set; }
         public string FurColorName { get; set; }
         #endregion
-        public static List<FurColors> ReturnFurColors()
+        public static BindableCollection<FurColors> ReturnFurColors()
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                return db.FurColors.ToList();
+                return new BindableCollection<FurColors>(db.FurColors);
             }
         }
         public void SaveFurColor()

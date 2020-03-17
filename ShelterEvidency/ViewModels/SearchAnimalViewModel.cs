@@ -13,6 +13,7 @@ namespace ShelterEvidency.ViewModels
 {
     public class SearchAnimalViewModel: Conductor<object>
     {
+        #region Initialize
         public SearchAnimalViewModel()
         {
         }
@@ -48,6 +49,8 @@ namespace ShelterEvidency.ViewModels
             }
         }
 
+        #endregion
+
         private BindableCollection<AnimalInfo> _animals;
 
         public BindableCollection<AnimalInfo> Animals
@@ -63,7 +66,6 @@ namespace ShelterEvidency.ViewModels
             }
         }
 
-        /*
 
         private string _searchValue;
 
@@ -77,9 +79,9 @@ namespace ShelterEvidency.ViewModels
             {
                 _searchValue = value;
                 NotifyOfPropertyChange(() => SearchValue);
-                NotifyOfPropertyChange(() => Animals);
             }
         }
+
 
         private AnimalInfo _selectedAnimal;
 
@@ -93,15 +95,35 @@ namespace ShelterEvidency.ViewModels
             {
                 _selectedAnimal = value;
                 NotifyOfPropertyChange(() => SelectedAnimal);
+                NotifyOfPropertyChange(() => IsSelected);
             }
+        }
+
+
+        public bool IsSelected
+        {
+            get
+            {
+                if (SelectedAnimal != null)
+                    return true;
+                else
+                    return false;
+            }
+
+        }
+
+
+
+        public async void Search()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            Animals = await Task.Run(() => AnimalModel.ReturnSpecificAnimals(SearchValue));
+            IsWorking = false;
         }
         
 
-        public List<AnimalInfo> Search()
-        {
-            return AnimalModel.ReturnSpecificAnimals(SearchValue);
-        }
-        */
+        #region Page Loading
 
         public void AddAnimal()
         {
@@ -110,16 +132,18 @@ namespace ShelterEvidency.ViewModels
 
         public void UpdateAnimals()
         {
-            NotifyOfPropertyChange(() => Animals);
+            Animals = AnimalModel.ReturnAnimals();
         }
 
-        /*
+       
         public void OpenEvidencyCard()
         {
             if (SelectedAnimal != null)
                 ActivateItem(new EvidencyCardViewModel((int)SelectedAnimal.ID));
         }
-        */
+
+        #endregion
+
 
 
 
