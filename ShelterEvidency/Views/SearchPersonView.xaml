@@ -4,11 +4,214 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShelterEvidency.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:helpers="clr-namespace:ShelterEvidency.Helpers"
              Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="1200">
+
+    <UserControl.Resources>
+        <helpers:InvertBooleanConverter  x:Key="boolConvert"/>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+
+        <Style x:Key="CellCentering" TargetType="{x:Type DataGridCell}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,0,0,0" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+
+
+    <Grid IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="SearchValue" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Vyhledávání" TextWrapping="Wrap" Margin="5,5,5,5" Width="400" VerticalContentAlignment="Center"/>
+            <Button x:Name="Search" Grid.Column="1" Margin="5" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                <materialDesign:PackIcon
+                Kind="Magnify"
+                Height="24"
+                Width="24" />
+            </Button>
+
+            <Button x:Name="UpdatePeople" Grid.Column="5" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                <materialDesign:PackIcon
+                Kind="Reload"
+                Height="24"
+                Width="24" />
+            </Button>
+
+
+            <Button x:Name="OpenPersonInfo" Grid.Column="3" IsEnabled="{Binding IsSelected}"  Style="{StaticResource MaterialDesignRaisedDarkButton}" Grid.Row="1" Margin="5,0">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="PersonCardDetailsOutline" Width="25" Height="25"/>
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Detail osoby</TextBlock>
+                </StackPanel>
+            </Button>
+
+
+        </Grid>
+        <DataGrid Grid.Row="1" Margin="5" ColumnWidth="*" AutoGenerateColumns="False" VerticalContentAlignment="Center" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding Path=People, Mode=OneWay}" SelectedItem="{Binding Path=SelectedPerson, Mode=OneWayToSource}">
+            <DataGrid.Columns>
+                <DataGridTextColumn MaxWidth="50" Header="ID" Binding="{Binding ID}"/>
+                <DataGridTextColumn MinWidth="300"  Header="Jméno a příjmení" Binding="{Binding TitledFullName}"/>
+                <DataGridTextColumn Header="Telefon" Binding="{Binding Phone}"/>
+                <DataGridTextColumn Header="E-mail" Binding="{Binding Mail}"/>
+                <DataGridTextColumn Header="Město" Binding="{Binding AdressCity}"/>
+                <DataGridTextColumn Header="Ulice" Binding="{Binding AdressStreet}"/>
+                <DataGridTextColumn Header="PSČ" Binding="{Binding AdressZip}"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <materialDesign:Card Grid.Row="2" Margin="5"
+    materialDesign:ShadowAssist.ShadowDepth="Depth1"
+    Padding="32,32,32,15" FontSize="14">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <materialDesign:PackIcon Kind="PersonAdd" HorizontalAlignment="Left" Width="50" Height="50" Opacity="0.5"  VerticalAlignment="Center" />
+
+
+                    <TextBox x:Name="Title" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Titul" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                    <TextBox x:Name="FirstName" Grid.Row="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Jméno" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                    <TextBox x:Name="LastName" Grid.Row="1" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Příjmení"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                    <TextBox x:Name="Phone" Grid.Row="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                    <TextBox x:Name="Mail" Grid.Row="2" Grid.Column="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Email"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+
+                    <GroupBox Header="Role osoby" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2" Style="{DynamicResource MaterialDesignGroupBox}"
+                          materialDesign:ShadowAssist.ShadowDepth="Depth3"   BorderThickness="0" Margin="0,10,0,0">
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox Content="majitel" Grid.Column="0" IsChecked="{Binding Path = IsOwner, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                            <CheckBox Content="veterinář" Grid.Column="1" IsChecked="{Binding Path = IsVet, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                            <CheckBox Content="venčitel" Grid.Column="2" IsChecked="{Binding Path = IsWalker, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                            <CheckBox Content="sponzor" Grid.Column="3" IsChecked="{Binding Path = IsSponsor, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                            <CheckBox Content="dobrovolník" Grid.Column="4" IsChecked="{Binding Path = IsVolunteer, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+                
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <GroupBox Header="Adresa"  Style="{DynamicResource MaterialDesignGroupBox}"
+                          materialDesign:ShadowAssist.ShadowDepth="Depth3"   BorderThickness="0" Margin="20,0,0,0">
+                            <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                            <TextBox x:Name="City" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Město" Grid.Row="1" Grid.ColumnSpan="2"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                            <TextBox x:Name="Zip" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="PSČ" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                            <TextBox x:Name="Street" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Ulice a číslo domu" Grid.Row="3" Grid.ColumnSpan="2"   TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                        </Grid>
+                        
+                        
+
+                        
+                    </GroupBox>
+
+                    <TextBox x:Name="Note" Margin="20,5,0,0" Grid.Row="2" materialDesign:HintAssist.Hint="Poznámka" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"  TextWrapping="Wrap" Padding="2"/>
+
+
+
+
+
+                </Grid>
+
+                <StackPanel Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Orientation="Horizontal">
+                    <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" x:Name="SaveToDatabase" Grid.Column="2" Grid.Row="1">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <materialDesign:PackIcon Kind="ContentSaveOutline"  Width="20" Height="20"/>
+                            <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Uložit</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+        </materialDesign:Card>
+
+
+        <ProgressBar  
+              Visibility="{Binding IsWorking, Converter={StaticResource VisibleIfTrueConverter}}"
+              Grid.RowSpan="3"
+              Style="{StaticResource MaterialDesignCircularProgressBar}"
+              Value="0"
+              Height="50"
+              Width="50"
+              IsIndeterminate="True" />
+        
+            <ContentControl  x:Name="ActiveItem" Grid.RowSpan="3"/>
+        
+        
+        
+        
+
+    </Grid>
+
+    <!--
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -19,12 +222,11 @@
             <TextBlock TextWrapping="Wrap" Text="Vyhledávání:" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBox x:Name="SearchValue" TextWrapping="Wrap" Margin="5,5,5,5" Width="400" VerticalContentAlignment="Center"/>
             <Button x:Name="OpenPersonInfo" Content="Detail" Margin="5"/>
-            <Button x:Name="UpdatePeople" Content="Aktualizovat" Margin="5"/>
         </StackPanel>
 
         <DataGrid Grid.Row="1" Margin="5" ColumnWidth="*" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" ItemsSource="{Binding Path=People, Mode=OneWay}" SelectedItem="{Binding Path=SelectedPerson, Mode=OneWayToSource}" Height="450"/>
 
-        <Grid Background="White" Grid.Row="2">
+        <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
@@ -99,4 +301,5 @@
         
 
     </Grid>
+    -->
 </UserControl>

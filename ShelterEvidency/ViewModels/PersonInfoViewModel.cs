@@ -12,8 +12,10 @@ namespace ShelterEvidency.ViewModels
     public class PersonInfoViewModel: Screen
     {
         public PersonModel Person { get; set; }
-        public PersonInfoViewModel(int personID)
+        public SearchPersonViewModel prnt { get; set; }
+        public PersonInfoViewModel(int personID, SearchPersonViewModel vm)
         {
+            prnt = vm;
             Person = new PersonModel();
             Person.GetPerson(personID);
 

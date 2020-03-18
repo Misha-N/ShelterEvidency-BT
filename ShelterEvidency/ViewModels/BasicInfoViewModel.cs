@@ -33,7 +33,7 @@ namespace ShelterEvidency.ViewModels
         }
 
 
-        private async void LoadData()
+        private async Task LoadData()
         {
             IsWorking = true;
             await Task.Delay(150);

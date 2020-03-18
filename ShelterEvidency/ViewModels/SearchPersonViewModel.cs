@@ -12,17 +12,62 @@ namespace ShelterEvidency.ViewModels
 {
     public class SearchPersonViewModel: Conductor<object>
     {
-        #region People Data Table
-        public List<PersonInfo> People
+        #region Initialize
+        public PersonModel Person { get; set; }
+        public SearchPersonViewModel()
+        {
+            Person = new PersonModel();
+        }
+
+        protected override void OnViewReady(object view)
+        {
+            base.OnViewReady(view);
+            LoadData();
+        }
+
+
+        private async void LoadData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            People = await Task.Run(() => PersonModel.ReturnPeople());
+            IsWorking = false;
+        }
+
+        private bool _isWorking;
+
+        public bool IsWorking
         {
             get
             {
-                if (SearchValue == null)
-                    return PersonModel.ReturnPeople();
-                else
-                    return Search();
+                return _isWorking;
+            }
+            set
+            {
+                _isWorking = value;
+                NotifyOfPropertyChange(() => IsWorking);
             }
         }
+
+        #endregion
+
+        #region People Data Table
+
+        private BindableCollection<PersonInfo> _people;
+
+        public BindableCollection<PersonInfo> People
+        {
+            get
+            {
+                return _people;
+            }
+            set
+            {
+                _people = value;
+                NotifyOfPropertyChange(() => People);
+            }
+        }
+
 
         private string _searchValue;
 
@@ -36,7 +81,6 @@ namespace ShelterEvidency.ViewModels
             {
                 _searchValue = value;
                 NotifyOfPropertyChange(() => SearchValue);
-                NotifyOfPropertyChange(() => People);
             }
         }
 
@@ -52,34 +96,36 @@ namespace ShelterEvidency.ViewModels
             {
                 _selectedPerson = value;
                 NotifyOfPropertyChange(() => SelectedPerson);
+                NotifyOfPropertyChange(() => IsSelected);
             }
         }
 
-        public List<PersonInfo> Search()
+        #endregion
+
+        #region Methods
+        public async void Search()
         {
-            return PersonModel.ReturnSpecificPeople(SearchValue);
+            IsWorking = true;
+            await Task.Delay(150);
+            People = await Task.Run(() => PersonModel.ReturnSpecificPeople(SearchValue));
+            IsWorking = false;
         }
+
 
         public void UpdatePeople()
         {
-            NotifyOfPropertyChange(() => People);
+            LoadData();
         }
 
         public void OpenPersonInfo()
         {
             if (SelectedPerson != null)
-                ActivateItem(new PersonInfoViewModel(SelectedPerson.ID));
+                ActivateItem(new PersonInfoViewModel(SelectedPerson.ID, this));
         }
 
         #endregion
 
-        #region Add Person
 
-        public PersonModel Person { get; set; }
-        public SearchPersonViewModel()
-        {
-            Person = new PersonModel();
-        }
 
         #region Person Binded Atributes
         public string Title
@@ -260,11 +306,25 @@ namespace ShelterEvidency.ViewModels
 
         #endregion
 
+        #region Methods
+
+        public bool IsSelected
+        {
+            get
+            {
+                if (SelectedPerson != null)
+                    return true;
+                else
+                    return false;
+            }
+
+        }
+
         public void SaveToDatabase()
         {
             Person.SavePerson();
             MessageBox.Show(Person.FirstName + " " + Person.LastName + " přidán do evidence.");
-            NotifyOfPropertyChange(() => People);
+            UpdatePeople();
 
             Person = new PersonModel();
             NotifyOfPropertyChange(() => Title);
@@ -284,6 +344,7 @@ namespace ShelterEvidency.ViewModels
         }
 
         #endregion
+
 
     }
 }

@@ -34,11 +34,11 @@ namespace ShelterEvidency.ViewModels
         protected override void OnViewReady(object view)
         {
             base.OnViewReady(view);
-            LoadData();
+            Task.Run(() => LoadData());
         }
 
 
-        private async void LoadData()
+        private async Task LoadData()
         {
             IsWorking = true;
             await Task.Delay(150);

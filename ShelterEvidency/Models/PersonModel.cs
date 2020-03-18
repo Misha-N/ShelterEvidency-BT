@@ -1,4 +1,5 @@
-﻿using ShelterEvidency.Database;
+﻿using Caliburn.Micro;
+using ShelterEvidency.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,7 +77,7 @@ namespace ShelterEvidency.Models
 
         }
 
-        public static List<PersonInfo> ReturnPeople()
+        public static BindableCollection<PersonInfo> ReturnPeople()
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
@@ -100,12 +101,12 @@ namespace ShelterEvidency.Models
                                    IsVolunteer = person.IsVolunteer
 
                                }).ToList();
-                return results;
+                return new BindableCollection<PersonInfo>(results);
             }
         }
 
 
-        public static List<PersonInfo> ReturnSpecificPeople(string searchValue)
+        public static BindableCollection<PersonInfo> ReturnSpecificPeople(string searchValue)
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
@@ -130,7 +131,7 @@ namespace ShelterEvidency.Models
                                    IsSponsor = person.IsSponsor,
                                    IsVolunteer = person.IsVolunteer
                                }).ToList();
-                return results;
+                return new BindableCollection<PersonInfo>(results);
             }
         }
 

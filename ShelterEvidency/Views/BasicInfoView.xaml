@@ -73,7 +73,7 @@
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <ToggleButton VerticalAlignment="Center"
                                   Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
-                                  ToolTip="MaterialDesignSwitchAccentToggleButton" IsChecked="{Binding Path = Castration, Mode = TwoWay}" Margin="5" IsThreeState="False"/>
+                                  IsChecked="{Binding Path = Castration, Mode = TwoWay}" Margin="5" IsThreeState="False"/>
                             <TextBlock VerticalAlignment="Center" Text="kastrát" Margin="10,0,0,0"></TextBlock>
                         </StackPanel>
 
@@ -157,7 +157,12 @@
 
             <StackPanel Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
                 <!--<Button Style="{StaticResource MaterialDesignFlatAccentButton}" x:Name="Cancel" Content="Zrušit" Width="75" Margin="5,0,5,5"/>-->
-                <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" x:Name="UpdateAnimal" Content="Uložit" Width="75" Margin="5,0,5,5"/>
+                <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" x:Name="UpdateAnimal" Margin="5,0,5,5">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <materialDesign:PackIcon Kind="ContentSaveOutline"  Width="20" Height="20"/>
+                        <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Uložit</TextBlock>
+                    </StackPanel>
+                </Button>
             </StackPanel>
 
         </Grid>

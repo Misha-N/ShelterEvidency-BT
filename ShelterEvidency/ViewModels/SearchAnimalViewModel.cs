@@ -132,7 +132,7 @@ namespace ShelterEvidency.ViewModels
 
         public void UpdateAnimals()
         {
-            Animals = AnimalModel.ReturnAnimals();
+            LoadData();
         }
 
        
