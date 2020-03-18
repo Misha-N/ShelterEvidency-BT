@@ -4,11 +4,195 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShelterEvidency.Views"
+             xmlns:helpers="clr-namespace:ShelterEvidency.Helpers"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="1000" d:DesignWidth="1500">
+
+    <UserControl.Resources>
+
+        <helpers:InvertBooleanConverter  x:Key="boolConvert"/>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+
+
+    </UserControl.Resources>
+
+    <Grid IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}" Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Margin="30,0,0,0" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                    <GroupBox Header="Základní údaje" Grid.ColumnSpan="2" Padding="50,20,50,9" Margin="15,25,15,15"  Style="{DynamicResource MaterialDesignGroupBox}"
+                          materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                          BorderThickness="0" FontSize="14">
+                        <StackPanel>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                        <TextBox x:Name="ID" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="ID" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=ID, Mode=OneTime}" IsReadOnly="True"/>
+                        </Grid>
+
+                    <TextBox x:Name="AnimalName" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Jméno" TextWrapping="Wrap" Margin="5" Padding="2"/>
+                    <TextBox x:Name="ChipNumber" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Číslo čipu/tetování:" TextWrapping="Wrap" Margin="5" Padding="2"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Margin="5" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Druh" ItemsSource="{Binding Path=SpeciesList, Mode=OneWay}" DisplayMemberPath="SpeciesName" SelectedValuePath="Id" SelectedValue="{Binding Path=Species, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
+                        <ComboBox Margin="5" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Plemeno" ItemsSource="{Binding Path=BreedList, Mode=OneWay}" DisplayMemberPath="BreedName" SelectedValuePath="Id" SelectedValue="{Binding Path=Breed, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
+
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Margin="5" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Pohlaví" ItemsSource="{Binding Path=SexList, Mode=OneWay}" DisplayMemberPath="SexName" SelectedValuePath="Id" SelectedValue="{Binding Path=Sex, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <ToggleButton VerticalAlignment="Center"
+                                  Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
+                                  ToolTip="MaterialDesignSwitchAccentToggleButton" IsChecked="{Binding Path = Castration, Mode = TwoWay}" Margin="5" IsThreeState="False"/>
+                            <TextBlock VerticalAlignment="Center" Text="kastrát" Margin="10,0,0,0"></TextBlock>
+                        </StackPanel>
+
+                    </Grid>
+                            
+
+                            
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <ToggleButton VerticalAlignment="Center"
+                                  Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
+                                  IsChecked="{Binding Path = InShelter, Mode = TwoWay}" Margin="5" IsThreeState="False"/>
+                                <TextBlock VerticalAlignment="Center" Text="v útulku" Margin="10,0,0,0"></TextBlock>
+                            </StackPanel>
+
+
+
+                        <DatePicker Margin="5" Grid.Column="1"  materialDesign:HintAssist.Hint="Datum narození" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+                    </Grid>
+
+
+
+
+                        </StackPanel>
+                    </GroupBox>
+
+
+            </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="3" Margin="30,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <GroupBox Header="Další údaje" Padding="20,9" Margin="15,5"  Style="{DynamicResource MaterialDesignGroupBox}"
+                          materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                          BorderThickness="0" Grid.IsSharedSizeScope="True" FontSize="13" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <ComboBox Margin="5" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Kříženec" ItemsSource="{Binding Path=CrossBreedList, Mode=OneWay}" DisplayMemberPath="BreedName" SelectedValuePath="Id" SelectedValue="{Binding Path=CrossBreed, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
+                        <ComboBox Margin="5" Grid.Row="1" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True"  materialDesign:HintAssist.Hint="Barva srsti" ItemsSource="{Binding Path=FurColorList, Mode=OneWay}" DisplayMemberPath="FurColorName" SelectedValuePath="Id" SelectedValue="{Binding Path=FurColor, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
+                        <ComboBox Margin="5" Grid.Row="2" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Typ srsti" ItemsSource="{Binding Path=CoatTypeList, Mode=OneWay}" DisplayMemberPath="CoatTypeName" SelectedValuePath="Id" SelectedValue="{Binding Path=CoatType, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
+                        <ComboBox Margin="5,0,5,5" Grid.Row="3" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True"  materialDesign:HintAssist.Hint="Veterinář"  ItemsSource="{Binding Path=VetList, Mode=OneWay}" DisplayMemberPath="TitledFullName" SelectedValuePath="ID" SelectedValue="{Binding Path=Vet, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
+                        <ComboBox Margin="5,0,5,5" Grid.Row="4" ItemsSource="{Binding Path=OwnerList, Mode=OneWay}" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True"  materialDesign:HintAssist.Hint="Původní majitel"  DisplayMemberPath="TitledFullName" SelectedValuePath="ID" SelectedValue="{Binding Path=Owner, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
+                        <ComboBox Margin="5,0,5,5" Grid.Row="5" ItemsSource="{Binding Path=OwnerList, Mode=OneWay}" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True"  materialDesign:HintAssist.Hint="Nový majitel"  DisplayMemberPath="TitledFullName" SelectedValuePath="ID" SelectedValue="{Binding Path=NewOwner, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="4*"/>
+                        </Grid.RowDefinitions>
+                        <TextBox x:Name="Weight" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Váha (kg)"  TextWrapping="Wrap" Margin="5" Padding="2"/>
+                        <TextBox x:Name="FeedRation" Grid.Row="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Krmná dávka (g)" TextWrapping="Wrap" Margin="5" Padding="2"/>
+
+                        <TextBox Grid.Row="2"  Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Poznámka"  x:Name="Note" TextWrapping="Wrap" Margin="5" Padding="2"/>
+                    </Grid>
+
+                </Grid>
+            </GroupBox>
+
+            <StackPanel Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+                <!--<Button Style="{StaticResource MaterialDesignFlatAccentButton}" x:Name="Cancel" Content="Zrušit" Width="75" Margin="5,0,5,5"/>-->
+                <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" x:Name="UpdateAnimal" Content="Uložit" Width="75" Margin="5,0,5,5"/>
+            </StackPanel>
+
+        </Grid>
+
+
+        <Grid Grid.ColumnSpan="2" VerticalAlignment="Center" Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}">
+            <materialDesign:Card UniformCornerRadius="120" Margin="25">
+                <Grid>
+                    <materialDesign:PackIcon Kind="ImageOutline" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="100" Opacity="0.08" />
+                    <Image Source="{Binding Path=AnimalImage}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </materialDesign:Card>
+
+            <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}" 
+                x:Name="LoadImage" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,25,25" >
+                <materialDesign:PackIcon
+                Kind="ImageEditOutline" 
+                Height="30"
+                Width="30" />
+            </Button>
+        </Grid>
+
+        <ProgressBar  
+              Visibility="{Binding IsWorking, Converter={StaticResource VisibleIfTrueConverter}, Mode=OneWay}"
+              Grid.RowSpan="2" Grid.ColumnSpan="3"
+              Style="{StaticResource MaterialDesignCircularProgressBar}"
+              Value="0"
+              Height="50"
+              Width="50"
+              IsIndeterminate="True" />
+    </Grid>
+
+
+
+    <!--
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -20,70 +204,42 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="1" Grid.RowSpan="2">
-            <TextBlock TextWrapping="Wrap" Text="Identifikační číslo:" Margin="5"/>
-            <TextBox x:Name="ID" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=ID, Mode=OneTime}" IsReadOnly="True"/>
 
-
-            <TextBlock TextWrapping="Wrap" Text="Číslo čipu/tetování:" Margin="5"/>
-            <TextBox x:Name="ChipNumber"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=ChipNumber, Mode=TwoWay}"/>
-
-            <TextBlock TextWrapping="Wrap" Text="Pohlaví:" Margin="5"/>
             <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=SexList, Mode=OneWay}" DisplayMemberPath="SexName" SelectedValuePath="Id" SelectedValue="{Binding Path=Sex, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
 
-            <TextBlock TextWrapping="Wrap" Text="Druh:" Margin="5"/>
             <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=SpeciesList, Mode=OneWay}" DisplayMemberPath="SpeciesName" SelectedValuePath="Id" SelectedValue="{Binding Path=Species, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
 
-            <TextBlock TextWrapping="Wrap" Text="Plemeno:" Margin="5"/>
             <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=BreedList, Mode=OneWay}" DisplayMemberPath="BreedName" SelectedValuePath="Id" SelectedValue="{Binding Path=Breed, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
 
-            <TextBlock TextWrapping="Wrap" Text="Kříženec:" Margin="5"/>
             <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=BreedList, Mode=OneWay}" DisplayMemberPath="BreedName" SelectedValuePath="Id" SelectedValue="{Binding Path=CrossBreed, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
 
-            <TextBlock TextWrapping="Wrap" Text="Veterinář:" Margin="5"/>
-            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=VetList, Mode=OneWay}" DisplayMemberPath="TitledFullName" SelectedValuePath="ID" SelectedValue="{Binding Path=Vet, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
 
-            <TextBlock TextWrapping="Wrap" Text="Původní majitel:" Margin="5"/>
-            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=OwnerList, Mode=OneWay}" DisplayMemberPath="TitledFullName" SelectedValuePath="ID" SelectedValue="{Binding Path=Owner, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
 
-            <TextBlock TextWrapping="Wrap" Text="Nový majitel:" Margin="5"/>
-            <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=OwnerList, Mode=OneWay}" DisplayMemberPath="TitledFullName" SelectedValuePath="ID" SelectedValue="{Binding Path=NewOwner, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
 
         </StackPanel>
         <StackPanel Grid.Column="2" Grid.RowSpan="2">
-            <TextBlock TextWrapping="Wrap" Text="Jméno:" Margin="5"/>
             <TextBox x:Name="AnimalName" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=AnimalName, Mode=TwoWay}"/>
 
-            <TextBlock TextWrapping="Wrap" Text="Datum narození:" Margin="5"/>
             <DatePicker Margin="5,0,5,5" SelectedDate="{Binding Path= BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             
-            <TextBlock TextWrapping="Wrap" Text="Typ srsti:" Margin="5"/>
             <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=CoatTypeList, Mode=OneWay}" DisplayMemberPath="CoatTypeName" SelectedValuePath="Id" SelectedValue="{Binding Path=CoatType, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
             
-            <TextBlock TextWrapping="Wrap" Text="Barva srsti:" Margin="5"/>
             <ComboBox Margin="5,0,5,5" ItemsSource="{Binding Path=FurColorList, Mode=OneWay}" DisplayMemberPath="FurColorName" SelectedValuePath="Id" SelectedValue="{Binding Path=FurColor, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"/>
 
-            <TextBlock TextWrapping="Wrap" Text="Krmná dávka (g):" Margin="5"/>
             <TextBox x:Name="FeedRation"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=FeedRation, Mode=TwoWay}"/>
 
-            <TextBlock TextWrapping="Wrap" Text="Váha (kg):" Margin="5"/>
             <TextBox x:Name="Weight"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Weight, Mode=TwoWay}"/>
 
-            <TextBlock TextWrapping="Wrap" Text="Poznámka:" Margin="5"/>
             <TextBox  x:Name="Note" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Note, Mode=TwoWay}"/>
 
-            <CheckBox Content="kastrát" IsChecked="{Binding Path = Castration, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
-
-            <CheckBox Content="v útulku" IsChecked="{Binding Path = InShelter, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+ 
 
 
         </StackPanel>
 
-        <StackPanel Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Orientation="Horizontal">
-            <Button x:Name="UpdateAnimal" Content="Uložit" Grid.Column="2" Grid.Row="1" Width="75" Margin="5,0,5,5"/>
-        </StackPanel>
-        <Button x:Name="LoadImage" Grid.Row="1" Content="Image" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="0,0,10,10"/>
-        <Image Margin="10" Source="{Binding Path=AnimalImage}"/>
+
 
     </Grid>
+    -->
 </UserControl>

@@ -66,10 +66,10 @@
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ToggleButton VerticalAlignment="Center"
                                   Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
-                                  ToolTip="MaterialDesignSwitchAccentToggleButton" IsChecked="{Binding Path = Castration, Mode = TwoWay}" Margin="5" IsThreeState="False"/>
+                                  ToolTip="MaterialDesignSwitchAccentToggleButton" IsChecked="{Binding Path = Castration, Mode = OneWayToSource}" Margin="5" IsThreeState="False"/>
                                     <TextBlock VerticalAlignment="Center" Text="kastrát" Margin="10,0,0,0"></TextBlock>
                                 </StackPanel>
-                                
+
                                 <DatePicker Grid.Column="1" Margin="30,5,5,5" materialDesign:HintAssist.Hint="Datum příjmu" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=StayStartDate, Mode=OneWayToSource}" SelectedDateFormat="Short"/>
                             </Grid>
 
@@ -82,7 +82,7 @@
                     <GroupBox Header="Další údaje" Margin="0,50,0,0" Padding="50,9"  Style="{DynamicResource MaterialDesignGroupBox}"
                           materialDesign:ShadowAssist.ShadowDepth="Depth3"
                           BorderThickness="0" Grid.IsSharedSizeScope="True" FontSize="13" >
-                            <StackPanel>
+                        <StackPanel>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
@@ -105,7 +105,7 @@
 
                             </Grid>
 
-                            <ComboBox Margin="5" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Kžíženec" ItemsSource="{Binding Path=BreedList, Mode=OneWay}" DisplayMemberPath="BreedName" SelectedValuePath="Id" SelectedValue="{Binding Path=CrossBreed, Mode=OneWayToSource}"/>
+                            <ComboBox Margin="5" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Kříženec" ItemsSource="{Binding Path=BreedList, Mode=OneWay}" DisplayMemberPath="BreedName" SelectedValuePath="Id" SelectedValue="{Binding Path=CrossBreed, Mode=OneWayToSource}"/>
 
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -123,12 +123,6 @@
 
                 </StackPanel>
 
-               
-                
-             
-
-               
-       
 
                 <StackPanel Grid.Column="2" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
                     <Button Style="{StaticResource MaterialDesignFlatAccentButton}" x:Name="Cancel" Content="Zrušit" Width="75" Margin="5,0,5,5"/>
@@ -136,10 +130,8 @@
                 </StackPanel>
             </Grid>
 
-            
-        </materialDesign:Card>
 
-        
+        </materialDesign:Card>
 
         <Grid Grid.RowSpan="2" Grid.ColumnSpan="2" VerticalAlignment="Center" Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}">
             <materialDesign:Card UniformCornerRadius="120">

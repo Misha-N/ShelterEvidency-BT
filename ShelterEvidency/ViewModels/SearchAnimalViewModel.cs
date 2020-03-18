@@ -22,7 +22,7 @@ namespace ShelterEvidency.ViewModels
         protected override void OnViewReady(object view)
         {
             base.OnViewReady(view);
-            Task.Run(() => LoadData());
+            LoadData();
         }
 
 

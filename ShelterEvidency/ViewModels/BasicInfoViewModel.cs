@@ -41,7 +41,8 @@ namespace ShelterEvidency.ViewModels
             {
                 SexList = SexModel.ReturnSexes();
                 SpeciesList = SpeciesModel.ReturnSpecies();
-                BreedList = BreedModel.ReturnBreeds(null);
+                BreedList = BreedModel.ReturnBreeds(Animal.SpeciesID);
+                CrossBreedList = BreedModel.ReturnBreeds(Animal.SpeciesID);
                 CoatTypeList = CoatTypeModel.ReturnCoatTypes();
                 FurColorList = FurColorModel.ReturnFurColors();
             });
@@ -174,8 +175,7 @@ namespace ShelterEvidency.ViewModels
             set
             {
                 Animal.SpeciesID = value;
-                NotifyOfPropertyChange(() => Species);
-                NotifyOfPropertyChange(() => BreedList);
+                UpdateBreeds(value);
             }
         }
         public int? Breed
@@ -352,6 +352,20 @@ namespace ShelterEvidency.ViewModels
             }
         }
 
+        private BindableCollection<Database.Breeds> _crossbreedlist;
+        public BindableCollection<Database.Breeds> CrossBreedList
+        {
+            get
+            {
+                return _crossbreedlist;
+            }
+            set
+            {
+                _crossbreedlist = value;
+                NotifyOfPropertyChange(() => CrossBreedList);
+            }
+        }
+
         private BindableCollection<Database.Species> _specieslist;
         public BindableCollection<Database.Species> SpeciesList
         {
@@ -395,6 +409,19 @@ namespace ShelterEvidency.ViewModels
         }
         #endregion
 
+        #region Methods
+
+        private async void UpdateBreeds(int? speciesID)
+        {
+            await Task.Run(() =>
+            {
+                BreedList = BreedModel.ReturnBreeds(speciesID);
+                CrossBreedList = BreedModel.ReturnBreeds(speciesID);
+                NotifyOfPropertyChange(() => Breed);
+                NotifyOfPropertyChange(() => CrossBreed);
+            });
+        }
+
         public void LoadImage()
         {
             OpenFileDialog op = new OpenFileDialog();
@@ -416,6 +443,8 @@ namespace ShelterEvidency.ViewModels
             Animal.UpdateAnimal();
             MessageBox.Show("updated");
         }
+
+        #endregion
 
 
 

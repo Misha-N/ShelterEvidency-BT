@@ -40,7 +40,7 @@ namespace ShelterEvidency.Models
 
             }
             else
-                return "";
+                return null;
         }
 
         public void GetImage(string imagePath)
