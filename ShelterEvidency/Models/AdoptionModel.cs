@@ -1,4 +1,5 @@
-﻿using ShelterEvidency.Database;
+﻿using Caliburn.Micro;
+using ShelterEvidency.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,7 @@ namespace ShelterEvidency.Models
             }
         }
 
-        public static List<AdoptionInfo> ReturnAdoptions()
+        public static BindableCollection<AdoptionInfo> ReturnAdoptions()
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
@@ -54,8 +55,8 @@ namespace ShelterEvidency.Models
                                Returned = adoption.Returned,
                                ReturnDate = adoption.ReturnDate,
                                ReturnReason = adoption.ReturnReason
-                           }).ToList();
-                return results;
+                           });
+                return new BindableCollection<AdoptionInfo>(results);
             }
         }
 
@@ -114,6 +115,26 @@ namespace ShelterEvidency.Models
                 adoption.ReturnReason = ReturnReason;
 
                 db.SubmitChanges();
+            }
+        }
+
+        public static BindableCollection<AdoptionInfo> ReturnPersonAdoptions(int personID)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var results = (from adoption in db.Adoptions
+                               where (adoption.PersonID.Equals(personID))
+                               select new AdoptionInfo
+                               {
+                                   ID = adoption.ID,
+                                   Date = adoption.Date,
+                                   OwnerName = adoption.People.FirstName + " " + adoption.People.LastName,
+                                   AnimalName = adoption.Animals.Name,
+                                   Returned = adoption.Returned,
+                                   ReturnDate = adoption.ReturnDate,
+                                   ReturnReason = adoption.ReturnReason
+                               });
+                return new BindableCollection<AdoptionInfo>(results);
             }
         }
     }

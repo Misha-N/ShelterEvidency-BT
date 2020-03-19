@@ -165,9 +165,9 @@ namespace ShelterEvidency.ViewModels
             {
                 NewWalk.AnimalID = AnimalID;
                 NewWalk.SaveWalk();
+                NotifyOfPropertyChange(() => AnimalWalks);
+                ClearNewWalk();
             }
-            NotifyOfPropertyChange(() => AnimalWalks);
-            ClearNewWalk();
         }
 
         public void ClearNewWalk()

@@ -1,4 +1,6 @@
-﻿using ShelterEvidency.Database;
+﻿using Caliburn.Micro;
+using ShelterEvidency.Database;
+using ShelterEvidency.WrappingClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +23,8 @@ namespace ShelterEvidency.Models
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
+                db.DeferredLoadingEnabled = false;
+
                 Walks walk = new Walks
                 {
                     AnimalID = AnimalID,
@@ -30,8 +34,9 @@ namespace ShelterEvidency.Models
                 };
                 db.Walks.InsertOnSubmit(walk);
                 db.SubmitChanges();
-
+                
                 ID = walk.ID;
+                
             }
         }
 
@@ -39,6 +44,7 @@ namespace ShelterEvidency.Models
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
+                db.DeferredLoadingEnabled = false;
                 return db.Walks.Where(x => x.AnimalID.Equals(animalID)).ToList();
             }
         }
@@ -74,6 +80,24 @@ namespace ShelterEvidency.Models
                 walk.Date = Date;
 
                 db.SubmitChanges();
+            }
+        }
+
+        public static BindableCollection<WalkInfo> ReturnPersonWalks(int personID)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var results = (from walk in db.Walks
+                               where (walk.PersonID.Equals(personID))
+                               select new WalkInfo
+                               {
+                                   ID = walk.ID,
+                                   Date = walk.Date,
+                                   PersonName = walk.People.FirstName + " " + walk.People.LastName,
+                                   AnimalName = walk.Animals.Name,
+                                   Note = walk.Note,
+                               });
+                return new BindableCollection<WalkInfo>(results);
             }
         }
     }

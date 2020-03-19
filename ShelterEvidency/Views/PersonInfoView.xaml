@@ -5,21 +5,39 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShelterEvidency.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:helpers="clr-namespace:ShelterEvidency.Helpers"
              Background="{DynamicResource MaterialDesignPaper}"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        FontFamily="{DynamicResource MaterialDesignFont}"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1500">
 
+    <UserControl.Resources>
+        <helpers:InvertBooleanConverter  x:Key="boolConvert"/>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
 
-    <Grid>
+        <Style x:Key="CellCentering" TargetType="{x:Type DataGridCell}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,0,0,0" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+
+    <Grid IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
-        <materialDesign:Card Margin="5"
+        <materialDesign:Card Margin="5,5,7,15"
     materialDesign:ShadowAssist.ShadowDepth="Depth1"
     Padding="32,32,32,15" FontSize="14">
             <Grid >
@@ -27,7 +45,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
+                <Grid Grid.Column="0" Margin="0,0,15,0">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -40,15 +58,15 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBox x:Name="Title" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Titul" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                    <TextBox x:Name="Title" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Titul" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                    <TextBox x:Name="FirstName" Grid.Row="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Jméno" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                    <TextBox x:Name="FirstName" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Jméno" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                    <TextBox x:Name="LastName" Grid.Row="1" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Příjmení"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                    <TextBox x:Name="LastName" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Příjmení"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                    <TextBox x:Name="Phone" Grid.Row="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                    <TextBox x:Name="Phone" VerticalAlignment="Center" Grid.Row="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                    <TextBox x:Name="Mail" Grid.Row="2" Grid.Column="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Email"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                    <TextBox x:Name="Mail" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Email"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
 
                     <GroupBox Header="Role osoby" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2" Style="{DynamicResource MaterialDesignGroupBox}"
@@ -72,7 +90,7 @@
 
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="2.5*"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
@@ -89,11 +107,11 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBox x:Name="City" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Město" Grid.Row="1" Grid.ColumnSpan="2"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                            <TextBox x:Name="City" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Město" Grid.Row="1" Grid.ColumnSpan="2"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                            <TextBox x:Name="Zip" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="PSČ" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                            <TextBox x:Name="Zip" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="PSČ" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                            <TextBox x:Name="Street" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Ulice a číslo domu" Grid.Row="3" Grid.ColumnSpan="2"   TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                            <TextBox x:Name="Street" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Ulice a číslo domu" Grid.Row="3" Grid.ColumnSpan="2"   TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
                         </Grid>
 
 
@@ -110,9 +128,9 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="0.9*"/>
             </Grid.ColumnDefinitions>
 
             <materialDesign:Card Grid.Column="1" Margin="5"
@@ -138,40 +156,13 @@
                         </TextBlock>
                     </Grid>
 
-                    <DataGrid Grid.Row="1" Margin="5" ColumnWidth="*" AutoGenerateColumns="False"  VerticalContentAlignment="Center" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding Path=Animals, Mode=OneWay}" SelectedItem="{Binding Path=SelectedAnimal, Mode=OneWayToSource}">
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn Width="120" Header="Obrázek">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Grid Width="80" Height="80">
-                                        <Image Source="{Binding ImagePath}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" />
-                                    </Grid>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn MaxWidth="50" Header="ID" Binding="{Binding ID}"/>
-                        <DataGridTextColumn Header="Jméno" Binding="{Binding Name}"/>
-                        <DataGridTextColumn Header="Číslo čipu" Binding="{Binding ChipNumber}"/>
-                        <DataGridTextColumn Header="Pohlaví" Binding="{Binding Sex}"/>
-                        <DataGridTextColumn Header="Druh" Binding="{Binding Species}"/>
-                        <DataGridTextColumn Header="Plemeno" Binding="{Binding Breed}"/>
-                        <DataGridTextColumn Header="Typ srsti" Binding="{Binding CoatType}"/>
-                        <DataGridTextColumn Header="Barva srsti" Binding="{Binding FurColor}"/>
-
-                        <DataGridTemplateColumn Header="V útulku">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <materialDesign:PackIcon x:Name="icon" Kind="CheckboxMarked" />
-                                    <DataTemplate.Triggers>
-                                        <DataTrigger Binding="{Binding Path=InShelter}" Value="False">
-                                            <Setter Property="Kind" Value="CheckBoxOutlineBlank" TargetName="icon"/>
-                                        </DataTrigger>
-                                    </DataTemplate.Triggers>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                    </DataGrid.Columns>
+                    <DataGrid Grid.Row="1" Margin="5" ColumnWidth="*" AutoGenerateColumns="False"  VerticalContentAlignment="Center" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding Path=DonationList, Mode=OneWay}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn MaxWidth="50" Header="ID" Binding="{Binding ID}"/>
+                            <DataGridTextColumn Header="Datum" Binding="{Binding Date, StringFormat=\{0:dd.MM.yyyy\}}"/>
+                            <DataGridTextColumn Header="Název" Binding="{Binding DonationName}"/>
+                            <DataGridTextColumn Header="Částka" Binding="{Binding Amount}"/>
+                        </DataGrid.Columns>
                 </DataGrid>
                 </Grid>
 
@@ -199,40 +190,25 @@
                     </TextBlock>
                     </Grid>
 
-                    <DataGrid Grid.Row="1" Margin="5" ColumnWidth="*" AutoGenerateColumns="False" VerticalContentAlignment="Center" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding Path=Animals, Mode=OneWay}" SelectedItem="{Binding Path=SelectedAnimal, Mode=OneWayToSource}">
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn Width="120" Header="Obrázek">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Grid Width="80" Height="80">
-                                        <Image Source="{Binding ImagePath}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" />
-                                    </Grid>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn MaxWidth="50" Header="ID" Binding="{Binding ID}"/>
-                        <DataGridTextColumn Header="Jméno" Binding="{Binding Name}"/>
-                        <DataGridTextColumn Header="Číslo čipu" Binding="{Binding ChipNumber}"/>
-                        <DataGridTextColumn Header="Pohlaví" Binding="{Binding Sex}"/>
-                        <DataGridTextColumn Header="Druh" Binding="{Binding Species}"/>
-                        <DataGridTextColumn Header="Plemeno" Binding="{Binding Breed}"/>
-                        <DataGridTextColumn Header="Typ srsti" Binding="{Binding CoatType}"/>
-                        <DataGridTextColumn Header="Barva srsti" Binding="{Binding FurColor}"/>
-
-                        <DataGridTemplateColumn Header="V útulku">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <materialDesign:PackIcon x:Name="icon" Kind="CheckboxMarked" />
-                                    <DataTemplate.Triggers>
-                                        <DataTrigger Binding="{Binding Path=InShelter}" Value="False">
-                                            <Setter Property="Kind" Value="CheckBoxOutlineBlank" TargetName="icon"/>
-                                        </DataTrigger>
-                                    </DataTemplate.Triggers>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                    </DataGrid.Columns>
+                    <DataGrid Grid.Row="1" Margin="5" ColumnWidth="*" AutoGenerateColumns="False" VerticalContentAlignment="Center" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding Path=AdoptionList, Mode=OneWay}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn MaxWidth="50" Header="ID" Binding="{Binding ID}"/>
+                            <DataGridTextColumn Header="Jméno zvířete" Binding="{Binding AnimalName}"/>
+                            <DataGridTextColumn Header="Datum adopce" Binding="{Binding Date, StringFormat=\{0:dd.MM.yyyy\}}"/>
+                            <DataGridTemplateColumn Header="Vrácen">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <materialDesign:PackIcon x:Name="icon" Kind="CheckboxMarked" />
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Returned}" Value="False">
+                                                <Setter Property="Kind" Value="CheckBoxOutlineBlank" TargetName="icon"/>
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Datum vrácení" Binding="{Binding ReturnDate}"/>
+                        </DataGrid.Columns>
                 </DataGrid>
                  </Grid>
 
@@ -262,40 +238,12 @@
                         </TextBlock>
                     </Grid>
 
-                    <DataGrid Grid.Row="1" Margin="5" ColumnWidth="*" AutoGenerateColumns="False" VerticalContentAlignment="Center" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding Path=Animals, Mode=OneWay}" SelectedItem="{Binding Path=SelectedAnimal, Mode=OneWayToSource}">
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn Width="120" Header="Obrázek">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Grid Width="80" Height="80">
-                                        <Image Source="{Binding ImagePath}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" />
-                                    </Grid>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn MaxWidth="50" Header="ID" Binding="{Binding ID}"/>
-                        <DataGridTextColumn Header="Jméno" Binding="{Binding Name}"/>
-                        <DataGridTextColumn Header="Číslo čipu" Binding="{Binding ChipNumber}"/>
-                        <DataGridTextColumn Header="Pohlaví" Binding="{Binding Sex}"/>
-                        <DataGridTextColumn Header="Druh" Binding="{Binding Species}"/>
-                        <DataGridTextColumn Header="Plemeno" Binding="{Binding Breed}"/>
-                        <DataGridTextColumn Header="Typ srsti" Binding="{Binding CoatType}"/>
-                        <DataGridTextColumn Header="Barva srsti" Binding="{Binding FurColor}"/>
-
-                        <DataGridTemplateColumn Header="V útulku">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <materialDesign:PackIcon x:Name="icon" Kind="CheckboxMarked" />
-                                    <DataTemplate.Triggers>
-                                        <DataTrigger Binding="{Binding Path=InShelter}" Value="False">
-                                            <Setter Property="Kind" Value="CheckBoxOutlineBlank" TargetName="icon"/>
-                                        </DataTrigger>
-                                    </DataTemplate.Triggers>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                    </DataGrid.Columns>
+                    <DataGrid Grid.Row="1" Margin="5" ColumnWidth="*" AutoGenerateColumns="False" VerticalContentAlignment="Center" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding Path=WalkList, Mode=OneWay}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn MaxWidth="50" Header="ID" Binding="{Binding ID}"/>
+                            <DataGridTextColumn Header="Datum" Binding="{Binding Date, StringFormat=\{0:dd.MM.yyyy\}}"/>
+                            <DataGridTextColumn Header="Jméno zvířete" Binding="{Binding AnimalName}"/>
+                        </DataGrid.Columns>
                 </DataGrid>
                     </Grid>
 
@@ -308,7 +256,7 @@
         </Grid>
 
         <StackPanel Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Orientation="Horizontal">
-            <Button x:Name="Cancel" Style="{StaticResource MaterialDesignFlatAccentButton}" Content="Zrušit" Grid.Column="2" Grid.Row="1" Width="75" Margin="5,0,5,5"/>
+            <Button x:Name="Cancel" Style="{StaticResource MaterialDesignFlatAccentButton}" Content="Zavřít" Grid.Column="2" Grid.Row="1" Width="75" Margin="5,0,15,5"/>
             <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" x:Name="UpdatePerson" Grid.Column="2" Grid.Row="1">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="ContentSaveOutline"  Width="20" Height="20"/>
@@ -316,6 +264,15 @@
                 </StackPanel>
             </Button>
         </StackPanel>
+
+        <ProgressBar  
+              Visibility="{Binding IsWorking, Converter={StaticResource VisibleIfTrueConverter}}"
+              Grid.RowSpan="2"
+              Style="{StaticResource MaterialDesignCircularProgressBar}"
+              Value="0"
+              Height="50"
+              Width="50"
+              IsIndeterminate="True" />
 
     </Grid>
 

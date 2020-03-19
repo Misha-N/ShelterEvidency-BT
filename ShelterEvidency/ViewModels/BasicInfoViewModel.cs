@@ -45,6 +45,9 @@ namespace ShelterEvidency.ViewModels
                 CrossBreedList = BreedModel.ReturnBreeds(Animal.SpeciesID);
                 CoatTypeList = CoatTypeModel.ReturnCoatTypes();
                 FurColorList = FurColorModel.ReturnFurColors();
+                VetList = PersonModel.ReturnVets();
+                OwnerList = PersonModel.ReturnOwners();
+                NewOwnerList = PersonModel.ReturnOwners();
             });
             IsWorking = false;
         }
@@ -308,19 +311,44 @@ namespace ShelterEvidency.ViewModels
 
         #region List Setting
 
-        public List<PersonInfo> VetList
+        private BindableCollection<PersonInfo> _vetlist;
+        public BindableCollection<PersonInfo> VetList
         {
             get
             {
-                return PersonModel.ReturnVets();
+                return _vetlist;
+            }
+            set
+            {
+                _vetlist = value;
+                NotifyOfPropertyChange(() => VetList);
             }
         }
 
-        public List<PersonInfo> OwnerList
+        private BindableCollection<PersonInfo> _ownerlist;
+        public BindableCollection<PersonInfo> OwnerList
         {
             get
             {
-                return PersonModel.ReturnOwners();
+                return _ownerlist;
+            }
+            set
+            {
+                _ownerlist = value;
+                NotifyOfPropertyChange(() => OwnerList);
+            }
+        }
+        private BindableCollection<PersonInfo> _newownerlist;
+        public BindableCollection<PersonInfo> NewOwnerList
+        {
+            get
+            {
+                return _newownerlist;
+            }
+            set
+            {
+                _newownerlist = value;
+                NotifyOfPropertyChange(() => NewOwnerList);
             }
         }
 
@@ -441,7 +469,7 @@ namespace ShelterEvidency.ViewModels
         {
             Animal.ImagePath = Image.SaveImage();
             Animal.UpdateAnimal();
-            MessageBox.Show("updated");
+            MessageBox.Show("Aktualizováno.");
         }
 
         #endregion

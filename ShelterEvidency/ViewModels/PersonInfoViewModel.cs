@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using ShelterEvidency.Models;
+using ShelterEvidency.WrappingClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace ShelterEvidency.ViewModels
 {
     public class PersonInfoViewModel: Screen
     {
+        #region Initialization
         public PersonModel Person { get; set; }
         public SearchPersonViewModel prnt { get; set; }
         public PersonInfoViewModel(int personID, SearchPersonViewModel vm)
@@ -21,8 +23,44 @@ namespace ShelterEvidency.ViewModels
 
         }
 
+        protected override void OnViewReady(object view)
+        {
+            base.OnViewReady(view);
+            Task.Run(() => LoadData());
+        }
+
+
+        private async Task LoadData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
+            {
+                AdoptionList = AdoptionModel.ReturnPersonAdoptions(Person.ID);
+                WalkList = WalkModel.ReturnPersonWalks(Person.ID);
+                DonationList = DonationModel.ReturnPersonDonations(Person.ID);
+            });
+            IsWorking = false;
+        }
+
+        private volatile bool _isWorking;
+        public bool IsWorking
+        {
+            get
+            {
+                return _isWorking;
+            }
+            set
+            {
+                _isWorking = value;
+                NotifyOfPropertyChange(() => IsWorking);
+            }
+        }
+
+        #endregion
+
         #region Binded Properties
-       
+
         public int ID
         {
             get
@@ -215,11 +253,59 @@ namespace ShelterEvidency.ViewModels
 
         #endregion
 
+        #region Bindings in DB
+
+        private BindableCollection<AdoptionInfo> _adoptionlist;
+        public BindableCollection<AdoptionInfo> AdoptionList
+        {
+            get
+            {
+                return _adoptionlist;
+            }
+            set
+            {
+                _adoptionlist = value;
+                NotifyOfPropertyChange(() => AdoptionList);
+            }
+        }
+
+
+        private BindableCollection<DonationInfo> _donationlist;
+        public BindableCollection<DonationInfo> DonationList
+        {
+            get
+            {
+                return _donationlist;
+            }
+            set
+            {
+                _donationlist = value;
+                NotifyOfPropertyChange(() => DonationList);
+            }
+        }
+
+        private BindableCollection<WalkInfo> _walklist;
+        public BindableCollection<WalkInfo> WalkList
+        {
+            get
+            {
+                return _walklist;
+            }
+            set
+            {
+                _walklist = value;
+                NotifyOfPropertyChange(() => WalkList);
+            }
+        }
+
+        #endregion
+
 
         public void UpdatePerson()
         {
             Person.UpdatePerson();
-            MessageBox.Show("ok");
+            MessageBox.Show("Aktualizováno.");
+            prnt.UpdatePeople();
         }
 
         public void Cancel()

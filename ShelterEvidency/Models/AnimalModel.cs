@@ -237,7 +237,40 @@ namespace ShelterEvidency.Models
                                    InShelter = animal.InShelter,
                                    FolderPath = animal.FolderPath,
                                    ImagePath = animal.ImagePath
-                               }).ToList();
+                               });
+                return new BindableCollection<AnimalInfo>(results);
+            }
+        }
+
+        public static BindableCollection<AnimalInfo> ReturnAnimalsInShelter()
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var results = (from animal in db.Animals
+                               where ((animal.InShelter.Equals(true)))
+                               select new AnimalInfo
+                               {
+                                   ID = animal.ID,
+                                   Name = animal.Name,
+                                   ChipNumber = animal.ChipNumber,
+                                   BirthDate = animal.Birth,
+                                   Sex = animal.Sexes.SexName,
+                                   Species = animal.Species.SpeciesName,
+                                   Breed = animal.Breeds.BreedName,
+                                   CrossBreed = animal.Breeds1.BreedName,
+                                   CoatType = animal.CoatTypes.CoatTypeName,
+                                   FurColor = animal.FurColors.FurColorName,
+                                   FeedRation = animal.FeedRation,
+                                   Weight = animal.Weight,
+                                   Owner = animal.People.FirstName + " " + animal.People.LastName,
+                                   NewOwner = animal.People1.FirstName + " " + animal.People1.LastName,
+                                   Vet = animal.People2.FirstName + " " + animal.People2.LastName,
+                                   Note = animal.Note,
+                                   Castration = animal.Castration,
+                                   InShelter = animal.InShelter,
+                                   FolderPath = animal.FolderPath,
+                                   ImagePath = animal.ImagePath
+                               });
                 return new BindableCollection<AnimalInfo>(results);
             }
         }

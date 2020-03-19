@@ -46,7 +46,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="SearchValue" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Vyhledávání" TextWrapping="Wrap" Margin="5,5,5,5" Width="400" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="SearchValue" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Vyhledávání" TextWrapping="Wrap" Margin="5,5,5,5" Width="400" VerticalContentAlignment="Center"/>
             <Button x:Name="Search" Grid.Column="1" Margin="5" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
                 <materialDesign:PackIcon
                 Kind="Magnify"
@@ -112,15 +112,15 @@
                     <materialDesign:PackIcon Kind="PersonAdd" HorizontalAlignment="Left" Width="50" Height="50" Opacity="0.5"  VerticalAlignment="Center" />
 
 
-                    <TextBox x:Name="Title" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Titul" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                    <TextBox x:Name="Title" VerticalAlignment="Center" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Titul" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                    <TextBox x:Name="FirstName" Grid.Row="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Jméno" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                    <TextBox x:Name="FirstName" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Jméno" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                    <TextBox x:Name="LastName" Grid.Row="1" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Příjmení"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                    <TextBox x:Name="LastName" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Příjmení"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                    <TextBox x:Name="Phone" Grid.Row="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                    <TextBox x:Name="Phone" VerticalAlignment="Center" Grid.Row="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                    <TextBox x:Name="Mail" Grid.Row="2" Grid.Column="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Email"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                    <TextBox x:Name="Mail" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Email"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
 
                     <GroupBox Header="Role osoby" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2" Style="{DynamicResource MaterialDesignGroupBox}"
@@ -161,11 +161,11 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                            <TextBox x:Name="City" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Město" Grid.Row="1" Grid.ColumnSpan="2"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                            <TextBox x:Name="City" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Město" Grid.Row="1" Grid.ColumnSpan="2"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                            <TextBox x:Name="Zip" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="PSČ" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                            <TextBox x:Name="Zip" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="PSČ" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                            <TextBox x:Name="Street" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Ulice a číslo domu" Grid.Row="3" Grid.ColumnSpan="2"   TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                            <TextBox x:Name="Street" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Ulice a číslo domu" Grid.Row="3" Grid.ColumnSpan="2"   TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
                         </Grid>
                         
                         

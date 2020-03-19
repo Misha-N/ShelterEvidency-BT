@@ -11,6 +11,8 @@ namespace ShelterEvidency.ViewModels
 {
     public class CreateAdoptionViewModel: Screen
     {
+        #region Initialization
+
         public AnimalModel Animal { get; set; }
         public PersonModel Owner { get; set; }
         public AdoptionModel Adoption { get; set; }
@@ -19,28 +21,78 @@ namespace ShelterEvidency.ViewModels
         public CreateAdoptionViewModel(AdoptionsViewModel parent)
         {
             prnt = parent;
-            //SelectedAnimal = Animals.FirstOrDefault();
-            SelectedOwner = Owners.FirstOrDefault();
             Animal = new AnimalModel();
             Owner = new PersonModel();
             Adoption = new AdoptionModel();
         }
 
-        #region List setting
-        /*
-        public Binda<AnimalInfo> Animals
+
+        protected override void OnViewReady(object view)
+        {
+            base.OnViewReady(view);
+            Task.Run(() => LoadData());
+        }
+
+
+        private async Task LoadData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
+            {
+                Animals = AnimalModel.ReturnAnimalsInShelter();
+                Owners = PersonModel.ReturnOwners();
+                SelectedAnimal = Animals.FirstOrDefault();
+                SelectedOwner = Owners.FirstOrDefault();
+            });
+            IsWorking = false;
+        }
+
+        private volatile bool _isWorking;
+        public bool IsWorking
         {
             get
             {
-                    return AnimalModel.ReturnAnimals();
+                return _isWorking;
+            }
+            set
+            {
+                _isWorking = value;
+                NotifyOfPropertyChange(() => IsWorking);
             }
         }
-        */
-        public List<PersonInfo> Owners
+
+        #endregion
+
+        #region List setting
+
+        private BindableCollection<AnimalInfo> _animals;
+
+        public BindableCollection<AnimalInfo> Animals
         {
             get
             {
-                    return PersonModel.ReturnOwners();
+                return _animals;
+            }
+            set
+            {
+                _animals = value;
+                NotifyOfPropertyChange(() => Animals);
+            }
+        }
+
+        private BindableCollection<PersonInfo> _owners;
+
+        public BindableCollection<PersonInfo> Owners
+        {
+            get
+            {
+                return _owners;
+            }
+            set
+            {
+                _owners = value;
+                NotifyOfPropertyChange(() => Owners);
             }
         }
         #endregion
@@ -67,11 +119,12 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                 return _selectedAnimal;
+                return _selectedAnimal;
             }
             set
             {
                 _selectedAnimal = value;
+                NotifyOfPropertyChange(() => SelectedAnimal);
                 AnimalSelection();
             }
         }
@@ -79,25 +132,31 @@ namespace ShelterEvidency.ViewModels
 
         private void OwnerSelection()
         {
-            NotifyOfPropertyChange(() => FullName);
-            NotifyOfPropertyChange(() => Phone);
-            NotifyOfPropertyChange(() => Mail);
-            NotifyOfPropertyChange(() => City);
-            NotifyOfPropertyChange(() => Street);
-            NotifyOfPropertyChange(() => Zip);
+            if(SelectedOwner != null)
+            {
+                NotifyOfPropertyChange(() => FullName);
+                NotifyOfPropertyChange(() => Phone);
+                NotifyOfPropertyChange(() => Mail);
+                NotifyOfPropertyChange(() => City);
+                NotifyOfPropertyChange(() => Street);
+                NotifyOfPropertyChange(() => Zip);
+            }
         }
         
         private void AnimalSelection()
         {
-            NotifyOfPropertyChange(() => ID);
-            NotifyOfPropertyChange(() => AnimalName);
-            NotifyOfPropertyChange(() => ChipNumber);
-            NotifyOfPropertyChange(() => Species);
-            NotifyOfPropertyChange(() => Sex);
-            NotifyOfPropertyChange(() => Breed);
-            NotifyOfPropertyChange(() => BirthDate);
-            NotifyOfPropertyChange(() => CoatType);
-            NotifyOfPropertyChange(() => FurColor);
+            if (SelectedAnimal != null)
+            {
+                NotifyOfPropertyChange(() => ID);
+                NotifyOfPropertyChange(() => AnimalName);
+                NotifyOfPropertyChange(() => ChipNumber);
+                NotifyOfPropertyChange(() => Species);
+                NotifyOfPropertyChange(() => Sex);
+                NotifyOfPropertyChange(() => Breed);
+                NotifyOfPropertyChange(() => BirthDate);
+                NotifyOfPropertyChange(() => CoatType);
+                NotifyOfPropertyChange(() => FurColor);
+            }
         }
 
         #region Binded Animal Properties
@@ -106,7 +165,10 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                return SelectedAnimal.ID;
+                if (SelectedAnimal != null)
+                    return SelectedAnimal.ID;
+                else
+                    return null;
             }
 
         }
@@ -115,7 +177,10 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                 return SelectedAnimal.Name;
+                if (SelectedAnimal != null)
+                    return SelectedAnimal.Name;
+                else
+                    return null;
             }
 
         }
@@ -123,28 +188,40 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                 return SelectedAnimal.ChipNumber;
+                if (SelectedAnimal != null)
+                    return SelectedAnimal.ChipNumber;
+                else
+                    return null;
             }
         }
         public string Sex
         {
             get
             {
-                 return SelectedAnimal.Sex;
+                if (SelectedAnimal != null)
+                    return SelectedAnimal.Sex;
+                else
+                    return null;
             }
         }
         public string Species
         {
             get
             {
-                return SelectedAnimal.Species;
+                if (SelectedAnimal != null)
+                    return SelectedAnimal.Species;
+                else
+                    return null;
             }
         }
         public string Breed
         {
             get
             {
-                 return SelectedAnimal.Breed;
+                if (SelectedAnimal != null)
+                    return SelectedAnimal.Breed;
+                else
+                    return null;
             }
         }
 
@@ -152,21 +229,30 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                 return SelectedAnimal.BirthDate;
+                if (SelectedAnimal != null)
+                    return SelectedAnimal.BirthDate;
+                else
+                    return null;
             }
         }
         public string CoatType
         {
             get
             {
-                 return SelectedAnimal.CoatType;
+                if (SelectedAnimal != null)
+                    return SelectedAnimal.CoatType;
+                else
+                    return null;
             }
         }
         public string FurColor
         {
             get
             {
-                 return SelectedAnimal.FurColor;
+                if (SelectedAnimal != null)
+                    return SelectedAnimal.FurColor;
+                else
+                    return null;
             }
         }
 
@@ -178,14 +264,20 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                 return SelectedOwner.TitledFullName;
+                if (SelectedOwner != null)
+                    return SelectedOwner.TitledFullName;
+                else
+                    return null;
             }
         }
         public string Phone
         {
             get
             {
-                return SelectedOwner.Phone;
+                if (SelectedOwner != null)
+                    return SelectedOwner.Phone;
+                else
+                    return null;
             }
         }
 
@@ -193,7 +285,10 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                 return SelectedOwner.Mail;
+                if (SelectedOwner != null)
+                    return SelectedOwner.Mail;
+                else
+                    return null;
             }
         }
 
@@ -201,7 +296,10 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                 return SelectedOwner.AdressCity;
+                if (SelectedOwner != null)
+                    return SelectedOwner.AdressCity;
+                else
+                    return null;
             }
         }
 
@@ -209,7 +307,10 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                 return SelectedOwner.AdressStreet;
+                if (SelectedOwner != null)
+                    return SelectedOwner.AdressStreet;
+                else
+                    return null;
             }
 
         }
@@ -217,7 +318,10 @@ namespace ShelterEvidency.ViewModels
         {
             get
             {
-                 return SelectedOwner.AdressZip;
+                if (SelectedOwner != null)
+                    return SelectedOwner.AdressZip;
+                else
+                    return null;
             }
         }
 
@@ -231,14 +335,24 @@ namespace ShelterEvidency.ViewModels
             set
             {
                 Adoption.Date = value;
-                NotifyOfPropertyChange(() => Zip);
+                NotifyOfPropertyChange(() => AdoptionDate);
             }
+        }
+
+        public bool CanCreate()
+        {
+            if (AdoptionDate != null)
+                return true;
+            else
+                return false;
         }
 
         public void CreateNewAdoption()
         {
             if (AdoptionDate != null)
             {
+                IsWorking = true;
+
                 Owner.GetPerson(SelectedOwner.ID);
                 Adoption.PersonID = SelectedOwner.ID;
 
@@ -250,10 +364,18 @@ namespace ShelterEvidency.ViewModels
 
                 DocumentManager.CreateAdoptionList(Animal, Owner, Adoption);
                 prnt.UpdateAdoptions();
+
+                IsWorking = false;
                 TryClose();
             }
             else
-                MessageBox.Show("vyplňte datum adopce");
+                MessageBox.Show("Vyplňte prosím datum adopce.");
         }
+
+        public void Cancel()
+        {
+            TryClose();
+        }
+
     }
 }

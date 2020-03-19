@@ -100,7 +100,8 @@ namespace ShelterEvidency.Models
                                    IsSponsor = person.IsSponsor,
                                    IsVolunteer = person.IsVolunteer
 
-                               }).ToList();
+                               });
+
                 return new BindableCollection<PersonInfo>(results);
             }
         }
@@ -130,7 +131,8 @@ namespace ShelterEvidency.Models
                                    IsWalker = person.IsWalker,
                                    IsSponsor = person.IsSponsor,
                                    IsVolunteer = person.IsVolunteer
-                               }).ToList();
+                               });
+
                 return new BindableCollection<PersonInfo>(results);
             }
         }
@@ -218,7 +220,7 @@ namespace ShelterEvidency.Models
             }
         }
 
-        public static List<PersonInfo> ReturnVets()
+        public static BindableCollection<PersonInfo> ReturnVets()
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
@@ -242,7 +244,7 @@ namespace ShelterEvidency.Models
                                    IsSponsor = person.IsSponsor,
                                    IsVolunteer = person.IsVolunteer
                                }).ToList();
-                return results;
+                return new BindableCollection<PersonInfo>(results);
             }
         }
 
@@ -302,7 +304,7 @@ namespace ShelterEvidency.Models
             }
         }
 
-        public static List<PersonInfo> ReturnOwners()
+        public static BindableCollection<PersonInfo> ReturnOwners()
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
@@ -325,8 +327,8 @@ namespace ShelterEvidency.Models
                                    IsWalker = person.IsWalker,
                                    IsSponsor = person.IsSponsor,
                                    IsVolunteer = person.IsVolunteer
-                               }).ToList();
-                return results;
+                               });
+                return new BindableCollection<PersonInfo>(results);
             }
         }
     }

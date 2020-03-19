@@ -4,11 +4,121 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShelterEvidency.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:helpers="clr-namespace:ShelterEvidency.Helpers"
              Background="{DynamicResource MaterialDesignPaper}"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        FontFamily="{DynamicResource MaterialDesignFont}"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="1200">
+
+    <UserControl.Resources>
+        <helpers:InvertBooleanConverter  x:Key="boolConvert"/>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+
+        <Style x:Key="CellCentering" TargetType="{x:Type DataGridCell}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,0,0,0" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+
+    <Grid>
+       <Grid IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="5.5*" />
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="SearchValue" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Vyhledávání" TextWrapping="Wrap" Margin="5,5,5,5" Width="400" VerticalContentAlignment="Center"/>
+            <Button x:Name="Search" Grid.Column="1" Margin="5" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                <materialDesign:PackIcon
+                Kind="Magnify"
+                Height="24"
+                Width="24" />
+            </Button>
+
+            <Button x:Name="UpdateAdoptions" Grid.Column="4" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                <materialDesign:PackIcon
+                Kind="Reload"
+                Height="24"
+                Width="24" />
+            </Button>
+
+            <Button x:Name="CreateAdoption" Style="{StaticResource MaterialDesignRaisedAccentButton}" Grid.Column="2" Grid.Row="1" Margin="5">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="AddCircleOutline"  Width="25" Height="25"/>
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Vytvořit novou adopci</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="OpenAdoption" IsEnabled="{Binding IsSelected}"  Style="{StaticResource MaterialDesignRaisedDarkButton}" Grid.Row="1" Margin="5">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="SquareEditOutline" Width="25" Height="25"/>
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Upravit adopci</TextBlock>
+                </StackPanel>
+            </Button>
+
+
+        </Grid>
+        <DataGrid Grid.Row="1" Margin="5" ColumnWidth="*" AutoGenerateColumns="False" VerticalContentAlignment="Center" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding Path=Adoptions, Mode=OneWay}" SelectedItem="{Binding Path=SelectedAdoption, Mode=OneWayToSource}">
+            <DataGrid.Columns>
+                <DataGridTextColumn MaxWidth="50" Header="ID" Binding="{Binding ID}"/>
+                <DataGridTextColumn Header="Jméno zvířete" Binding="{Binding AnimalName}"/>
+                <DataGridTextColumn MinWidth="300"  Header="Jméno majitele" Binding="{Binding OwnerName}"/>
+                <DataGridTextColumn Header="Datum adopce" Binding="{Binding Date, StringFormat=\{0:dd.MM.yyyy\}}"/>
+                <DataGridTemplateColumn Header="Vrácen">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <materialDesign:PackIcon x:Name="icon" Kind="CheckboxMarked" />
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Path=Returned}" Value="False">
+                                    <Setter Property="Kind" Value="CheckBoxOutlineBlank" TargetName="icon"/>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Datum vrácení" Binding="{Binding ReturnDate}"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <ProgressBar  
+              Visibility="{Binding IsWorking, Converter={StaticResource VisibleIfTrueConverter}}"
+              Grid.RowSpan="2"
+              Style="{StaticResource MaterialDesignCircularProgressBar}"
+              Value="0"
+              Height="50"
+              Width="50"
+              IsIndeterminate="True" />
+
+        </Grid>
+        <ContentControl x:Name="ActiveItem"/>
+
+    </Grid>
+
+
+
+
+    <!--
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -25,4 +135,5 @@
         <ContentControl x:Name="ActiveItem" Grid.RowSpan="2"/>
 
     </Grid>
+    -->
 </UserControl>

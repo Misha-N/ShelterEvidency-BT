@@ -1,4 +1,6 @@
-﻿using ShelterEvidency.Database;
+﻿using Caliburn.Micro;
+using ShelterEvidency.Database;
+using ShelterEvidency.WrappingClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,6 +90,25 @@ namespace ShelterEvidency.Models
                 donation.DonatorID = DonatorID;
 
                 db.SubmitChanges();
+            }
+        }
+
+        public static BindableCollection<DonationInfo> ReturnPersonDonations(int personID)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var results = (from donation in db.Donations
+                               where (donation.DonatorID.Equals(personID))
+                               select new DonationInfo
+                               {
+                                   ID = donation.ID,
+                                   Date = donation.Date,
+                                   DonatorName = donation.People.FirstName + " " + donation.People.LastName,
+                                   Amount = donation.Amount,
+                                   DonationName = donation.DonationName,
+                                   Description = donation.Description
+                               });
+                return new BindableCollection<DonationInfo>(results);
             }
         }
     }

@@ -65,7 +65,7 @@
                             <ColumnDefinition Width="5*"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBox x:Name="DiaryRecord" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Přidat poznámku na vybrané datum"  Text="{Binding Path=DiaryRecord, Mode=TwoWay}" FontSize="14"/>
+                        <TextBox x:Name="DiaryRecord" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Přidat poznámku na vybrané datum"  Text="{Binding Path=DiaryRecord, Mode=TwoWay}" FontSize="14"/>
                             <Button x:Name="CreateDiaryRecord" Width="25" Height="25" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Grid.Column="1">
                             <materialDesign:PackIcon
                                 Kind="Plus"

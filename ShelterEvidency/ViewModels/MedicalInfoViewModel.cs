@@ -44,7 +44,7 @@ namespace ShelterEvidency.ViewModels
                 return MedicalRecordModel.GetAnimalMedicalRecords(AnimalID);
             }
         }
-        public List<PersonInfo> VetList
+        public BindableCollection<PersonInfo> VetList
         {
             get
             {

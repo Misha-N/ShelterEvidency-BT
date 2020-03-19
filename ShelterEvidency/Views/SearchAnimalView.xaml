@@ -48,7 +48,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="SearchValue" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Vyhledávání" TextWrapping="Wrap" Margin="5,5,5,5" Width="400" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="SearchValue" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Vyhledávání" TextWrapping="Wrap" Margin="5,5,5,5" Width="400" VerticalContentAlignment="Center"/>
             <Button x:Name="Search" Grid.Column="1" Margin="5" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
                 <materialDesign:PackIcon
                 Kind="Magnify"
@@ -65,7 +65,7 @@
             
              <Button x:Name="AddAnimal" Style="{StaticResource MaterialDesignRaisedAccentButton}" Grid.Column="2" Grid.Row="1" Margin="5">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <materialDesign:PackIcon Kind="PlusCircle"  Width="25" Height="25"/>
+                    <materialDesign:PackIcon Kind="AddCircleOutline"  Width="25" Height="25"/>
                     <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Přidat nové zvíře</TextBlock>
                 </StackPanel>
             </Button>

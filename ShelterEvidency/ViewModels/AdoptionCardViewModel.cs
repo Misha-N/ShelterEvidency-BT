@@ -11,19 +11,57 @@ namespace ShelterEvidency.ViewModels
 {
     public class AdoptionCardViewModel: Screen
     {
+        #region Initialization
         public AdoptionModel Adoption { get; set; }
         public AnimalInfo Animal { get; set; }
         public PersonInfo Person { get; set; }
+        public AdoptionsViewModel prnt { get; set; }
 
-        public AdoptionCardViewModel(int adoptionID)
+        public AdoptionCardViewModel(int adoptionID, AdoptionsViewModel parent)
         {
+            prnt = parent;
+            prnt.IsWorking = true;
             Adoption = new AdoptionModel();
             Adoption.GetAdoption(adoptionID);
             Animal = new AnimalInfo();
-            Animal = AnimalModel.GetAnimalInfo(Adoption.AnimalID);
             Person = new PersonInfo();
-            Person = PersonModel.GetPersonInfo(Adoption.PersonID);
         }
+
+        protected override void OnViewReady(object view)
+        {
+            base.OnViewReady(view);
+            Task.Run(() => LoadData());
+        }
+
+
+        private async Task LoadData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
+            {
+                Animal = AnimalModel.GetAnimalInfo(Adoption.AnimalID);
+                Person = PersonModel.GetPersonInfo(Adoption.PersonID);
+            });
+            IsWorking = false;
+        }
+
+        private bool _isWorking;
+
+        public bool IsWorking
+        {
+            get
+            {
+                return _isWorking;
+            }
+            set
+            {
+                _isWorking = value;
+                NotifyOfPropertyChange(() => IsWorking);
+            }
+        }
+
+        #endregion
 
         #region Binded Animal Properties
 
@@ -165,6 +203,7 @@ namespace ShelterEvidency.ViewModels
             {
                 Adoption.Returned = value;
                 NotifyOfPropertyChange(() => Returned);
+                ClearReturnInput();
             }
         }
 
@@ -177,7 +216,7 @@ namespace ShelterEvidency.ViewModels
             set
             {
                 Adoption.ReturnDate = value;
-                NotifyOfPropertyChange(() => Returned);
+                NotifyOfPropertyChange(() => ReturnDate);
             }
         }
 
@@ -190,20 +229,28 @@ namespace ShelterEvidency.ViewModels
             set
             {
                 Adoption.ReturnReason = value;
-                NotifyOfPropertyChange(() => Returned);
+                NotifyOfPropertyChange(() => ReturnReason);
             }
+        }
+
+        public void ClearReturnInput()
+        {
+            ReturnDate = null;
+            ReturnReason = null;
         }
 
         public void SaveToDatabase()
         {
-            if (Returned == false)
-            {
-                ReturnDate = null;
-                ReturnReason = null;
-            }
             Adoption.UpdateAdoption();
+            MessageBox.Show("Aktualizováno.");
+            prnt.UpdateAdoptions();
+            prnt.IsWorking = false;
+            TryClose();
+        }
 
-            MessageBox.Show("updated");
+        public void Cancel()
+        {
+            prnt.IsWorking = false;
             TryClose();
         }
     }

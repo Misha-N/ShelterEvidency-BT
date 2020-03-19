@@ -41,8 +41,7 @@ namespace ShelterEvidency.Models
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                BindableCollection<DiaryRecords> result = new BindableCollection<DiaryRecords>(db.DiaryRecords.Where(x => x.Date.Equals(selectedDate)));
-                return result;
+                return new BindableCollection<DiaryRecords>(db.DiaryRecords.Where(x => x.Date.Equals(selectedDate)));
             }
         }
         #endregion
