@@ -42,8 +42,6 @@ namespace ShelterEvidency.ViewModels
             {
                 Animals = AnimalModel.ReturnAnimalsInShelter();
                 Owners = PersonModel.ReturnOwners();
-                SelectedAnimal = Animals.FirstOrDefault();
-                SelectedOwner = Owners.FirstOrDefault();
             });
             IsWorking = false;
         }
@@ -134,12 +132,12 @@ namespace ShelterEvidency.ViewModels
         {
             if(SelectedOwner != null)
             {
-                NotifyOfPropertyChange(() => FullName);
-                NotifyOfPropertyChange(() => Phone);
-                NotifyOfPropertyChange(() => Mail);
-                NotifyOfPropertyChange(() => City);
-                NotifyOfPropertyChange(() => Street);
-                NotifyOfPropertyChange(() => Zip);
+                FullName = SelectedOwner.TitledFullName;
+                Phone = SelectedOwner.Phone;
+                Mail = SelectedOwner.Mail;
+                City = SelectedOwner.AdressCity;
+                Street = SelectedOwner.AdressStreet;
+                Zip = SelectedOwner.AdressZip;
             }
         }
         
@@ -147,181 +145,233 @@ namespace ShelterEvidency.ViewModels
         {
             if (SelectedAnimal != null)
             {
-                NotifyOfPropertyChange(() => ID);
-                NotifyOfPropertyChange(() => AnimalName);
-                NotifyOfPropertyChange(() => ChipNumber);
-                NotifyOfPropertyChange(() => Species);
-                NotifyOfPropertyChange(() => Sex);
-                NotifyOfPropertyChange(() => Breed);
-                NotifyOfPropertyChange(() => BirthDate);
-                NotifyOfPropertyChange(() => CoatType);
-                NotifyOfPropertyChange(() => FurColor);
+                ID = SelectedAnimal.ID;
+                AnimalName = SelectedAnimal.Name;
+                ChipNumber = SelectedAnimal.ChipNumber;
+                Species = SelectedAnimal.Species;
+                Sex = SelectedAnimal.Sex;
+                Breed = SelectedAnimal.Breed;
+                BirthDate = SelectedAnimal.BirthDate;
+                CoatType = SelectedAnimal.CoatType;
+                FurColor = SelectedAnimal.FurColor;
+
             }
         }
 
         #region Binded Animal Properties
 
+        private int? _ID;
         public int? ID
         {
-            get
-            {
-                if (SelectedAnimal != null)
-                    return SelectedAnimal.ID;
-                else
-                    return null;
+            get 
+            { 
+                return _ID; 
             }
-
+            set 
+            { 
+                _ID = value;
+                NotifyOfPropertyChange(() => ID);
+            }
         }
 
+        private string _animalName;
         public string AnimalName
         {
-            get
-            {
-                if (SelectedAnimal != null)
-                    return SelectedAnimal.Name;
-                else
-                    return null;
+            get 
+            { 
+                return _animalName; 
             }
-
+            set 
+            { 
+                _animalName = value;
+                NotifyOfPropertyChange(() => AnimalName);
+            }
         }
+
+        private string _chipNumber;
         public string ChipNumber
         {
             get
             {
-                if (SelectedAnimal != null)
-                    return SelectedAnimal.ChipNumber;
-                else
-                    return null;
+                return _chipNumber;
+            }
+            set
+            {
+                _chipNumber = value;
+                NotifyOfPropertyChange(() => ChipNumber);
             }
         }
+
+        private string _sex;
         public string Sex
         {
             get
             {
-                if (SelectedAnimal != null)
-                    return SelectedAnimal.Sex;
-                else
-                    return null;
+                return _sex;
+            }
+            set
+            {
+                _sex = value;
+                NotifyOfPropertyChange(() => Sex);
             }
         }
+
+        private string _species;
         public string Species
         {
             get
             {
-                if (SelectedAnimal != null)
-                    return SelectedAnimal.Species;
-                else
-                    return null;
+                return _species;
+            }
+            set
+            {
+                _species = value;
+                NotifyOfPropertyChange(() => Species);
             }
         }
+
+        private string _breed;
         public string Breed
         {
             get
             {
-                if (SelectedAnimal != null)
-                    return SelectedAnimal.Breed;
-                else
-                    return null;
+                return _breed;
+            }
+            set
+            {
+                _breed = value;
+                NotifyOfPropertyChange(() => Breed);
             }
         }
 
+        private DateTime? _birthDate;
         public DateTime? BirthDate
         {
             get
             {
-                if (SelectedAnimal != null)
-                    return SelectedAnimal.BirthDate;
-                else
-                    return null;
+                return _birthDate;
+            }
+            set
+            {
+                _birthDate = value;
+                NotifyOfPropertyChange(() => BirthDate);
             }
         }
+
+        private string _coatType;
         public string CoatType
         {
             get
             {
-                if (SelectedAnimal != null)
-                    return SelectedAnimal.CoatType;
-                else
-                    return null;
+                return _coatType;
+            }
+            set
+            {
+                _coatType = value;
+                NotifyOfPropertyChange(() => CoatType);
             }
         }
+
+        private string _furColor;
         public string FurColor
         {
             get
             {
-                if (SelectedAnimal != null)
-                    return SelectedAnimal.FurColor;
-                else
-                    return null;
+                return _furColor;
+            }
+            set
+            {
+                _furColor = value;
+                NotifyOfPropertyChange(() => FurColor);
             }
         }
+
 
         #endregion
 
         #region Binded Owner Properties
 
+        private string _fullName;
         public string FullName
         {
             get
             {
-                if (SelectedOwner != null)
-                    return SelectedOwner.TitledFullName;
-                else
-                    return null;
+                return _fullName;
+            }
+            set
+            {
+                _fullName = value;
+                NotifyOfPropertyChange(() => FullName);
             }
         }
+
+        private string _phone;
         public string Phone
         {
             get
             {
-                if (SelectedOwner != null)
-                    return SelectedOwner.Phone;
-                else
-                    return null;
+                return _phone;
+            }
+            set
+            {
+                _phone = value;
+                NotifyOfPropertyChange(() => Phone);
             }
         }
 
+        private string _mail;
         public string Mail
         {
             get
             {
-                if (SelectedOwner != null)
-                    return SelectedOwner.Mail;
-                else
-                    return null;
+                return _mail;
+            }
+            set
+            {
+                _mail = value;
+                NotifyOfPropertyChange(() => Mail);
             }
         }
 
+        private string _city;
         public string City
         {
             get
             {
-                if (SelectedOwner != null)
-                    return SelectedOwner.AdressCity;
-                else
-                    return null;
+                return _city;
+            }
+            set
+            {
+                _city = value;
+                NotifyOfPropertyChange(() => City);
             }
         }
 
+        private string _street;
         public string Street
         {
             get
             {
-                if (SelectedOwner != null)
-                    return SelectedOwner.AdressStreet;
-                else
-                    return null;
+                return _street;
             }
-
+            set
+            {
+                _street = value;
+                NotifyOfPropertyChange(() => Street);
+            }
         }
+
+        private string _zip;
         public string Zip
         {
             get
             {
-                if (SelectedOwner != null)
-                    return SelectedOwner.AdressZip;
-                else
-                    return null;
+                return _zip;
+            }
+            set
+            {
+                _zip = value;
+                NotifyOfPropertyChange(() => Zip);
             }
         }
 
@@ -356,7 +406,7 @@ namespace ShelterEvidency.ViewModels
                 Owner.GetPerson(SelectedOwner.ID);
                 Adoption.PersonID = SelectedOwner.ID;
 
-                Animal.GetAnimal((int)SelectedAnimal.ID);
+                Animal.GetAnimal(SelectedAnimal.ID);
                 Adoption.AnimalID = SelectedAnimal.ID;
 
                 Animal.Adopt(SelectedOwner.ID);

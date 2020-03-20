@@ -41,19 +41,43 @@ namespace ShelterEvidency.Models
             }
         }
 
-        public static List<Donations> GetDonations()
+        public static BindableCollection<DonationInfo> GetDonations()
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                return db.Donations.ToList();
+                var results = (from donation in db.Donations
+                               select new DonationInfo
+                               {
+                                   ID = donation.ID,
+                                   Date = donation.Date,
+                                   DonatorID = donation.DonatorID,
+                                   DonatorName = donation.People.FirstName + " " + donation.People.LastName,
+                                   Amount = donation.Amount,
+                                   DonationName = donation.DonationName,
+                                   Description = donation.Description
+                               });
+                return new BindableCollection<DonationInfo>(results);
             }
         }
 
-        public static List<Donations> GetDatedDonations(DateTime? since, DateTime? to)
+        public static BindableCollection<DonationInfo> GetDatedDonations(DateTime? since, DateTime? to)
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                return db.Donations.Where(x => x.Date >= since && x.Date <= to).ToList();
+                //return db.Donations.Where(x => x.Date >= since && x.Date <= to).ToList();
+
+                var results = (from donation in db.Donations
+                               where (donation.Date >= since && donation.Date <= to)
+                               select new DonationInfo
+                               {
+                                   ID = donation.ID,
+                                   Date = donation.Date,
+                                   DonatorName = donation.People.FirstName + " " + donation.People.LastName,
+                                   Amount = donation.Amount,
+                                   DonationName = donation.DonationName,
+                                   Description = donation.Description
+                               });
+                return new BindableCollection<DonationInfo>(results);
             }
         }
 

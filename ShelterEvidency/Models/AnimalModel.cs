@@ -144,30 +144,27 @@ namespace ShelterEvidency.Models
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                var animal = db.Animals.FirstOrDefault(i => i.ID == animalID);
-                if (animal != null)
-                {
-                    AnimalInfo info = new AnimalInfo
-                    {
-                        ID = animal.ID,
-                        Name = animal.Name,
-                        ChipNumber = animal.ChipNumber,
-                        BirthDate = animal.Birth,
-                        Sex = animal.Sexes.SexName,
-                        Species = animal.Species.SpeciesName,
-                        Breed = animal.Breeds.BreedName,
-                        CoatType = animal.CoatTypes.CoatTypeName,
-                        FurColor = animal.FurColors.FurColorName,
-                        Castration = animal.Castration,
-                        InShelter = animal.InShelter,
-                        FolderPath = animal.FolderPath,
-                        ImagePath = animal.ImagePath
+                db.DeferredLoadingEnabled = false;
 
-                    };
-                    return info;
-                }
-                else
-                    return new AnimalInfo();
+                var result =
+                (from animal in db.Animals
+                 where (animal.ID.Equals(animalID))
+                     select new AnimalInfo
+                     {
+                         ID = animal.ID,
+                         Name = animal.Name,
+                         ChipNumber = animal.ChipNumber,
+                         BirthDate = animal.Birth,
+                         Sex = animal.Sexes.SexName,
+                         Species = animal.Species.SpeciesName,
+                         Breed = animal.Breeds.BreedName,
+                         CrossBreed = animal.Breeds1.BreedName,
+                         CoatType = animal.CoatTypes.CoatTypeName,
+                         FurColor = animal.FurColors.FurColorName,
+                         Castration = animal.Castration,
+
+                     });
+                    return result.First();
             }
         }
 

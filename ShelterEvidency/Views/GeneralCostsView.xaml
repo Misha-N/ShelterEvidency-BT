@@ -4,11 +4,161 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShelterEvidency.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              Background="{DynamicResource MaterialDesignPaper}"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        FontFamily="{DynamicResource MaterialDesignFont}"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="1200">
+
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="1" Grid.RowSpan="2" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="90"/>
+                </Grid.ColumnDefinitions>
+
+                <DatePicker Margin="5" materialDesign:HintAssist.Hint="Od data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=Since, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+                <DatePicker Grid.Column="1" Margin="5" materialDesign:HintAssist.Hint="Do data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=To, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+
+
+                <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Grid.Column="2"
+                x:Name="Filter" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,2,2" >
+                    <materialDesign:PackIcon
+                Kind="Update"
+                Height="30"
+                Width="30" />
+                </Button>
+
+            </Grid>
+
+
+
+            <DataGrid Grid.Row="1" Margin="5" ColumnWidth="*" AutoGenerateColumns="False" VerticalContentAlignment="Center" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" IsReadOnly="True" SelectedValuePath="Id" ItemsSource="{Binding Path=AnimalCosts, Mode=OneWay}" SelectedValue="{Binding Path=SelectedCost, Mode=OneWayToSource}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID nákladu" MaxWidth="90" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Header="Název" MinWidth="200" Binding="{Binding CostName}"/>
+                    <DataGridTextColumn Header="Datum" Binding="{Binding Date}"/>
+                    <DataGridTextColumn Header="ID zvířete" MaxWidth="90" Binding="{Binding AnimalID}"/>
+                    <DataGridTextColumn Header="Cena" Binding="{Binding Price}"/>
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+        </Grid>
+
+        <materialDesign:Card Margin="10"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth1">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="15,10,0,0">
+
+                    <materialDesign:PackIcon Kind="FileDocumentEditOutline" VerticalAlignment="Center" HorizontalAlignment="Center" Width="50" Height="50" Opacity="0.3" Margin="0" />
+
+
+                    <TextBlock VerticalAlignment="Center"  Grid.ColumnSpan="2" HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignHeadline5TextBlock}" Margin="15,0,0,0">
+                      Upravit vybraný náklad
+                    </TextBlock>
+
+                </StackPanel>
+
+
+                <Grid Grid.Row="1" Margin="15,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="1.6*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="CostName" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Název" Grid.Row="0" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=CostName, Mode=TwoWay}"/>
+
+                    <TextBox x:Name="Price" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Částka" Grid.Row="1" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Price, Mode=TwoWay}"/>
+
+                    <DatePicker Grid.Row="2" Margin="5" materialDesign:HintAssist.Hint="Datum" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=Date, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+
+
+                    <TextBox x:Name="Description" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Popis" Grid.Row="3" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="50" Text="{Binding Path=Description, Mode=TwoWay}"/>
+
+                    <Button x:Name="UpdateCost" Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="100"  Grid.Row="4" Content="Upravit"/>
+                </Grid>
+
+            </Grid>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="1" Margin="10"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth1">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="15,10,0,0">
+
+                    <materialDesign:PackIcon Kind="FileDocumentBoxPlusOutline" VerticalAlignment="Center" HorizontalAlignment="Center" Width="50" Height="50" Opacity="0.3" Margin="0" />
+
+
+                    <TextBlock VerticalAlignment="Center"  Grid.ColumnSpan="2" HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignHeadline5TextBlock}" Margin="15,0,0,0">
+                      Vytvořit nový náklad
+                    </TextBlock>
+
+                </StackPanel>
+
+                <Grid Grid.Row="1" Margin="15,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="1.6*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="NewCostName" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Název" Grid.Row="0" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=NewCostName, Mode=TwoWay}"/>
+
+                    <TextBox x:Name="NewPrice" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Částka" Grid.Row="1" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=NewPrice, Mode=TwoWay}"/>
+
+                    <DatePicker Grid.Row="2" Margin="5" materialDesign:HintAssist.Hint="Datum" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=NewDate, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+
+
+                    <TextBox x:Name="NewDescription" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Popis" Grid.Row="3" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="50" Text="{Binding Path=NewDescription, Mode=TwoWay}"/>
+
+                    <Button x:Name="CreateNewCost" Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="100"  Grid.Row="4" Content="Vytvořit"/>
+                </Grid>
+
+            </Grid>
+
+        </materialDesign:Card>
+
+
+
+    </Grid>
+    
+    <!--
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -66,4 +216,5 @@
         </StackPanel>
 
     </Grid>
+    -->
 </UserControl>

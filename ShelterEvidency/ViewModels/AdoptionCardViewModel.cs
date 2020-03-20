@@ -42,6 +42,8 @@ namespace ShelterEvidency.ViewModels
             {
                 Animal = AnimalModel.GetAnimalInfo(Adoption.AnimalID);
                 Person = PersonModel.GetPersonInfo(Adoption.PersonID);
+                SetAnimal();
+                SetOwner();
             });
             IsWorking = false;
         }
@@ -61,133 +63,249 @@ namespace ShelterEvidency.ViewModels
             }
         }
 
+        private void SetOwner()
+        {
+                FullName = Person.TitledFullName;
+                Phone = Person.Phone;
+                Mail = Person.Mail;
+                City = Person.AdressCity;
+                Street = Person.AdressStreet;
+                Zip = Person.AdressZip;
+        }
+
+        private void SetAnimal()
+        {
+
+                ID = Animal.ID;
+                AnimalName = Animal.Name;
+                ChipNumber = Animal.ChipNumber;
+                Species = Animal.Species;
+                Sex = Animal.Sex;
+                Breed = Animal.Breed;
+                BirthDate = Animal.BirthDate;
+                CoatType = Animal.CoatType;
+                FurColor = Animal.FurColor;
+
+
+        }
+
+
         #endregion
 
         #region Binded Animal Properties
 
+        private int? _ID;
         public int? ID
         {
             get
             {
-                    return Animal.ID;
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+                NotifyOfPropertyChange(() => ID);
             }
         }
 
+        private string _animalName;
         public string AnimalName
         {
             get
             {
-                    return Animal.Name;
+                return _animalName;
             }
-
+            set
+            {
+                _animalName = value;
+                NotifyOfPropertyChange(() => AnimalName);
+            }
         }
+
+        private string _chipNumber;
         public string ChipNumber
         {
             get
             {
-                    return Animal.ChipNumber;
+                return _chipNumber;
             }
-
+            set
+            {
+                _chipNumber = value;
+                NotifyOfPropertyChange(() => ChipNumber);
+            }
         }
+
+        private string _sex;
         public string Sex
         {
             get
             {
-                    return Animal.Sex;
+                return _sex;
             }
-
+            set
+            {
+                _sex = value;
+                NotifyOfPropertyChange(() => Sex);
+            }
         }
+
+        private string _species;
         public string Species
         {
             get
             {
-                    return Animal.Species;
+                return _species;
+            }
+            set
+            {
+                _species = value;
+                NotifyOfPropertyChange(() => Species);
             }
         }
+
+        private string _breed;
         public string Breed
         {
             get
             {
-                    return Animal.Breed;
+                return _breed;
             }
-
+            set
+            {
+                _breed = value;
+                NotifyOfPropertyChange(() => Breed);
+            }
         }
 
+        private DateTime? _birthDate;
         public DateTime? BirthDate
         {
             get
             {
-                    return Animal.BirthDate;
+                return _birthDate;
             }
-
+            set
+            {
+                _birthDate = value;
+                NotifyOfPropertyChange(() => BirthDate);
+            }
         }
+
+        private string _coatType;
         public string CoatType
         {
             get
             {
-                    return Animal.CoatType;
+                return _coatType;
             }
-
+            set
+            {
+                _coatType = value;
+                NotifyOfPropertyChange(() => CoatType);
+            }
         }
+
+        private string _furColor;
         public string FurColor
         {
             get
             {
-                    return Animal.FurColor;
+                return _furColor;
             }
-
+            set
+            {
+                _furColor = value;
+                NotifyOfPropertyChange(() => FurColor);
+            }
         }
+
 
         #endregion
 
         #region Binded Owner Properties
 
+        private string _fullName;
         public string FullName
         {
             get
             {
-                    return Person.TitledFullName;
+                return _fullName;
             }
-
+            set
+            {
+                _fullName = value;
+                NotifyOfPropertyChange(() => FullName);
+            }
         }
+
+        private string _phone;
         public string Phone
         {
             get
             {
-                    return Person.Phone;
+                return _phone;
             }
-
+            set
+            {
+                _phone = value;
+                NotifyOfPropertyChange(() => Phone);
+            }
         }
 
+        private string _mail;
         public string Mail
         {
             get
             {
-                    return Person.Mail;
+                return _mail;
             }
-
+            set
+            {
+                _mail = value;
+                NotifyOfPropertyChange(() => Mail);
+            }
         }
 
+        private string _city;
         public string City
         {
             get
             {
-                    return Person.AdressCity;
+                return _city;
+            }
+            set
+            {
+                _city = value;
+                NotifyOfPropertyChange(() => City);
             }
         }
 
+        private string _street;
         public string Street
         {
             get
             {
-                    return Person.AdressStreet;
+                return _street;
+            }
+            set
+            {
+                _street = value;
+                NotifyOfPropertyChange(() => Street);
             }
         }
+
+        private string _zip;
         public string Zip
         {
             get
             {
-                    return Person.AdressZip;
+                return _zip;
+            }
+            set
+            {
+                _zip = value;
+                NotifyOfPropertyChange(() => Zip);
             }
         }
 

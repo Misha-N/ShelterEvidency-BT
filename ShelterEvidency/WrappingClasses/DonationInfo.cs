@@ -12,6 +12,7 @@ namespace ShelterEvidency.WrappingClasses
         public int? Amount { get; set; }
         public DateTime? Date { get; set; }
         public string DonatorName { get; set; }
+        public int? DonatorID { get; set; }
         public string Description { get; set; }
         public string DonationName { get; set; }
 

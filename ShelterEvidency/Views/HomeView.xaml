@@ -148,7 +148,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <materialDesign:PackIcon Kind="Home" Height="25" Width="25" Margin="0,10,10,10"/>
+                                <materialDesign:PackIcon Kind="ViewDashboardOutline" Height="25" Width="25" Margin="0,10,10,10"/>
                                 <TextBlock Grid.Column="1" Text="Úvodní obrazovka" VerticalAlignment="Center" Margin="20 10"/>
                             </Grid>
                         </Button>
@@ -178,7 +178,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <materialDesign:PackIcon Kind="PersonAdd" Height="25" Width="25" Margin="0,10,10,10"/>
+                                <materialDesign:PackIcon Kind="Person" Height="25" Width="25" Margin="0,10,10,10"/>
                                 <TextBlock Text="Správa osob" Grid.Column="1" VerticalAlignment="Center"  Margin="20 10"/>
                             </Grid>
                         </Button>
@@ -198,7 +198,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <materialDesign:PackIcon Kind="Finance" Height="25" Width="25" Margin="0,10,10,10"/>
+                                <materialDesign:PackIcon Kind="CashMultiple" Height="25" Width="25" Margin="0,10,10,10"/>
                                 <TextBlock Text="Finance a příspěvky" Grid.Column="1" VerticalAlignment="Center"  Margin="20 10"/>
                             </Grid>
                         </Button>
@@ -209,7 +209,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <materialDesign:PackIcon Kind="InfoCircle" Height="25" Width="25" Margin="0,10,10,10"/>
+                                <materialDesign:PackIcon Kind="InfoCircleOutline" Height="25" Width="25" Margin="0,10,10,10"/>
                                 <TextBlock Grid.Column="1" Text="Statistiky" VerticalAlignment="Center"  Margin="20 10"/>
                             </Grid>
                         </Button>

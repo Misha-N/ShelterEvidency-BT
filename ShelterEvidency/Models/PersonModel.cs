@@ -248,7 +248,7 @@ namespace ShelterEvidency.Models
             }
         }
 
-        public static List<PersonInfo> ReturnDonators()
+        public static BindableCollection<PersonInfo> ReturnDonators()
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
@@ -271,12 +271,12 @@ namespace ShelterEvidency.Models
                                    IsWalker = person.IsWalker,
                                    IsSponsor = person.IsSponsor,
                                    IsVolunteer = person.IsVolunteer
-                               }).ToList();
-                return results;
+                               });
+                return new BindableCollection<PersonInfo>(results);
             }
         }
 
-        public static List<PersonInfo> ReturnWalkers()
+        public static BindableCollection<PersonInfo> ReturnWalkers()
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
@@ -299,8 +299,8 @@ namespace ShelterEvidency.Models
                                    IsWalker = person.IsWalker,
                                    IsSponsor = person.IsSponsor,
                                    IsVolunteer = person.IsVolunteer
-                               }).ToList();
-                return results;
+                               });
+                return new BindableCollection<PersonInfo>(results);
             }
         }
 

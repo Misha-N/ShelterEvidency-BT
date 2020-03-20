@@ -1,15 +1,18 @@
 ﻿using Caliburn.Micro;
 using ShelterEvidency.Models;
+using ShelterEvidency.WrappingClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.ViewModels
 {
     class DonationsViewModel: Screen
     {
+        #region Initialize
         public DonationModel Donation { get; set; }
         public DonationModel NewDonation { get; set; }
         public DonationsViewModel()
@@ -17,20 +20,118 @@ namespace ShelterEvidency.ViewModels
             Donation = new DonationModel();
             NewDonation = new DonationModel();
         }
-        public virtual List<Database.Donations> Donations
+
+        protected override void OnViewReady(object view)
+        {
+            base.OnViewReady(view);
+            Task.Run(() => LoadData());
+        }
+
+
+        private async Task LoadData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
+            {
+                Donations = DonationModel.GetDonations();
+                DonatorList = PersonModel.ReturnDonators();
+                NewDonatorList = PersonModel.ReturnDonators();
+            });
+            IsWorking = false;
+        }
+
+        private volatile bool _isWorking;
+        public bool IsWorking
         {
             get
             {
-                if (Since != null && To != null)
-                    return DonationModel.GetDatedDonations(Since, To);
-                else
-                    return DonationModel.GetDonations();
+                return _isWorking;
+            }
+            set
+            {
+                _isWorking = value;
+                NotifyOfPropertyChange(() => IsWorking);
             }
         }
 
+        #endregion
+
+        private BindableCollection<DonationInfo> _donations;
+        public BindableCollection<DonationInfo> Donations
+        {
+            get
+            {
+                return _donations;
+            }
+            set
+            {
+                _donations = value;
+                NotifyOfPropertyChange(() => Donations);
+            }
+        }
+
+
+        private BindableCollection<PersonInfo> _donatorList;
+        public BindableCollection<PersonInfo> DonatorList
+        {
+            get
+            {
+                return _donatorList;
+            }
+            set
+            {
+                _donatorList = value;
+                NotifyOfPropertyChange(() => DonatorList);
+            }
+        }
+
+        private BindableCollection<PersonInfo> _newdonatorList;
+        public BindableCollection<PersonInfo> NewDonatorList
+        {
+            get
+            {
+                return _newdonatorList;
+            }
+            set
+            {
+                _newdonatorList = value;
+                NotifyOfPropertyChange(() => NewDonatorList);
+            }
+        }
+
+
+
         public void Filter()
         {
-            NotifyOfPropertyChange(() => Donations);
+            if (Since == null || To == null)
+                Task.Run(() => GetData());
+            else
+                Task.Run(() => FilterData());
+
+
+        }
+
+        private async Task FilterData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
+            {
+                Donations = DonationModel.GetDatedDonations(Since, To);
+            });
+            IsWorking = false;
+        }
+
+        private async Task GetData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
+            {
+                Donations = DonationModel.GetDonations();
+            });
+            IsWorking = false;
         }
 
         private DateTime? _since;
@@ -61,14 +162,6 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => To);
             }
 
-        }
-
-        public List<PersonInfo> DonatorList
-        {
-            get
-            {
-                return PersonModel.ReturnDonators();
-            }
         }
 
         #region Selected donation bindings
@@ -137,21 +230,35 @@ namespace ShelterEvidency.ViewModels
             }
         }
         #endregion
-        public int? SelectedDonation
+
+        private DonationInfo _selectedDonation;
+
+        public DonationInfo SelectedDonation
         {
             get
             {
-                return Donation.ID;
+                return _selectedDonation;
             }
             set
             {
-                Donation.GetDonation(value);
-                Selection();
+                _selectedDonation = value;
+                NotifyOfPropertyChange(() => SelectedDonation);
+                Task.Run(() => Selection());
             }
         }
 
-        private void Selection()
+        private async Task Selection()
         {
+            if(SelectedDonation != null)
+            {
+                IsWorking = true;
+                await Task.Delay(150);
+                await Task.Run(() =>
+                {
+                    Donation.GetDonation(SelectedDonation.ID);
+                });
+                IsWorking = false;
+            }
             NotifyOfPropertyChange(() => DonationName);
             NotifyOfPropertyChange(() => Description);
             NotifyOfPropertyChange(() => Donator);
@@ -162,10 +269,11 @@ namespace ShelterEvidency.ViewModels
 
         public void UpdateDonation()
         {
-            if (SelectedDonation != null)
+            if (Donation != null)
             {
                 Donation.UpdateDonation();
-                NotifyOfPropertyChange(() => Donations);
+                MessageBox.Show("Upraveno.");
+                Filter();
             }
         }
 
@@ -237,15 +345,23 @@ namespace ShelterEvidency.ViewModels
 
         #endregion
 
+        #region Methods
+
         public void CreateNewDonation()
         {
             if (NewDonationName != null)
             {
+                IsWorking = true;
                 NewDonation.DonatorID = NewDonator;
                 NewDonation.SaveDonation();
+                Task.Run(() => GetData());
+                ClearNewDonation();
+                IsWorking = false;
+                MessageBox.Show("Záznam vytvořen.");
             }
-            NotifyOfPropertyChange(() => Donations);
-            ClearNewDonation();
+            else
+                MessageBox.Show("Vyplňte prosím název.");
+
         }
 
         public void ClearNewDonation()
@@ -258,6 +374,7 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => NewDate);
             NotifyOfPropertyChange(() => NewAmount);
         }
+        #endregion
     }
 
 }

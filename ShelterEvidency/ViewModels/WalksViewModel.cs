@@ -40,7 +40,7 @@ namespace ShelterEvidency.ViewModels
                 return WalkModel.GetAnimalWalks(AnimalID);
             }
         }
-        public List<PersonInfo> WalkerList
+        public BindableCollection<PersonInfo> WalkerList
         {
             get
             {
