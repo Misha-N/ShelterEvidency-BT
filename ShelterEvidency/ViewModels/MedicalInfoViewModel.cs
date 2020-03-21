@@ -1,15 +1,19 @@
 ﻿using Caliburn.Micro;
 using ShelterEvidency.Models;
+using ShelterEvidency.WrappingClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.ViewModels
 {
     public class MedicalInfoViewModel: Screen
     {
+        #region Initialization
+
         private int _animalID;
         public int AnimalID
         {
@@ -37,20 +41,90 @@ namespace ShelterEvidency.ViewModels
             MedicalCost = new CostModel();
             NewMedicalCost = new CostModel();
         }
-        public List<Database.MedicalRecords> AnimalMedicalRecords
+
+        protected override void OnViewReady(object view)
+        {
+            base.OnViewReady(view);
+            Task.Run(() => LoadData());
+        }
+
+
+        private async Task LoadData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
+            {
+                AnimalMedicalRecords = MedicalRecordModel.GetAnimalMedicalRecords(AnimalID);
+                VetList = PersonModel.ReturnVets();
+                NewVetList = PersonModel.ReturnVets();
+            });
+            IsWorking = false;
+        }
+
+        private volatile bool _isWorking;
+        public bool IsWorking
         {
             get
             {
-                return MedicalRecordModel.GetAnimalMedicalRecords(AnimalID);
+                return _isWorking;
+            }
+            set
+            {
+                _isWorking = value;
+                NotifyOfPropertyChange(() => IsWorking);
             }
         }
+
+        #endregion
+
+        #region Lists 
+
+
+        private BindableCollection<MedicalRecordInfo> _animalMedicalRecords;
+        public BindableCollection<MedicalRecordInfo> AnimalMedicalRecords
+        {
+            get
+            {
+                return _animalMedicalRecords;
+            }
+            set
+            {
+                _animalMedicalRecords = value;
+                NotifyOfPropertyChange(() => AnimalMedicalRecords);
+            }
+        }
+
+
+        private BindableCollection<PersonInfo> _vetList;
         public BindableCollection<PersonInfo> VetList
         {
             get
             {
-                return PersonModel.ReturnVets();
+                return _vetList;
+            }
+            set
+            {
+                _vetList = value;
+                NotifyOfPropertyChange(() => VetList);
             }
         }
+
+        private BindableCollection<PersonInfo> _newvetList;
+        public BindableCollection<PersonInfo> NewVetList
+        {
+            get
+            {
+                return _newvetList;
+            }
+            set
+            {
+                _newvetList = value;
+                NotifyOfPropertyChange(() => NewVetList);
+            }
+        }
+
+        #endregion
 
         #region Selected medical record bindings
         public string RecordName
@@ -117,22 +191,36 @@ namespace ShelterEvidency.ViewModels
             }
         }
         #endregion
-        public int? SelectedMedicalRecord
+
+        private MedicalRecordInfo _selectedMedicalRecord;
+
+        public MedicalRecordInfo SelectedMedicalRecord
         {
             get
             {
-                return MedicalRecord.ID;
+                return _selectedMedicalRecord;
             }
             set
             {
-                MedicalRecord.GetMedicalRecord(value);
-                MedicalCost.GetCost(MedicalRecord.CostID);
-                Selection();
+                _selectedMedicalRecord = value;
+                NotifyOfPropertyChange(() => SelectedMedicalRecord);
+                Task.Run(() => Selection());
             }
         }
 
-        private void Selection()
+        private async Task Selection()
         {
+            if (SelectedMedicalRecord != null)
+            {
+                IsWorking = true;
+                await Task.Delay(150);
+                await Task.Run(() =>
+                {
+                    MedicalRecord.GetMedicalRecord(SelectedMedicalRecord.ID);
+                    MedicalCost.GetCost(MedicalRecord.CostID);
+                });
+                IsWorking = false;
+            }
             NotifyOfPropertyChange(() => RecordName);
             NotifyOfPropertyChange(() => Description);
             NotifyOfPropertyChange(() => Vet);
@@ -142,11 +230,13 @@ namespace ShelterEvidency.ViewModels
 
         public void UpdateMedicalRecord()
         {
-            if (SelectedMedicalRecord != null)
+            if (MedicalRecord != null)
             {
+                IsWorking = true;
                 MedicalRecord.UpdateMedicalRecord();
                 MedicalCost.UpdateCost();
-                NotifyOfPropertyChange(() => AnimalMedicalRecords);
+                Filter();
+                MessageBox.Show("Upraveno.");
             }
         }
 
@@ -216,20 +306,93 @@ namespace ShelterEvidency.ViewModels
         }
         #endregion
 
-        
+        #region Methods
+
+
+        public void Filter()
+        {
+            if (Since == null || To == null)
+                Task.Run(() => GetData());
+            else
+                Task.Run(() => FilterData());
+
+
+        }
+
+        private async Task FilterData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
+            {
+                AnimalMedicalRecords = MedicalRecordModel.GetDatedMedicalRecords(AnimalID, Since, To);
+            });
+            IsWorking = false;
+        }
+
+        private async Task GetData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
+            {
+                AnimalMedicalRecords = MedicalRecordModel.GetAnimalMedicalRecords(AnimalID);
+            });
+            IsWorking = false;
+        }
+
+        private DateTime? _since;
+        public DateTime? Since
+        {
+            get
+            {
+                return _since;
+            }
+            set
+            {
+                _since = value;
+                NotifyOfPropertyChange(() => Since);
+            }
+
+        }
+
+        private DateTime? _to;
+        public DateTime? To
+        {
+            get
+            {
+                return _to;
+            }
+            set
+            {
+                _to = value;
+                NotifyOfPropertyChange(() => To);
+            }
+
+        }
+
         public void CreateNewMedicalRecord()
         {
             if (NewRecordName != null)
             {
+                IsWorking = true;
                 NewMedicalCost.AnimalID = AnimalID;
                 NewMedicalCost.SaveCost();
                 NewMedicalRecord.CostID = NewMedicalCost.ID;
                 NewMedicalRecord.AnimalID = AnimalID;
                 NewMedicalRecord.SaveMedicalRecord();
+                Filter();
+                IsWorking = false;
+                ClearNewMedicalRecord();
+                MessageBox.Show("Záznam vytvořen.");
             }
-            NotifyOfPropertyChange(() => AnimalMedicalRecords);
-            ClearNewMedicalRecord();
+            else
+                MessageBox.Show("Vyplňte prosím název.");
         }
+
+
+
+
 
         public void ClearNewMedicalRecord()
         {
@@ -244,6 +407,8 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => NewPrice);
             
         }
+
+        #endregion
 
     }
 }

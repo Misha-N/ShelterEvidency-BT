@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace ShelterEvidency.WrappingClasses
 {
-    public class WalkInfo
+    public class CostInfo
     {
         public int ID { get; set; }
+        public int? Price { get; set; }
         public DateTime? Date { get; set; }
-        public string Note { get; set; }
+        public string CostName { get; set; }
+        public int? AnimalID { get; set; }
         public string AnimalName { get; set; }
-        public int? PersonID { get; set; }
-        public string PersonName { get; set; }
+        public string Description { get; set; }
+
     }
 }

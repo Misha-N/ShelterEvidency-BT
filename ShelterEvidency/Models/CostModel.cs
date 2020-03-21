@@ -1,4 +1,6 @@
-﻿using ShelterEvidency.Database;
+﻿using Caliburn.Micro;
+using ShelterEvidency.Database;
+using ShelterEvidency.WrappingClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,30 +40,90 @@ namespace ShelterEvidency.Models
             }
         }
 
-        public static List<Costs> GetAnimalCosts(int? animalID)
+        public static BindableCollection<CostInfo> GetAnimalCosts(int? animalID)
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                return db.Costs.Where(x => x.AnimalID.Equals(animalID)).ToList();
+                var results = (from cost in db.Costs
+                               where (cost.AnimalID.Equals(animalID))
+                               select new CostInfo
+                               {
+                                   ID = cost.Id,
+                                   CostName = cost.CostName,
+                                   Date = cost.Date,
+                                   AnimalName = cost.Animals.Name,
+                                   Price = cost.Price,
+                                   AnimalID = cost.AnimalID,
+                                   Description = cost.Description
+                               });
+                return new BindableCollection<CostInfo>(results);
+
+            }
+        }
+
+        public static BindableCollection<CostInfo> GetDatedCosts(DateTime? since, DateTime? to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+
+                var results = (from cost in db.Costs
+                               where (cost.Date >= since && cost.Date <= to)
+                               select new CostInfo
+                               {
+                                   ID = cost.Id,
+                                   CostName = cost.CostName,
+                                   Date = cost.Date,
+                                   AnimalName = cost.Animals.Name,
+                                   Price = cost.Price,
+                                   AnimalID = cost.AnimalID,
+                                   Description = cost.Description
+                               });
+                return new BindableCollection<CostInfo>(results);
+            }
+        }
+
+        public static BindableCollection<CostInfo> GetDatedAnimalCosts(int? animalID, DateTime? since, DateTime? to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+
+                var results = (from cost in db.Costs
+                               where (cost.Date >= since && cost.Date <= to) && (cost.AnimalID.Equals(animalID))
+                               select new CostInfo
+                               {
+                                   ID = cost.Id,
+                                   CostName = cost.CostName,
+                                   Date = cost.Date,
+                                   AnimalName = cost.Animals.Name,
+                                   Price = cost.Price,
+                                   AnimalID = cost.AnimalID,
+                                   Description = cost.Description
+                               });
+                return new BindableCollection<CostInfo>(results);
             }
         }
 
 
-        public static List<Costs> GetAllCosts()
+        public static BindableCollection<CostInfo> GetAllCosts()
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                return db.Costs.ToList();
+                var results = (from cost in db.Costs
+                               select new CostInfo
+                               {
+                                   ID = cost.Id,
+                                   CostName = cost.CostName,
+                                   Date = cost.Date,
+                                   AnimalName = cost.Animals.Name,
+                                   Price = cost.Price,
+                                   AnimalID = cost.AnimalID,
+                                   Description = cost.Description
+                               });
+                return new BindableCollection<CostInfo>(results);
+
             }
         }
 
-        public static List<Costs> GetDatedCosts(DateTime? since, DateTime? to)
-        {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
-            {
-                return db.Costs.Where(x => x.Date >= since && x.Date <= to).ToList();
-            }
-        }
 
         public void GetCost(int? costID)
         {

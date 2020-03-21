@@ -20,7 +20,7 @@
 
     </UserControl.Resources>
 
-    <Grid Margin="5">
+    <Grid Margin="5" IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>

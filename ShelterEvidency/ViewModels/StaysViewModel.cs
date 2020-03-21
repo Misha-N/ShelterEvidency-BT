@@ -1,16 +1,20 @@
 ﻿using Caliburn.Micro;
 using ShelterEvidency.Database;
 using ShelterEvidency.Models;
+using ShelterEvidency.WrappingClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.ViewModels
 {
     public class StaysViewModel: Screen
     {
+        #region Initialization
+
         private int _animalID;
         public int AnimalID
         {
@@ -33,11 +37,53 @@ namespace ShelterEvidency.ViewModels
             Stay = new StayModel();
             NewStay = new StayModel();
         }
-        public List<Database.Stays> AnimalStays
+
+        protected override void OnViewReady(object view)
+        {
+            base.OnViewReady(view);
+            Task.Run(() => LoadData());
+        }
+
+
+        private async Task LoadData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
+            {
+                AnimalStays = StayModel.GetAnimalStays(AnimalID);
+
+            });
+            IsWorking = false;
+        }
+
+        private volatile bool _isWorking;
+        public bool IsWorking
         {
             get
             {
-                return StayModel.GetAnimalStays(AnimalID);
+                return _isWorking;
+            }
+            set
+            {
+                _isWorking = value;
+                NotifyOfPropertyChange(() => IsWorking);
+            }
+        }
+
+        #endregion
+
+        private BindableCollection<StayInfo> _animalStays;
+        public BindableCollection<StayInfo> AnimalStays
+        {
+            get
+            {
+                return _animalStays;
+            }
+            set
+            {
+                _animalStays = value;
+                NotifyOfPropertyChange(() => AnimalStays);
             }
         }
 
@@ -118,25 +164,38 @@ namespace ShelterEvidency.ViewModels
             }
         }
         #endregion
-        public int? SelectedStayID
+
+        private StayInfo _selectedstay;
+
+        public StayInfo SelectedStay
         {
             get
             {
-                return Stay.ID;
+                return _selectedstay;
             }
             set
             {
-                Stay.GetStay(value);
-                Selection();
+                _selectedstay = value;
+                NotifyOfPropertyChange(() => SelectedStay);
+                Task.Run(() => Selection());
             }
         }
 
-        private void Selection()
+        private async Task Selection()
         {
+            if (SelectedStay != null)
+            {
+                IsWorking = true;
+                await Task.Delay(150);
+                await Task.Run(() =>
+                {
+                    Stay.GetStay(SelectedStay.ID);
+                });
+                IsWorking = false;
+            }
             NotifyOfPropertyChange(() => Start);
             NotifyOfPropertyChange(() => Finish);
             NotifyOfPropertyChange(() => Note);
-            NotifyOfPropertyChange(() => SelectedStayID);
             NotifyOfPropertyChange(() => Adopted);
             NotifyOfPropertyChange(() => Escaped);
             NotifyOfPropertyChange(() => Died);
@@ -144,11 +203,64 @@ namespace ShelterEvidency.ViewModels
 
         public void UpdateStay()
         {
-            if (SelectedStayID != null)
+            if (Stay != null)
             {
+                IsWorking = true;
                 Stay.UpdateStay();
-                NotifyOfPropertyChange(() => AnimalStays);
+                Filter();
+                MessageBox.Show("Upraveno.");
             }
+        }
+
+        public void Filter()
+        {
+            if (Since == null || To == null)
+                Task.Run(() => LoadData());
+            else
+                Task.Run(() => FilterData());
+
+
+        }
+
+        private async Task FilterData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
+            {
+                AnimalStays = StayModel.GetDatedStays(Since, To);
+            });
+            IsWorking = false;
+        }
+
+        private DateTime? _since;
+        public DateTime? Since
+        {
+            get
+            {
+                return _since;
+            }
+            set
+            {
+                _since = value;
+                NotifyOfPropertyChange(() => Since);
+            }
+
+        }
+
+        private DateTime? _to;
+        public DateTime? To
+        {
+            get
+            {
+                return _to;
+            }
+            set
+            {
+                _to = value;
+                NotifyOfPropertyChange(() => To);
+            }
+
         }
 
         public void CreateNewStay()
@@ -157,9 +269,31 @@ namespace ShelterEvidency.ViewModels
             {
                 NewStay.AnimalID = AnimalID;
                 NewStay.SaveStay();
+                ClearNewStay();
+                Task.Run(() => LoadData());
+                IsWorking = false;
+                MessageBox.Show("Záznam vytvořen.");
             }
-            NotifyOfPropertyChange(() => AnimalStays);
+            else
+                MessageBox.Show("Vyplňte prosím datum.");
+
         }
+
+        public void ClearNewStay()
+        {
+            NewStay = new StayModel();
+            NotifyOfPropertyChange(() => NewStayDate);
+        }
+
+        public bool CanCreate()
+        {
+            if(NewStayDate != DateTime.MinValue)
+                return true;
+            else
+                return false;
+        }
+
+
         public DateTime? NewStayDate
         {
             get

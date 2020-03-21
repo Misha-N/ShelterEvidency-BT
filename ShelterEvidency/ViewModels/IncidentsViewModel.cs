@@ -1,15 +1,19 @@
 ﻿using Caliburn.Micro;
 using ShelterEvidency.Models;
+using ShelterEvidency.WrappingClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.ViewModels
 {
     class IncidentsViewModel: Screen
     {
+        #region Initialize
+
         private int _animalID;
         public int AnimalID
         {
@@ -33,11 +37,50 @@ namespace ShelterEvidency.ViewModels
             NewIncident = new IncidentModel();
         }
 
-        public List<Database.Incidents> AnimalIncidents
+        protected override void OnViewReady(object view)
+        {
+            base.OnViewReady(view);
+            Task.Run(() => LoadData());
+        }
+
+
+        private async Task LoadData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
+            {
+                AnimalIncidents = IncidentModel.GetAnimalIncidents(AnimalID);
+            });
+            IsWorking = false;
+        }
+
+        private volatile bool _isWorking;
+        public bool IsWorking
         {
             get
             {
-                return IncidentModel.GetAnimalIncidents(AnimalID);
+                return _isWorking;
+            }
+            set
+            {
+                _isWorking = value;
+                NotifyOfPropertyChange(() => IsWorking);
+            }
+        }
+        #endregion
+
+        private BindableCollection<IncidentInfo> _animalIncidents;
+        public BindableCollection<IncidentInfo> AnimalIncidents
+        {
+            get
+            {
+                return _animalIncidents;
+            }
+            set
+            {
+                _animalIncidents = value;
+                NotifyOfPropertyChange(() => AnimalIncidents);
             }
         }
 
@@ -80,23 +123,37 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => Description);
             }
         }
-       
+
         #endregion
-        public int? SelectedIncident
+
+        private IncidentInfo _selectedIncident;
+
+        public IncidentInfo SelectedIncident
         {
             get
             {
-                return Incident.ID;
+                return _selectedIncident;
             }
             set
             {
-                Incident.GetIncident(value);
-                Selection();
+                _selectedIncident = value;
+                NotifyOfPropertyChange(() => SelectedIncident);
+                Task.Run(() => Selection());
             }
         }
 
-        private void Selection()
+        private async Task Selection()
         {
+            if (SelectedIncident != null)
+            {
+                IsWorking = true;
+                await Task.Delay(150);
+                await Task.Run(() =>
+                {
+                    Incident.GetIncident(SelectedIncident.ID);
+                });
+                IsWorking = false;
+            }
             NotifyOfPropertyChange(() => Severity);
             NotifyOfPropertyChange(() => Description);
             NotifyOfPropertyChange(() => Date);
@@ -104,12 +161,65 @@ namespace ShelterEvidency.ViewModels
 
         public void UpdateIncident()
         {
-            if (SelectedIncident != null)
+            if (Incident != null)
             {
+                IsWorking = true;
                 Incident.UpdateIncident();
-                NotifyOfPropertyChange(() => AnimalIncidents);
+                Filter();
+                MessageBox.Show("Upraveno.");
             }
         }
+
+        public void Filter()
+        {
+            if (Since == null || To == null)
+                Task.Run(() => LoadData());
+            else
+                Task.Run(() => FilterData());
+
+        }
+
+        private async Task FilterData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
+            {
+                AnimalIncidents = IncidentModel.GetDatedAnimalIncidents(AnimalID, Since, To);
+            });
+            IsWorking = false;
+        }
+
+        private DateTime? _since;
+        public DateTime? Since
+        {
+            get
+            {
+                return _since;
+            }
+            set
+            {
+                _since = value;
+                NotifyOfPropertyChange(() => Since);
+            }
+
+        }
+
+        private DateTime? _to;
+        public DateTime? To
+        {
+            get
+            {
+                return _to;
+            }
+            set
+            {
+                _to = value;
+                NotifyOfPropertyChange(() => To);
+            }
+
+        }
+
 
         #region NewIncident binded properties
 
@@ -171,11 +281,16 @@ namespace ShelterEvidency.ViewModels
         {
             if (NewDate != null)
             {
+                IsWorking = true;
                 NewIncident.AnimalID = AnimalID;
                 NewIncident.SaveIncident();
+                Filter();
+                IsWorking = false;
+                ClearNewIncident();
+                MessageBox.Show("Záznam vytvořen.");
             }
-            NotifyOfPropertyChange(() => AnimalIncidents);
-            ClearNewIncident();
+            else
+                MessageBox.Show("Vyplňte prosím datum.");
         }
 
         public void ClearNewIncident()
@@ -184,6 +299,8 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => NewDescription);
             NotifyOfPropertyChange(() => NewDate);
             NotifyOfPropertyChange(() => NewSeverity);
+
         }
+
     }
 }

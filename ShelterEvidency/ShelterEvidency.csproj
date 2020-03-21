@@ -126,7 +126,10 @@
     <Compile Include="Models\StatisticModel.cs" />
     <Compile Include="Models\StayModel.cs" />
     <Compile Include="Models\WalkModel.cs" />
+    <Compile Include="WrappingClasses\CostInfo.cs" />
     <Compile Include="WrappingClasses\DonationInfo.cs" />
+    <Compile Include="WrappingClasses\IncidentInfo.cs" />
+    <Compile Include="WrappingClasses\MedicalRecordInfo.cs" />
     <Compile Include="WrappingClasses\PersonInfo.cs" />
     <Compile Include="ViewModels\AddAnimalViewModel.cs" />
     <Compile Include="ViewModels\AdoptionCardViewModel.cs" />
@@ -230,6 +233,7 @@
     <Compile Include="Views\WalksView.xaml.cs">
       <DependentUpon>WalksView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WrappingClasses\StayInfo.cs" />
     <Compile Include="WrappingClasses\WalkInfo.cs" />
     <Page Include="Views\AddAnimalView.xaml">
       <SubType>Designer</SubType>

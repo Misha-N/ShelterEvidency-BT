@@ -90,6 +90,18 @@ namespace ShelterEvidency.ViewModels
 
         #region Methods
 
+        public void Exit()
+        {
+            MessageBoxResult result = MessageBox.Show("Chcete aplikaci ukončit?",
+                                          "Confirmation",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                Application.Current.Shutdown();
+            }
+        }
+
         public void CreateDiaryRecord()
         {
             DateTime recordDate = DiaryModel.Date;

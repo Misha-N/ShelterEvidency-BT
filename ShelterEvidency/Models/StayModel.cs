@@ -1,4 +1,6 @@
-﻿using ShelterEvidency.Database;
+﻿using Caliburn.Micro;
+using ShelterEvidency.Database;
+using ShelterEvidency.WrappingClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,11 +60,26 @@ namespace ShelterEvidency.Models
             }
         }
 
-        public static List<Stays> GetAnimalStays(int animalID)
+        public static BindableCollection<StayInfo> GetAnimalStays(int animalID)
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                return db.Stays.Where(x => x.AnimalID.Equals(animalID)).ToList();
+                    var results = (from stay in db.Stays
+                                   where (stay.AnimalID.Equals(animalID))
+                                   select new StayInfo
+                                   {
+                                       ID = stay.Id,
+                                       StartDate = stay.StartDate,
+                                       FinishDate = stay.FinishDate,
+                                       AnimalID = stay.AnimalID,
+                                       AnimalName = stay.Animals.Name,
+                                       Note = stay.Note,
+                                       Adopted = stay.Adopted,
+                                       Escaped = stay.Escaped,
+                                       Died = stay.Died
+                                   });
+                    return new BindableCollection<StayInfo>(results);
+                
             }
         }
 
@@ -91,6 +108,29 @@ namespace ShelterEvidency.Models
                 stay.Died = Died;
 
                 db.SubmitChanges();
+            }
+        }
+
+        public static BindableCollection<StayInfo> GetDatedStays(DateTime? since, DateTime? to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+
+                var results = (from stay in db.Stays
+                               where (stay.StartDate >= since && stay.StartDate <= to)
+                               select new StayInfo
+                               {
+                                   ID = stay.Id,
+                                   StartDate = stay.StartDate,
+                                   FinishDate = stay.FinishDate,
+                                   AnimalID = stay.AnimalID,
+                                   AnimalName = stay.Animals.Name,
+                                   Note = stay.Note,
+                                   Adopted = stay.Adopted,
+                                   Escaped = stay.Escaped,
+                                   Died = stay.Died
+                               });
+                return new BindableCollection<StayInfo>(results);
             }
         }
 

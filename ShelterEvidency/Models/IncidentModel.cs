@@ -1,4 +1,6 @@
-﻿using ShelterEvidency.Database;
+﻿using Caliburn.Micro;
+using ShelterEvidency.Database;
+using ShelterEvidency.WrappingClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,11 +37,45 @@ namespace ShelterEvidency.Models
             }
         }
 
-        public static List<Incidents> GetAnimalIncidents(int animalID)
+        public static BindableCollection<IncidentInfo> GetAnimalIncidents(int animalID)
         {
+
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                return db.Incidents.Where(x => x.AnimalID.Equals(animalID)).ToList();
+                var results = (from incident in db.Incidents
+                               where (incident.AnimalID.Equals(animalID))
+                               select new IncidentInfo
+                               {
+                                   ID = incident.ID,
+                                   Date = incident.IncidentDate,
+                                   AnimalID = incident.AnimalID,
+                                   AnimalName = incident.Animals.Name,
+                                   Description = incident.Description,
+                                   Severity = incident.Severity,
+                               });
+                return new BindableCollection<IncidentInfo>(results);
+
+            }
+        }
+
+        public static BindableCollection<IncidentInfo> GetDatedAnimalIncidents(int animalID, DateTime? since, DateTime? to)
+        {
+
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var results = (from incident in db.Incidents
+                               where (incident.AnimalID.Equals(animalID) && (incident.IncidentDate >= since && incident.IncidentDate <= to))
+                               select new IncidentInfo
+                               {
+                                   ID = incident.ID,
+                                   Date = incident.IncidentDate,
+                                   AnimalID = incident.AnimalID,
+                                   AnimalName = incident.Animals.Name,
+                                   Description = incident.Description,
+                                   Severity = incident.Severity,
+                               });
+                return new BindableCollection<IncidentInfo>(results);
+
             }
         }
 

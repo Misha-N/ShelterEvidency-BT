@@ -86,19 +86,22 @@
 
             <materialDesign:ColorZone Mode="Accent" Grid.Row="0" Grid.ColumnSpan="2" Height="60" materialDesign:ShadowAssist.ShadowDepth="Depth2">
                 <Grid VerticalAlignment="Center" Height="60">
-                <Grid.Effect>
-                    <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FFACACAC"/>
-                </Grid.Effect>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="10">
-                        <StackPanel Width="150">
-                            <Button x:Name="LoadSettingsPage" Content="Nastavení"/>
-                            <Button Content="Nic"/>
-                            <Separator/>
-                            <Button x:Name="Exit"  Content="Logout"/>
-                        </StackPanel>
-                    </materialDesign:PopupBox>
-                </StackPanel>
+                    <Grid.Effect>
+                        <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FFACACAC"/>
+                    </Grid.Effect>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+
+                        <Button x:Name="Exit"
+                          Style="{StaticResource MaterialDesignIconForegroundButton}" Margin="0,0,15,0">
+                            <materialDesign:PackIcon
+                            Kind="PowerStandby"
+                            Height="24"
+                            Width="24" />
+                        </Button>
+
+
+
+                    </StackPanel>
             </Grid>
             </materialDesign:ColorZone>
 
@@ -209,10 +212,22 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <materialDesign:PackIcon Kind="InfoCircleOutline" Height="25" Width="25" Margin="0,10,10,10"/>
+                                <materialDesign:PackIcon Kind="Equalizer" Height="25" Width="25" Margin="0,10,10,10"/>
                                 <TextBlock Grid.Column="1" Text="Statistiky" VerticalAlignment="Center"  Margin="20 10"/>
                             </Grid>
                         </Button>
+
+                        <Button Height="60" x:Name="LoadSettingsPage"  Padding="14,4,16,4">
+                            <Grid Width="225">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <materialDesign:PackIcon Kind="Cogs" Height="25" Width="25" Margin="0,10,10,10"/>
+                                <TextBlock Grid.Column="1" Text="Nastavení" VerticalAlignment="Center"  Margin="20 10"/>
+                            </Grid>
+                        </Button>
+
                     </ListView>
 
                 </Grid>

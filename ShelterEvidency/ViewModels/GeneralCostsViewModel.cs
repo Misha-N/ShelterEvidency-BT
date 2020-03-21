@@ -11,53 +11,18 @@ namespace ShelterEvidency.ViewModels
     {
         public GeneralCostsViewModel(int? animalID): base(animalID)
         {
-
+           
         }
 
-        public override List<Database.Costs> AnimalCosts
+        public override async Task LoadData()
         {
-            get
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
             {
-                if(Since != null && To != null)
-                    return CostModel.GetDatedCosts(Since, To);
-                else
-                    return CostModel.GetAllCosts();
-            }
-        }
-
-        public void Filter()
-        {
-            NotifyOfPropertyChange(() => AnimalCosts);
-        }
-
-        private DateTime? _since;
-        public DateTime? Since
-        {
-            get
-            {
-                return _since;
-            }
-            set
-            {
-                _since = value;
-                NotifyOfPropertyChange(() => Since);
-            }
-
-        }
-
-        private DateTime? _to;
-        public DateTime? To
-        {
-            get
-            {
-                return _to;
-            }
-            set
-            {
-                _to = value;
-                NotifyOfPropertyChange(() => To);
-            }
-
+                AnimalCosts = CostModel.GetAllCosts();
+            });
+            IsWorking = false;
         }
 
     }

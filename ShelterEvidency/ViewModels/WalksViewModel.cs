@@ -1,15 +1,19 @@
 ﻿using Caliburn.Micro;
 using ShelterEvidency.Models;
+using ShelterEvidency.WrappingClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.ViewModels
 {
     class WalksViewModel: Screen
     {
+        #region Initialize
+
         private int _animalID;
         public int AnimalID
         {
@@ -33,18 +37,82 @@ namespace ShelterEvidency.ViewModels
             Walk = new WalkModel();
             NewWalk = new WalkModel();
         }
-        public List<Database.Walks> AnimalWalks
+
+        protected override void OnViewReady(object view)
+        {
+            base.OnViewReady(view);
+            Task.Run(() => LoadData());
+        }
+
+
+        private async Task LoadData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
+            {
+                AnimalWalks = WalkModel.GetAnimalWalks(AnimalID);
+                WalkerList = PersonModel.ReturnWalkers();
+                NewWalkerList = PersonModel.ReturnWalkers();
+            });
+            IsWorking = false;
+        }
+
+        private volatile bool _isWorking;
+        public bool IsWorking
         {
             get
             {
-                return WalkModel.GetAnimalWalks(AnimalID);
+                return _isWorking;
+            }
+            set
+            {
+                _isWorking = value;
+                NotifyOfPropertyChange(() => IsWorking);
             }
         }
+
+        #endregion
+
+        private BindableCollection<WalkInfo> _animalWalks;
+        public BindableCollection<WalkInfo> AnimalWalks
+        {
+            get
+            {
+                return _animalWalks;
+            }
+            set
+            {
+                _animalWalks = value;
+                NotifyOfPropertyChange(() => AnimalWalks);
+            }
+        }
+
+        private BindableCollection<PersonInfo> _walkerList;
         public BindableCollection<PersonInfo> WalkerList
         {
             get
             {
-                return PersonModel.ReturnWalkers();
+                return _walkerList;
+            }
+            set
+            {
+                _walkerList = value;
+                NotifyOfPropertyChange(() => WalkerList);
+            }
+        }
+
+        private BindableCollection<PersonInfo> _newwalkerList;
+        public BindableCollection<PersonInfo> NewWalkerList
+        {
+            get
+            {
+                return _newwalkerList;
+            }
+            set
+            {
+                _newwalkerList = value;
+                NotifyOfPropertyChange(() => NewWalkerList);
             }
         }
 
@@ -88,21 +156,97 @@ namespace ShelterEvidency.ViewModels
         }
 
         #endregion
-        public int? SelectedWalk
+
+        public void Filter()
+        {
+            if (Since == null || To == null)
+                Task.Run(() => GetData());
+            else
+                Task.Run(() => FilterData());
+
+
+        }
+
+        private async Task FilterData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
+            {
+                AnimalWalks = WalkModel.GetDatedWalks(AnimalID, Since, To);
+            });
+            IsWorking = false;
+        }
+
+        private async Task GetData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
+            {
+                AnimalWalks = WalkModel.GetAnimalWalks(AnimalID);
+            });
+            IsWorking = false;
+        }
+
+        private DateTime? _since;
+        public DateTime? Since
         {
             get
             {
-                return Walk.ID;
+                return _since;
             }
             set
             {
-                Walk.GetWalk(value);
-                Selection();
+                _since = value;
+                NotifyOfPropertyChange(() => Since);
+            }
+
+        }
+
+        private DateTime? _to;
+        public DateTime? To
+        {
+            get
+            {
+                return _to;
+            }
+            set
+            {
+                _to = value;
+                NotifyOfPropertyChange(() => To);
+            }
+
+        }
+
+        private WalkInfo _selectedWalk;
+
+        public WalkInfo SelectedWalk
+        {
+            get
+            {
+                return _selectedWalk;
+            }
+            set
+            {
+                _selectedWalk = value;
+                NotifyOfPropertyChange(() => SelectedWalk);
+                Task.Run(() => Selection());
             }
         }
 
-        private void Selection()
+        private async Task Selection()
         {
+            if (SelectedWalk != null)
+            {
+                IsWorking = true;
+                await Task.Delay(150);
+                await Task.Run(() =>
+                {
+                    Walk.GetWalk(SelectedWalk.ID);
+                });
+                IsWorking = false;
+            }
             NotifyOfPropertyChange(() => Note);
             NotifyOfPropertyChange(() => Date);
             NotifyOfPropertyChange(() => Walker);
@@ -110,12 +254,14 @@ namespace ShelterEvidency.ViewModels
 
         public void UpdateWalk()
         {
-            if (SelectedWalk != null)
+            if (Walk != null)
             {
                 Walk.UpdateWalk();
-                NotifyOfPropertyChange(() => AnimalWalks);
+                MessageBox.Show("Upraveno.");
+                Filter();
             }
         }
+
 
         #region New walk bindings
 
@@ -158,16 +304,21 @@ namespace ShelterEvidency.ViewModels
 
         #endregion
 
-
         public void CreateNewWalk()
         {
             if (NewDate != null)
             {
+                IsWorking = true;
                 NewWalk.AnimalID = AnimalID;
                 NewWalk.SaveWalk();
-                NotifyOfPropertyChange(() => AnimalWalks);
+                Task.Run(() => GetData());
                 ClearNewWalk();
+                IsWorking = false;
+                MessageBox.Show("Záznam vytvořen.");
             }
+            else
+                MessageBox.Show("Vyplňte prosím datum.");
+
         }
 
         public void ClearNewWalk()
@@ -178,6 +329,7 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => NewWalker);
             NotifyOfPropertyChange(() => NewNote);
         }
+
 
     }
 

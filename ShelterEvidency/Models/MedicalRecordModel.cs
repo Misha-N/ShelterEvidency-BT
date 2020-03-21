@@ -1,4 +1,6 @@
-﻿using ShelterEvidency.Database;
+﻿using Caliburn.Micro;
+using ShelterEvidency.Database;
+using ShelterEvidency.WrappingClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,11 +41,51 @@ namespace ShelterEvidency.Models
             }
         }
 
-        public static List<MedicalRecords> GetAnimalMedicalRecords(int animalID)
+        public static BindableCollection<MedicalRecordInfo> GetAnimalMedicalRecords(int animalID)
         {
+
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                return db.MedicalRecords.Where(x => x.AnimalID.Equals(animalID)).ToList();
+                var results = (from record in db.MedicalRecords
+                               where (record.AnimalID.Equals(animalID))
+                               select new MedicalRecordInfo
+                               {
+                                   ID = record.Id,
+                                   Date = record.Date,
+                                   RecordName = record.RecordName,
+                                   AnimalID = record.AnimalID,
+                                   AnimalName = record.Animals.Name,
+                                   Description = record.Description,
+                                   VetID = record.VetID,
+                                   VetName = record.People.FirstName + " " + record.People.LastName,
+                                   CostID = record.CostID,
+                               });
+                return new BindableCollection<MedicalRecordInfo>(results);
+
+            }
+        }
+
+        public static BindableCollection<MedicalRecordInfo> GetDatedMedicalRecords(int animalID, DateTime? since, DateTime? to)
+        {
+
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var results = (from record in db.MedicalRecords
+                               where (record.AnimalID.Equals(animalID) && (record.Date >= since && record.Date <= to))
+                               select new MedicalRecordInfo
+                               {
+                                   ID = record.Id,
+                                   Date = record.Date,
+                                   RecordName = record.RecordName,
+                                   AnimalID = record.AnimalID,
+                                   AnimalName = record.Animals.Name,
+                                   Description = record.Description,
+                                   VetID = record.VetID,
+                                   VetName = record.People.FirstName + " " + record.People.LastName,
+                                   CostID = record.CostID,
+                               });
+                return new BindableCollection<MedicalRecordInfo>(results);
+
             }
         }
 

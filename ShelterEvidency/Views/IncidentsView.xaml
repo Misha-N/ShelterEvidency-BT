@@ -4,11 +4,187 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShelterEvidency.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:helpers="clr-namespace:ShelterEvidency.Helpers"
              Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="1200">
+    <UserControl.Resources>
+
+        <helpers:InvertBooleanConverter  x:Key="boolConvert"/>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+
+
+    </UserControl.Resources>
+
+    <Grid Margin="5" IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="1" Grid.RowSpan="2" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="90"/>
+                </Grid.ColumnDefinitions>
+
+                <DatePicker Margin="5" materialDesign:HintAssist.Hint="Od data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=Since, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+                <DatePicker Grid.Column="1" Margin="5" materialDesign:HintAssist.Hint="Do data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=To, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+
+
+                <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Grid.Column="2"
+                x:Name="Filter" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,2,2" >
+                    <materialDesign:PackIcon
+                Kind="Update"
+                Height="30"
+                Width="30" />
+                </Button>
+
+            </Grid>
+
+
+
+            <DataGrid Grid.Row="1" Margin="5" ColumnWidth="*" AutoGenerateColumns="False" VerticalContentAlignment="Center" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding Path=AnimalIncidents, Mode=OneWay}" SelectedValue="{Binding Path=SelectedIncident, Mode=OneWayToSource}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID incidentu" MaxWidth="90" Binding="{Binding ID}"/>
+                    <DataGridTextColumn Header="Závažnost" MinWidth="200" Binding="{Binding Severity}"/>
+                    <DataGridTextColumn Header="Datum" Binding="{Binding Date}"/>
+                    <DataGridTextColumn Header="Popis" Binding="{Binding Description}"/>
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+        </Grid>
+
+        <materialDesign:Card Margin="10"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth1">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="15,10,0,0">
+
+                    <materialDesign:PackIcon Kind="AlertRhombusOutline" VerticalAlignment="Center" HorizontalAlignment="Center" Width="50" Height="50" Opacity="0.3" Margin="0" />
+
+
+                    <TextBlock VerticalAlignment="Center"  Grid.ColumnSpan="2" HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignHeadline5TextBlock}" Margin="15,0,0,0">
+                      Upravit vybraný incident
+                    </TextBlock>
+
+                </StackPanel>
+
+
+                <Grid Grid.Row="1" Margin="15,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="1.6*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Margin="0,10,0,0"
+                        Style="{StaticResource MaterialDesignSubtitle1TextBlock}">
+                      Závažnost incidentu:
+                    </TextBlock>
+
+                    <DatePicker Margin="5" Grid.Row="2" materialDesign:HintAssist.Hint="Datum incidentu" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=Date, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Long" Grid.ColumnSpan="2"/>
+                    <Slider x:Name="Severity" Grid.Row="1"  Style="{StaticResource MaterialDesignDiscreteSlider}" materialDesign:HintAssist.Hint="Závažnost incidentu" Minimum="1" Maximum="10" Margin="5,0,5,5" Grid.ColumnSpan="2" />
+
+
+                    <TextBox x:Name="Description" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Popis incidentu" Grid.Row="3" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="50" Text="{Binding Path=Description, Mode=TwoWay}" Grid.ColumnSpan="2"/>
+
+                    <Button x:Name="UpdateIncident" Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="100"  Grid.Row="4" Content="Upravit" Grid.Column="1" />
+                </Grid>
+
+            </Grid>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="1" Margin="10"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth1">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="15,10,0,0">
+
+                    <materialDesign:PackIcon Kind="MapMarkerAlert" VerticalAlignment="Center" HorizontalAlignment="Center" Width="50" Height="50" Opacity="0.3" Margin="0" />
+
+
+                    <TextBlock VerticalAlignment="Center"  Grid.ColumnSpan="2" HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignHeadline5TextBlock}" Margin="15,0,0,0">
+                      Vytvořit nový incident
+                    </TextBlock>
+
+                </StackPanel>
+
+                <Grid Grid.Row="1" Margin="15,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="1.6*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Margin="0,10,0,0"
+                        Style="{StaticResource MaterialDesignSubtitle1TextBlock}">
+                      Závažnost incidentu:
+                    </TextBlock>
+
+                    <DatePicker Margin="5" Grid.Row="2" materialDesign:HintAssist.Hint="Datum incidentu" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=NewDate, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Long" Grid.ColumnSpan="2"/>
+                    <Slider x:Name="NewSeverity" Grid.Row="1"  Style="{StaticResource MaterialDesignDiscreteSlider}" materialDesign:HintAssist.Hint="Závažnost incidentu" Minimum="1" Maximum="10" Margin="5,0,5,5" Grid.ColumnSpan="2" />
+
+
+                    <TextBox x:Name="NewDescription" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Popis incidentu" Grid.Row="3" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="50" Text="{Binding Path=NewDescription, Mode=TwoWay}" Grid.ColumnSpan="2"/>
+
+                    <Button x:Name="CreateNewIncident" Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="100"  Grid.Row="4" Content="Vytvořit" Grid.Column="1"/>
+                </Grid>
+
+            </Grid>
+
+        </materialDesign:Card>
+
+        <ProgressBar  
+              Visibility="{Binding IsWorking, Converter={StaticResource VisibleIfTrueConverter}, Mode=OneWay}"
+              Grid.RowSpan="2" Grid.ColumnSpan="3"
+              Style="{StaticResource MaterialDesignCircularProgressBar}"
+              Value="0"
+              Height="50"
+              Width="50"
+              IsIndeterminate="True" />
+
+    </Grid>
+
+    <!--
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -25,7 +201,7 @@
                     <TextBox x:Name="Description" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="50" Text="{Binding Path=Description, Mode=TwoWay}"/>
 
                     <TextBlock TextWrapping="Wrap" Text="Závažnost:" Margin="5"/>
-                    <Slider x:Name="Severity" Minimum="1" Maximum="10" Margin="5,0,5,5" AutoToolTipPlacement="TopLeft" TickPlacement="TopLeft"/>
+                    <Slider x:Name="Severity" Style="{StaticResource MaterialDesignDiscreteSlider}" Minimum="1" Maximum="10" Margin="5,0,5,5" AutoToolTipPlacement="TopLeft" TickPlacement="TopLeft"/>
                     
                     <Button x:Name="UpdateIncident" Content="Upravit"/>
                 </StackPanel>
@@ -48,4 +224,5 @@
         </StackPanel>
 
     </Grid>
+    -->
 </UserControl>

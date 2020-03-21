@@ -40,12 +40,46 @@ namespace ShelterEvidency.Models
             }
         }
 
-        public static List<Walks> GetAnimalWalks(int animalID)
+
+        public static BindableCollection<WalkInfo> GetAnimalWalks(int animalID)
         {
+
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                db.DeferredLoadingEnabled = false;
-                return db.Walks.Where(x => x.AnimalID.Equals(animalID)).ToList();
+                var results = (from walk in db.Walks
+                               where (walk.AnimalID.Equals(animalID))
+                               select new WalkInfo
+                               {
+                                   ID = walk.ID,
+                                   Date = walk.Date,
+                                   Note = walk.Note,
+                                   AnimalName = walk.Animals.Name,
+                                   PersonID = walk.PersonID,
+                                   PersonName = walk.People.FirstName + " " + walk.People.LastName,
+                               });
+                return new BindableCollection<WalkInfo>(results);
+
+            }
+        }
+
+        public static BindableCollection<WalkInfo> GetDatedWalks(int animalID, DateTime? since, DateTime? to)
+        {
+
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var results = (from walk in db.Walks
+                               where (walk.AnimalID.Equals(animalID) && (walk.Date >= since && walk.Date <= to))
+                               select new WalkInfo
+                               {
+                                   ID = walk.ID,
+                                   Date = walk.Date,
+                                   Note = walk.Note,
+                                   AnimalName = walk.Animals.Name,
+                                   PersonID = walk.PersonID,
+                                   PersonName = walk.People.FirstName + " " + walk.People.LastName,
+                               });
+                return new BindableCollection<WalkInfo>(results);
+
             }
         }
 

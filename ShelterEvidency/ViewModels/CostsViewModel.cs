@@ -1,15 +1,19 @@
 ﻿using Caliburn.Micro;
 using ShelterEvidency.Models;
+using ShelterEvidency.WrappingClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.ViewModels
 {
     public class CostsViewModel: Screen
     {
+        #region Initialization 
+
         private int? _animalID;
         public int? AnimalID
         {
@@ -32,13 +36,54 @@ namespace ShelterEvidency.ViewModels
             Cost = new CostModel();
             NewCost = new CostModel();
         }
-        public virtual List<Database.Costs> AnimalCosts
+
+        protected override void OnViewReady(object view)
+        {
+            base.OnViewReady(view);
+            Task.Run(() => LoadData());
+        }
+
+        public virtual async Task LoadData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
+            {
+                AnimalCosts = CostModel.GetAnimalCosts(AnimalID);
+            });
+            IsWorking = false;
+        }
+
+        private volatile bool _isWorking;
+        public bool IsWorking
         {
             get
             {
-                return CostModel.GetAnimalCosts(AnimalID);
+                return _isWorking;
+            }
+            set
+            {
+                _isWorking = value;
+                NotifyOfPropertyChange(() => IsWorking);
             }
         }
+
+        #endregion
+
+        private BindableCollection<CostInfo> _animalCosts;
+        public BindableCollection<CostInfo> AnimalCosts
+        {
+            get
+            {
+                return _animalCosts;
+            }
+            set
+            {
+                _animalCosts = value;
+                NotifyOfPropertyChange(() => AnimalCosts);
+            }
+        }
+
 
         #region Selected cost bindings
         public DateTime? Date
@@ -105,21 +150,36 @@ namespace ShelterEvidency.ViewModels
             }
         }
         #endregion
-        public int? SelectedCost
+
+
+        private CostInfo _selectedCost;
+
+        public CostInfo SelectedCost
         {
             get
             {
-                return Cost.ID;
+                return _selectedCost;
             }
             set
             {
-                Cost.GetCost(value);
-                Selection();
+                _selectedCost = value;
+                NotifyOfPropertyChange(() => SelectedCost);
+                Task.Run(() => Selection());
             }
         }
 
-        private void Selection()
+        private async Task Selection()
         {
+            if (SelectedCost != null)
+            {
+                IsWorking = true;
+                await Task.Delay(150);
+                await Task.Run(() =>
+                {
+                    Cost.GetCost(SelectedCost.ID);
+                });
+                IsWorking = false;
+            }
             NotifyOfPropertyChange(() => CostName);
             NotifyOfPropertyChange(() => Description);
             NotifyOfPropertyChange(() => Price);
@@ -129,10 +189,11 @@ namespace ShelterEvidency.ViewModels
 
         public void UpdateCost()
         {
-            if (SelectedCost != null)
+            if (Cost != null)
             {
                 Cost.UpdateCost();
-                NotifyOfPropertyChange(() => AnimalCosts);
+                MessageBox.Show("Upraveno.");
+                Filter();
             }
         }
 
@@ -204,15 +265,75 @@ namespace ShelterEvidency.ViewModels
 
         #endregion
 
+        #region Methods
+
+        public void Filter()
+        {
+            if (Since == null || To == null)
+                Task.Run(() => LoadData());
+            else
+                Task.Run(() => FilterData());
+
+
+        }
+
+        public virtual async Task FilterData()
+        {
+            IsWorking = true;
+            await Task.Delay(150);
+            await Task.Run(() =>
+            {
+                AnimalCosts = CostModel.GetDatedCosts(Since, To);
+            });
+            IsWorking = false;
+        }
+
+        private DateTime? _since;
+        public DateTime? Since
+        {
+            get
+            {
+                return _since;
+            }
+            set
+            {
+                _since = value;
+                NotifyOfPropertyChange(() => Since);
+            }
+
+        }
+
+        private DateTime? _to;
+        public DateTime? To
+        {
+            get
+            {
+                return _to;
+            }
+            set
+            {
+                _to = value;
+                NotifyOfPropertyChange(() => To);
+            }
+
+        }
+
+
         public void CreateNewCost()
         {
             if (NewCostName != null)
             {
+                IsWorking = true;
                 NewCost.AnimalID = AnimalID;
                 NewCost.SaveCost();
+                Task.Run(() => LoadData());
+                ClearNewCost();
+                IsWorking = false;
+                MessageBox.Show("Záznam vytvořen.");
             }
-            NotifyOfPropertyChange(() => AnimalCosts);
-            ClearNewCost();
+            else
+                MessageBox.Show("Vyplňte prosím název.");
+
         }
 
         public void ClearNewCost()
@@ -224,6 +345,9 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => NewDate);
             NotifyOfPropertyChange(() => NewPrice);
         }
+
+
+        #endregion
 
 
     }

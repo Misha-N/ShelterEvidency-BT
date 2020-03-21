@@ -243,7 +243,7 @@ namespace ShelterEvidency.Models
                                    IsWalker = person.IsWalker,
                                    IsSponsor = person.IsSponsor,
                                    IsVolunteer = person.IsVolunteer
-                               }).ToList();
+                               });
                 return new BindableCollection<PersonInfo>(results);
             }
         }

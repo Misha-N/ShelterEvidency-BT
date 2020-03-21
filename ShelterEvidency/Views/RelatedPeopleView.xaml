@@ -4,11 +4,230 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShelterEvidency.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:helpers="clr-namespace:ShelterEvidency.Helpers"
              Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="1200">
+
+    <UserControl.Resources>
+
+        <helpers:InvertBooleanConverter  x:Key="boolConvert"/>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+
+
+    </UserControl.Resources>
+
+    <Grid Margin="5" IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <materialDesign:Card Margin="10"  materialDesign:ShadowAssist.ShadowDepth="Depth1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="1.5*"/>
+                </Grid.RowDefinitions>
+
+                <materialDesign:Card Background="{DynamicResource SecondaryAccentBrush}" Margin="15" Width="250" Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth5" UniformCornerRadius="250"
+                    Padding="32">
+                    <materialDesign:PackIcon Kind="Doctor" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="150" />
+                </materialDesign:Card>
+
+                <Grid Margin="10" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="1.8*"/>
+                        <RowDefinition Height="1.8*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="VetTitle" FontSize="14" IsReadOnly="True"  VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Titul" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                    <TextBox x:Name="VetFirstName" FontSize="14" IsReadOnly="True"  VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Jméno" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                    <TextBox x:Name="VetLastName" FontSize="14" IsReadOnly="True"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Příjmení"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                    <TextBox x:Name="VetPhone" FontSize="14"  IsReadOnly="True" VerticalAlignment="Center" Grid.Row="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                    <TextBox x:Name="VetMail" FontSize="14" IsReadOnly="True"  VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Email"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                    <GroupBox Header="Adresa" FontSize="14"    Style="{DynamicResource MaterialDesignGroupBox}" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                          materialDesign:ShadowAssist.ShadowDepth="Depth3"   BorderThickness="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox x:Name="VetCity" IsReadOnly="True" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Město" Grid.Row="1" Grid.ColumnSpan="2"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                            <TextBox x:Name="VetZip" IsReadOnly="True" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="PSČ" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                            <TextBox x:Name="VetStreet" IsReadOnly="True" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Ulice a číslo domu" Grid.Row="3" Grid.ColumnSpan="2"   TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                        </Grid>
+                    </GroupBox>
+
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Column="1" Margin="10"  materialDesign:ShadowAssist.ShadowDepth="Depth1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="1.5*"/>
+                </Grid.RowDefinitions>
+
+                <materialDesign:Card Background="{DynamicResource PrimaryHueLightBrush}" Margin="15" Width="250" Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth5" UniformCornerRadius="250"
+                    Padding="32">
+                    <materialDesign:PackIcon Kind="UserHeartOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="150" />
+                </materialDesign:Card>
+
+                <Grid Margin="10" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="1.8*"/>
+                        <RowDefinition Height="1.8*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="Title" FontSize="14" IsReadOnly="True"  VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Titul" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                    <TextBox x:Name="FirstName" FontSize="14" IsReadOnly="True"  VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Jméno" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                    <TextBox x:Name="LastName" FontSize="14" IsReadOnly="True"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Příjmení"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                    <TextBox x:Name="Phone" FontSize="14"  IsReadOnly="True" VerticalAlignment="Center" Grid.Row="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                    <TextBox x:Name="Mail" FontSize="14" IsReadOnly="True"  VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Email"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                    <GroupBox Header="Adresa" FontSize="14"    Style="{DynamicResource MaterialDesignGroupBox}" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                          materialDesign:ShadowAssist.ShadowDepth="Depth3"   BorderThickness="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox x:Name="City" IsReadOnly="True" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Město" Grid.Row="1" Grid.ColumnSpan="2"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                            <TextBox x:Name="Zip" IsReadOnly="True" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="PSČ" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                            <TextBox x:Name="Street" IsReadOnly="True" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Ulice a číslo domu" Grid.Row="3" Grid.ColumnSpan="2"   TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                        </Grid>
+                    </GroupBox>
+
+                </Grid>
+
+
+            </Grid>
+        </materialDesign:Card>
+
+        <materialDesign:Card Margin="10" Grid.Column="2"  materialDesign:ShadowAssist.ShadowDepth="Depth1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="1.5*"/>
+                </Grid.RowDefinitions>
+
+                <materialDesign:Card Background="{DynamicResource PrimaryHueMidBrush}" Margin="15" Width="250" Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth5" UniformCornerRadius="250"
+                    Padding="32">
+                    <materialDesign:PackIcon Kind="UserRemove" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="150" />
+                </materialDesign:Card>
+
+
+
+                <Grid Margin="10" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="1.8*"/>
+                        <RowDefinition Height="1.8*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="ExTitle" FontSize="14" IsReadOnly="True"  VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Titul" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                    <TextBox x:Name="ExFirstName" FontSize="14" IsReadOnly="True"  VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Jméno" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                    <TextBox x:Name="ExLastName" FontSize="14" IsReadOnly="True"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Příjmení"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                    <TextBox x:Name="ExPhone" FontSize="14"  IsReadOnly="True" VerticalAlignment="Center" Grid.Row="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                    <TextBox x:Name="ExMail" FontSize="14" IsReadOnly="True"  VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Email"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                    <GroupBox Header="Adresa" FontSize="14"    Style="{DynamicResource MaterialDesignGroupBox}" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                          materialDesign:ShadowAssist.ShadowDepth="Depth3"   BorderThickness="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox x:Name="ExCity" IsReadOnly="True" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Město" Grid.Row="1" Grid.ColumnSpan="2"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                            <TextBox x:Name="ExZip" IsReadOnly="True" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="PSČ" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+
+                            <TextBox x:Name="ExStreet" IsReadOnly="True" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Ulice a číslo domu" Grid.Row="3" Grid.ColumnSpan="2"   TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                        </Grid>
+                    </GroupBox>
+
+                </Grid>
+
+
+            </Grid>
+        </materialDesign:Card>
+
+        <ProgressBar  
+              Visibility="{Binding IsWorking, Converter={StaticResource VisibleIfTrueConverter}, Mode=OneWay}"
+              Grid.RowSpan="2" Grid.ColumnSpan="3"
+              Style="{StaticResource MaterialDesignCircularProgressBar}"
+              Value="0"
+              Height="50"
+              Width="50"
+              IsIndeterminate="True" />
+
+    </Grid>
+    
+    <!--
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -124,4 +343,5 @@
         </GroupBox>
 
     </Grid>
+    -->
 </UserControl>
