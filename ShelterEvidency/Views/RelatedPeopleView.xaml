@@ -34,11 +34,18 @@
                     <RowDefinition Height="1.5*"/>
                 </Grid.RowDefinitions>
 
-                <materialDesign:Card Background="{DynamicResource SecondaryAccentBrush}" Margin="15" Width="250" Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                <StackPanel>
+                    <materialDesign:Card Background="{DynamicResource SecondaryAccentBrush}" Margin="15" Width="250" Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
                     materialDesign:ShadowAssist.ShadowDepth="Depth5" UniformCornerRadius="250"
                     Padding="32">
-                    <materialDesign:PackIcon Kind="Doctor" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="150" />
-                </materialDesign:Card>
+                        <materialDesign:PackIcon Kind="Doctor" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="150" />
+                    </materialDesign:Card>
+                    <TextBlock HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                      Veterinář
+                    </TextBlock>
+                </StackPanel>
+
 
                 <Grid Margin="10" Grid.Row="1">
                     <Grid.RowDefinitions>
@@ -63,7 +70,7 @@
 
                     <TextBox x:Name="VetMail" FontSize="14" IsReadOnly="True"  VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Email"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                    <GroupBox Header="Adresa" FontSize="14"    Style="{DynamicResource MaterialDesignGroupBox}" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                    <GroupBox Header="Adresa" FontSize="14"  materialDesign:ColorZoneAssist.Mode="Accent"   Style="{DynamicResource MaterialDesignGroupBox}" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2"
                           materialDesign:ShadowAssist.ShadowDepth="Depth3"   BorderThickness="0">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -95,11 +102,17 @@
                     <RowDefinition Height="1.5*"/>
                 </Grid.RowDefinitions>
 
-                <materialDesign:Card Background="{DynamicResource PrimaryHueLightBrush}" Margin="15" Width="250" Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                <StackPanel>
+                    <materialDesign:Card Background="{DynamicResource PrimaryHueLightBrush}" Margin="15" Width="250" Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
                     materialDesign:ShadowAssist.ShadowDepth="Depth5" UniformCornerRadius="250"
                     Padding="32">
                     <materialDesign:PackIcon Kind="UserHeartOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="150" />
                 </materialDesign:Card>
+                <TextBlock HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                      Nový majitel
+                </TextBlock>
+                </StackPanel>
 
                 <Grid Margin="10" Grid.Row="1">
                     <Grid.RowDefinitions>
@@ -124,7 +137,7 @@
 
                     <TextBox x:Name="Mail" FontSize="14" IsReadOnly="True"  VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Email"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                    <GroupBox Header="Adresa" FontSize="14"    Style="{DynamicResource MaterialDesignGroupBox}" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                    <GroupBox Header="Adresa" FontSize="14" materialDesign:ColorZoneAssist.Mode="PrimaryLight"   Style="{DynamicResource MaterialDesignGroupBox}" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2"
                           materialDesign:ShadowAssist.ShadowDepth="Depth3"   BorderThickness="0">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -157,12 +170,18 @@
                     <RowDefinition/>
                     <RowDefinition Height="1.5*"/>
                 </Grid.RowDefinitions>
-
-                <materialDesign:Card Background="{DynamicResource PrimaryHueMidBrush}" Margin="15" Width="250" Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                <StackPanel>
+                    <materialDesign:Card Background="{DynamicResource PrimaryHueMidBrush}" Margin="15" Width="250" Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
                     materialDesign:ShadowAssist.ShadowDepth="Depth5" UniformCornerRadius="250"
                     Padding="32">
                     <materialDesign:PackIcon Kind="UserRemove" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="150" />
                 </materialDesign:Card>
+               
+                    <TextBlock HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                      Původní majitel
+                </TextBlock>
+                </StackPanel>
 
 
 
@@ -189,7 +208,7 @@
 
                     <TextBox x:Name="ExMail" FontSize="14" IsReadOnly="True"  VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Email"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                    <GroupBox Header="Adresa" FontSize="14"    Style="{DynamicResource MaterialDesignGroupBox}" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                    <GroupBox Header="Adresa" FontSize="14"  materialDesign:ColorZoneAssist.Mode="PrimaryMid"   Style="{DynamicResource MaterialDesignGroupBox}" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2"
                           materialDesign:ShadowAssist.ShadowDepth="Depth3"   BorderThickness="0">
                         <Grid>
                             <Grid.RowDefinitions>

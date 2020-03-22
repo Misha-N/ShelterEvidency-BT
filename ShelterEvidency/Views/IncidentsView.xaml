@@ -60,7 +60,7 @@
 
             <DataGrid Grid.Row="1" Margin="5" ColumnWidth="*" AutoGenerateColumns="False" VerticalContentAlignment="Center" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding Path=AnimalIncidents, Mode=OneWay}" SelectedValue="{Binding Path=SelectedIncident, Mode=OneWayToSource}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID incidentu" MaxWidth="90" Binding="{Binding ID}"/>
+                    <DataGridTextColumn Header="ID incidentu" MaxWidth="100" Binding="{Binding ID}"/>
                     <DataGridTextColumn Header="Závažnost" MinWidth="200" Binding="{Binding Severity}"/>
                     <DataGridTextColumn Header="Datum" Binding="{Binding Date}"/>
                     <DataGridTextColumn Header="Popis" Binding="{Binding Description}"/>

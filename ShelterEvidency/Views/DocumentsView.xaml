@@ -4,18 +4,130 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShelterEvidency.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:helpers="clr-namespace:ShelterEvidency.Helpers"
              Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="900" d:DesignWidth="1200">
+
+
+    <UserControl.Resources>
+
+        <helpers:InvertBooleanConverter  x:Key="boolConvert"/>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+
+
+    </UserControl.Resources>
+
+    <Grid Margin="5" IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <materialDesign:PackIcon Kind="FileCabinet" Margin="30,30,0,0"  Width="150" Opacity="0.2" Height="150"/>
+
+
+        <Grid  VerticalAlignment="Center" Margin="35,60,35,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <materialDesign:Card
+    materialDesign:ShadowAssist.ShadowDepth="Depth1">
+
+                <GroupBox Header="Možnosti vybraného dokumentu" IsEnabled="{Binding IsSelected}"  Style="{DynamicResource MaterialDesignGroupBox}"
+                          materialDesign:ShadowAssist.ShadowDepth="Depth3" FontSize="15"   BorderThickness="0" Margin="10">
+                    <StackPanel>
+
+                            <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" x:Name="Open"  Height="50" Margin="30,10">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="OpenInNew"  Width="20" Height="20"/>
+                                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Otevřít dokument</TextBlock>
+                                </StackPanel>
+                            </Button>
+
+                        <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" x:Name="Print" Height="50" Margin="30,10">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="Printer"  Width="20" Height="20"/>
+                                <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Vytisknout dokument</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" x:Name="Delete" Height="50" Margin="30,10">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="DeleteForeverOutline"  Width="20" Height="20"/>
+                                <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Smazat dokument</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </GroupBox>
+
+            </materialDesign:Card>
+
+            <materialDesign:Card
+    materialDesign:ShadowAssist.ShadowDepth="Depth1" Grid.Row="1" Margin="0,30,0,0">
+
+                    <GroupBox Header="Další možnosti vybraného dokumentu" FontSize="15"  Style="{DynamicResource MaterialDesignGroupBox}"
+                          materialDesign:ShadowAssist.ShadowDepth="Depth3"   BorderThickness="0" Margin="10">
+                    <StackPanel>
+                        <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" x:Name="LoadNewDocument" Height="50" Margin="30,10">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="FileUploadOutline"  Width="20" Height="20"/>
+                                <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Nahrát nový dokument</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" x:Name="GenerateEvidencyCard" Height="50" Margin="30,10">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="FileExportOutline"  Width="20" Height="20"/>
+                                <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Generovat evidenční kartu zvířete</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                    </StackPanel>
+                </GroupBox>
+
+                </materialDesign:Card>
+
+
+        </Grid>
+        
+
+        
+
+        <DataGrid Margin="5" ColumnWidth="*" Grid.Column="1" AutoGenerateColumns="False" VerticalContentAlignment="Center" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding Path=Documents, Mode=OneWay}" SelectedValue="{Binding Path=SelectedDocument, Mode=OneWayToSource}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Název dokumentu" Binding="{Binding Name}"/>
+                <DataGridTextColumn Binding="{Binding CreationTime}" Header="Datum vytvoření"/>
+                <DataGridTextColumn Binding="{Binding Extension}" Header="Typ"/>
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+        <ProgressBar  
+              Visibility="{Binding IsWorking, Converter={StaticResource VisibleIfTrueConverter}, Mode=OneWay}"
+              Grid.RowSpan="2" Grid.ColumnSpan="3"
+              Style="{StaticResource MaterialDesignCircularProgressBar}"
+              Value="0"
+              Height="50"
+              Width="50"
+              IsIndeterminate="True" />
+
+    </Grid>
+    
+    <!--
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <DataGrid x:Name="documentDatagrid" AutoGenerateColumns="False" ColumnWidth="*" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" SelectedValuePath="FullName" ItemsSource="{Binding Path=Documents, Mode=OneWay}" SelectedValue="{Binding Path=SelectedDocumentPath, Mode=OneWayToSource}" >
+        <DataGrid x:Name="documentDatagrid" AutoGenerateColumns="False" ColumnWidth="*" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" SelectedValuePath="FullName" ItemsSource="{Binding Path=Documents, Mode=OneWay}" SelectedValue="{Binding Path=SelectedDocument, Mode=OneWayToSource}" >
             <DataGrid.Columns>
                 <DataGridTextColumn IsReadOnly="True" Binding="{Binding Name}" Header="Jméno"/>
                 <DataGridTextColumn IsReadOnly="True" Binding="{Binding Extension}" Header="Typ"/>
@@ -41,4 +153,5 @@
 
 
     </Grid>
+    -->
 </UserControl>
