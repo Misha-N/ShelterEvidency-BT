@@ -52,6 +52,229 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="1" x:Name="GridMain" Margin="100,10,20,10">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <materialDesign:Card Margin="20" Grid.Column="3" Grid.ColumnSpan="4" Grid.RowSpan="3"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        <Grid Margin="15">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="4*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Style="{StaticResource MaterialDesignHeadline4TextBlock}">
+                              Poslední přijatá zvířata
+                            </TextBlock>
+
+                            
+                                <ListView >
+
+                                </ListView>
+                            
+
+                        </Grid>
+                    </materialDesign:Card>
+
+                    <materialDesign:Card Margin="20" Grid.ColumnSpan="3" Grid.RowSpan="4"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth1">
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <materialDesign:Card Margin="15" Width="180" Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth5" UniformCornerRadius="400">
+                                <Image Source="/Graphics/logo-loz.jpg" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Width="195" Height="190"></Image>
+                            </materialDesign:Card>
+                            <StackPanel Margin="40, 0" Grid.Row="1">
+                                <TextBox x:Name="ShelterPhone" VerticalAlignment="Center" IsReadOnly="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon útulku" TextWrapping="Wrap" Margin="5" Padding="2"/>
+                                <TextBox x:Name="EmergencyPhone" VerticalAlignment="Center" IsReadOnly="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Pohotovost útulku" TextWrapping="Wrap" Margin="5" Padding="2"/>
+                                <TextBox x:Name="ShelterMail" VerticalAlignment="Center" IsReadOnly="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="E-mail útulku" TextWrapping="Wrap" Margin="5" Padding="2"/>
+                                <TextBox x:Name="ShelteAdress" VerticalAlignment="Center" IsReadOnly="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Adresa útulku" TextWrapping="Wrap" Margin="5" Padding="2"/>
+                                <TextBox x:Name="ShelteAccount" VerticalAlignment="Center" IsReadOnly="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Číslo účtu útulku" TextWrapping="Wrap" Margin="5" Padding="2"/>
+
+
+                            </StackPanel>
+
+                        </Grid>
+                        
+                    </materialDesign:Card>
+
+                    <materialDesign:Card Margin="20" Grid.ColumnSpan="3" Grid.Row="4" Grid.RowSpan="2"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth1">
+
+                        <Grid Margin="35, 10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="0.5*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="1.5*"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                                        Style="{StaticResource MaterialDesignSubtitle1TextBlock}">
+                                      Náklady
+                                </TextBlock>
+
+                                <materialDesign:PackIcon Grid.Row="1" Kind="CashMinus" VerticalAlignment="Center" HorizontalAlignment="Center" Width="80" Height="80" Opacity="0.5" />
+
+                                <TextBlock x:Name="DatedCosts" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+    Style="{StaticResource MaterialDesignHeadline4TextBlock}">
+                                    xxx
+
+                                </TextBlock>
+
+                            </Grid>
+
+
+
+
+                            <DatePicker Grid.Row="1"
+                              Width="140"
+                              materialDesign:HintAssist.Hint="Od data"
+                              Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="1.5*"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                                        Style="{StaticResource MaterialDesignSubtitle1TextBlock}">
+                                      Sponzorské dary
+                                </TextBlock>
+
+                                <materialDesign:PackIcon Grid.Row="1" Kind="CashPlus" VerticalAlignment="Center" HorizontalAlignment="Center" Width="80" Height="80" Opacity="0.5" />
+
+                                <TextBlock x:Name="DatedDonations" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+    Style="{StaticResource MaterialDesignHeadline4TextBlock}">
+                                    xxx
+
+                                </TextBlock>
+
+                            </Grid>
+
+
+                            <DatePicker Grid.Row="1" Grid.Column="1"
+                              Width="140"
+                              materialDesign:HintAssist.Hint="Do data"
+                              Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                        </Grid>
+
+                    </materialDesign:Card>
+
+                    <materialDesign:Card Margin="20" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="3" Grid.RowSpan="2"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <materialDesign:Card Background="{DynamicResource SecondaryAccentBrush}" Margin="15" Width="80" Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth5" UniformCornerRadius="250"
+                    >
+                                <materialDesign:PackIcon Kind="HouseMapMarker" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="60" />
+                            </materialDesign:Card>
+
+                            <StackPanel Grid.Row="1">
+                                <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                                Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                              Počet úspěšných adopcí
+                                </TextBlock>
+                                <TextBlock x:Name="AdoptionCount"
+                                        Style="{StaticResource MaterialDesignHeadline3TextBlock}">
+
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
+
+                    </materialDesign:Card>
+
+                    <materialDesign:Card Margin="20" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="5"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel VerticalAlignment="Center">
+                                <materialDesign:Card Background="{DynamicResource PrimaryHueMidBrush}" Width="60" Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth5" UniformCornerRadius="250"
+                    >
+                                <materialDesign:PackIcon Kind="Dog" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" />
+                            </materialDesign:Card>
+                            <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center"
+    Style="{StaticResource MaterialDesignBody1TextBlock}">                                 
+                                V útulku
+                            </TextBlock>
+                            </StackPanel>
+
+
+                            <TextBlock x:Name="AnimalCount"  Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                        Style="{StaticResource MaterialDesignHeadline3TextBlock}">
+
+                                </TextBlock>
+
+                        </Grid>
+                    </materialDesign:Card>
+
+                    <materialDesign:Card Margin="20" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="3" Grid.RowSpan="3"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="90"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <materialDesign:PackIcon Kind="SignRoutes" VerticalAlignment="Center" HorizontalAlignment="Center" Width="50" Height="50" />
+                            <TextBlock TextWrapping="Wrap" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                        Style="{StaticResource MaterialDesignHeadline6TextBlock}">
+                              Plánované procházky
+                            </TextBlock>
+                            <ListBox Grid.ColumnSpan="2" Grid.Row="1" Margin="10">
+                                
+                            </ListBox>
+
+                        </Grid>
+                    </materialDesign:Card>
+
+
+
+                </Grid>
+                
+                
                 <ContentControl x:Name="ActiveItem"/>
             </Grid>
 

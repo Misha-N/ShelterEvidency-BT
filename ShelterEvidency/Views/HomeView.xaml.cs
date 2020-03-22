@@ -37,5 +37,6 @@ namespace ShelterEvidency.Views
             ButtonOpenMenu.Visibility = Visibility.Visible;
         }
 
+
     }
 }
