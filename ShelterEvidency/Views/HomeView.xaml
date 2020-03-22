@@ -10,7 +10,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="HomeView" Height="607.209" Width="1028.809" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="HomeView" Height="800" Width="1200" WindowStartupLocation="CenterScreen" WindowState="Maximized">
 
     <Window.Resources>
         <Storyboard x:Key="OpenMenu">
@@ -55,7 +55,7 @@
                 <ContentControl x:Name="ActiveItem"/>
             </Grid>
 
-            <materialDesign:Card Grid.Column="1" Grid.Row="1">
+            <materialDesign:Card Grid.Column="1" Grid.Row="1" IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
                 <DockPanel LastChildFill="True" >
                     <Viewbox DockPanel.Dock="Top" Margin="10" MaxHeight="400">
                         <Calendar SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
