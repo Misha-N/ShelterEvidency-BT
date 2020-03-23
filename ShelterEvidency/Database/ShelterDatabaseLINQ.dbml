@@ -210,4 +210,15 @@
       <Association Name="Animals_Incidents" Member="Animals" ThisKey="AnimalID" OtherKey="ID" Type="Animals" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Shelter" Member="Shelter">
+    <Type Name="Shelter">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Phone2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Mail" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Adress" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Account" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

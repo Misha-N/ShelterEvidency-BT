@@ -272,6 +272,39 @@ namespace ShelterEvidency.Models
             }
         }
 
+        public static BindableCollection<AnimalInfo> LastAnimals(int count)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var results = (from animal in db.Animals
+                               where ((animal.InShelter.Equals(true)))
+                               select new AnimalInfo
+                               {
+                                   ID = animal.ID,
+                                   Name = animal.Name,
+                                   ChipNumber = animal.ChipNumber,
+                                   BirthDate = animal.Birth,
+                                   Sex = animal.Sexes.SexName,
+                                   Species = animal.Species.SpeciesName,
+                                   Breed = animal.Breeds.BreedName,
+                                   CrossBreed = animal.Breeds1.BreedName,
+                                   CoatType = animal.CoatTypes.CoatTypeName,
+                                   FurColor = animal.FurColors.FurColorName,
+                                   FeedRation = animal.FeedRation,
+                                   Weight = animal.Weight,
+                                   Owner = animal.People.FirstName + " " + animal.People.LastName,
+                                   NewOwner = animal.People1.FirstName + " " + animal.People1.LastName,
+                                   Vet = animal.People2.FirstName + " " + animal.People2.LastName,
+                                   Note = animal.Note,
+                                   Castration = animal.Castration,
+                                   InShelter = animal.InShelter,
+                                   FolderPath = animal.FolderPath,
+                                   ImagePath = animal.ImagePath
+                               }).OrderByDescending(x => x.ID).Take(count);
+                return new BindableCollection<AnimalInfo>(results);
+            }
+        }
+
         public void CreateDocumentFolder()
         {
             System.IO.Directory.CreateDirectory("AnimalDocuments");

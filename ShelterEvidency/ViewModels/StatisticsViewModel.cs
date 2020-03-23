@@ -11,7 +11,7 @@ namespace ShelterEvidency.ViewModels
     class StatisticsViewModel: Screen
     {
 
-        public int AnimalsInShelterSum
+        public int? AnimalsInShelterSum
         {
             get
             {
@@ -20,7 +20,7 @@ namespace ShelterEvidency.ViewModels
 
         }
 
-        public int SuccessfullyAdoptedAnimals
+        public int? SuccessfullyAdoptedAnimals
         {
             get
             {

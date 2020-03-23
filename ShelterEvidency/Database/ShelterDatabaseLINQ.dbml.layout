@@ -101,14 +101,14 @@
         <classShapeMoniker Id="69503c3d-2fad-48cf-932f-e9c741956b83" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.72760602088341 : 17); (6.125 : 16.6026060208834); (6.125 : 3.62938757942708); (6.26041666666667 : 3.62938757942708 : JumpStart); (6.42708333333333 : 3.62938757942708 : JumpEnd); (6.5 : 3.62938757942708)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.72760602088341 : 17); (6.125 : 16.6026060208834); (6.125 : 3.62938757942708); (6.5 : 3.62938757942708)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/Breeds/Breeds_Animals1" />
       <nodes>
         <classShapeMoniker Id="42435c45-3f91-42f3-9bb7-9076aa886ebd" />
         <classShapeMoniker Id="69503c3d-2fad-48cf-932f-e9c741956b83" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.75 : 4.84699625651042); (6.5 : 4.84699625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.75 : 4.84699625651042); (6.04166666666667 : 4.84699625651042 : JumpStart); (6.20833333333333 : 4.84699625651042 : JumpEnd); (6.26041666666667 : 4.84699625651042 : JumpStart); (6.42708333333333 : 4.84699625651042 : JumpEnd); (6.5 : 4.84699625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/CoatTypes/CoatTypes_Animals" />
       <nodes>
         <classShapeMoniker Id="4e526bd4-d55c-4b6c-a4c3-b9516734beb4" />
@@ -122,7 +122,7 @@
         <classShapeMoniker Id="69503c3d-2fad-48cf-932f-e9c741956b83" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 8.8069482421875); (6.26041666666667 : 8.8069482421875 : JumpStart); (6.42708333333333 : 8.8069482421875 : JumpEnd); (6.5 : 8.8069482421875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 8.8069482421875); (6.04166666666667 : 8.8069482421875 : JumpStart); (6.42708333333333 : 8.8069482421875 : JumpEnd); (6.5 : 8.8069482421875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/People/People_Adoptions" />
       <nodes>
         <classShapeMoniker Id="f28084e9-f8fd-44c7-8567-9c0972be1442" />
@@ -164,14 +164,14 @@
         <classShapeMoniker Id="9b853244-4002-4a1f-9b77-4d30676606b1" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.75 : 13.1562264964944); (6.06607443490112 : 12.8401520615933 : JumpStart); (6.18392556509888 : 12.7223009313955 : JumpEnd); (6.21875 : 12.6874764964944); (6.21875 : 5.34976070768229); (6.26041666666667 : 5.34976070768229 : JumpStart); (6.42708333333333 : 5.34976070768229 : JumpEnd); (6.5 : 5.34976070768229)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.75 : 13.1562264964944); (6.06607443490112 : 12.8401520615933 : JumpStart); (6.18392556509888 : 12.7223009313955 : JumpEnd); (6.21875 : 12.6874764964944); (6.21875 : 5.34976070768229); (6.5 : 5.34976070768229)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/Sexes/Sexes_Animals" />
       <nodes>
         <classShapeMoniker Id="273f42c5-3d1d-462c-8457-b93c89071c9b" />
         <classShapeMoniker Id="69503c3d-2fad-48cf-932f-e9c741956b83" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.75 : 15.0312264964944); (6.34375 : 14.4374764964944); (6.34375 : 2.24381187825521); (6.5 : 2.24381187825521)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.75 : 15.0312264964944); (6.06607443490112 : 14.7151520615933 : JumpStart); (6.18392556509888 : 14.5973009313955 : JumpEnd); (6.34375 : 14.4374764964944); (6.34375 : 2.24381187825521); (6.5 : 2.24381187825521)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/Species/Species_Animals" />
       <nodes>
         <classShapeMoniker Id="4f487c90-7a34-4edb-9345-1bf613e56688" />
@@ -184,7 +184,7 @@
         <elementListCompartment Id="b41ee0f4-b009-4abb-af53-3fef8e4b75f1" absoluteBounds="12.265, 8.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(8.5 : 3.66909912109375); (11.9479166666667 : 3.66909912109375 : JumpStart); (12.1145833333333 : 3.66909912109375 : JumpEnd); (12.5 : 3.66909912109375); (12.5 : 7.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.5 : 3.66909912109375); (11.9479166666667 : 3.66909912109375 : JumpStart); (12.1145833333333 : 3.66909912109375 : JumpEnd); (12.5 : 3.66909912109375); (12.5 : 7.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/Animals/Animals_Stays" />
       <nodes>
         <classShapeMoniker Id="69503c3d-2fad-48cf-932f-e9c741956b83" />
@@ -224,7 +224,7 @@
         <classShapeMoniker Id="4c82f836-12ac-4cb3-bb36-dfc74d62a457" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.5 : 2.35659912109375); (10.25 : 2.35659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.5 : 2.35659912109375); (10.25 : 2.35659912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/Animals/Animals_Costs" />
       <nodes>
         <classShapeMoniker Id="69503c3d-2fad-48cf-932f-e9c741956b83" />
@@ -237,12 +237,18 @@
         <elementListCompartment Id="b2fa9807-edbb-482f-a1cd-309d847e809c" absoluteBounds="14.015, 2.71, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(8.5 : 3.47239868164063); (11.9479166666667 : 3.47239868164062 : JumpStart); (12.1145833333333 : 3.47239868164063 : JumpEnd); (14 : 3.47239868164063)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.5 : 3.47239868164062); (11.9479166666667 : 3.47239868164062 : JumpStart); (12.1145833333333 : 3.47239868164062 : JumpEnd); (14 : 3.47239868164062)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ShelterDatabaseLINQDataContext/Animals/Animals_Incidents" />
       <nodes>
         <classShapeMoniker Id="69503c3d-2fad-48cf-932f-e9c741956b83" />
         <classShapeMoniker Id="7551b6df-83d1-45a3-92f1-6a4c092fc990" />
       </nodes>
     </associationConnector>
+    <classShape Id="8a32797e-67dc-462d-ba4b-9b64d536a1b5" absoluteBounds="12.5, 0.5, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/ShelterDatabaseLINQDataContext/Shelter" />
+      <nestedChildShapes>
+        <elementListCompartment Id="17640dd2-9c3f-4b45-87a6-242205b7e59d" absoluteBounds="12.515, 0.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

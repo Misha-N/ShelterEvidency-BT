@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using ShelterEvidency.Database;
+using ShelterEvidency.WrappingClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,11 +38,20 @@ namespace ShelterEvidency.Models
                 ID = diaryRecord.Id;
             }
         }
-        public static BindableCollection<DiaryRecords> GetDiaryRecords(DateTime selectedDate)
+        public static BindableCollection<DiaryRecordInfo> GetDiaryRecords(DateTime selectedDate)
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                return new BindableCollection<DiaryRecords>(db.DiaryRecords.Where(x => x.Date.Equals(selectedDate)));
+                var results = (from record in db.DiaryRecords
+                               where (record.Date.Equals(selectedDate))
+                               select new DiaryRecordInfo
+                               {
+                                   ID = record.Id,
+                                   Date = record.Date,
+                                   Record = record.Record
+                               });
+                return new BindableCollection<DiaryRecordInfo>(results);
+
             }
         }
         #endregion

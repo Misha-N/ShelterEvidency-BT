@@ -173,7 +173,7 @@ namespace ShelterEvidency.ViewModels
             await Task.Delay(150);
             await Task.Run(() =>
             {
-                AnimalWalks = WalkModel.GetDatedWalks(AnimalID, Since, To);
+                AnimalWalks = WalkModel.GetAnimalDatedWalks(AnimalID, Since, To);
             });
             IsWorking = false;
         }

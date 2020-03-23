@@ -62,7 +62,28 @@ namespace ShelterEvidency.Models
             }
         }
 
-        public static BindableCollection<WalkInfo> GetDatedWalks(int animalID, DateTime? since, DateTime? to)
+        public static BindableCollection<WalkInfo> GetDatedWalks(DateTime? since, DateTime? to)
+        {
+
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var results = (from walk in db.Walks
+                               where (walk.Date >= since && walk.Date <= to)
+                               select new WalkInfo
+                               {
+                                   ID = walk.ID,
+                                   Date = walk.Date,
+                                   Note = walk.Note,
+                                   AnimalName = walk.Animals.Name,
+                                   PersonID = walk.PersonID,
+                                   PersonName = walk.People.FirstName + " " + walk.People.LastName,
+                               });
+                return new BindableCollection<WalkInfo>(results);
+
+            }
+        }
+
+        public static BindableCollection<WalkInfo> GetAnimalDatedWalks(int animalID, DateTime? since, DateTime? to)
         {
 
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())

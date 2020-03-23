@@ -81,6 +81,9 @@ namespace ShelterEvidency.Database
     partial void InsertIncidents(Incidents instance);
     partial void UpdateIncidents(Incidents instance);
     partial void DeleteIncidents(Incidents instance);
+    partial void InsertShelter(Shelter instance);
+    partial void UpdateShelter(Shelter instance);
+    partial void DeleteShelter(Shelter instance);
     #endregion
 		
 		public ShelterDatabaseLINQDataContext() : 
@@ -246,6 +249,14 @@ namespace ShelterEvidency.Database
 			get
 			{
 				return this.GetTable<Incidents>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Shelter> Shelter
+		{
+			get
+			{
+				return this.GetTable<Shelter>();
 			}
 		}
 	}
@@ -4699,6 +4710,212 @@ namespace ShelterEvidency.Database
 						this._AnimalID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Animals");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Shelter")]
+	public partial class Shelter : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Name;
+		
+		private string _Phone;
+		
+		private string _Phone2;
+		
+		private string _Mail;
+		
+		private string _Adress;
+		
+		private string _Account;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnPhoneChanging(string value);
+    partial void OnPhoneChanged();
+    partial void OnPhone2Changing(string value);
+    partial void OnPhone2Changed();
+    partial void OnMailChanging(string value);
+    partial void OnMailChanged();
+    partial void OnAdressChanging(string value);
+    partial void OnAdressChanged();
+    partial void OnAccountChanging(string value);
+    partial void OnAccountChanged();
+    #endregion
+		
+		public Shelter()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(MAX)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="NVarChar(50)")]
+		public string Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this.OnPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._Phone = value;
+					this.SendPropertyChanged("Phone");
+					this.OnPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone2", DbType="NVarChar(50)")]
+		public string Phone2
+		{
+			get
+			{
+				return this._Phone2;
+			}
+			set
+			{
+				if ((this._Phone2 != value))
+				{
+					this.OnPhone2Changing(value);
+					this.SendPropertyChanging();
+					this._Phone2 = value;
+					this.SendPropertyChanged("Phone2");
+					this.OnPhone2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mail", DbType="NVarChar(50)")]
+		public string Mail
+		{
+			get
+			{
+				return this._Mail;
+			}
+			set
+			{
+				if ((this._Mail != value))
+				{
+					this.OnMailChanging(value);
+					this.SendPropertyChanging();
+					this._Mail = value;
+					this.SendPropertyChanged("Mail");
+					this.OnMailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adress", DbType="NVarChar(MAX)")]
+		public string Adress
+		{
+			get
+			{
+				return this._Adress;
+			}
+			set
+			{
+				if ((this._Adress != value))
+				{
+					this.OnAdressChanging(value);
+					this.SendPropertyChanging();
+					this._Adress = value;
+					this.SendPropertyChanged("Adress");
+					this.OnAdressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Account", DbType="NVarChar(50)")]
+		public string Account
+		{
+			get
+			{
+				return this._Account;
+			}
+			set
+			{
+				if ((this._Account != value))
+				{
+					this.OnAccountChanging(value);
+					this.SendPropertyChanging();
+					this._Account = value;
+					this.SendPropertyChanged("Account");
+					this.OnAccountChanged();
 				}
 			}
 		}

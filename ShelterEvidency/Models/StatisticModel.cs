@@ -9,31 +9,35 @@ namespace ShelterEvidency.Models
 {
     class StatisticModel
     {
-        public static int AnimalsInShelterSum()
+        public static int? AnimalsInShelterSum()
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                int total =
+                int? total =
                     (from animal in db.Animals
                      where (animal.InShelter == true)
                      select animal)
                     .Count();
-
-                return total;
+                if (total != null)
+                    return total;
+                else
+                    return 0;
             }
         }
 
-        public static int SuccessfullyAdoptedAnimals()
+        public static int? SuccessfullyAdoptedAnimals()
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                int total =
+                int? total =
                     (from adoption in db.Adoptions
                      where (adoption.Returned == false)
                      select adoption)
                     .Count();
-
-                return total;
+                if (total != null)
+                    return total;
+                else
+                    return 0;
             }
         }
 
@@ -45,8 +49,10 @@ namespace ShelterEvidency.Models
                     (from cost in db.Costs
                      select cost.Price)
                     .Sum();
-
-                return total;
+                if (total != null)
+                    return total;
+                else
+                    return 0;
             }
         }
 
@@ -59,8 +65,10 @@ namespace ShelterEvidency.Models
                      where (cost.Date >= since) && (cost.Date <= to)
                      select cost.Price)
                     .Sum();
-
-                return total;
+                if (total != null)
+                    return total;
+                else
+                    return 0;
             }
         }
 
@@ -72,8 +80,10 @@ namespace ShelterEvidency.Models
                     (from donation in db.Donations
                      select donation.Amount)
                     .Sum();
-
-                return total;
+                if (total != null)
+                    return total;
+                else
+                    return 0;
             }
         }
 
@@ -86,8 +96,10 @@ namespace ShelterEvidency.Models
                      where (donation.Date >= since) && (donation.Date <= to)
                      select donation.Amount)
                     .Sum();
-
-                return total;
+                if (total != null)
+                    return total;
+                else
+                    return 0;
             }
         }
     }

@@ -99,6 +99,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\ShelterModel.cs" />
     <Compile Include="WrappingClasses\AdoptionInfo.cs" />
     <Compile Include="WrappingClasses\AnimalInfo.cs" />
     <Compile Include="DocumentManager.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Models\StayModel.cs" />
     <Compile Include="Models\WalkModel.cs" />
     <Compile Include="WrappingClasses\CostInfo.cs" />
+    <Compile Include="WrappingClasses\DiaryRecordInfo.cs" />
     <Compile Include="WrappingClasses\DonationInfo.cs" />
     <Compile Include="WrappingClasses\IncidentInfo.cs" />
     <Compile Include="WrappingClasses\MedicalRecordInfo.cs" />
@@ -368,6 +370,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>ShelterDatabase.mdf</DependentUpon>
     </Content>
+    <Resource Include="Graphics\icon.png" />
     <Resource Include="Graphics\logo-loz.jpg" />
   </ItemGroup>
   <ItemGroup>
