@@ -48,7 +48,7 @@ namespace ShelterEvidency.Models
         }
    
 
-        public void UpdatePerson()
+        public void UpdateInfo()
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {

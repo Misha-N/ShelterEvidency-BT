@@ -207,13 +207,13 @@ namespace ShelterEvidency.ViewModels
 
         public void SetShelterInfo()
         {
+            ShelterModel = new ShelterModel();
             ShelterName = ShelterModel.Name;
             ShelterPhone = ShelterModel.Phone;
             ShelterEmergencyPhone = ShelterModel.Phone2;
             ShelterMail = ShelterModel.Mail;
             ShelterAdress = ShelterModel.Adress;
             ShelterAccount = ShelterModel.Account;
-
         }
 
 

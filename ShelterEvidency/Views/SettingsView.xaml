@@ -4,11 +4,89 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShelterEvidency.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:helpers="clr-namespace:ShelterEvidency.Helpers"
              Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="900" d:DesignWidth="1200">
+    <UserControl.Resources>
+
+        <helpers:InvertBooleanConverter  x:Key="boolConvert"/>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+
+
+    </UserControl.Resources>
+
+    <materialDesign:Card Margin="10"
+    materialDesign:ShadowAssist.ShadowDepth="Depth1">
+        <Grid  IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <materialDesign:PackIcon Kind="Cogs" Margin="30,30,0,0"  Width="150" Opacity="0.2" Height="150"/>
+
+
+            <materialDesign:Card VerticalAlignment="Bottom"
+    materialDesign:ShadowAssist.ShadowDepth="Depth1" Margin="20,0,20,75">
+                <GroupBox FontSize="15"
+                      Header="Úprava základních údajů o útulku" 
+                          
+                      Style="{DynamicResource MaterialDesignGroupBox}"
+                      Margin="16,16,17,16"
+                      materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                      BorderThickness="0">
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="80"/>
+                        </Grid.RowDefinitions>
+                        <TextBox x:Name="ShelterName" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon útulku" TextWrapping="Wrap" Margin="5,15,5,5" Padding="2"/>
+
+
+                        <TextBox x:Name="ShelterPhone" Grid.Row="1" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon útulku" TextWrapping="Wrap" Margin="5,15,5,5" Padding="2"/>
+                        <TextBox x:Name="ShelterEmergencyPhone" Grid.Row="2" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Pohotovost útulku" TextWrapping="Wrap" Margin="5,15,5,5" Padding="2"/>
+                        <TextBox x:Name="ShelterMail" Grid.Row="3" VerticalAlignment="Center"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="E-mail útulku" TextWrapping="Wrap" Margin="5,15,5,5" Padding="2"/>
+                        <TextBox x:Name="ShelterAdress" Grid.Row="4" VerticalAlignment="Center"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Adresa útulku" TextWrapping="Wrap" Margin="5,15,5,5" Padding="2"/>
+                        <TextBox x:Name="ShelterAccount" Grid.Row="5" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Číslo účtu útulku" TextWrapping="Wrap" Margin="5,15,5,5" Padding="2"/>
+
+                        <Button Grid.Row="6" Style="{StaticResource MaterialDesignRaisedAccentButton}" VerticalAlignment="Bottom" x:Name="UpdateShelterInfo"  Height="50" Margin="30,10">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="ContentSaveEditOutline"  Width="20" Height="20"/>
+                                <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Aktualizovat údaje</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                    </Grid>
+
+                </GroupBox>
+            </materialDesign:Card>
+
+            <ScrollViewer Grid.Column="1">
+                <ContentControl  x:Name="ActiveItem"/>
+            </ScrollViewer>
+
+            <ProgressBar  
+              Visibility="{Binding IsWorking, Converter={StaticResource VisibleIfTrueConverter}, Mode=OneWay}"
+              Grid.RowSpan="2" Grid.ColumnSpan="3"
+              Style="{StaticResource MaterialDesignCircularProgressBar}"
+              Value="0"
+              Height="50"
+              Width="50"
+              IsIndeterminate="True" />
+
+        </Grid>
+    </materialDesign:Card>
+    <!--
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -20,8 +98,9 @@
             <Button Content="Nastavení 3" Margin="2,0,0,0" Padding="2,0"/>
         </StackPanel>
 
-        <ContentControl x:Name="ActiveItem" Grid.Row="1"/>
+        <ContentControl x:Name="ActiveItem"/>
 
 
     </Grid>
+    -->
 </UserControl>

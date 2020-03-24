@@ -4,11 +4,230 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShelterEvidency.Views"
-             Background="{DynamicResource MaterialDesignPaper}"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        FontFamily="{DynamicResource MaterialDesignFont}"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+                FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="1800" d:DesignWidth="600">
+
+    <StackPanel Margin="10">
+        <materialDesign:Card Margin="10"
+             materialDesign:ShadowAssist.ShadowDepth="Depth1">
+
+
+            <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="250"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+
+                <Grid Margin="10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock VerticalAlignment="Center" 
+                    Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                  Nastavení druhů
+                    </TextBlock>
+
+                    <Button Grid.Column="1" x:Name="DeleteSpecies" IsEnabled="{Binding SpeciesSelected}"
+                        Style="{StaticResource MaterialDesignIconForegroundButton}" VerticalAlignment="Center" >
+                                <materialDesign:PackIcon
+                        Kind="DeleteForever"
+                        Height="24"
+                        Width="24" />
+                    </Button>
+
+                </Grid>
+
+                <DataGrid  Grid.Row="1" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding Path=SpeciesList, Mode=OneWay}" SelectedItem="{Binding Path=SelectedSpecies, Mode=OneWayToSource}" Margin="10,10,10,0"/>
+
+                <Grid Grid.Row="2" Margin="10,0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="NewSpeciesName" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Název nového druhu" TextWrapping="Wrap" Margin="0,5" Padding="2"/>
+
+                    <Button Grid.Column="1" x:Name="AddSpecies"  IsEnabled="{Binding NewSpeciesSelected}"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                        <materialDesign:PackIcon
+                        Kind="Add"
+                        Height="24"
+                        Width="24" />
+                    </Button>
+                </Grid>
+                
+        </Grid>
+        </materialDesign:Card>
+
+
+        <materialDesign:Card Margin="10"
+             materialDesign:ShadowAssist.ShadowDepth="Depth1">
+
+
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="250"/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+
+                <Grid Margin="10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock VerticalAlignment="Center" 
+                    Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                  Nastavení plemen
+                    </TextBlock>
+
+                    <Button Grid.Column="1" x:Name="DeleteBreed" IsEnabled="{Binding BreedSelected}"
+                        Style="{StaticResource MaterialDesignIconForegroundButton}" VerticalAlignment="Center" >
+                        <materialDesign:PackIcon
+                        Kind="DeleteForever"
+                        Height="24"
+                        Width="24" />
+                    </Button>
+
+                </Grid>
+
+                <DataGrid  Grid.Row="1" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding Path=BreedList, Mode=OneWay}" SelectedItem="{Binding Path=SelectedBreed, Mode=OneWayToSource}" Margin="10,10,10,0"/>
+
+                <Grid Grid.Row="2" Margin="10,0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="2.5*"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="NewBreedName" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Název nového plemena" TextWrapping="Wrap" Margin="0,5" Padding="2"/>
+
+                    <ComboBox Margin="5" VerticalAlignment="Center" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Druh" ItemsSource="{Binding Path=SpeciesList, Mode=OneWay}" DisplayMemberPath="SpeciesName" SelectedValuePath="Id" SelectedValue="{Binding Path=NewBreedSpecies, Mode=OneWayToSource}"/>
+
+
+                    <Button Grid.Column="2" x:Name="AddBreed" IsEnabled="{Binding NewBreedSelected}"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                        <materialDesign:PackIcon
+                        Kind="Add"
+                        Height="24"
+                        Width="24" />
+                    </Button>
+                </Grid>
+
+            </Grid>
+        </materialDesign:Card>
+
+
+        <materialDesign:Card Margin="10"
+             materialDesign:ShadowAssist.ShadowDepth="Depth1">
+
+
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="250"/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+
+                <Grid Margin="10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock VerticalAlignment="Center" 
+                    Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                  Nastavení typů srsti
+                    </TextBlock>
+
+                    <Button Grid.Column="1" x:Name="DeleteCoatType" IsEnabled="{Binding CoatTypeSelected}"
+                        Style="{StaticResource MaterialDesignIconForegroundButton}" VerticalAlignment="Center" >
+                        <materialDesign:PackIcon
+                        Kind="DeleteForever"
+                        Height="24"
+                        Width="24" />
+                    </Button>
+
+                </Grid>
+
+                <DataGrid  Grid.Row="1" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding Path=CoatTypeList, Mode=OneWay}" SelectedItem="{Binding Path=SelectedCoatType, Mode=OneWayToSource}" Margin="10,10,10,0"/>
+
+                <Grid Grid.Row="2" Margin="10,0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="NewCoatTypeName" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Název nového typu srsti" TextWrapping="Wrap" Margin="0,5" Padding="2"/>
+
+                    <Button Grid.Column="1" x:Name="AddCoatType"  IsEnabled="{Binding NewCoatTypeSelected}"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                        <materialDesign:PackIcon
+                        Kind="Add"
+                        Height="24"
+                        Width="24" />
+                    </Button>
+                </Grid>
+
+            </Grid>
+        </materialDesign:Card>
+
+        <materialDesign:Card Margin="10"
+             materialDesign:ShadowAssist.ShadowDepth="Depth1">
+
+
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="250"/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+
+                <Grid Margin="10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock VerticalAlignment="Center" 
+                    Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                  Nastavení barev srsti
+                    </TextBlock>
+
+                    <Button Grid.Column="1" x:Name="DeleteFurColor" IsEnabled="{Binding FurColorSelected}"
+                        Style="{StaticResource MaterialDesignIconForegroundButton}" VerticalAlignment="Center" >
+                        <materialDesign:PackIcon
+                        Kind="DeleteForever"
+                        Height="24"
+                        Width="24" />
+                    </Button>
+
+                </Grid>
+
+                <DataGrid  Grid.Row="1" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding Path=FurColorList, Mode=OneWay}" SelectedItem="{Binding Path=SelectedFurColor, Mode=OneWayToSource}" Margin="10,10,10,0"/>
+
+                <Grid Grid.Row="2" Margin="10,0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="NewFurColorName" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Název nové barvy srsti" TextWrapping="Wrap" Margin="0,5" Padding="2"/>
+
+                    <Button Grid.Column="1" x:Name="AddFurColor"  IsEnabled="{Binding NewFurColorSelected}"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                        <materialDesign:PackIcon
+                        Kind="Add"
+                        Height="24"
+                        Width="24" />
+                    </Button>
+                </Grid>
+
+            </Grid>
+        </materialDesign:Card>
+
+    </StackPanel>
+
+    <!--
     <StackPanel>
         <GroupBox Header="Nastavení druhů:">
             <StackPanel>
@@ -84,4 +303,5 @@
         </GroupBox>
 
     </StackPanel>
+    -->
 </UserControl>
