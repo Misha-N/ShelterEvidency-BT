@@ -445,6 +445,62 @@ namespace ShelterEvidency.ViewModels
         }
         #endregion
 
+        #region Delete functions
+
+        public void DeleteBreed()
+        {
+            MessageBoxResult result = MessageBox.Show("Opravdu chcete vymazat zvolené plemeno?",
+                                          "Confirmation",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                BreedModel.MarkAsDeleted(SelectedBreed.Id);
+                LoadBreeds();
+            }
+        }
+
+        public void DeleteSpecies()
+        {
+            MessageBoxResult result = MessageBox.Show("Opravdu chcete vymazat zvolený druh?",
+                                          "Confirmation",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                SpeciesModel.MarkAsDeleted(SelectedSpecies.Id);
+                LoadSpecies();
+            }
+        }
+
+        public void DeleteFurColor()
+        {
+            MessageBoxResult result = MessageBox.Show("Opravdu chcete vymazat zvolenou barvu srsti?",
+                                          "Confirmation",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                FurColorModel.MarkAsDeleted(SelectedFurColor.Id);
+                LoadFurColors();
+            }
+        }
+
+        public void DeleteCoatType()
+        {
+            MessageBoxResult result = MessageBox.Show("Opravdu chcete vymazat zvolený typ srsti?",
+                                          "Confirmation",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                CoatTypeModel.MarkAsDeleted(SelectedCoatType.Id);
+                LoadCoatTypes();
+            }
+        }
+
+        #endregion
+
     }
 
 }

@@ -19,7 +19,7 @@ namespace ShelterEvidency.Models
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                return new BindableCollection<Species>(db.Species);
+                return new BindableCollection<Species>(db.Species.Where(x => x.IsDeleted.Equals(false)));
             }
         }
 
@@ -32,7 +32,8 @@ namespace ShelterEvidency.Models
                 {
                     Species species = new Species
                     {
-                        SpeciesName = SpeciesName
+                        SpeciesName = SpeciesName,
+                        IsDeleted = false
                     };
                     db.Species.InsertOnSubmit(species);
                     db.SubmitChanges();
@@ -41,6 +42,16 @@ namespace ShelterEvidency.Models
                 }
             }
 
+        }
+
+        public static void MarkAsDeleted(int id)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var species = db.Species.Single(x => x.Id == id);
+                species.IsDeleted = true;
+                db.SubmitChanges();
+            }
         }
     }
 }

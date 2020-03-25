@@ -21,9 +21,9 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 if (speciesID is null)
-                    return new BindableCollection<Breeds>(db.Breeds);
+                    return new BindableCollection<Breeds>(db.Breeds.Where(x => x.IsDeleted.Equals(false)));
                 else
-                    return  new BindableCollection<Breeds>(db.Breeds.Where(x => x.SpeciesID.Equals(speciesID)));
+                    return  new BindableCollection<Breeds>(db.Breeds.Where(x => x.SpeciesID.Equals(speciesID) && x.IsDeleted.Equals(false)));
             }
         }
         public void SaveBreed()
@@ -34,8 +34,9 @@ namespace ShelterEvidency.Models
                 {
                     Breeds breed = new Breeds
                     {
-                        BreedName = BreedName, 
-                        SpeciesID = SpeciesID
+                        BreedName = BreedName,
+                        SpeciesID = SpeciesID,
+                        IsDeleted = false
                     };
                     db.Breeds.InsertOnSubmit(breed);
                     db.SubmitChanges();
@@ -46,6 +47,17 @@ namespace ShelterEvidency.Models
         }
 
 
-        
+        public static void MarkAsDeleted(int id)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var breed = db.Breeds.Single(x => x.Id == id);
+                breed.IsDeleted = true;
+                db.SubmitChanges();
+            }
+        }
+
+
+
     }
 }

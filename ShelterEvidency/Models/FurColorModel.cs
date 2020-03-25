@@ -18,7 +18,7 @@ namespace ShelterEvidency.Models
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                return new BindableCollection<FurColors>(db.FurColors);
+                return new BindableCollection<FurColors>(db.FurColors.Where(x => x.IsDeleted.Equals(false)));
             }
         }
         public void SaveFurColor()
@@ -30,7 +30,8 @@ namespace ShelterEvidency.Models
                 {
                     FurColors furColor = new FurColors
                     {
-                        FurColorName = FurColorName
+                        FurColorName = FurColorName,
+                        IsDeleted = false
                     };
                     db.FurColors.InsertOnSubmit(furColor);
                     db.SubmitChanges();
@@ -39,6 +40,16 @@ namespace ShelterEvidency.Models
                 }
             }
 
+        }
+
+        public static void MarkAsDeleted(int id)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var furColor = db.FurColors.Single(x => x.Id == id);
+                furColor.IsDeleted = true;
+                db.SubmitChanges();
+            }
         }
     }
 }

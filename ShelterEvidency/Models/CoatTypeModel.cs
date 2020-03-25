@@ -20,7 +20,7 @@ namespace ShelterEvidency.Models
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                return new  BindableCollection<CoatTypes>(db.CoatTypes);
+                return new  BindableCollection<CoatTypes>(db.CoatTypes.Where(x => x.IsDeleted.Equals(false)));
             }
         }
 
@@ -32,7 +32,8 @@ namespace ShelterEvidency.Models
                 {
                     CoatTypes coatType = new CoatTypes
                     {
-                        CoatTypeName = CoatTypeName
+                        CoatTypeName = CoatTypeName,
+                        IsDeleted = false
                     };
                     db.CoatTypes.InsertOnSubmit(coatType);
                     db.SubmitChanges();
@@ -41,6 +42,16 @@ namespace ShelterEvidency.Models
                 }
             }
 
+        }
+
+        public static void MarkAsDeleted(int id)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var coatType = db.CoatTypes.Single(x => x.Id == id);
+                coatType.IsDeleted = true;
+                db.SubmitChanges();
+            }
         }
     }
 }

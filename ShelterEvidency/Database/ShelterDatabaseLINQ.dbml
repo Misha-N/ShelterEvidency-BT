@@ -54,31 +54,15 @@
       <Association Name="Animals_MedicalRecords" Member="MedicalRecords" ThisKey="ID" OtherKey="AnimalID" Type="MedicalRecords" />
       <Association Name="Animals_Costs" Member="Costs" ThisKey="ID" OtherKey="AnimalID" Type="Costs" />
       <Association Name="Animals_Incidents" Member="Incidents" ThisKey="ID" OtherKey="AnimalID" Type="Incidents" />
-      <Association Name="Breeds_Animals" Member="Breeds" ThisKey="BreedID" OtherKey="Id" Type="Breeds" IsForeignKey="true" />
-      <Association Name="Breeds_Animals1" Member="Breeds1" ThisKey="CrossBreedID" OtherKey="Id" Type="Breeds" IsForeignKey="true" />
-      <Association Name="CoatTypes_Animals" Member="CoatTypes" ThisKey="CoatTypeID" OtherKey="Id" Type="CoatTypes" IsForeignKey="true" />
-      <Association Name="FurColors_Animals" Member="FurColors" ThisKey="FurColorID" OtherKey="Id" Type="FurColors" IsForeignKey="true" />
       <Association Name="People_Animals" Member="People" ThisKey="NewOwnerID" OtherKey="Id" Type="People" IsForeignKey="true" />
       <Association Name="People_Animals1" Member="People1" ThisKey="OwnerID" OtherKey="Id" Type="People" IsForeignKey="true" />
       <Association Name="People_Animals2" Member="People2" ThisKey="VetID" OtherKey="Id" Type="People" IsForeignKey="true" />
       <Association Name="Sexes_Animals" Member="Sexes" ThisKey="SexID" OtherKey="Id" Type="Sexes" IsForeignKey="true" />
+      <Association Name="Breeds_Animals" Member="Breeds" ThisKey="BreedID" OtherKey="Id" Type="Breeds" IsForeignKey="true" />
+      <Association Name="Breeds_Animals1" Member="Breeds1" ThisKey="CrossBreedID" OtherKey="Id" Type="Breeds" IsForeignKey="true" />
+      <Association Name="CoatTypes_Animals" Member="CoatTypes" ThisKey="CoatTypeID" OtherKey="Id" Type="CoatTypes" IsForeignKey="true" />
+      <Association Name="FurColors_Animals" Member="FurColors" ThisKey="FurColorID" OtherKey="Id" Type="FurColors" IsForeignKey="true" />
       <Association Name="Species_Animals" Member="Species" ThisKey="SpeciesID" OtherKey="Id" Type="Species" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Breeds" Member="Breeds">
-    <Type Name="Breeds">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="BreedName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="SpeciesID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Breeds_Animals" Member="Animals" ThisKey="Id" OtherKey="BreedID" Type="Animals" />
-      <Association Name="Breeds_Animals1" Member="Animals1" ThisKey="Id" OtherKey="CrossBreedID" Type="Animals" />
-    </Type>
-  </Table>
-  <Table Name="dbo.CoatTypes" Member="CoatTypes">
-    <Type Name="CoatTypes">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CoatTypeName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="CoatTypes_Animals" Member="Animals" ThisKey="Id" OtherKey="CoatTypeID" Type="Animals" />
     </Type>
   </Table>
   <Table Name="dbo.Deaths" Member="Deaths">
@@ -104,13 +88,6 @@
       <Column Name="DonationName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="People_Donations" Member="People" ThisKey="DonatorID" OtherKey="Id" Type="People" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.FurColors" Member="FurColors">
-    <Type Name="FurColors">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FurColorName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="FurColors_Animals" Member="Animals" ThisKey="Id" OtherKey="FurColorID" Type="Animals" />
     </Type>
   </Table>
   <Table Name="dbo.Images" Member="Images">
@@ -152,13 +129,6 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="SexName" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
       <Association Name="Sexes_Animals" Member="Animals" ThisKey="Id" OtherKey="SexID" Type="Animals" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Species" Member="Species">
-    <Type Name="Species">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="SpeciesName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Species_Animals" Member="Animals" ThisKey="Id" OtherKey="SpeciesID" Type="Animals" />
     </Type>
   </Table>
   <Table Name="dbo.Stays" Member="Stays">
@@ -219,6 +189,40 @@
       <Column Name="Mail" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Adress" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Account" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Breeds" Member="Breeds">
+    <Type Name="Breeds">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BreedName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SpeciesID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Breeds_Animals" Member="Animals" ThisKey="Id" OtherKey="BreedID" Type="Animals" />
+      <Association Name="Breeds_Animals1" Member="Animals1" ThisKey="Id" OtherKey="CrossBreedID" Type="Animals" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CoatTypes" Member="CoatTypes">
+    <Type Name="CoatTypes">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CoatTypeName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="CoatTypes_Animals" Member="Animals" ThisKey="Id" OtherKey="CoatTypeID" Type="Animals" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FurColors" Member="FurColors">
+    <Type Name="FurColors">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FurColorName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="FurColors_Animals" Member="Animals" ThisKey="Id" OtherKey="FurColorID" Type="Animals" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Species" Member="Species">
+    <Type Name="Species">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SpeciesName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Species_Animals" Member="Animals" ThisKey="Id" OtherKey="SpeciesID" Type="Animals" />
     </Type>
   </Table>
 </Database>
