@@ -141,8 +141,8 @@ namespace ShelterEvidency.Models
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                var donation = db.Donations.Single(x => x.ID == id);
-                donation.IsDeleted = true;
+                var incident = db.Incidents.Single(x => x.ID == id);
+                incident.IsDeleted = true;
                 db.SubmitChanges();
             }
         }

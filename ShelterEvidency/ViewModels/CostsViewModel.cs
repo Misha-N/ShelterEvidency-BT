@@ -369,6 +369,9 @@ namespace ShelterEvidency.ViewModels
             if (result == MessageBoxResult.Yes)
             {
                 CostModel.MarkAsDeleted((int)SelectedCost.ID);
+                Cost = new CostModel();
+                SelectedCost = null;
+
                 Filter();
             }
         }

@@ -157,6 +157,7 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => Severity);
             NotifyOfPropertyChange(() => Description);
             NotifyOfPropertyChange(() => Date);
+            NotifyOfPropertyChange(() => IsSelected);
         }
 
         public void UpdateIncident()
@@ -300,6 +301,35 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => NewDate);
             NotifyOfPropertyChange(() => NewSeverity);
 
+        }
+
+        public bool IsSelected
+        {
+            get
+            {
+                if (SelectedIncident != null)
+                    return true;
+                else
+                    return false;
+            }
+
+        }
+
+        public void DeleteIncident()
+        {
+            MessageBoxResult result = MessageBox.Show("Opravdu chcete vymazat zvolený incident?",
+                                          "Confirmation",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                DonationModel.MarkAsDeleted((int)SelectedIncident.ID);
+
+                Incident = new IncidentModel();
+                SelectedIncident = null;
+
+                Filter();
+            }
         }
 
     }

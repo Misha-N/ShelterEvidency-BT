@@ -265,6 +265,7 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => Amount);
             NotifyOfPropertyChange(() => Date);
             NotifyOfPropertyChange(() => SelectedDonation);
+            NotifyOfPropertyChange(() => IsSelected);
         }
 
         public void UpdateDonation()
@@ -374,6 +375,36 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => NewDate);
             NotifyOfPropertyChange(() => NewAmount);
         }
+
+        public bool IsSelected
+        {
+            get
+            {
+                if (SelectedDonation != null)
+                    return true;
+                else
+                    return false;
+            }
+
+        }
+
+        public void DeleteDonation()
+        {
+            MessageBoxResult result = MessageBox.Show("Opravdu chcete vymazat zvolený dar?",
+                                          "Confirmation",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                DonationModel.MarkAsDeleted((int)SelectedDonation.ID);
+
+                Donation = new DonationModel();
+                SelectedDonation = null;
+                
+                Filter();
+            }
+        }
+
         #endregion
     }
 

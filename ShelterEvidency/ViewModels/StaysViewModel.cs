@@ -199,6 +199,7 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => Adopted);
             NotifyOfPropertyChange(() => Escaped);
             NotifyOfPropertyChange(() => Died);
+            NotifyOfPropertyChange(() => IsSelected);
         }
 
         public void UpdateStay()
@@ -327,6 +328,36 @@ namespace ShelterEvidency.ViewModels
             {
                 NewStay.StartDate = value;
                 NotifyOfPropertyChange(() => NewStayDate);
+            }
+        }
+
+        public bool IsSelected
+        {
+            get
+            {
+                if (SelectedStay != null)
+                    return true;
+                else
+                    return false;
+            }
+
+        }
+
+        public void DeleteStay()
+        {
+            MessageBoxResult result = MessageBox.Show("Opravdu chcete vymazat zvolený pobyt?",
+                                          "Confirmation",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                StayModel.MarkAsDeleted((int)SelectedStay.ID);
+
+                Stay = new StayModel();
+
+                SelectedStay = null;
+
+                Filter();
             }
         }
 

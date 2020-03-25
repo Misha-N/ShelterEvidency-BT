@@ -47,7 +47,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from record in db.MedicalRecords
-                               where (record.AnimalID.Equals(animalID)) && (record.IsDeleted.Equals(false))
+                               where (record.AnimalID.Equals(animalID) && (record.IsDeleted.Equals(false)))
                                select new MedicalRecordInfo
                                {
                                    ID = record.Id,
@@ -71,7 +71,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from record in db.MedicalRecords
-                               where (record.AnimalID.Equals(animalID) && (record.Date >= since && record.Date <= to)) && (record.IsDeleted.Equals(false))
+                               where (record.AnimalID.Equals(animalID) && (record.Date >= since && record.Date <= to) && (record.IsDeleted.Equals(false)))
                                select new MedicalRecordInfo
                                {
                                    ID = record.Id,

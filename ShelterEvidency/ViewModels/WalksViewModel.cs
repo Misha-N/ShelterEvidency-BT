@@ -250,6 +250,7 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => Note);
             NotifyOfPropertyChange(() => Date);
             NotifyOfPropertyChange(() => Walker);
+            NotifyOfPropertyChange(() => IsSelected);
         }
 
         public void UpdateWalk()
@@ -328,6 +329,37 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => NewDate);
             NotifyOfPropertyChange(() => NewWalker);
             NotifyOfPropertyChange(() => NewNote);
+        }
+
+
+        public bool IsSelected
+        {
+            get
+            {
+                if (SelectedWalk != null)
+                    return true;
+                else
+                    return false;
+            }
+
+        }
+
+        public void DeleteWalk()
+        {
+            MessageBoxResult result = MessageBox.Show("Opravdu chcete vymazat zvolenou procházku?",
+                                          "Confirmation",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                WalkModel.MarkAsDeleted((int)SelectedWalk.ID);
+
+                Walk = new WalkModel();
+
+                SelectedWalk = null;
+
+                Filter();
+            }
         }
 
 

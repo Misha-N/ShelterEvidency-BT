@@ -226,6 +226,9 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => Vet);
             NotifyOfPropertyChange(() => Date);
             NotifyOfPropertyChange(() => Price);
+            NotifyOfPropertyChange(() => IsSelected);
+
+
         }
 
         public void UpdateMedicalRecord()
@@ -406,6 +409,37 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => NewDate);
             NotifyOfPropertyChange(() => NewPrice);
             
+        }
+
+        public bool IsSelected
+        {
+            get
+            {
+                if (SelectedMedicalRecord != null)
+                    return true;
+                else
+                    return false;
+            }
+
+        }
+
+        public void DeleteRecord()
+        {
+            MessageBoxResult result = MessageBox.Show("Opravdu chcete vymazat zvolený záznam?",
+                                          "Confirmation",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                CostModel.MarkAsDeleted((int)SelectedMedicalRecord.CostID);
+                MedicalRecordModel.MarkAsDeleted((int)SelectedMedicalRecord.ID);
+
+                MedicalCost = new CostModel();
+                MedicalRecord = new MedicalRecordModel();
+                SelectedMedicalRecord = null;
+
+                Filter();
+            }
         }
 
         #endregion
