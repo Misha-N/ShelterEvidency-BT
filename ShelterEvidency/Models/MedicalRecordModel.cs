@@ -47,7 +47,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from record in db.MedicalRecords
-                               where (record.AnimalID.Equals(animalID))
+                               where (record.AnimalID.Equals(animalID)) && (record.IsDeleted.Equals(false))
                                select new MedicalRecordInfo
                                {
                                    ID = record.Id,
@@ -71,7 +71,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from record in db.MedicalRecords
-                               where (record.AnimalID.Equals(animalID) && (record.Date >= since && record.Date <= to))
+                               where (record.AnimalID.Equals(animalID) && (record.Date >= since && record.Date <= to)) && (record.IsDeleted.Equals(false))
                                select new MedicalRecordInfo
                                {
                                    ID = record.Id,
@@ -120,6 +120,16 @@ namespace ShelterEvidency.Models
                 medicalRecord.Description = Description;
                 medicalRecord.Date = Date;
 
+                db.SubmitChanges();
+            }
+        }
+
+        public static void MarkAsDeleted(int id)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var record = db.MedicalRecords.Single(x => x.Id == id);
+                record.IsDeleted = true;
                 db.SubmitChanges();
             }
         }

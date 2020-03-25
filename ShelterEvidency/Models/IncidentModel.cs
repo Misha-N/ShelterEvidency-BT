@@ -43,7 +43,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from incident in db.Incidents
-                               where (incident.AnimalID.Equals(animalID))
+                               where (incident.AnimalID.Equals(animalID)) && (incident.IsDeleted.Equals(false))
                                select new IncidentInfo
                                {
                                    ID = incident.ID,
@@ -65,6 +65,7 @@ namespace ShelterEvidency.Models
             {
                 var results = (from incident in db.Incidents
                                where (incident.AnimalID.Equals(animalID) && (incident.IncidentDate >= since && incident.IncidentDate <= to))
+                                && (incident.IsDeleted.Equals(false))
                                select new IncidentInfo
                                {
                                    ID = incident.ID,
@@ -108,6 +109,16 @@ namespace ShelterEvidency.Models
                 incident.Description = Description;
                 incident.AnimalID = AnimalID;
 
+                db.SubmitChanges();
+            }
+        }
+
+        public static void MarkAsDeleted(int id)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var incident = db.Incidents.Single(x => x.ID == id);
+                incident.IsDeleted = true;
                 db.SubmitChanges();
             }
         }

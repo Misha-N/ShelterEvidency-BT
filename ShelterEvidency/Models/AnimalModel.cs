@@ -31,7 +31,6 @@ namespace ShelterEvidency.Models
         public bool? Castration { get; set; }
         public bool? InShelter { get; set; }
         public bool? IsDead { get; set; }
-        public bool IsDeleted { get; set; }
         public string FolderPath { get; set; }
         public string ImagePath { get; set; }
 
@@ -42,7 +41,6 @@ namespace ShelterEvidency.Models
             Castration = false;
             InShelter = true;
             IsDead = false;
-            IsDeleted = false;
         }
 
         public void SaveAnimal()
@@ -70,9 +68,7 @@ namespace ShelterEvidency.Models
                     InShelter = InShelter,
                     IsDead = IsDead,
                     FolderPath = FolderPath,
-                    ImagePath = ImagePath,
-                    IsDeleted = IsDeleted,
- 
+                    ImagePath = ImagePath, 
 
                 };
                 db.Animals.InsertOnSubmit(animal);

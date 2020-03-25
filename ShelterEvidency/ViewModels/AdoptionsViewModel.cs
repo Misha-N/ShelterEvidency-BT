@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.ViewModels
 {
@@ -125,6 +126,19 @@ namespace ShelterEvidency.ViewModels
         public void UpdateAdoptions()
         {
             LoadData();
+        }
+
+        public void DeleteAdoption()
+        {
+            MessageBoxResult result = MessageBox.Show("Opravdu chcete vymazat zvolenou osobu?",
+                                          "Confirmation",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                AdoptionModel.MarkAsDeleted((int)SelectedAdoption.ID);
+                LoadData();
+            }
         }
 
     }

@@ -343,6 +343,19 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => IsWalker);
         }
 
+        public void DeletePerson()
+        {
+            MessageBoxResult result = MessageBox.Show("Opravdu chcete vymazat zvolenou osobu?",
+                                          "Confirmation",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                PersonModel.MarkAsDeleted((int)SelectedPerson.ID);
+                LoadData();
+            }
+        }
+
         #endregion
 
 

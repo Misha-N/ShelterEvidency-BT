@@ -47,7 +47,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from walk in db.Walks
-                               where (walk.AnimalID.Equals(animalID))
+                               where (walk.AnimalID.Equals(animalID)) && (walk.IsDeleted.Equals(false))
                                select new WalkInfo
                                {
                                    ID = walk.ID,
@@ -68,7 +68,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from walk in db.Walks
-                               where (walk.Date >= since && walk.Date <= to)
+                               where (walk.Date >= since && walk.Date <= to) && (walk.IsDeleted.Equals(false))
                                select new WalkInfo
                                {
                                    ID = walk.ID,
@@ -90,6 +90,7 @@ namespace ShelterEvidency.Models
             {
                 var results = (from walk in db.Walks
                                where (walk.AnimalID.Equals(animalID) && (walk.Date >= since && walk.Date <= to))
+                                && (walk.IsDeleted.Equals(false))
                                select new WalkInfo
                                {
                                    ID = walk.ID,
@@ -143,7 +144,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from walk in db.Walks
-                               where (walk.PersonID.Equals(personID))
+                               where (walk.PersonID.Equals(personID)) && (walk.IsDeleted.Equals(false))
                                select new WalkInfo
                                {
                                    ID = walk.ID,
@@ -153,6 +154,16 @@ namespace ShelterEvidency.Models
                                    Note = walk.Note,
                                });
                 return new BindableCollection<WalkInfo>(results);
+            }
+        }
+
+        public static void MarkAsDeleted(int id)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var walk = db.Walks.Single(x => x.ID == id);
+                walk.IsDeleted = true;
+                db.SubmitChanges();
             }
         }
     }

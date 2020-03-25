@@ -43,7 +43,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from record in db.DiaryRecords
-                               where (record.Date.Equals(selectedDate))
+                               where (record.Date.Equals(selectedDate)) && (record.IsDeleted.Equals(false))
                                select new DiaryRecordInfo
                                {
                                    ID = record.Id,
@@ -52,6 +52,16 @@ namespace ShelterEvidency.Models
                                });
                 return new BindableCollection<DiaryRecordInfo>(results);
 
+            }
+        }
+
+        public static void MarkAsDeleted(int id)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var record = db.DiaryRecords.Single(x => x.Id == id);
+                record.IsDeleted = true;
+                db.SubmitChanges();
             }
         }
         #endregion

@@ -331,5 +331,15 @@ namespace ShelterEvidency.Models
                 return new BindableCollection<PersonInfo>(results);
             }
         }
+
+        public static void MarkAsDeleted(int id)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var person = db.People.Single(x => x.Id == id);
+                person.IsDeleted = true;
+                db.SubmitChanges();
+            }
+        }
     }
 }

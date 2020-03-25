@@ -46,6 +46,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from donation in db.Donations
+                               where ((donation.IsDeleted.Equals(false)))
                                select new DonationInfo
                                {
                                    ID = donation.ID,
@@ -67,7 +68,7 @@ namespace ShelterEvidency.Models
                 //return db.Donations.Where(x => x.Date >= since && x.Date <= to).ToList();
 
                 var results = (from donation in db.Donations
-                               where (donation.Date >= since && donation.Date <= to)
+                               where (donation.Date >= since && donation.Date <= to) && (donation.IsDeleted.Equals(false))
                                select new DonationInfo
                                {
                                    ID = donation.ID,
@@ -122,7 +123,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from donation in db.Donations
-                               where (donation.DonatorID.Equals(personID))
+                               where (donation.DonatorID.Equals(personID)) && (donation.IsDeleted.Equals(false))
                                select new DonationInfo
                                {
                                    ID = donation.ID,
@@ -133,6 +134,16 @@ namespace ShelterEvidency.Models
                                    Description = donation.Description
                                });
                 return new BindableCollection<DonationInfo>(results);
+            }
+        }
+
+        public static void MarkAsDeleted(int id)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var donation = db.Donations.Single(x => x.ID == id);
+                donation.IsDeleted = true;
+                db.SubmitChanges();
             }
         }
     }

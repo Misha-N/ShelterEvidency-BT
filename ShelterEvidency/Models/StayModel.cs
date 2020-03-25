@@ -65,7 +65,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                     var results = (from stay in db.Stays
-                                   where (stay.AnimalID.Equals(animalID))
+                                   where (stay.AnimalID.Equals(animalID)) && (stay.IsDeleted.Equals(false))
                                    select new StayInfo
                                    {
                                        ID = stay.Id,
@@ -117,7 +117,7 @@ namespace ShelterEvidency.Models
             {
 
                 var results = (from stay in db.Stays
-                               where (stay.StartDate >= since && stay.StartDate <= to)
+                               where (stay.StartDate >= since && stay.StartDate <= to) && (stay.IsDeleted.Equals(false))
                                select new StayInfo
                                {
                                    ID = stay.Id,
@@ -131,6 +131,16 @@ namespace ShelterEvidency.Models
                                    Died = stay.Died
                                });
                 return new BindableCollection<StayInfo>(results);
+            }
+        }
+
+        public static void MarkAsDeleted(int id)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var stay = db.Stays.Single(x => x.Id == id);
+                stay.IsDeleted = true;
+                db.SubmitChanges();
             }
         }
 

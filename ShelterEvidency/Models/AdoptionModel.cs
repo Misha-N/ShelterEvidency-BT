@@ -46,16 +46,17 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from adoption in db.Adoptions
-                           select new AdoptionInfo
-                           {
-                               ID = adoption.ID,
-                               Date = adoption.Date,
-                               OwnerName = adoption.People.FirstName + " " + adoption.People.LastName,
-                               AnimalName = adoption.Animals.Name,
-                               Returned = adoption.Returned,
-                               ReturnDate = adoption.ReturnDate,
-                               ReturnReason = adoption.ReturnReason
-                           });
+                               where (adoption.IsDeleted.Equals(false))
+                               select new AdoptionInfo
+                               {
+                                   ID = adoption.ID,
+                                   Date = adoption.Date,
+                                   OwnerName = adoption.People.FirstName + " " + adoption.People.LastName,
+                                   AnimalName = adoption.Animals.Name,
+                                   Returned = adoption.Returned,
+                                   ReturnDate = adoption.ReturnDate,
+                                   ReturnReason = adoption.ReturnReason
+                               });
                 return new BindableCollection<AdoptionInfo>(results);
             }
         }
@@ -65,10 +66,11 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from adoption in db.Adoptions
-                           where ((adoption.Date.ToString().Contains(searchValue)) ||
+                           where ((adoption.IsDeleted.Equals(false)) &&
+                           ((adoption.Date.ToString().Contains(searchValue)) ||
                                   (adoption.ID.ToString().Equals(searchValue)) ||
                                   (adoption.Animals.Name.Contains(searchValue)) ||
-                                  (adoption.People.LastName.Contains(searchValue)))
+                                  (adoption.People.LastName.Contains(searchValue))))
                            select new AdoptionInfo
                            {
                                ID = adoption.ID,
@@ -135,6 +137,16 @@ namespace ShelterEvidency.Models
                                    ReturnReason = adoption.ReturnReason
                                });
                 return new BindableCollection<AdoptionInfo>(results);
+            }
+        }
+
+        public static void MarkAsDeleted(int id)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var adoption = db.Adoptions.Single(x => x.ID == id);
+                adoption.IsDeleted = true;
+                db.SubmitChanges();
             }
         }
     }

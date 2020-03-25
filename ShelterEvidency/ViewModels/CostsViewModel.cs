@@ -185,6 +185,7 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => Price);
             NotifyOfPropertyChange(() => Date);
             NotifyOfPropertyChange(() => SelectedCost);
+            NotifyOfPropertyChange(() => IsSelected);
         }
 
         public void UpdateCost()
@@ -346,6 +347,31 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => NewPrice);
         }
 
+
+        public bool IsSelected
+        {
+            get
+            {
+                if (SelectedCost != null)
+                    return true;
+                else
+                    return false;
+            }
+
+        }
+
+        public void DeleteCost()
+        {
+            MessageBoxResult result = MessageBox.Show("Opravdu chcete vymazat zvolenoý náklad?",
+                                          "Confirmation",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                CostModel.MarkAsDeleted((int)SelectedCost.ID);
+                Filter();
+            }
+        }
 
         #endregion
 

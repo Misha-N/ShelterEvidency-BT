@@ -56,7 +56,14 @@
                 Width="24" />
             </Button>
 
-            <Button x:Name="UpdateAdoptions" Grid.Column="4" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                <Button x:Name="DeleteAdoption" IsEnabled="{Binding IsSelected}" Grid.Column="4" Grid.Row="1" Style="{StaticResource MaterialDesignIconForegroundButton}">
+                    <materialDesign:PackIcon
+                Kind="DeleteForever"
+                Height="24"
+                Width="24" />
+                </Button>
+
+                <Button x:Name="UpdateAdoptions" Grid.Column="4" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
                 <materialDesign:PackIcon
                 Kind="Reload"
                 Height="24"

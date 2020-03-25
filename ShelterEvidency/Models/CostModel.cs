@@ -45,7 +45,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from cost in db.Costs
-                               where (cost.AnimalID.Equals(animalID))
+                               where (cost.AnimalID.Equals(animalID)) && (cost.IsDeleted.Equals(false))
                                select new CostInfo
                                {
                                    ID = cost.Id,
@@ -67,7 +67,7 @@ namespace ShelterEvidency.Models
             {
 
                 var results = (from cost in db.Costs
-                               where (cost.Date >= since && cost.Date <= to)
+                               where (cost.Date >= since && cost.Date <= to) && (cost.IsDeleted.Equals(false))
                                select new CostInfo
                                {
                                    ID = cost.Id,
@@ -88,7 +88,7 @@ namespace ShelterEvidency.Models
             {
 
                 var results = (from cost in db.Costs
-                               where (cost.Date >= since && cost.Date <= to) && (cost.AnimalID.Equals(animalID))
+                               where (cost.Date >= since && cost.Date <= to) && (cost.AnimalID.Equals(animalID) && (cost.IsDeleted.Equals(false)))
                                select new CostInfo
                                {
                                    ID = cost.Id,
@@ -109,6 +109,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from cost in db.Costs
+                               where((cost.IsDeleted.Equals(false)))
                                select new CostInfo
                                {
                                    ID = cost.Id,
@@ -157,6 +158,16 @@ namespace ShelterEvidency.Models
                 cost.Description = Description;
                 cost.AnimalID = AnimalID;
 
+                db.SubmitChanges();
+            }
+        }
+
+        public static void MarkAsDeleted(int id)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var cost = db.Costs.Single(x => x.Id == id);
+                cost.IsDeleted = true;
                 db.SubmitChanges();
             }
         }

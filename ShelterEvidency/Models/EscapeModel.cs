@@ -32,5 +32,15 @@ namespace ShelterEvidency.Models
 
             }
         }
+
+        public static void MarkAsDeleted(int id)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var escape = db.Escapes.Single(x => x.Id == id);
+                escape.IsDeleted = true;
+                db.SubmitChanges();
+            }
+        }
     }
 }
