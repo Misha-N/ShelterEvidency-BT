@@ -142,6 +142,19 @@ namespace ShelterEvidency.ViewModels
                 ActivateItem(new EvidencyCardViewModel((int)SelectedAnimal.ID));
         }
 
+        public void DeleteAnimal()
+        {
+            MessageBoxResult result = MessageBox.Show("Opravdu chcete vymazat zvolené zvíře?",
+                                          "Confirmation",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                AnimalModel.MarkAsDeleted((int)SelectedAnimal.ID);
+                LoadData();
+            }
+        }
+
         #endregion
 
 

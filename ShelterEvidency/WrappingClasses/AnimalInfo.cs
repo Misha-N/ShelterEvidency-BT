@@ -28,6 +28,7 @@ namespace ShelterEvidency
         public string FolderPath { get; set; }
         public string ImagePath { get; set; }
         public bool? InShelter { get; set; }
+        public bool? IsDead { get; set; }
 
     }
 }

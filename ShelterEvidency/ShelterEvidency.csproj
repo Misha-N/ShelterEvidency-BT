@@ -99,6 +99,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\EscapeModel.cs" />
     <Compile Include="Models\ShelterModel.cs" />
     <Compile Include="WrappingClasses\AdoptionInfo.cs" />
     <Compile Include="WrappingClasses\AnimalInfo.cs" />
@@ -111,7 +112,6 @@
     <Compile Include="Models\BreedModel.cs" />
     <Compile Include="Models\CoatTypeModel.cs" />
     <Compile Include="Models\CostModel.cs" />
-    <Compile Include="Models\DeathModel.cs" />
     <Compile Include="Models\DiaryModel.cs" />
     <Compile Include="Models\DonationModel.cs" />
     <Compile Include="Models\FurColorModel.cs" />

@@ -502,6 +502,17 @@
                             </Grid>
                         </Button>
 
+                        <Button Height="60" x:Name="LoadStays"  Padding="14,4,16,4">
+                            <Grid Width="225">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <materialDesign:PackIcon Kind="CalendarSearch" Height="25" Width="25" Margin="0,10,10,10"/>
+                                <TextBlock Grid.Column="1" Text="Pobyty a útěky" VerticalAlignment="Center"  Margin="20 10"/>
+                            </Grid>
+                        </Button>
+
                         <Button Height="60" x:Name="LoadStatisticsPage"  Padding="14,4,16,4">
                             <Grid Width="225">
                                 <Grid.ColumnDefinitions>

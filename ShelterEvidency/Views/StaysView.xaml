@@ -64,6 +64,7 @@
                     <DataGridTextColumn Header="ID" MaxWidth="50" Binding="{Binding ID}"/>
                     <DataGridTextColumn Header="Začátek" Binding="{Binding StartDate}"/>
                     <DataGridTextColumn Header="Konec" Binding="{Binding FinishDate}"/>
+                    <DataGridTextColumn Header="Dnů" Binding="{Binding DaysInShelter}"/>
 
                     <DataGridTemplateColumn Header="Adopce">
                         <DataGridTemplateColumn.CellTemplate>

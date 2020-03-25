@@ -18,5 +18,16 @@ namespace ShelterEvidency.WrappingClasses
         public bool? Escaped { get; set; }
         public bool? Died { get; set; }
         public string Note { get; set; }
+
+        public int? DaysInShelter
+        {
+            get
+            {
+                if (StartDate != null && FinishDate != null)
+                    return (int)((DateTime)FinishDate - (DateTime)StartDate).TotalDays;
+                else
+                    return null;
+            }
+        }
     }
 }

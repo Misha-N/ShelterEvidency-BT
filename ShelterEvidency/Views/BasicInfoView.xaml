@@ -85,6 +85,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                             <ColumnDefinition/>
+                            <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
 
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -94,9 +95,16 @@
                                 <TextBlock VerticalAlignment="Center" Text="v útulku" Margin="10,0,0,0"></TextBlock>
                             </StackPanel>
 
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center">
+                            <ToggleButton VerticalAlignment="Center"
+                                  Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
+                                  IsChecked="{Binding Path = IsDead, Mode = TwoWay}" Margin="5" IsThreeState="False"/>
+                            <TextBlock VerticalAlignment="Center" Text="zemřel/a" Margin="10,0,0,0"></TextBlock>
+                        </StackPanel>
 
 
-                        <DatePicker Margin="5" VerticalAlignment="Center" Grid.Column="1"  materialDesign:HintAssist.Hint="Datum narození" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+
+                        <DatePicker Margin="5" VerticalAlignment="Center" Grid.Column="2"  materialDesign:HintAssist.Hint="Datum narození" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
                     </Grid>
 
 

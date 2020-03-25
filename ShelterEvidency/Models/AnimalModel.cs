@@ -30,6 +30,8 @@ namespace ShelterEvidency.Models
         public string Note { get; set; }
         public bool? Castration { get; set; }
         public bool? InShelter { get; set; }
+        public bool? IsDead { get; set; }
+        public bool IsDeleted { get; set; }
         public string FolderPath { get; set; }
         public string ImagePath { get; set; }
 
@@ -39,6 +41,8 @@ namespace ShelterEvidency.Models
         {
             Castration = false;
             InShelter = true;
+            IsDead = false;
+            IsDeleted = false;
         }
 
         public void SaveAnimal()
@@ -64,8 +68,11 @@ namespace ShelterEvidency.Models
                     Note = Note,
                     Castration = Castration,
                     InShelter = InShelter,
+                    IsDead = IsDead,
                     FolderPath = FolderPath,
-                    ImagePath = ImagePath
+                    ImagePath = ImagePath,
+                    IsDeleted = IsDeleted,
+ 
 
                 };
                 db.Animals.InsertOnSubmit(animal);
@@ -101,6 +108,7 @@ namespace ShelterEvidency.Models
                 animal.Note = Note;
                 animal.Castration = Castration;
                 animal.InShelter = InShelter;
+                animal.IsDead = IsDead;
                 animal.FolderPath = FolderPath;
                 animal.ImagePath = ImagePath;
 
@@ -134,6 +142,7 @@ namespace ShelterEvidency.Models
                     Note = animal.Note;
                     Castration = animal.Castration;
                     InShelter = animal.InShelter;
+                    IsDead = animal.IsDead;
                     FolderPath = animal.FolderPath;
                     ImagePath = animal.ImagePath;
                 }
@@ -174,6 +183,7 @@ namespace ShelterEvidency.Models
             {
                 var results =
                     (from animal in db.Animals
+                     where (animal.IsDeleted.Equals(false))
                                select new AnimalInfo
                                {
                                     ID = animal.ID,
@@ -194,6 +204,7 @@ namespace ShelterEvidency.Models
                                     Note = animal.Note,
                                     Castration = animal.Castration,
                                     InShelter = animal.InShelter,
+                                    IsDead = animal.IsDead,
                                     FolderPath = animal.FolderPath,
                                     ImagePath = animal.ImagePath
                                });
@@ -208,10 +219,11 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from animal in db.Animals
-                               where ((animal.Name.Contains(searchValue)) ||
+                               where ((animal.IsDeleted.Equals(false)) &&  
+                                      ((animal.Name.Contains(searchValue)) ||
                                       (animal.ID.ToString().Equals(searchValue)) ||
                                       (animal.Species.SpeciesName.Contains(searchValue)) ||
-                                      (animal.Breeds.BreedName.Contains(searchValue)))
+                                      (animal.Breeds.BreedName.Contains(searchValue))))
                                select new AnimalInfo 
                                {
                                    ID = animal.ID,
@@ -232,6 +244,7 @@ namespace ShelterEvidency.Models
                                    Note = animal.Note,
                                    Castration = animal.Castration,
                                    InShelter = animal.InShelter,
+                                   IsDead = animal.IsDead,
                                    FolderPath = animal.FolderPath,
                                    ImagePath = animal.ImagePath
                                });
@@ -244,7 +257,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from animal in db.Animals
-                               where ((animal.InShelter.Equals(true)))
+                               where ((animal.InShelter.Equals(true)) && animal.IsDeleted.Equals(false))
                                select new AnimalInfo
                                {
                                    ID = animal.ID,
@@ -265,6 +278,7 @@ namespace ShelterEvidency.Models
                                    Note = animal.Note,
                                    Castration = animal.Castration,
                                    InShelter = animal.InShelter,
+                                   IsDead = animal.IsDead,
                                    FolderPath = animal.FolderPath,
                                    ImagePath = animal.ImagePath
                                });
@@ -277,7 +291,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var results = (from animal in db.Animals
-                               where ((animal.InShelter.Equals(true)))
+                               where ((animal.InShelter.Equals(true)) && animal.IsDeleted.Equals(false))
                                select new AnimalInfo
                                {
                                    ID = animal.ID,
@@ -298,6 +312,7 @@ namespace ShelterEvidency.Models
                                    Note = animal.Note,
                                    Castration = animal.Castration,
                                    InShelter = animal.InShelter,
+                                   IsDead = animal.IsDead,
                                    FolderPath = animal.FolderPath,
                                    ImagePath = animal.ImagePath
                                }).OrderByDescending(x => x.ID).Take(count);
@@ -337,6 +352,26 @@ namespace ShelterEvidency.Models
             NewOwnerID = null;
             UpdateAnimal();
 
+        }
+
+        public static void AnimalDied(int id)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var animal = db.Animals.Single(x => x.ID == id);
+                animal.IsDead = true;
+                db.SubmitChanges();
+            }
+        }
+
+        public static void MarkAsDeleted(int id)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var animal = db.Animals.Single(x => x.ID == id);
+                animal.IsDeleted = true;
+                db.SubmitChanges();
+            }
         }
 
     }

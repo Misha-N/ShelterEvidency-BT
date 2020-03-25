@@ -62,8 +62,15 @@
                 Height="24"
                 Width="24" />
             </Button>
-            
-             <Button x:Name="AddAnimal" Style="{StaticResource MaterialDesignRaisedAccentButton}" Grid.Column="2" Grid.Row="1" Margin="5">
+
+            <Button x:Name="DeleteAnimal" IsEnabled="{Binding IsSelected}" Grid.Column="4" Grid.Row="1" Style="{StaticResource MaterialDesignIconForegroundButton}">
+                <materialDesign:PackIcon
+                Kind="DeleteForever"
+                Height="24"
+                Width="24" />
+            </Button>
+
+            <Button x:Name="AddAnimal" Style="{StaticResource MaterialDesignRaisedAccentButton}" Grid.Column="2" Grid.Row="1" Margin="5">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="AddCircleOutline"  Width="25" Height="25"/>
                     <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Přidat nové zvíře</TextBlock>

@@ -208,8 +208,31 @@ namespace ShelterEvidency.ViewModels
                 IsWorking = true;
                 Stay.UpdateStay();
                 Filter();
+                CheckDeath();
+                CheckEscape();
                 MessageBox.Show("Upraveno.");
             }
+        }
+
+        private void CheckEscape()
+        {
+            if (Stay.Escaped == true)
+            {
+                MessageBoxResult result = MessageBox.Show("Založit nový záznam o útěku?",
+                              "Confirmation",
+                              MessageBoxButton.YesNo,
+                              MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    EscapeModel.CreateEscape((int)Stay.AnimalID, (DateTime)Stay.FinishDate, Stay.Note);
+                }
+            }
+        }
+
+        private void CheckDeath()
+        {
+            if (Stay.Died == true)
+                AnimalModel.AnimalDied((int)Stay.AnimalID);
         }
 
         public void Filter()

@@ -307,6 +307,19 @@ namespace ShelterEvidency.ViewModels
             }
         }
 
+        public bool? IsDead
+        {
+            get
+            {
+                return Animal.IsDead;
+            }
+            set
+            {
+                Animal.IsDead = value;
+                NotifyOfPropertyChange(() => InShelter);
+            }
+        }
+
         #endregion
 
         #region List Setting
