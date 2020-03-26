@@ -450,6 +450,11 @@ namespace ShelterEvidency.ViewModels
             ActivateItem(new EconomyViewModel());
         }
 
+        public void LoadGeneralStaysPage()
+        {
+            ActivateItem(new GeneralStaysViewModel());
+        }
+
         public void Home()
         {
             ActivateItem(null);

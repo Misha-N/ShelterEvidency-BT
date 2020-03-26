@@ -101,6 +101,10 @@
     </ApplicationDefinition>
     <Compile Include="Models\EscapeModel.cs" />
     <Compile Include="Models\ShelterModel.cs" />
+    <Compile Include="ViewModels\GeneralStaysViewModel.cs" />
+    <Compile Include="Views\GeneralStaysView.xaml.cs">
+      <DependentUpon>GeneralStaysView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WrappingClasses\AdoptionInfo.cs" />
     <Compile Include="WrappingClasses\AnimalInfo.cs" />
     <Compile Include="DocumentManager.cs" />
@@ -127,6 +131,7 @@
     <Compile Include="WrappingClasses\CostInfo.cs" />
     <Compile Include="WrappingClasses\DiaryRecordInfo.cs" />
     <Compile Include="WrappingClasses\DonationInfo.cs" />
+    <Compile Include="WrappingClasses\EscapeInfo.cs" />
     <Compile Include="WrappingClasses\IncidentInfo.cs" />
     <Compile Include="WrappingClasses\MedicalRecordInfo.cs" />
     <Compile Include="WrappingClasses\PersonInfo.cs" />
@@ -279,6 +284,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\GeneralCostsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GeneralStaysView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

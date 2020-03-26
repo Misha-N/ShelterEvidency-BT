@@ -502,7 +502,7 @@
                             </Grid>
                         </Button>
 
-                        <Button Height="60" x:Name="LoadStays"  Padding="14,4,16,4">
+                        <Button Height="60" x:Name="LoadGeneralStaysPage"  Padding="14,4,16,4">
                             <Grid Width="225">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>

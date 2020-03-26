@@ -219,7 +219,7 @@ namespace ShelterEvidency.ViewModels
 
         private void CheckEscape()
         {
-            if (Stay.Escaped == true)
+            if (Stay.Escaped == true && Stay.ValidValues())
             {
                 MessageBoxResult result = MessageBox.Show("Založit nový záznam o útěku?",
                               "Confirmation",
@@ -227,9 +227,14 @@ namespace ShelterEvidency.ViewModels
                               MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    EscapeModel.CreateEscape((int)Stay.AnimalID, (DateTime)Stay.FinishDate, Stay.Note);
+                    if(Stay.FinishDate != null)
+                        EscapeModel.CreateEscape((int)Stay.AnimalID, (DateTime)Stay.FinishDate, Stay.Note);
+                    else
+                        MessageBox.Show("Záznam o útěku nemůže být založen, neplatné datum.");
+
                 }
             }
+
         }
 
         private void CheckDeath()
