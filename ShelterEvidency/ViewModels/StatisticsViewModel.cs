@@ -10,6 +10,21 @@ namespace ShelterEvidency.ViewModels
 {
     class StatisticsViewModel: Screen
     {
+        private int _animalID;
+
+        public int AnimalID
+        {
+            get 
+            { 
+                return _animalID; 
+            }
+            set 
+            { 
+                _animalID = value;
+                NotifyOfPropertyChange(() => AnimalID);
+            }
+        }
+
 
         public int? AnimalsInShelterSum
         {

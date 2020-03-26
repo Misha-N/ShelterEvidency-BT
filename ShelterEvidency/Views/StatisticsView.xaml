@@ -4,11 +4,331 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShelterEvidency.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="1300">
+
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <materialDesign:Card Margin="10"
+    materialDesign:ShadowAssist.ShadowDepth="Depth1">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+
+                <materialDesign:PackIcon Kind="Equalizer" Opacity="0.3" Width="100"  Height="100" VerticalAlignment="Center" Margin="15,0,0,0" />
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                    Style="{StaticResource MaterialDesignHeadline4TextBlock}">
+                  Statistiky zvířete
+                </TextBlock>
+
+                <Grid Margin="150,0" Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="80"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="AnimalID" FontSize="14" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="ID zvířete" TextWrapping="Wrap" Margin="5" Padding="2"/>
+                    <Button x:Name="Search" Grid.Column="1" Margin="5" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                        <materialDesign:PackIcon
+                Kind="Magnify"
+                Height="24"
+                Width="24" />
+                    </Button>
+                </Grid>
+
+                <Grid Grid.Row="2" Margin="0,15,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition/>
+                        
+                    </Grid.RowDefinitions>
+
+                    <TextBlock x:Name="AnimalNAme" VerticalAlignment="Center" HorizontalAlignment="Center"
+    Style="{StaticResource MaterialDesignHeadline6TextBlock}" FontSize="35" TextDecorations="Underline">
+                    </TextBlock>
+
+                    <StackPanel Grid.Row="1" Margin="50,15,50,0">
+
+                        <Border
+                        Padding="8"
+                        BorderThickness="0 0 0 1"
+                        BorderBrush="{DynamicResource MaterialDesignDivider}">
+                            <Grid Margin="0,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                        Celkové náklady
+                                </TextBlock>
+                                <TextBlock x:Name="AnimalCosts" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}">
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+
+
+                        <Border
+                        Padding="8"
+                        BorderThickness="0 0 0 1"
+                        BorderBrush="{DynamicResource MaterialDesignDivider}">
+                            <Grid Margin="0,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                        Počet dnů v útulku
+                                </TextBlock>
+                                <TextBlock x:Name="AnimalDays" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}">
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+
+                        <Border
+                        Padding="8"
+                        BorderThickness="0 0 0 1"
+                        BorderBrush="{DynamicResource MaterialDesignDivider}">
+                            <Grid Margin="0,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                        Spotřeba krmiva
+                                </TextBlock>
+                                <TextBlock x:Name="AnimalFood" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}">
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+
+                        <Border
+                        Padding="8"
+                        BorderThickness="0 0 0 1"
+                        BorderBrush="{DynamicResource MaterialDesignDivider}">
+                            <Grid Margin="0,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                        Počet pobytů
+                                </TextBlock>
+                                <TextBlock x:Name="AnimalStays" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}">
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+
+                        <Border
+                        Padding="8"
+                        BorderThickness="0 0 0 1"
+                        BorderBrush="{DynamicResource MaterialDesignDivider}">
+                            <Grid Margin="0,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                        Spotřeba krmiva
+                                </TextBlock>
+                                <TextBlock x:Name="AnimalIncidents" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}">
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+
+                        <Border
+                        Padding="8"
+                        BorderThickness="0 0 0 1"
+                        BorderBrush="{DynamicResource MaterialDesignDivider}">
+                            <Grid Margin="0,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                        Počet zdravotních záznamů
+                                </TextBlock>
+                                <TextBlock x:Name="AnimalMedicalRecords" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}">
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+
+                        <Border
+                        Padding="8"
+                        BorderThickness="0 0 0 1"
+                        BorderBrush="{DynamicResource MaterialDesignDivider}">
+                            <Grid Margin="0,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                        Počet útěků
+                                </TextBlock>
+                                <TextBlock x:Name="AnimalEscapes" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}">
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+
+                        <Border
+                        Padding="8"
+                        BorderThickness="0 0 0 1"
+                        BorderBrush="{DynamicResource MaterialDesignDivider}">
+                            <Grid Margin="0,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                        Počet procházek
+                                </TextBlock>
+                                <TextBlock x:Name="AnimalWalks" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}">
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+
+                        <Border
+                        Padding="8"
+                        BorderThickness="0 0 0 1"
+                        BorderBrush="{DynamicResource MaterialDesignDivider}">
+                            <Grid Margin="0,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                        Adotpován
+                                </TextBlock>
+                                <TextBlock x:Name="AnimalAdopted" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}">
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+
+                        <Border
+                        Padding="8"
+                        BorderThickness="0 0 0 1"
+                        BorderBrush="{DynamicResource MaterialDesignDivider}">
+                            <Grid Margin="0,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                        V útulku
+                                </TextBlock>
+                                <TextBlock x:Name="AnimalInShelter" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}">
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+
+                        <Border
+                        Padding="8"
+                        BorderThickness="0 0 0 1"
+                        BorderBrush="{DynamicResource MaterialDesignDivider}">
+                            <Grid Margin="0,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                        Zemřel
+                                </TextBlock>
+                                <TextBlock x:Name="AnimalDead" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}">
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+
+                    </StackPanel>
+
+                </Grid>
+
+                
+
+
+            </Grid>
+            
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Column="1" Margin="10"
+    materialDesign:ShadowAssist.ShadowDepth="Depth1">
+
+            <Grid Grid.Column="1" Grid.RowSpan="2" Margin="10,20,10,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                    Style="{StaticResource MaterialDesignHeadline4TextBlock}">
+                  Všeobecné statistiky v daném období
+                </TextBlock>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="90"/>
+                    </Grid.ColumnDefinitions>
+
+                    <DatePicker Margin="5" FontSize="14" materialDesign:HintAssist.Hint="Od data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=Since, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Long"/>
+                    <DatePicker Grid.Column="1" FontSize="14" Margin="5" materialDesign:HintAssist.Hint="Do data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=To, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Long"/>
+
+
+                    <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Grid.Column="2"
+                x:Name="Filter" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,2,2" >
+                        <materialDesign:PackIcon
+                Kind="Update"
+                Height="30"
+                Width="30" />
+                    </Button>
+
+                </Grid>
+
+
+
+                
+
+            </Grid>
+
+        </materialDesign:Card>
+
+    </Grid>
+    
+    <!--
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -45,4 +365,5 @@
 
 
     </Grid>
+    -->
 </UserControl>
