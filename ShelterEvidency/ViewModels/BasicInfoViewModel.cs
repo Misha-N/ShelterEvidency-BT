@@ -480,9 +480,14 @@ namespace ShelterEvidency.ViewModels
         }
         public void UpdateAnimal()
         {
-            Animal.ImagePath = Image.SaveImage();
-            Animal.UpdateAnimal();
-            MessageBox.Show("Aktualizováno.");
+            if (Animal.ValidValues())
+            {
+                Animal.ImagePath = Image.SaveImage();
+                Animal.UpdateAnimal();
+                MessageBox.Show("Aktualizováno.");
+            }
+            else
+                MessageBox.Show("Vyplňte prosím jméno zvířete.");
         }
 
         #endregion

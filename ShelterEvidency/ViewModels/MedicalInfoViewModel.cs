@@ -233,7 +233,7 @@ namespace ShelterEvidency.ViewModels
 
         public void UpdateMedicalRecord()
         {
-            if (MedicalRecord != null)
+            if (MedicalRecord.ValidValues() && MedicalCost.ValidValues() )
             {
                 IsWorking = true;
                 MedicalRecord.UpdateMedicalRecord();
@@ -241,6 +241,8 @@ namespace ShelterEvidency.ViewModels
                 Filter();
                 MessageBox.Show("Upraveno.");
             }
+            else
+                MessageBox.Show("Vyplňte prosím název,datum a částku.");
         }
 
         #region New medical record bindings
@@ -376,7 +378,7 @@ namespace ShelterEvidency.ViewModels
 
         public void CreateNewMedicalRecord()
         {
-            if (NewRecordName != null)
+            if (NewMedicalRecord.ValidValues() && NewMedicalCost.ValidValues())
             {
                 IsWorking = true;
                 NewMedicalCost.AnimalID = AnimalID;
@@ -390,7 +392,7 @@ namespace ShelterEvidency.ViewModels
                 MessageBox.Show("Záznam vytvořen.");
             }
             else
-                MessageBox.Show("Vyplňte prosím název.");
+                MessageBox.Show("Vyplňte prosím název,datum a částku.");
         }
 
 

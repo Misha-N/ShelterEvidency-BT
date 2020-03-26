@@ -270,12 +270,14 @@ namespace ShelterEvidency.ViewModels
 
         public void UpdateDonation()
         {
-            if (Donation != null)
+            if (Donation.ValidValues() && Donation != null)
             {
                 Donation.UpdateDonation();
                 MessageBox.Show("Upraveno.");
                 Filter();
             }
+            else
+                MessageBox.Show("Vyplňte prosím název, hodnotu a datum.");
         }
 
         #region NewCost binded properties
@@ -350,7 +352,7 @@ namespace ShelterEvidency.ViewModels
 
         public void CreateNewDonation()
         {
-            if (NewDonationName != null)
+            if (NewDonation.ValidValues())
             {
                 IsWorking = true;
                 NewDonation.DonatorID = NewDonator;
@@ -361,7 +363,7 @@ namespace ShelterEvidency.ViewModels
                 MessageBox.Show("Záznam vytvořen.");
             }
             else
-                MessageBox.Show("Vyplňte prosím název.");
+                MessageBox.Show("Vyplňte prosím název, hodnotu a datum.");
 
         }
 

@@ -162,13 +162,15 @@ namespace ShelterEvidency.ViewModels
 
         public void UpdateIncident()
         {
-            if (Incident != null)
+            if (Incident != null && Incident.ValidValues())
             {
                 IsWorking = true;
                 Incident.UpdateIncident();
                 Filter();
                 MessageBox.Show("Upraveno.");
             }
+            else
+                MessageBox.Show("Vyplňte prosím datum.");
         }
 
         public void Filter()
@@ -280,7 +282,7 @@ namespace ShelterEvidency.ViewModels
 
         public void CreateNewIncident()
         {
-            if (NewDate != null)
+            if (NewIncident.ValidValues())
             {
                 IsWorking = true;
                 NewIncident.AnimalID = AnimalID;

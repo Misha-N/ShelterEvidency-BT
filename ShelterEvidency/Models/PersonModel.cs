@@ -341,5 +341,13 @@ namespace ShelterEvidency.Models
                 db.SubmitChanges();
             }
         }
+
+        public bool ValidValues()
+        {
+            if (!String.IsNullOrEmpty(FirstName) && !String.IsNullOrEmpty(LastName))
+                return true;
+            else
+                return false;
+        }
     }
 }

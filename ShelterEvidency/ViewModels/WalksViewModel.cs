@@ -255,12 +255,14 @@ namespace ShelterEvidency.ViewModels
 
         public void UpdateWalk()
         {
-            if (Walk != null)
+            if (Walk != null && Walk.ValidValues())
             {
                 Walk.UpdateWalk();
                 MessageBox.Show("Upraveno.");
                 Filter();
             }
+            else
+                MessageBox.Show("Vyplňte prosím datum.");
         }
 
 
@@ -307,7 +309,7 @@ namespace ShelterEvidency.ViewModels
 
         public void CreateNewWalk()
         {
-            if (NewDate != null)
+            if (NewWalk.ValidValues())
             {
                 IsWorking = true;
                 NewWalk.AnimalID = AnimalID;

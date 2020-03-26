@@ -204,7 +204,7 @@ namespace ShelterEvidency.ViewModels
 
         public void UpdateStay()
         {
-            if (Stay != null)
+            if (Stay.ValidValues())
             {
                 IsWorking = true;
                 Stay.UpdateStay();
@@ -213,6 +213,8 @@ namespace ShelterEvidency.ViewModels
                 CheckEscape();
                 MessageBox.Show("Upraveno.");
             }
+            else
+                MessageBox.Show("Vyplňte prosím počáteční datum.");
         }
 
         private void CheckEscape()
@@ -289,7 +291,7 @@ namespace ShelterEvidency.ViewModels
 
         public void CreateNewStay()
         {
-            if (NewStayDate != null)
+            if (NewStay.ValidValues())
             {
                 NewStay.AnimalID = AnimalID;
                 NewStay.SaveStay();
@@ -299,7 +301,7 @@ namespace ShelterEvidency.ViewModels
                 MessageBox.Show("Záznam vytvořen.");
             }
             else
-                MessageBox.Show("Vyplňte prosím datum.");
+                MessageBox.Show("Vyplňte prosím počáteční datum.");
 
         }
 

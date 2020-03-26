@@ -303,9 +303,14 @@ namespace ShelterEvidency.ViewModels
 
         public void UpdatePerson()
         {
-            Person.UpdatePerson();
-            MessageBox.Show("Aktualizováno.");
-            prnt.UpdatePeople();
+            if (Person.ValidValues())
+            {
+                Person.UpdatePerson();
+                MessageBox.Show("Aktualizováno.");
+                prnt.UpdatePeople();
+            }
+            else
+                MessageBox.Show("Vyplňte prosím jméno a příjmení.");
         }
 
         public void Cancel()

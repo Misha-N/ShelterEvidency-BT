@@ -172,5 +172,14 @@ namespace ShelterEvidency.Models
             }
         }
 
+        public bool ValidValues()
+        {
+            if (Date != null && Date != DateTime.MinValue && Date != DateTime.MaxValue
+                && Price != null && Price > 0 && !String.IsNullOrEmpty(CostName))
+                return true;
+            else
+                return false;
+        }
+
     }
 }

@@ -64,6 +64,15 @@ namespace ShelterEvidency.Models
                 db.SubmitChanges();
             }
         }
+
+        public bool ValidValues()
+        {
+            if (Date != null && Date != DateTime.MinValue && Date != DateTime.MaxValue &&
+                !String.IsNullOrEmpty(Record))
+                return true;
+            else
+                return false;
+        }
         #endregion
     }
 }

@@ -190,12 +190,14 @@ namespace ShelterEvidency.ViewModels
 
         public void UpdateCost()
         {
-            if (Cost != null)
+            if (Cost != null && Cost.ValidValues())
             {
                 Cost.UpdateCost();
                 MessageBox.Show("Upraveno.");
                 Filter();
             }
+            else
+                MessageBox.Show("Vyplňte prosím název, datum a částku.");
         }
 
         #region NewCost binded properties
@@ -322,7 +324,7 @@ namespace ShelterEvidency.ViewModels
 
         public void CreateNewCost()
         {
-            if (NewCostName != null)
+            if (NewCost.ValidValues())
             {
                 IsWorking = true;
                 NewCost.AnimalID = AnimalID;
@@ -333,7 +335,7 @@ namespace ShelterEvidency.ViewModels
                 MessageBox.Show("Záznam vytvořen.");
             }
             else
-                MessageBox.Show("Vyplňte prosím název.");
+                MessageBox.Show("Vyplňte prosím název, datum a částku.");
 
         }
 

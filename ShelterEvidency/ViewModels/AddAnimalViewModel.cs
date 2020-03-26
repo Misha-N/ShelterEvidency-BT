@@ -347,14 +347,19 @@ namespace ShelterEvidency.ViewModels
 
         public void SaveToDatabase()
         {
-            Animal.ImagePath = Image.SaveImage();
-            Animal.SaveAnimal();
-            Stay.AnimalID = Animal.ID;
-            Stay.SaveStay();
-            MessageBox.Show(Animal.Name + " přidán do evidence.");
-            if(prnt != null)
-                prnt.UpdateAnimals();
-            TryClose();
+            if (Animal.ValidValues() && Stay.ValidValues())
+            {
+                Animal.ImagePath = Image.SaveImage();
+                Animal.SaveAnimal();
+                Stay.AnimalID = Animal.ID;
+                Stay.SaveStay();
+                MessageBox.Show(Animal.Name + " přidán do evidence.");
+                if (prnt != null)
+                    prnt.UpdateAnimals();
+                TryClose();
+            }
+            else
+                MessageBox.Show("Vyplňte prosím jméno a datum příjmu zvířete.");
         }
         public void LoadImage()
         {

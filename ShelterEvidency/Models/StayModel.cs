@@ -144,5 +144,13 @@ namespace ShelterEvidency.Models
             }
         }
 
+        public bool ValidValues()
+        {
+            if (StartDate != null && StartDate != DateTime.MinValue && StartDate != DateTime.MaxValue)
+                return true;
+            else
+                return false;
+        }
+
     }
 }

@@ -370,6 +370,14 @@ namespace ShelterEvidency.Models
             }
         }
 
+        public bool ValidValues()
+        {
+            if (!String.IsNullOrEmpty(Name))
+                return true;
+            else
+                return false;
+        }
+
     }
 
 }

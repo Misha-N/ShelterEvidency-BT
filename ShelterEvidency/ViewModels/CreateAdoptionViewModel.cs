@@ -399,7 +399,7 @@ namespace ShelterEvidency.ViewModels
 
         public void CreateNewAdoption()
         {
-            if (AdoptionDate != null)
+            if (Adoption.ValidValues())
             {
                 IsWorking = true;
 

@@ -322,25 +322,30 @@ namespace ShelterEvidency.ViewModels
 
         public void SaveToDatabase()
         {
-            Person.SavePerson();
-            MessageBox.Show(Person.FirstName + " " + Person.LastName + " přidán do evidence.");
-            UpdatePeople();
+            if (Person.ValidValues())
+            {
+                Person.SavePerson();
+                MessageBox.Show(Person.FirstName + " " + Person.LastName + " přidán do evidence.");
+                UpdatePeople();
 
-            Person = new PersonModel();
-            NotifyOfPropertyChange(() => Title);
-            NotifyOfPropertyChange(() => FirstName);
-            NotifyOfPropertyChange(() => LastName);
-            NotifyOfPropertyChange(() => Note);
-            NotifyOfPropertyChange(() => Phone);
-            NotifyOfPropertyChange(() => Mail);
-            NotifyOfPropertyChange(() => City);
-            NotifyOfPropertyChange(() => Street);
-            NotifyOfPropertyChange(() => Zip);
-            NotifyOfPropertyChange(() => IsOwner);
-            NotifyOfPropertyChange(() => IsVet);
-            NotifyOfPropertyChange(() => IsSponsor);
-            NotifyOfPropertyChange(() => IsVolunteer);
-            NotifyOfPropertyChange(() => IsWalker);
+                Person = new PersonModel();
+                NotifyOfPropertyChange(() => Title);
+                NotifyOfPropertyChange(() => FirstName);
+                NotifyOfPropertyChange(() => LastName);
+                NotifyOfPropertyChange(() => Note);
+                NotifyOfPropertyChange(() => Phone);
+                NotifyOfPropertyChange(() => Mail);
+                NotifyOfPropertyChange(() => City);
+                NotifyOfPropertyChange(() => Street);
+                NotifyOfPropertyChange(() => Zip);
+                NotifyOfPropertyChange(() => IsOwner);
+                NotifyOfPropertyChange(() => IsVet);
+                NotifyOfPropertyChange(() => IsSponsor);
+                NotifyOfPropertyChange(() => IsVolunteer);
+                NotifyOfPropertyChange(() => IsWalker);
+            }
+            else
+                MessageBox.Show("Vyplňte prosím jméno a příjmení.");
         }
 
         public void DeletePerson()

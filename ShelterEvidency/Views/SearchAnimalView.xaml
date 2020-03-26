@@ -77,7 +77,7 @@
                 </StackPanel>
             </Button>
 
-            <Button x:Name="OpenEvidencyCard" IsEnabled="{Binding IsSelected}"  Style="{StaticResource MaterialDesignRaisedDarkButton}" Grid.Row="1" Margin="5">
+            <Button x:Name="OpenEvidencyCard" IsEnabled="{Binding IsSelected}" Style="{StaticResource MaterialDesignRaisedDarkButton}" Grid.Row="1" Margin="5">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="FolderOpen" Width="25" Height="25"/>
                     <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Otevřít evidenční kartu</TextBlock>
