@@ -82,7 +82,7 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => Image);
             }
         }
-        public int? ID
+        public int ID
         {
             get
             {

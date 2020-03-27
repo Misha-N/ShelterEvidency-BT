@@ -249,8 +249,6 @@ namespace ShelterEvidency.ViewModels
                 Task.Run(() => LoadData());
             else
                 Task.Run(() => FilterData());
-
-
         }
 
         private async Task FilterData()

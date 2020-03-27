@@ -362,8 +362,26 @@
                         </Button>
                     </Grid>
 
-                    <TextBlock Margin="10" DockPanel.Dock="Top" Style="{StaticResource MaterialDesignHeadline6TextBlock}">Poznámky:</TextBlock>
-                    <DataGrid Margin="10" ItemsSource="{Binding Path=RecordList, Mode=OneWay}" VerticalAlignment="Stretch" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" AutoGenerateColumns="False">
+                    <Grid DockPanel.Dock="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Margin="10" DockPanel.Dock="Top" Style="{StaticResource MaterialDesignHeadline6TextBlock}">Poznámky:</TextBlock>
+
+
+
+                        <Button x:Name="DeleteRecord" HorizontalAlignment="Left" IsEnabled="{Binding IsSelected}" Grid.Column="1"  Style="{StaticResource MaterialDesignIconForegroundButton}">
+                            <materialDesign:PackIcon
+                Kind="DeleteForever"
+                Height="24"
+                Width="24" />
+                        </Button>
+                    </Grid>
+
+
+                    <DataGrid Margin="10" ItemsSource="{Binding Path=RecordList, Mode=OneWay}" SelectedValue="{Binding Path=SelectedRecord, Mode=OneWayToSource}" VerticalAlignment="Stretch" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Datum" Binding="{Binding Date, StringFormat=\{0:dd.MM.yyyy\}}"/>
 

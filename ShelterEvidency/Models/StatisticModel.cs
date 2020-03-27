@@ -80,7 +80,7 @@ namespace ShelterEvidency.Models
                 int? total =
                     (from stay in db.Stays
                      where stay.AnimalID.Equals(animalID) && stay.IsDeleted.Equals(false) && !stay.FinishDate.Equals(null)
-                     select (int)((DateTime)stay.FinishDate - (DateTime)stay.StartDate).TotalDays)
+                     select (int?)((DateTime)stay.FinishDate - (DateTime)stay.StartDate).TotalDays)
                     .Sum();
 
                 if (total != null)
@@ -88,6 +88,14 @@ namespace ShelterEvidency.Models
                 else
                     return 0;
             }
+        }
+
+        public static DateTime NullDateToNow(DateTime? finishDate)
+        {
+            if (finishDate == null)
+                return DateTime.Now;
+            else
+                return (DateTime)finishDate;
         }
 
         public static int? TotalAnimalStays(int animalID)
@@ -103,6 +111,22 @@ namespace ShelterEvidency.Models
                     return total;
                 else
                     return 0;
+            }
+        }
+
+        public static bool? AnimalAdopted(int animalID)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                bool? result =
+                    (from adoption in db.Adoptions
+                     where adoption.AnimalID.Equals(animalID) && adoption.IsDeleted.Equals(false)
+                     select adoption.Returned)
+                    .Contains(false);
+                if (result != null)
+                    return result;
+                else
+                    return null;
             }
         }
 
@@ -211,6 +235,150 @@ namespace ShelterEvidency.Models
                      where (donation.Date >= since) && (donation.Date <= to) && donation.IsDeleted.Equals(false)
                      select donation.Amount)
                     .Sum();
+                if (total != null)
+                    return total;
+                else
+                    return 0;
+            }
+        }
+
+        public static int? DatedEscapes(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                int? total =
+                    (from escape in db.Escapes
+                     where (escape.Date >= since) && (escape.Date <= to) && escape.IsDeleted.Equals(false)
+                     select escape)
+                    .Count();
+                if (total != null)
+                    return total;
+                else
+                    return 0;
+            }
+        }
+
+        public static int? DatedWalks(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                int? total =
+                    (from walk in db.Walks
+                     where (walk.Date >= since) && (walk.Date <= to) && walk.IsDeleted.Equals(false)
+                     select walk)
+                    .Count();
+                if (total != null)
+                    return total;
+                else
+                    return 0;
+            }
+        }
+
+        public static int? DatedIntakes(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                int? total =
+                    (from stay in db.Stays
+                     where (stay.StartDate >= since) && (stay.StartDate <= to) && stay.IsDeleted.Equals(false)
+                     select stay)
+                    .Count();
+                if (total != null)
+                    return total;
+                else
+                    return 0;
+            }
+        }
+
+        public static int? DatedIncidents(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                int? total =
+                    (from incident in db.Incidents
+                     where (incident.IncidentDate >= since) && (incident.IncidentDate <= to) && incident.IsDeleted.Equals(false)
+                     select incident)
+                    .Count();
+                if (total != null)
+                    return total;
+                else
+                    return 0;
+            }
+        }
+
+        public static int? DatedMedicalRecords(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                int? total =
+                    (from record in db.MedicalRecords
+                     where (record.Date >= since) && (record.Date <= to) && record.IsDeleted.Equals(false)
+                     select record)
+                    .Count();
+                if (total != null)
+                    return total;
+                else
+                    return 0;
+            }
+        }
+
+        public static int? DatedDeaths(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                int? total =
+                    (from stay in db.Stays
+                     where (stay.FinishDate >= since) && (stay.FinishDate <= to) && stay.IsDeleted.Equals(false) && stay.Died.Equals(true)
+                     select stay)
+                    .Count();
+                if (total != null)
+                    return total;
+                else
+                    return 0;
+            }
+        }
+
+        public static int? DatedAdoptions(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                int? total =
+                    (from adoption in db.Adoptions
+                     where (adoption.Date >= since) && (adoption.Date <= to) && adoption.IsDeleted.Equals(false)
+                     select adoption)
+                    .Count();
+                if (total != null)
+                    return total;
+                else
+                    return 0;
+            }
+        }
+
+        public static int? DatedNotReturned(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                int? total =
+                    (from adoption in db.Adoptions
+                     where (adoption.Date >= since) && (adoption.Date <= to) && adoption.IsDeleted.Equals(false) && adoption.Returned.Equals(false)
+                     select adoption)
+                    .Count();
+                if (total != null)
+                    return total;
+                else
+                    return 0;
+            }
+        }
+
+        public static int? DatedReturned(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                int? total =
+                    (from adoption in db.Adoptions
+                     where (adoption.ReturnDate >= since) && (adoption.ReturnDate <= to) && adoption.IsDeleted.Equals(false)
+                     select adoption)
+                    .Count();
                 if (total != null)
                     return total;
                 else

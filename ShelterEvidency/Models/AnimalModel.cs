@@ -12,7 +12,7 @@ namespace ShelterEvidency.Models
     public class AnimalModel
     {
         #region Atributes/Properties
-        public int? ID { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public string ChipNumber { get; set; }
         public DateTime? BirthDate { get; set; }
@@ -118,7 +118,7 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var animal = db.Animals.FirstOrDefault(i => i.ID == animalID);
-                if (animal != null)
+                if (animal != null && animal.IsDeleted != true)
                 {
                     ID = animal.ID;
                     Name = animal.Name;

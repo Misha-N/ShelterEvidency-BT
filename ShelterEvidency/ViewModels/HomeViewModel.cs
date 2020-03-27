@@ -356,6 +356,51 @@ namespace ShelterEvidency.ViewModels
             }
         }
 
+        private DiaryRecordInfo _selectedRecord;
+
+        public DiaryRecordInfo SelectedRecord
+        {
+            get
+            {
+                return _selectedRecord;
+            }
+            set
+            {
+                _selectedRecord = value;
+                NotifyOfPropertyChange(() => SelectedRecord);
+                NotifyOfPropertyChange(() => IsSelected);
+            }
+        }
+
+
+        public bool IsSelected
+        {
+            get
+            {
+                if (SelectedRecord != null)
+                    return true;
+                else
+                    return false;
+            }
+
+        }
+
+        public void DeleteRecord()
+        {
+            MessageBoxResult result = MessageBox.Show("Opravdu chcete vymazat zvolený záznam?",
+                                          "Confirmation",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                DiaryModel.MarkAsDeleted((int)SelectedRecord.ID);
+
+                SelectedRecord = null;
+
+                Task.Run(() => LoadDiaryData());
+            }
+        }
+
         #endregion
 
         #region Methods
