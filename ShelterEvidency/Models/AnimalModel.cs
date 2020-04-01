@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.Models
 {
@@ -45,40 +46,49 @@ namespace ShelterEvidency.Models
 
         public void SaveAnimal()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+
+            try
             {
-                Animals animal = new Animals
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    Name = Name,
-                    ChipNumber = ChipNumber,
-                    Birth = BirthDate,
-                    SexID = SexID,
-                    SpeciesID = SpeciesID,
-                    BreedID = BreedID,
-                    CrossBreedID = CrossBreedID,
-                    CoatTypeID = CoatTypeID,
-                    FurColorID = FurColorID,
-                    OwnerID = OwnerID,
-                    NewOwnerID = NewOwnerID,
-                    VetID = VetID,
-                    FeedRation = FeedRation,
-                    Weight = Weight,
-                    Note = Note,
-                    Castration = Castration,
-                    InShelter = InShelter,
-                    IsDead = IsDead,
-                    FolderPath = FolderPath,
-                    ImagePath = ImagePath, 
+                    Animals animal = new Animals
+                    {
+                        Name = Name,
+                        ChipNumber = ChipNumber,
+                        Birth = BirthDate,
+                        SexID = SexID,
+                        SpeciesID = SpeciesID,
+                        BreedID = BreedID,
+                        CrossBreedID = CrossBreedID,
+                        CoatTypeID = CoatTypeID,
+                        FurColorID = FurColorID,
+                        OwnerID = OwnerID,
+                        NewOwnerID = NewOwnerID,
+                        VetID = VetID,
+                        FeedRation = FeedRation,
+                        Weight = Weight,
+                        Note = Note,
+                        Castration = Castration,
+                        InShelter = InShelter,
+                        IsDead = IsDead,
+                        FolderPath = FolderPath,
+                        ImagePath = ImagePath,
 
-                };
-                db.Animals.InsertOnSubmit(animal);
-                db.SubmitChanges();
+                    };
+                    db.Animals.InsertOnSubmit(animal);
+                    db.SubmitChanges();
 
-                ID = animal.ID;
+                    ID = animal.ID;
 
-                CreateDocumentFolder();
-                UpdateAnimal();
+                    CreateDocumentFolder();
+                    UpdateAnimal();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         public void UpdateAnimal()

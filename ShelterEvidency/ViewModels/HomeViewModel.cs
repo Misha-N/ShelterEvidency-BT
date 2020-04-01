@@ -450,7 +450,6 @@ namespace ShelterEvidency.ViewModels
                 db.Sexes.FirstOrDefault();
                 db.Species.FirstOrDefault();
                 db.DiaryRecords.FirstOrDefault();
-                db.Images.FirstOrDefault();
                 db.Adoptions.FirstOrDefault();
             }
 

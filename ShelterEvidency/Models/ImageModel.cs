@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace ShelterEvidency.Models
@@ -28,13 +29,14 @@ namespace ShelterEvidency.Models
                     try
                     {
                         fileName = RandomStringGenerator.RandomString(10) + ".jpg";
+                        System.IO.Directory.CreateDirectory(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "AnimalImages"));
                         path = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "AnimalImages", fileName);
                         System.IO.File.Copy(ImagePath, path);
                         return path;
                     }
                     catch (IOException e)
                     {
-                        throw e;
+                        MessageBox.Show(e.Message);
                     }
                 }
 
