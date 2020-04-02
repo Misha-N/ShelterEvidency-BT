@@ -53,11 +53,11 @@
       <Association Name="Animals_Adoptions" Member="Adoptions" ThisKey="ID" OtherKey="AnimalID" Type="Adoptions" />
       <Association Name="Animals_Walks" Member="Walks" ThisKey="ID" OtherKey="AnimalID" Type="Walks" />
       <Association Name="Animals_Costs" Member="Costs" ThisKey="ID" OtherKey="AnimalID" Type="Costs" />
-      <Association Name="Animals_Deaths" Member="Deaths" ThisKey="ID" OtherKey="AnimalID" Type="Deaths" />
       <Association Name="Animals_Escapes" Member="Escapes" ThisKey="ID" OtherKey="AnimalID" Type="Escapes" />
       <Association Name="Animals_Incidents" Member="Incidents" ThisKey="ID" OtherKey="AnimalID" Type="Incidents" />
       <Association Name="Animals_MedicalRecords" Member="MedicalRecords" ThisKey="ID" OtherKey="AnimalID" Type="MedicalRecords" />
       <Association Name="Animals_Stays" Member="Stays" ThisKey="ID" OtherKey="AnimalID" Type="Stays" />
+      <Association Name="Animals_Deaths" Member="Deaths" ThisKey="ID" OtherKey="AnimalID" Type="Deaths" />
       <Association Name="Breeds_Animals" Member="Breeds" ThisKey="BreedID" OtherKey="Id" Type="Breeds" IsForeignKey="true" />
       <Association Name="Breeds_Animals1" Member="Breeds1" ThisKey="CrossBreedID" OtherKey="Id" Type="Breeds" IsForeignKey="true" />
       <Association Name="CoatTypes_Animals" Member="CoatTypes" ThisKey="CoatTypeID" OtherKey="Id" Type="CoatTypes" IsForeignKey="true" />
@@ -98,18 +98,6 @@
       <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="Costs_MedicalRecords" Member="MedicalRecords" ThisKey="Id" OtherKey="CostID" Type="MedicalRecords" />
       <Association Name="Animals_Costs" Member="Animals" ThisKey="AnimalID" OtherKey="ID" Type="Animals" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Deaths" Member="Deaths">
-    <Type Name="Deaths">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="AnimalID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="[Natural]" Member="Natural" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Euthanasia" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Other" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="Animals_Deaths" Member="Animals" ThisKey="AnimalID" OtherKey="ID" Type="Animals" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.DiaryRecords" Member="DiaryRecords">
@@ -244,6 +232,19 @@
       <Column Name="Died" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="Animals_Stays" Member="Animals" ThisKey="AnimalID" OtherKey="ID" Type="Animals" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Deaths" Member="Deaths">
+    <Type Name="Deaths">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AnimalID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[Natural]" Member="Natural" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Euthanasia" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Other" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Animals_Deaths" Member="Animals" ThisKey="AnimalID" OtherKey="ID" Type="Animals" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

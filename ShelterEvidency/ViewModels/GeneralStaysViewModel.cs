@@ -26,8 +26,6 @@ namespace ShelterEvidency.ViewModels
             await Task.Run(() =>
             {
                 Stays = StayModel.GetDatedStays(DateTime.Now.AddYears(-100), DateTime.Now.AddYears(100));
-                Escapes = EscapeModel.GetDatedEscapes(DateTime.Now.AddYears(-100), DateTime.Now.AddYears(100));
-
             });
             IsWorking = false;
         }
@@ -156,116 +154,7 @@ namespace ShelterEvidency.ViewModels
 
         #endregion
 
-        #region Escapes
-
-        private BindableCollection<EscapeInfo> _escapes;
-        public BindableCollection<EscapeInfo> Escapes
-        {
-            get
-            {
-                return _escapes;
-            }
-            set
-            {
-                _escapes = value;
-                NotifyOfPropertyChange(() => Escapes);
-            }
-        }
-
-        private DateTime? _escapesince;
-        public DateTime? EscapeSince
-        {
-            get
-            {
-                return _escapesince;
-            }
-            set
-            {
-                _escapesince = value;
-                NotifyOfPropertyChange(() => EscapeSince);
-            }
-
-        }
-
-        private DateTime? _escapeto;
-        public DateTime? EscapeTo
-        {
-            get
-            {
-                return _escapeto;
-            }
-            set
-            {
-                _escapeto = value;
-                NotifyOfPropertyChange(() => EscapeTo);
-            }
-
-        }
-
-        public void FilterEscapes()
-        {
-            if (EscapeSince == null || EscapeTo == null)
-            {
-                IsWorking = true;
-                Escapes = EscapeModel.GetDatedEscapes(DateTime.Now.AddYears(-100), DateTime.Now.AddYears(100));
-                IsWorking = false;
-            }
-            else
-            {
-                IsWorking = true;
-                Escapes = EscapeModel.GetDatedEscapes(EscapeSince, EscapeTo);
-                IsWorking = false;
-            }
-
-        }
-
-        private EscapeInfo _selectedescape;
-
-        public EscapeInfo SelectedEscape
-        {
-            get
-            {
-                return _selectedescape;
-            }
-            set
-            {
-                _selectedescape = value;
-                NotifyOfPropertyChange(() => SelectedEscape);
-                NotifyOfPropertyChange(() => EscapeIsSelected);
-            }
-        }
-
-
-        public bool EscapeIsSelected
-        {
-            get
-            {
-                if (SelectedEscape != null)
-                    return true;
-                else
-                    return false;
-            }
-
-        }
-
-        public void DeleteEscape()
-        {
-            MessageBoxResult result = MessageBox.Show("Opravdu chcete vymazat zvolený útěk?",
-                                          "Confirmation",
-                                          MessageBoxButton.YesNo,
-                                          MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
-            {
-                EscapeModel.MarkAsDeleted((int)SelectedEscape.ID);
-
-                SelectedEscape = null;
-
-                FilterEscapes();
-            }
-        }
-
-        #endregion
-
+     
 
     }
 }

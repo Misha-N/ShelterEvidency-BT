@@ -10,7 +10,7 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1200">
+             d:DesignHeight="900" d:DesignWidth="1200">
 
     <UserControl.Resources>
         <helpers:InvertBooleanConverter  x:Key="boolConvert"/>
@@ -141,11 +141,11 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <CheckBox Content="majitel" Grid.Column="0" IsChecked="{Binding Path = IsOwner, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
-                            <CheckBox Content="veterinář" Grid.Column="1" IsChecked="{Binding Path = IsVet, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
-                            <CheckBox Content="venčitel" Grid.Column="2" IsChecked="{Binding Path = IsWalker, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
-                            <CheckBox Content="sponzor" Grid.Column="3" IsChecked="{Binding Path = IsSponsor, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
-                            <CheckBox Content="dobrovolník" Grid.Column="4" IsChecked="{Binding Path = IsVolunteer, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                            <CheckBox Content="majitel" Style="{DynamicResource MaterialDesignAccentCheckBox}" Grid.Column="0" IsChecked="{Binding Path = IsOwner, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                            <CheckBox Content="veterinář" Style="{DynamicResource MaterialDesignAccentCheckBox}" Grid.Column="1" IsChecked="{Binding Path = IsVet, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                            <CheckBox Content="venčitel" Style="{DynamicResource MaterialDesignAccentCheckBox}" Grid.Column="2" IsChecked="{Binding Path = IsWalker, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                            <CheckBox Content="sponzor" Style="{DynamicResource MaterialDesignAccentCheckBox}" Grid.Column="3" IsChecked="{Binding Path = IsSponsor, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                            <CheckBox Content="dobrovolník" Style="{DynamicResource MaterialDesignAccentCheckBox}" Grid.Column="4" IsChecked="{Binding Path = IsVolunteer, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
                         </Grid>
                     </GroupBox>
                 </Grid>

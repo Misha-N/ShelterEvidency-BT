@@ -9,48 +9,57 @@ using System.Threading.Tasks;
 
 namespace ShelterEvidency.Models
 {
-    public class EscapeModel
+    class DeathModel
     {
         #region Properties/Atributes
         public int ID { get; set; }
         public string Description { get; set; }
         public DateTime? Date { get; set; }
         public int AnimalID { get; set; }
+        public bool Euthanasia { get; set; }
+        public bool Natural { get; set; }
+        public bool Other { get; set; }
 
         #endregion
 
-        public void CreateEscape()
+        public void CreateDeath()
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                Escapes escape = new Escapes
+                Deaths death = new Deaths
                 {
                     AnimalID = AnimalID,
                     Date = Date,
                     Description = Description,
+                    Euthanasia = Euthanasia,
+                    Natural = Natural,
+                    Other = Other
                 };
-                db.Escapes.InsertOnSubmit(escape);
+                db.Deaths.InsertOnSubmit(death);
                 db.SubmitChanges();
 
             }
         }
 
-        public static BindableCollection<EscapeInfo> GetDatedEscapes(DateTime? since, DateTime? to)
+        public static BindableCollection<DeathInfo> GetDatedDeaths(DateTime? since, DateTime? to)
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
 
-                var results = (from escape in db.Escapes
-                               where (escape.Date >= since && escape.Date <= to) && (escape.IsDeleted.Equals(false))
-                               select new EscapeInfo
+                var results = (from death in db.Deaths
+                               where (death.Date >= since && death.Date <= to) && (death.IsDeleted.Equals(false))
+                               select new DeathInfo
                                {
-                                   ID = escape.Id,
-                                   Date = escape.Date,
-                                   AnimalID = escape.AnimalID,
-                                   AnimalName = escape.Animals.Name,
-                                   Description = escape.Description,
+                                   ID = death.Id,
+                                   Date = death.Date,
+                                   AnimalID = death.AnimalID,
+                                   AnimalName = death.Animals.Name,
+                                   Description = death.Description,
+                                   Euthanasia = death.Euthanasia,
+                                   Natural = death.Natural,
+                                   Other = death.Other,
                                });
-                return new BindableCollection<EscapeInfo>(results);
+                return new BindableCollection<DeathInfo>(results);
             }
         }
 
@@ -59,8 +68,8 @@ namespace ShelterEvidency.Models
         {
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
-                var escape = db.Escapes.Single(x => x.Id == id);
-                escape.IsDeleted = true;
+                var death = db.Deaths.Single(x => x.Id == id);
+                death.IsDeleted = true;
                 db.SubmitChanges();
             }
         }

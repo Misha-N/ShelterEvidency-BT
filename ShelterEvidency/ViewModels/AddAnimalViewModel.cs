@@ -331,6 +331,32 @@ namespace ShelterEvidency.ViewModels
             }
         }
 
+        public DateTime? FindDate
+        {
+            get
+            {
+                return Stay.FindDate;
+            }
+            set
+            {
+                Stay.FindDate = value;
+                NotifyOfPropertyChange(() => FindDate);
+            }
+        }
+
+        public string FindPlace
+        {
+            get
+            {
+                return Stay.FindPlace;
+            }
+            set
+            {
+                Stay.FindPlace = value;
+                NotifyOfPropertyChange(() => FindPlace);
+            }
+        }
+
         #endregion
 
         #region Methods

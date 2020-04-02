@@ -55,8 +55,16 @@
                             <ComboBox Margin="5" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Pohlaví" ItemsSource="{Binding Path=SexList, Mode=OneWay}" DisplayMemberPath="SexName" SelectedValuePath="Id" SelectedValue="{Binding Path=Sex, Mode=OneWayToSource}"/>
 
                             <ComboBox Margin="5" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Druh" ItemsSource="{Binding Path=SpeciesList, Mode=OneWay}" DisplayMemberPath="SpeciesName" SelectedValuePath="Id" SelectedValue="{Binding Path=Species, Mode=OneWayToSource}"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="FindPlace" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Místo nálezu" TextWrapping="Wrap" Margin="5" Padding="2"/>
+                                <DatePicker Grid.Column="1" Margin="30,5,5,5" materialDesign:HintAssist.Hint="Datum nálezu" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=FindDate, Mode=OneWayToSource}" SelectedDateFormat="Short"/>
 
-                            <ComboBox Margin="5" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Plemeno" ItemsSource="{Binding Path=BreedList, Mode=OneWay}" DisplayMemberPath="BreedName" SelectedValuePath="Id" SelectedValue="{Binding Path=Breed, Mode=OneWayToSource}"/>
+
+                            </Grid>
 
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -79,7 +87,7 @@
                         </StackPanel>
                     </GroupBox>
 
-                    <GroupBox Header="Další údaje" Margin="0,50,0,0" Padding="50,9"  Style="{DynamicResource MaterialDesignGroupBox}"
+                    <GroupBox Header="Další údaje" Margin="0,30,0,0" Padding="50,9"  Style="{DynamicResource MaterialDesignGroupBox}"
                           materialDesign:ShadowAssist.ShadowDepth="Depth3"
                           BorderThickness="0" Grid.IsSharedSizeScope="True" FontSize="13" >
                         <StackPanel>
@@ -105,7 +113,18 @@
 
                             </Grid>
 
-                            <ComboBox Margin="5" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Kříženec" ItemsSource="{Binding Path=BreedList, Mode=OneWay}" DisplayMemberPath="BreedName" SelectedValuePath="Id" SelectedValue="{Binding Path=CrossBreed, Mode=OneWayToSource}"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <ComboBox Margin="5" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Plemeno" ItemsSource="{Binding Path=BreedList, Mode=OneWay}" DisplayMemberPath="BreedName" SelectedValuePath="Id" SelectedValue="{Binding Path=Breed, Mode=OneWayToSource}"/>
+
+                                <ComboBox Margin="5" Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Kříženec" ItemsSource="{Binding Path=BreedList, Mode=OneWay}" DisplayMemberPath="BreedName" SelectedValuePath="Id" SelectedValue="{Binding Path=CrossBreed, Mode=OneWayToSource}"/>
+
+
+                            </Grid>
+
 
                             <Grid>
                                 <Grid.ColumnDefinitions>

@@ -13,10 +13,13 @@ namespace ShelterEvidency.Models
     {
         #region Properties/Atributes
         public int? ID { get; set; }
+
+        public DateTime? FindDate { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? FinishDate { get; set; }
         public int? AnimalID { get; set; }
         public string Note { get; set; }
+        public string FindPlace { get; set; }
         public bool? Adopted { get; set; }
         public bool? Escaped { get; set; }
         public bool? Died { get; set; }
@@ -39,6 +42,8 @@ namespace ShelterEvidency.Models
                     StartDate = StartDate,
                     FinishDate = FinishDate,
                     Note = Note,
+                    FindDate = FindDate,
+                    FindPlace = FindPlace,
                     Adopted = Adopted,
                     Escaped = Escaped,
                     Died = Died
@@ -69,6 +74,8 @@ namespace ShelterEvidency.Models
                                    select new StayInfo
                                    {
                                        ID = stay.Id,
+                                       FindDate = stay.FindDate,
+                                       FindPlace = stay.FindPlace,
                                        StartDate = stay.StartDate,
                                        FinishDate = stay.FinishDate,
                                        AnimalID = stay.AnimalID,
@@ -92,6 +99,8 @@ namespace ShelterEvidency.Models
             Adopted = stay.Adopted;
             Escaped = stay.Escaped;
             Died = stay.Died;
+            FindPlace = stay.FindPlace;
+            FindDate = stay.FindDate;
         }
 
         public void UpdateStay()
@@ -106,6 +115,8 @@ namespace ShelterEvidency.Models
                 stay.Adopted = Adopted;
                 stay.Escaped = Escaped;
                 stay.Died = Died;
+                stay.FindDate = FindDate;
+                stay.FindPlace = FindPlace;
 
                 db.SubmitChanges();
             }
@@ -128,7 +139,9 @@ namespace ShelterEvidency.Models
                                    Note = stay.Note,
                                    Adopted = stay.Adopted,
                                    Escaped = stay.Escaped,
-                                   Died = stay.Died
+                                   Died = stay.Died,
+                                   FindDate = stay.FindDate,
+                                   FindPlace = stay.FindPlace
                                });
                 return new BindableCollection<StayInfo>(results);
             }

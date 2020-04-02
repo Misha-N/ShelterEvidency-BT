@@ -179,7 +179,7 @@ namespace ShelterEvidency.Models
                          Castration = animal.Castration,
 
                      });
-                    return result.First();
+                    return result.FirstOrDefault();
             }
         }
 

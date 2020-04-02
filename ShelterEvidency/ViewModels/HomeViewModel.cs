@@ -499,6 +499,11 @@ namespace ShelterEvidency.ViewModels
             ActivateItem(new GeneralStaysViewModel());
         }
 
+        public void LoadStayEndPage()
+        {
+            ActivateItem(new StayEndViewModel());
+        }
+
         public void Home()
         {
             ActivateItem(null);

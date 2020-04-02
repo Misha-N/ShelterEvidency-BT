@@ -15,12 +15,12 @@ namespace ShelterEvidency.ViewModels
         public AdoptionModel Adoption { get; set; }
         public AnimalInfo Animal { get; set; }
         public PersonInfo Person { get; set; }
-        public AdoptionsViewModel prnt { get; set; }
+        public AdoptionsViewModel Prnt { get; set; }
 
         public AdoptionCardViewModel(int adoptionID, AdoptionsViewModel parent)
         {
-            prnt = parent;
-            prnt.IsWorking = true;
+            Prnt = parent;
+            Prnt.IsWorking = true;
             Adoption = new AdoptionModel();
             Adoption.GetAdoption(adoptionID);
             Animal = new AnimalInfo();
@@ -361,14 +361,14 @@ namespace ShelterEvidency.ViewModels
         {
             Adoption.UpdateAdoption();
             MessageBox.Show("Aktualizováno.");
-            prnt.UpdateAdoptions();
-            prnt.IsWorking = false;
+            Prnt.UpdateAdoptions();
+            Prnt.IsWorking = false;
             TryClose();
         }
 
         public void Cancel()
         {
-            prnt.IsWorking = false;
+            Prnt.IsWorking = false;
             TryClose();
         }
     }

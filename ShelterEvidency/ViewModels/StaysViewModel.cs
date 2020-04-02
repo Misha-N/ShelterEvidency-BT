@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace ShelterEvidency.ViewModels
 {
-    public class StaysViewModel: Screen
+    public class StaysViewModel: Conductor<object>
     {
         #region Initialization
 
@@ -112,6 +112,19 @@ namespace ShelterEvidency.ViewModels
                 NotifyOfPropertyChange(() => Finish);
             }
         }
+
+        public DateTime? FindDate
+        {
+            get
+            {
+                return Stay.FindDate;
+            }
+            set
+            {
+                Stay.FindDate = value;
+                NotifyOfPropertyChange(() => FindDate);
+            }
+        }
         public string Note
         {
             get
@@ -122,6 +135,19 @@ namespace ShelterEvidency.ViewModels
             {
                 Stay.Note = value;
                 NotifyOfPropertyChange(() => Note);
+            }
+        }
+
+        public string FindPlace
+        {
+            get
+            {
+                return Stay.FindPlace;
+            }
+            set
+            {
+                Stay.FindPlace = value;
+                NotifyOfPropertyChange(() => FindPlace);
             }
         }
 
@@ -199,6 +225,8 @@ namespace ShelterEvidency.ViewModels
             NotifyOfPropertyChange(() => Adopted);
             NotifyOfPropertyChange(() => Escaped);
             NotifyOfPropertyChange(() => Died);
+            NotifyOfPropertyChange(() => FindDate);
+            NotifyOfPropertyChange(() => FindPlace);
             NotifyOfPropertyChange(() => IsSelected);
         }
 
@@ -206,12 +234,17 @@ namespace ShelterEvidency.ViewModels
         {
             if (Stay.ValidValues())
             {
-                IsWorking = true;
-                Stay.UpdateStay();
-                Filter();
-                CheckDeath();
-                CheckEscape();
-                MessageBox.Show("Upraveno.");
+                if ((Start < Finish))
+                {
+                    IsWorking = true;
+                    Stay.UpdateStay();
+                    Filter();
+                    MessageBox.Show("Upraveno.");
+                    CheckDeath();
+                    CheckEscape();
+                }
+                else
+                    MessageBox.Show("Pobyt nesmí končit před jeho začátkem.");
             }
             else
                 MessageBox.Show("Vyplňte prosím počáteční datum.");
@@ -227,20 +260,39 @@ namespace ShelterEvidency.ViewModels
                               MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    if(Stay.FinishDate != null)
-                        EscapeModel.CreateEscape((int)Stay.AnimalID, (DateTime)Stay.FinishDate, Stay.Note);
-                    else
-                        MessageBox.Show("Záznam o útěku nemůže být založen, neplatné datum.");
+                    if (Stay.FinishDate != null)
+                        OpenEscapeCreation();
 
                 }
             }
 
         }
 
+        public void OpenEscapeCreation()
+        {
+                ActivateItem(new CreateEscapeViewModel(AnimalID, this));
+        }
+
         private void CheckDeath()
         {
-            if (Stay.Died == true)
-                AnimalModel.AnimalDied((int)Stay.AnimalID);
+            if (Stay.Died == true && Stay.ValidValues())
+            {
+                MessageBoxResult result = MessageBox.Show("Založit nový záznam o úhynu?",
+                  "Confirmation",
+                  MessageBoxButton.YesNo,
+                  MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    if (Stay.FinishDate != null)
+                        OpenDeathCreation();
+
+                }
+            }
+        }
+
+        public void OpenDeathCreation()
+        {
+            ActivateItem(new CreateDeathViewModel(AnimalID, this));
         }
 
         public void Filter()
@@ -312,6 +364,8 @@ namespace ShelterEvidency.ViewModels
         {
             NewStay = new StayModel();
             NotifyOfPropertyChange(() => NewStayDate);
+            NotifyOfPropertyChange(() => NewFindDate);
+            NotifyOfPropertyChange(() => NewFindPlace);
         }
 
         public bool CanCreate()
@@ -333,6 +387,32 @@ namespace ShelterEvidency.ViewModels
             {
                 NewStay.StartDate = value;
                 NotifyOfPropertyChange(() => NewStayDate);
+            }
+        }
+
+        public DateTime? NewFindDate
+        {
+            get
+            {
+                return NewStay.FindDate;
+            }
+            set
+            {
+                NewStay.FindDate = value;
+                NotifyOfPropertyChange(() => NewFindDate);
+            }
+        }
+
+        public string NewFindPlace
+        {
+            get
+            {
+                return NewStay.FindPlace;
+            }
+            set
+            {
+                NewStay.FindPlace = value;
+                NotifyOfPropertyChange(() => NewFindPlace);
             }
         }
 

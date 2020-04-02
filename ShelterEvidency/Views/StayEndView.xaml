@@ -1,0 +1,225 @@
+﻿<UserControl x:Class="ShelterEvidency.Views.StayEndView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ShelterEvidency.Views" xmlns:helpers="clr-namespace:ShelterEvidency.Helpers" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             Background="{DynamicResource MaterialDesignPaper}"
+            TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+            FontFamily="{DynamicResource MaterialDesignFont}"
+             d:DesignHeight="900" d:DesignWidth="1300">
+
+
+    <UserControl.Resources>
+
+        <helpers:InvertBooleanConverter  x:Key="boolConvert"/>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+
+
+    </UserControl.Resources>
+
+    <Grid Margin="5" IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+
+
+
+
+        <materialDesign:Card Margin="10"
+    materialDesign:ShadowAssist.ShadowDepth="Depth1">
+
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <materialDesign:PackIcon Kind="RunFast" Opacity="0.3" Width="80" Height="80"  VerticalAlignment="Center"/>
+                    <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline4TextBlock}">
+                          Útěky z útulku
+                    </TextBlock>
+
+
+
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="90"/>
+                    </Grid.ColumnDefinitions>
+
+                    <DatePicker Margin="5" materialDesign:HintAssist.Hint="Od data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=EscapeSince, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+                    <DatePicker Grid.Column="1" Margin="5" materialDesign:HintAssist.Hint="Do data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=EscapeTo, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+
+                    <Button x:Name="DeleteEscape" IsEnabled="{Binding EscapeIsSelected}" Grid.Column="3"  Style="{StaticResource MaterialDesignIconForegroundButton}">
+                        <materialDesign:PackIcon
+                Kind="DeleteForever"
+                Height="24"
+                Width="24" />
+                    </Button>
+
+                    <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Grid.Column="2"
+                x:Name="FilterEscapes" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,2,2" >
+                        <materialDesign:PackIcon
+                Kind="Update"
+                Height="30"
+                Width="30" />
+                    </Button>
+
+                </Grid>
+
+
+
+                <DataGrid Grid.Row="2" Margin="5" ColumnWidth="*" AutoGenerateColumns="False" VerticalContentAlignment="Center" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" IsReadOnly="True" SelectedValue="{Binding Path=SelectedEscape, Mode=OneWayToSource}" ItemsSource="{Binding Path=Escapes, Mode=OneWay}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" MaxWidth="50" Binding="{Binding ID}"/>
+                        <DataGridTextColumn Header="Datum" Binding="{Binding Date}"/>
+                        <DataGridTextColumn Header="ID zvířete" Binding="{Binding AnimalID}"/>
+                        <DataGridTextColumn Header="Jméno" Binding="{Binding AnimalName}"/>
+                        <DataGridTextColumn Header="Popis" Binding="{Binding Description}"/>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+            </Grid>
+
+
+        </materialDesign:Card>
+
+        <materialDesign:Card Margin="10" Grid.Column="1"
+    materialDesign:ShadowAssist.ShadowDepth="Depth1">
+
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <materialDesign:PackIcon Kind="Tombstone" Opacity="0.3" Width="80" Height="80"  VerticalAlignment="Center"/>
+                    <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Style="{StaticResource MaterialDesignHeadline4TextBlock}">
+                          Úhyny v útulku
+                    </TextBlock>
+
+
+
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="90"/>
+                    </Grid.ColumnDefinitions>
+
+                    <DatePicker Margin="5" materialDesign:HintAssist.Hint="Od data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=DeathSince, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+                    <DatePicker Grid.Column="1" Margin="5" materialDesign:HintAssist.Hint="Do data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=DeathTo, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+
+                    <Button x:Name="DeleteDeath" IsEnabled="{Binding DeathIsSelected}" Grid.Column="3"  Style="{StaticResource MaterialDesignIconForegroundButton}">
+                        <materialDesign:PackIcon
+                Kind="DeleteForever"
+                Height="24"
+                Width="24" />
+                    </Button>
+
+                    <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Grid.Column="2"
+                x:Name="FilterDeaths" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,2,2" >
+                        <materialDesign:PackIcon
+                Kind="Update"
+                Height="30"
+                Width="30" />
+                    </Button>
+
+                </Grid>
+
+
+
+                <DataGrid Grid.Row="2" Margin="5" ColumnWidth="*" AutoGenerateColumns="False" VerticalContentAlignment="Center" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" IsReadOnly="True" SelectedValue="{Binding Path=SelectedDeath, Mode=OneWayToSource}" ItemsSource="{Binding Path=Deaths, Mode=OneWay}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" MaxWidth="50" Binding="{Binding ID}"/>
+                        <DataGridTextColumn Header="Datum" Binding="{Binding Date}"/>
+                        <DataGridTextColumn Header="ID zvířete" Binding="{Binding AnimalID}"/>
+                        <DataGridTextColumn Header="Jméno" Binding="{Binding AnimalName}"/>
+                        <DataGridTextColumn Header="Popis" Binding="{Binding Description}"/>
+
+                        <DataGridTemplateColumn Header="Eutanázie">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <materialDesign:PackIcon x:Name="icon" Kind="CheckboxMarked" />
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding Path=Euthanasia}" Value="False">
+                                            <Setter Property="Kind" Value="CheckBoxOutlineBlank" TargetName="icon"/>
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Přirozený">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <materialDesign:PackIcon x:Name="icon" Kind="CheckboxMarked" />
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding Path=Natural}" Value="False">
+                                            <Setter Property="Kind" Value="CheckBoxOutlineBlank" TargetName="icon"/>
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Jiný">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <materialDesign:PackIcon x:Name="icon" Kind="CheckboxMarked" />
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding Path=Other}" Value="False">
+                                            <Setter Property="Kind" Value="CheckBoxOutlineBlank" TargetName="icon"/>
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+                <Button Style="{StaticResource MaterialDesignFlatAccentButton}" Grid.Row="3" x:Name="SaveToDatabase" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">EXPORT</TextBlock>
+                        <materialDesign:PackIcon Kind="FileExportOutline" Margin="10,0,0,0"  Width="20" Height="20"/>
+                    </StackPanel>
+                </Button>
+
+            </Grid>
+
+
+        </materialDesign:Card>
+
+    </Grid>
+</UserControl>
