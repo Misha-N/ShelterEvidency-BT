@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShelterEvidency.WrappingClasses
 {
-    public class CostInfo
+    public class CostInfo : WrappingClassBase
     {
         public int ID { get; set; }
         public int? Price { get; set; }

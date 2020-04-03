@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShelterEvidency.WrappingClasses
 {
-    public class StayInfo
+    public class StayInfo : WrappingClassBase
     {
         public int ID { get; set; }
         public DateTime? StartDate { get; set; }
@@ -30,5 +30,6 @@ namespace ShelterEvidency.WrappingClasses
                     return null;
             }
         }
+
     }
 }

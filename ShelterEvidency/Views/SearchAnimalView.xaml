@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ShelterEvidency.Views"
              xmlns:helpers="clr-namespace:ShelterEvidency.Helpers"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:cal="http://www.caliburnproject.org"
              Background="{DynamicResource MaterialDesignPaper}"
             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
             FontFamily="{DynamicResource MaterialDesignFont}"
@@ -15,7 +15,7 @@
     <UserControl.Resources> 
         <helpers:InvertBooleanConverter  x:Key="boolConvert"/>
         <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
-        
+
         <Style x:Key="CellCentering" TargetType="{x:Type DataGridCell}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -63,12 +63,41 @@
                 Width="24" />
             </Button>
 
-            <Button x:Name="DeleteAnimal" IsEnabled="{Binding IsSelected}" Grid.Column="4" Grid.Row="1" Style="{StaticResource MaterialDesignIconForegroundButton}">
+            <Button x:Name="DeleteAnimal" IsEnabled="{Binding IsSelected}" Grid.Column="3" HorizontalAlignment="Right" Grid.Row="1" Style="{StaticResource MaterialDesignIconForegroundButton}">
                 <materialDesign:PackIcon
                 Kind="DeleteForever"
                 Height="24"
                 Width="24" />
             </Button>
+
+            <materialDesign:PopupBox Grid.Row="1" Grid.Column="4" HorizontalAlignment="Right" Width="50" Height="50"
+                  Style="{StaticResource MaterialDesignPopupBox}"
+                  PlacementMode="BottomAndAlignRightEdges">
+                <StackPanel>
+                    <Button Style="{StaticResource MaterialDesignFlatAccentButton}" VerticalAlignment="Center">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <cal:ActionMessage MethodName="ExportPDF" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">EXPORT PDF</TextBlock>
+                            <materialDesign:PackIcon Kind="FileAcrobat" Margin="10,0,0,0"  Width="20" Height="20"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignFlatAccentButton}" VerticalAlignment="Center">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <cal:ActionMessage MethodName="ExportExcell" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">EXPORT XLSX</TextBlock>
+                            <materialDesign:PackIcon Kind="FileExcel" Margin="10,0,0,0"  Width="20" Height="20"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </materialDesign:PopupBox>
 
             <Button x:Name="AddAnimal" Style="{StaticResource MaterialDesignRaisedAccentButton}" Grid.Column="2" Grid.Row="1" Margin="5">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">

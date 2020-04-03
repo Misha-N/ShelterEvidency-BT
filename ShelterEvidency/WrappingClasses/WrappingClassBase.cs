@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShelterEvidency.WrappingClasses
 {
-    public class DiaryRecordInfo : WrappingClassBase
+    public class WrappingClassBase
     {
-        public int ID { get; set; }
-
-        public DateTime? Date { get; set; }
-        public string Record { get; set; }
-
     }
 }

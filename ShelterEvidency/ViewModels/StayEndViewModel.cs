@@ -3,6 +3,7 @@ using ShelterEvidency.Models;
 using ShelterEvidency.WrappingClasses;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -267,7 +268,19 @@ namespace ShelterEvidency.ViewModels
             }
         }
 
-        #endregion
+        public void Export()
+        {
+            if (Escapes != null && Escapes.Count() != 0)
+                DocumentManager.ExportDataPDF(EscapeInfo.ConvertToList(Escapes), "Export útěky: " + EscapeSince + " až " + EscapeTo);
+            else
+                MessageBox.Show("Žádná data pro export.");
+        }
 
-    }
+
+
+
+
+    #endregion
+
+}
 }

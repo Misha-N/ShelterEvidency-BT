@@ -12,10 +12,20 @@ namespace ShelterEvidency.ViewModels
     class CreateDeathViewModel: Screen
     {
         public StaysViewModel Prnt { get; set; }
+
+        public StayEndViewModel Prnt1 { get; set; }
         public DeathModel Death { get; set; }
         public CreateDeathViewModel(int animalID, StaysViewModel parent)
         {
             Prnt = parent;
+            Prnt.IsWorking = true;
+            Death = new DeathModel();
+            AnimalID = animalID;
+        }
+
+        public CreateDeathViewModel(int animalID, StayEndViewModel parent)
+        {
+            Prnt1 = parent;
             Prnt.IsWorking = true;
             Death = new DeathModel();
             AnimalID = animalID;
@@ -106,7 +116,13 @@ namespace ShelterEvidency.ViewModels
                 Death.CreateDeath();
                 MessageBox.Show("Záznam vytvořen.");
                 AnimalModel.AnimalDied(AnimalID);
-                Prnt.IsWorking = false;
+                if (Prnt != null)
+                    Prnt.IsWorking = false;
+                if (Prnt1 != null)
+                {
+                    Prnt1.IsWorking = false;
+                    Prnt1.FilterDeaths();
+                }
                 TryClose();
             }
             else
@@ -115,7 +131,10 @@ namespace ShelterEvidency.ViewModels
 
         public void Cancel()
         {
-            Prnt.IsWorking = false;
+            if(Prnt != null)
+                Prnt.IsWorking = false;
+            if (Prnt1 != null)
+                Prnt1.IsWorking = false;
             TryClose();
         }
     }

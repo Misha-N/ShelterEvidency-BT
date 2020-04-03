@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShelterEvidency.WrappingClasses
 {
-    class DeathInfo
+    class DeathInfo : WrappingClassBase
     {
         public int ID { get; set; }
         public DateTime? Date { get; set; }

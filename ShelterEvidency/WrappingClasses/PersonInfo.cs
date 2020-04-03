@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShelterEvidency.WrappingClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShelterEvidency
 {
-    public class PersonInfo
+    public class PersonInfo : WrappingClassBase
     {
         public int ID { get; set; }
         public string Title { get; set; }

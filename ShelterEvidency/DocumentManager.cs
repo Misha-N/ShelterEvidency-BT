@@ -6,15 +6,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Win32;
+/*
 using PdfSharp;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
+*/
 using ShelterEvidency.Models;
+using iTextSharp;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Caliburn.Micro;
+using ShelterEvidency.WrappingClasses;
+using ClosedXML.Excel;
 
 namespace ShelterEvidency
 {
     public class DocumentManager
     {
+        /*
         public static void CreateAdoptionList(AnimalModel animal, PersonModel owner, AdoptionModel adoption)
         {
             // Create a new PDF document
@@ -42,6 +51,7 @@ namespace ShelterEvidency
             // ...and start a viewer.
             Process.Start(filename);
         }
+        */
 
         public static FileInfo[] ReturnAnimalFolder(int animalID)
         {
@@ -90,6 +100,7 @@ namespace ShelterEvidency
             }
         }
 
+        /*
         public static void GenerateAnimalEvidencyCard(int animalID)
         {
             string path = AnimalModel.ReturnFolder(animalID);
@@ -117,6 +128,94 @@ namespace ShelterEvidency
 
             // ...and start a viewer.
             Process.Start(filename);
+        }
+        */
+
+        public static void ExportDataPDF(List<List<string>> data, string dataName)
+        {
+            //configure save file dialog box
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.FileName = "Export"; //default file name
+            dlg.DefaultExt = ".pdf"; //default file extension
+            dlg.Filter = "PDF Files|*.pdf"; //filter files by extension
+
+            // Show save file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+            string fileName = string.Empty;
+
+            // Process save file dialog box results
+            if (result == true)
+            {
+                string FONT = "c:/windows/fonts/arial.ttf";
+                BaseFont bf = BaseFont.CreateFont(
+                    FONT, BaseFont.IDENTITY_H, BaseFont.EMBEDDED
+                  );
+                // Save document
+                fileName = dlg.FileName;
+
+                Document myDocument = new Document(iTextSharp.text.PageSize.A4.Rotate(), 10, 10, 42, 35);
+                PdfWriter.GetInstance(myDocument, new FileStream(fileName, FileMode.Create));
+
+                PdfPTable table = new PdfPTable(data.First().Count());
+                PdfPCell name = new PdfPCell(new Phrase(dataName, new Font(bf)));
+                name.Colspan = data.First().Count();
+                name.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
+
+                table.AddCell(name);
+
+                foreach (List<string> record in data)
+                {
+                    foreach (string value in record)
+                    {
+
+                        table.AddCell(new PdfPCell(new Phrase(value?.ToString() ?? String.Empty, new Font(bf))));
+
+                    }
+                    
+                }
+
+                myDocument.Open();
+                myDocument.Add(table);
+                myDocument.Close();
+            }
+        }
+
+        public static void ExportDataExcell(List<List<string>> data, string dataName)
+        {
+            var workbook = new XLWorkbook();
+            workbook.AddWorksheet("sheetName");
+            var ws = workbook.Worksheet("sheetName");
+
+            int row = 1;
+            int col = 1;
+
+            foreach (List<string> record in data)
+            {
+                foreach (string value in record)
+                {
+
+                    ws.Cell(row, col).Value = value?.ToString() ?? String.Empty;
+                    col++;
+
+                }
+                col = 1;
+                row++;
+            }
+
+
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.Filter = "Excel|*.xls|Excel 2010|*.xlsx"; ;
+            dlg.Title = "Save the Excel File";
+            dlg.FileName = "Order25.xlsx";
+
+            // Show save file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+            string fileName = string.Empty;
+
+            if (result == true)
+            {
+                workbook.SaveAs(dlg.FileName);
+            }
         }
 
     }

@@ -179,7 +179,7 @@ namespace ShelterEvidency.ViewModels
 
         public void GenerateEvidencyCard()
         {
-            DocumentManager.GenerateAnimalEvidencyCard(AnimalID);
+            //DocumentManager.GenerateAnimalEvidencyCard(AnimalID);
             Task.Run(() => LoadData());
         }
 

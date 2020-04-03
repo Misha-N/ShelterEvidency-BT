@@ -209,7 +209,7 @@
 
                 </DataGrid>
 
-                <Button Style="{StaticResource MaterialDesignFlatAccentButton}" Grid.Row="3" x:Name="SaveToDatabase" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Button Style="{StaticResource MaterialDesignFlatAccentButton}" Grid.Row="3" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right" x:Name="Export">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">EXPORT</TextBlock>
                         <materialDesign:PackIcon Kind="FileExportOutline" Margin="10,0,0,0"  Width="20" Height="20"/>

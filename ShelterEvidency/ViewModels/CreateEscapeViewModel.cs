@@ -12,10 +12,19 @@ namespace ShelterEvidency.ViewModels
     class CreateEscapeViewModel: Screen
     {
         public StaysViewModel Prnt { get; set; }
+        public StayEndViewModel Prnt1 { get; set; }
         public EscapeModel Escape { get; set; }
         public CreateEscapeViewModel(int animalID, StaysViewModel parent)
         {
             Prnt = parent;
+            Prnt.IsWorking = true;
+            Escape = new EscapeModel();
+            AnimalID = animalID;
+        }
+
+        public CreateEscapeViewModel(int animalID, StayEndViewModel parent)
+        {
+            Prnt1 = parent;
             Prnt.IsWorking = true;
             Escape = new EscapeModel();
             AnimalID = animalID;
@@ -66,7 +75,13 @@ namespace ShelterEvidency.ViewModels
             {
                 Escape.CreateEscape();
                 MessageBox.Show("Záznam vytvořen.");
-                Prnt.IsWorking = false;
+                if(Prnt != null)
+                    Prnt.IsWorking = false;
+                if (Prnt1 != null)
+                {
+                    Prnt1.IsWorking = false;
+                    Prnt1.FilterEscapes();
+                }
                 TryClose();
             }
             else
@@ -75,7 +90,10 @@ namespace ShelterEvidency.ViewModels
 
         public void Cancel()
         {
-            Prnt.IsWorking = false;
+            if (Prnt != null)
+                Prnt.IsWorking = false;
+            if (Prnt1 != null)
+                Prnt1.IsWorking = false;
             TryClose();
         }
 
