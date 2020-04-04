@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShelterEvidency.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:helpers="clr-namespace:ShelterEvidency.Helpers"
+             xmlns:helpers="clr-namespace:ShelterEvidency.Helpers" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:cal="http://www.caliburnproject.org"
              Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         FontFamily="{DynamicResource MaterialDesignFont}"
@@ -43,9 +43,39 @@
                     <ColumnDefinition/>
                     <ColumnDefinition Width="90"/>
                     <ColumnDefinition Width="90"/>
-                </Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                    </Grid.ColumnDefinitions>
 
-                <DatePicker Margin="5" materialDesign:HintAssist.Hint="Od data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=Since, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+                    <materialDesign:PopupBox Grid.Row="1" Grid.Column="7" HorizontalAlignment="Right" Width="50" Height="50"
+                  Style="{StaticResource MaterialDesignPopupBox}"
+                  PlacementMode="BottomAndAlignRightEdges">
+                        <StackPanel>
+                            <Button Style="{StaticResource MaterialDesignFlatAccentButton}" VerticalAlignment="Center">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <cal:ActionMessage MethodName="ExportPDF" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">EXPORT PDF</TextBlock>
+                                    <materialDesign:PackIcon Kind="FileAcrobat" Margin="10,0,0,0"  Width="20" Height="20"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFlatAccentButton}" VerticalAlignment="Center">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <cal:ActionMessage MethodName="ExportExcell" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">EXPORT XLSX</TextBlock>
+                                    <materialDesign:PackIcon Kind="FileExcel" Margin="10,0,0,0"  Width="20" Height="20"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+
+                    <DatePicker Margin="5" materialDesign:HintAssist.Hint="Od data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=Since, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
                 <DatePicker Grid.Column="1" Margin="5" materialDesign:HintAssist.Hint="Do data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=To, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
 
                 <Button x:Name="DeleteStay" IsEnabled="{Binding IsSelected}" Grid.Column="3"  Style="{StaticResource MaterialDesignIconForegroundButton}">

@@ -446,5 +446,21 @@ namespace ShelterEvidency.ViewModels
             }
         }
 
+        public void ExportExcell()
+        {
+            if (AnimalStays != null && AnimalStays.Count() != 0)
+                DocumentManager.ExportDataExcell(StayInfo.ConvertToList(AnimalStays), "Export zvířata");
+            else
+                MessageBox.Show("Žádná data pro export.");
+        }
+
+        public void ExportPDF()
+        {
+            if (AnimalStays != null && AnimalStays.Count() != 0)
+                DocumentManager.ExportDataPDF(StayInfo.ConvertToList(AnimalStays), "Export zvířata");
+            else
+                MessageBox.Show("Žádná data pro export.");
+        }
+
     }
 }
