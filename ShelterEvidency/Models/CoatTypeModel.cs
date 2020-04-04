@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.Models
 {
@@ -18,9 +19,17 @@ namespace ShelterEvidency.Models
 
         public static BindableCollection<CoatTypes> ReturnCoatTypes()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                return new  BindableCollection<CoatTypes>(db.CoatTypes.Where(x => x.IsDeleted.Equals(false)));
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    return new BindableCollection<CoatTypes>(db.CoatTypes.Where(x => x.IsDeleted.Equals(false)));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<CoatTypes>();
             }
         }
 

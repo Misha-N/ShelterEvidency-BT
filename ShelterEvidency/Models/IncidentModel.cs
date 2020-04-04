@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.Models
 {
@@ -21,73 +22,101 @@ namespace ShelterEvidency.Models
 
         public void SaveIncident()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                Incidents incident = new Incidents
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    AnimalID = AnimalID,
-                    Severity = Severity,
-                    Description = Description,
-                    IncidentDate = Date
-                };
-                db.Incidents.InsertOnSubmit(incident);
-                db.SubmitChanges();
+                    Incidents incident = new Incidents
+                    {
+                        AnimalID = AnimalID,
+                        Severity = Severity,
+                        Description = Description,
+                        IncidentDate = Date
+                    };
+                    db.Incidents.InsertOnSubmit(incident);
+                    db.SubmitChanges();
 
-                ID = incident.ID;
+                    ID = incident.ID;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         public static BindableCollection<IncidentInfo> GetAnimalIncidents(int animalID)
         {
-
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var results = (from incident in db.Incidents
-                               where (incident.AnimalID.Equals(animalID)) && (incident.IsDeleted.Equals(false))
-                               select new IncidentInfo
-                               {
-                                   ID = incident.ID,
-                                   Date = incident.IncidentDate,
-                                   AnimalID = incident.AnimalID,
-                                   AnimalName = incident.Animals.Name,
-                                   Description = incident.Description,
-                                   Severity = incident.Severity,
-                               });
-                return new BindableCollection<IncidentInfo>(results);
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var results = (from incident in db.Incidents
+                                   where (incident.AnimalID.Equals(animalID)) && (incident.IsDeleted.Equals(false))
+                                   select new IncidentInfo
+                                   {
+                                       ID = incident.ID,
+                                       Date = incident.IncidentDate,
+                                       AnimalID = incident.AnimalID,
+                                       AnimalName = incident.Animals.Name,
+                                       Description = incident.Description,
+                                       Severity = incident.Severity,
+                                   });
+                    return new BindableCollection<IncidentInfo>(results);
 
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<IncidentInfo>();
             }
         }
 
         public static BindableCollection<IncidentInfo> GetDatedAnimalIncidents(int animalID, DateTime? since, DateTime? to)
         {
-
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var results = (from incident in db.Incidents
-                               where (incident.AnimalID.Equals(animalID) && (incident.IncidentDate >= since && incident.IncidentDate <= to))
-                                && (incident.IsDeleted.Equals(false))
-                               select new IncidentInfo
-                               {
-                                   ID = incident.ID,
-                                   Date = incident.IncidentDate,
-                                   AnimalID = incident.AnimalID,
-                                   AnimalName = incident.Animals.Name,
-                                   Description = incident.Description,
-                                   Severity = incident.Severity,
-                               });
-                return new BindableCollection<IncidentInfo>(results);
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var results = (from incident in db.Incidents
+                                   where (incident.AnimalID.Equals(animalID) && (incident.IncidentDate >= since && incident.IncidentDate <= to))
+                                    && (incident.IsDeleted.Equals(false))
+                                   select new IncidentInfo
+                                   {
+                                       ID = incident.ID,
+                                       Date = incident.IncidentDate,
+                                       AnimalID = incident.AnimalID,
+                                       AnimalName = incident.Animals.Name,
+                                       Description = incident.Description,
+                                       Severity = incident.Severity,
+                                   });
+                    return new BindableCollection<IncidentInfo>(results);
 
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<IncidentInfo>();
             }
         }
 
         public void GetIncident(int? incidentID)
         {
-            ID = incidentID;
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var incident = db.Incidents.FirstOrDefault(i => i.ID == incidentID);
-                if (incident != null)
-                    SetInformations(incident);
+                ID = incidentID;
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var incident = db.Incidents.FirstOrDefault(i => i.ID == incidentID);
+                    if (incident != null)
+                        SetInformations(incident);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -100,26 +129,40 @@ namespace ShelterEvidency.Models
         }
         public void UpdateIncident()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                Incidents incident = db.Incidents.FirstOrDefault(i => i.ID == ID);
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    Incidents incident = db.Incidents.FirstOrDefault(i => i.ID == ID);
 
-                incident.IncidentDate = Date;
-                incident.Severity = Severity;
-                incident.Description = Description;
-                incident.AnimalID = AnimalID;
+                    incident.IncidentDate = Date;
+                    incident.Severity = Severity;
+                    incident.Description = Description;
+                    incident.AnimalID = AnimalID;
 
-                db.SubmitChanges();
+                    db.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         public static void MarkAsDeleted(int id)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var incident = db.Incidents.Single(x => x.ID == id);
-                incident.IsDeleted = true;
-                db.SubmitChanges();
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var incident = db.Incidents.Single(x => x.ID == id);
+                    incident.IsDeleted = true;
+                    db.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

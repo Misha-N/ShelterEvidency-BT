@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.Models
 {
@@ -23,117 +24,165 @@ namespace ShelterEvidency.Models
 
         public void SaveCost()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                Costs cost = new Costs
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    AnimalID = AnimalID,
-                    CostName = CostName,
-                    Description = Description,
-                    Price = Price,
-                    Date = Date
-                };
-                db.Costs.InsertOnSubmit(cost);
-                db.SubmitChanges();
+                    Costs cost = new Costs
+                    {
+                        AnimalID = AnimalID,
+                        CostName = CostName,
+                        Description = Description,
+                        Price = Price,
+                        Date = Date
+                    };
+                    db.Costs.InsertOnSubmit(cost);
+                    db.SubmitChanges();
 
-                ID = cost.Id;
+                    ID = cost.Id;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         public static BindableCollection<CostInfo> GetAnimalCosts(int? animalID)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var results = (from cost in db.Costs
-                               where (cost.AnimalID.Equals(animalID)) && (cost.IsDeleted.Equals(false))
-                               select new CostInfo
-                               {
-                                   ID = cost.Id,
-                                   CostName = cost.CostName,
-                                   Date = cost.Date,
-                                   AnimalName = cost.Animals.Name,
-                                   Price = cost.Price,
-                                   AnimalID = cost.AnimalID,
-                                   Description = cost.Description
-                               });
-                return new BindableCollection<CostInfo>(results);
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var results = (from cost in db.Costs
+                                   where (cost.AnimalID.Equals(animalID)) && (cost.IsDeleted.Equals(false))
+                                   select new CostInfo
+                                   {
+                                       ID = cost.Id,
+                                       CostName = cost.CostName,
+                                       Date = cost.Date,
+                                       AnimalName = cost.Animals.Name,
+                                       Price = cost.Price,
+                                       AnimalID = cost.AnimalID,
+                                       Description = cost.Description
+                                   });
+                    return new BindableCollection<CostInfo>(results);
 
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<CostInfo>();
             }
         }
 
         public static BindableCollection<CostInfo> GetDatedCosts(DateTime? since, DateTime? to)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
 
-                var results = (from cost in db.Costs
-                               where (cost.Date >= since && cost.Date <= to) && (cost.IsDeleted.Equals(false))
-                               select new CostInfo
-                               {
-                                   ID = cost.Id,
-                                   CostName = cost.CostName,
-                                   Date = cost.Date,
-                                   AnimalName = cost.Animals.Name,
-                                   Price = cost.Price,
-                                   AnimalID = cost.AnimalID,
-                                   Description = cost.Description
-                               });
-                return new BindableCollection<CostInfo>(results);
+                    var results = (from cost in db.Costs
+                                   where (cost.Date >= since && cost.Date <= to) && (cost.IsDeleted.Equals(false))
+                                   select new CostInfo
+                                   {
+                                       ID = cost.Id,
+                                       CostName = cost.CostName,
+                                       Date = cost.Date,
+                                       AnimalName = cost.Animals.Name,
+                                       Price = cost.Price,
+                                       AnimalID = cost.AnimalID,
+                                       Description = cost.Description
+                                   });
+                    return new BindableCollection<CostInfo>(results);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<CostInfo>();
             }
         }
 
         public static BindableCollection<CostInfo> GetDatedAnimalCosts(int? animalID, DateTime? since, DateTime? to)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
 
-                var results = (from cost in db.Costs
-                               where (cost.Date >= since && cost.Date <= to) && (cost.AnimalID.Equals(animalID) && (cost.IsDeleted.Equals(false)))
-                               select new CostInfo
-                               {
-                                   ID = cost.Id,
-                                   CostName = cost.CostName,
-                                   Date = cost.Date,
-                                   AnimalName = cost.Animals.Name,
-                                   Price = cost.Price,
-                                   AnimalID = cost.AnimalID,
-                                   Description = cost.Description
-                               });
-                return new BindableCollection<CostInfo>(results);
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+
+                    var results = (from cost in db.Costs
+                                   where (cost.Date >= since && cost.Date <= to) && (cost.AnimalID.Equals(animalID) && (cost.IsDeleted.Equals(false)))
+                                   select new CostInfo
+                                   {
+                                       ID = cost.Id,
+                                       CostName = cost.CostName,
+                                       Date = cost.Date,
+                                       AnimalName = cost.Animals.Name,
+                                       Price = cost.Price,
+                                       AnimalID = cost.AnimalID,
+                                       Description = cost.Description
+                                   });
+                    return new BindableCollection<CostInfo>(results);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<CostInfo>();
             }
         }
 
 
         public static BindableCollection<CostInfo> GetAllCosts()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var results = (from cost in db.Costs
-                               where((cost.IsDeleted.Equals(false)))
-                               select new CostInfo
-                               {
-                                   ID = cost.Id,
-                                   CostName = cost.CostName,
-                                   Date = cost.Date,
-                                   AnimalName = cost.Animals.Name,
-                                   Price = cost.Price,
-                                   AnimalID = cost.AnimalID,
-                                   Description = cost.Description
-                               });
-                return new BindableCollection<CostInfo>(results);
 
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var results = (from cost in db.Costs
+                                   where ((cost.IsDeleted.Equals(false)))
+                                   select new CostInfo
+                                   {
+                                       ID = cost.Id,
+                                       CostName = cost.CostName,
+                                       Date = cost.Date,
+                                       AnimalName = cost.Animals.Name,
+                                       Price = cost.Price,
+                                       AnimalID = cost.AnimalID,
+                                       Description = cost.Description
+                                   });
+                    return new BindableCollection<CostInfo>(results);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<CostInfo>();
             }
         }
 
 
         public void GetCost(int? costID)
         {
-            ID = costID;
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var cost = db.Costs.FirstOrDefault(i => i.Id == costID);
-                if (cost != null)
-                    SetInformations(cost);
+                ID = costID;
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var cost = db.Costs.FirstOrDefault(i => i.Id == costID);
+                    if (cost != null)
+                        SetInformations(cost);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -148,27 +197,41 @@ namespace ShelterEvidency.Models
 
         public void UpdateCost()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                Costs cost = db.Costs.FirstOrDefault(i => i.Id == ID);
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    Costs cost = db.Costs.FirstOrDefault(i => i.Id == ID);
 
-                cost.Price = Price;
-                cost.Date = Date;
-                cost.CostName = CostName;
-                cost.Description = Description;
-                cost.AnimalID = AnimalID;
+                    cost.Price = Price;
+                    cost.Date = Date;
+                    cost.CostName = CostName;
+                    cost.Description = Description;
+                    cost.AnimalID = AnimalID;
 
-                db.SubmitChanges();
+                    db.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         public static void MarkAsDeleted(int id)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var cost = db.Costs.Single(x => x.Id == id);
-                cost.IsDeleted = true;
-                db.SubmitChanges();
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var cost = db.Costs.Single(x => x.Id == id);
+                    cost.IsDeleted = true;
+                    db.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

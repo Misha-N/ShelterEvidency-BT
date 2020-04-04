@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.Models
 {
@@ -33,42 +34,58 @@ namespace ShelterEvidency.Models
         }
 
         public void SaveStay()
+        {
+            try
             {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
-            {
-                Stays stay = new Stays
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    AnimalID = AnimalID,
-                    StartDate = StartDate,
-                    FinishDate = FinishDate,
-                    Note = Note,
-                    FindDate = FindDate,
-                    FindPlace = FindPlace,
-                    Adopted = Adopted,
-                    Escaped = Escaped,
-                    Died = Died
-                };
-                db.Stays.InsertOnSubmit(stay);
-                db.SubmitChanges();
+                    Stays stay = new Stays
+                    {
+                        AnimalID = AnimalID,
+                        StartDate = StartDate,
+                        FinishDate = FinishDate,
+                        Note = Note,
+                        FindDate = FindDate,
+                        FindPlace = FindPlace,
+                        Adopted = Adopted,
+                        Escaped = Escaped,
+                        Died = Died
+                    };
+                    db.Stays.InsertOnSubmit(stay);
+                    db.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
         }
 
         public void GetStay(int? stayID)
         {
-            ID = stayID;
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var stay = db.Stays.FirstOrDefault(i => i.Id == stayID);
-                if (stay != null)
-                    SetInformations(stay);
+                ID = stayID;
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var stay = db.Stays.FirstOrDefault(i => i.Id == stayID);
+                    if (stay != null)
+                        SetInformations(stay);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         public static BindableCollection<StayInfo> GetAnimalStays(int animalID)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
                     var results = (from stay in db.Stays
                                    where (stay.AnimalID.Equals(animalID)) && (stay.IsDeleted.Equals(false))
                                    select new StayInfo
@@ -86,7 +103,13 @@ namespace ShelterEvidency.Models
                                        Died = stay.Died
                                    });
                     return new BindableCollection<StayInfo>(results);
-                
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<StayInfo>();
             }
         }
 
@@ -105,55 +128,77 @@ namespace ShelterEvidency.Models
 
         public void UpdateStay()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                Stays stay = db.Stays.FirstOrDefault(i => i.Id == ID);
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    Stays stay = db.Stays.FirstOrDefault(i => i.Id == ID);
 
-                stay.StartDate = StartDate;
-                stay.FinishDate = FinishDate;
-                stay.Note = Note;
-                stay.Adopted = Adopted;
-                stay.Escaped = Escaped;
-                stay.Died = Died;
-                stay.FindDate = FindDate;
-                stay.FindPlace = FindPlace;
+                    stay.StartDate = StartDate;
+                    stay.FinishDate = FinishDate;
+                    stay.Note = Note;
+                    stay.Adopted = Adopted;
+                    stay.Escaped = Escaped;
+                    stay.Died = Died;
+                    stay.FindDate = FindDate;
+                    stay.FindPlace = FindPlace;
 
-                db.SubmitChanges();
+                    db.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         public static BindableCollection<StayInfo> GetDatedStays(DateTime? since, DateTime? to)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
 
-                var results = (from stay in db.Stays
-                               where (stay.StartDate >= since && stay.StartDate <= to) && (stay.IsDeleted.Equals(false))
-                               select new StayInfo
-                               {
-                                   ID = stay.Id,
-                                   StartDate = stay.StartDate,
-                                   FinishDate = stay.FinishDate,
-                                   AnimalID = stay.AnimalID,
-                                   AnimalName = stay.Animals.Name,
-                                   Note = stay.Note,
-                                   Adopted = stay.Adopted,
-                                   Escaped = stay.Escaped,
-                                   Died = stay.Died,
-                                   FindDate = stay.FindDate,
-                                   FindPlace = stay.FindPlace
-                               });
-                return new BindableCollection<StayInfo>(results);
+                    var results = (from stay in db.Stays
+                                   where (stay.StartDate >= since && stay.StartDate <= to) && (stay.IsDeleted.Equals(false))
+                                   select new StayInfo
+                                   {
+                                       ID = stay.Id,
+                                       StartDate = stay.StartDate,
+                                       FinishDate = stay.FinishDate,
+                                       AnimalID = stay.AnimalID,
+                                       AnimalName = stay.Animals.Name,
+                                       Note = stay.Note,
+                                       Adopted = stay.Adopted,
+                                       Escaped = stay.Escaped,
+                                       Died = stay.Died,
+                                       FindDate = stay.FindDate,
+                                       FindPlace = stay.FindPlace
+                                   });
+                    return new BindableCollection<StayInfo>(results);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<StayInfo>();
             }
         }
 
         public static void MarkAsDeleted(int id)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var stay = db.Stays.Single(x => x.Id == id);
-                stay.IsDeleted = true;
-                db.SubmitChanges();
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var stay = db.Stays.Single(x => x.Id == id);
+                    stay.IsDeleted = true;
+                    db.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

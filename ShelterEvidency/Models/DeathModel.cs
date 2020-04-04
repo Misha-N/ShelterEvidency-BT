@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.Models
 {
@@ -24,53 +25,76 @@ namespace ShelterEvidency.Models
 
         public void CreateDeath()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                Deaths death = new Deaths
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    AnimalID = AnimalID,
-                    Date = Date,
-                    Description = Description,
-                    Euthanasia = Euthanasia,
-                    Natural = Natural,
-                    Other = Other
-                };
-                db.Deaths.InsertOnSubmit(death);
-                db.SubmitChanges();
+                    Deaths death = new Deaths
+                    {
+                        AnimalID = AnimalID,
+                        Date = Date,
+                        Description = Description,
+                        Euthanasia = Euthanasia,
+                        Natural = Natural,
+                        Other = Other
+                    };
+                    db.Deaths.InsertOnSubmit(death);
+                    db.SubmitChanges();
 
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         public static BindableCollection<DeathInfo> GetDatedDeaths(DateTime? since, DateTime? to)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
 
-                var results = (from death in db.Deaths
-                               where (death.Date >= since && death.Date <= to) && (death.IsDeleted.Equals(false))
-                               select new DeathInfo
-                               {
-                                   ID = death.Id,
-                                   Date = death.Date,
-                                   AnimalID = death.AnimalID,
-                                   AnimalName = death.Animals.Name,
-                                   Description = death.Description,
-                                   Euthanasia = death.Euthanasia,
-                                   Natural = death.Natural,
-                                   Other = death.Other,
-                               });
-                return new BindableCollection<DeathInfo>(results);
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+
+                    var results = (from death in db.Deaths
+                                   where (death.Date >= since && death.Date <= to) && (death.IsDeleted.Equals(false))
+                                   select new DeathInfo
+                                   {
+                                       ID = death.Id,
+                                       Date = death.Date,
+                                       AnimalID = death.AnimalID,
+                                       AnimalName = death.Animals.Name,
+                                       Description = death.Description,
+                                       Euthanasia = death.Euthanasia,
+                                       Natural = death.Natural,
+                                       Other = death.Other,
+                                   });
+                    return new BindableCollection<DeathInfo>(results);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<DeathInfo>();
             }
         }
 
 
         public static void MarkAsDeleted(int id)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var death = db.Deaths.Single(x => x.Id == id);
-                death.IsDeleted = true;
-                db.SubmitChanges();
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var death = db.Deaths.Single(x => x.Id == id);
+                    death.IsDeleted = true;
+                    db.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

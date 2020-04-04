@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.Models
 {
@@ -25,43 +26,65 @@ namespace ShelterEvidency.Models
         #region Methods
         public void SaveDiaryRecord()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                DiaryRecords diaryRecord = new DiaryRecords
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    Date = Date,
-                    Record = Record
-                };
-                db.DiaryRecords.InsertOnSubmit(diaryRecord);
-                db.SubmitChanges();
+                    DiaryRecords diaryRecord = new DiaryRecords
+                    {
+                        Date = Date,
+                        Record = Record
+                    };
+                    db.DiaryRecords.InsertOnSubmit(diaryRecord);
+                    db.SubmitChanges();
 
-                ID = diaryRecord.Id;
+                    ID = diaryRecord.Id;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
         public static BindableCollection<DiaryRecordInfo> GetDiaryRecords(DateTime selectedDate)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var results = (from record in db.DiaryRecords
-                               where (record.Date.Equals(selectedDate)) && (record.IsDeleted.Equals(false))
-                               select new DiaryRecordInfo
-                               {
-                                   ID = record.Id,
-                                   Date = record.Date,
-                                   Record = record.Record
-                               });
-                return new BindableCollection<DiaryRecordInfo>(results);
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var results = (from record in db.DiaryRecords
+                                   where (record.Date.Equals(selectedDate)) && (record.IsDeleted.Equals(false))
+                                   select new DiaryRecordInfo
+                                   {
+                                       ID = record.Id,
+                                       Date = record.Date,
+                                       Record = record.Record
+                                   });
+                    return new BindableCollection<DiaryRecordInfo>(results);
 
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<DiaryRecordInfo>();
             }
         }
 
         public static void MarkAsDeleted(int id)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var record = db.DiaryRecords.Single(x => x.Id == id);
-                record.IsDeleted = true;
-                db.SubmitChanges();
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var record = db.DiaryRecords.Single(x => x.Id == id);
+                    record.IsDeleted = true;
+                    db.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

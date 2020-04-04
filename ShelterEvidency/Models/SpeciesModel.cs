@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.Models
 {
@@ -17,40 +18,62 @@ namespace ShelterEvidency.Models
 
         public static BindableCollection<Species> ReturnSpecies()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                return new BindableCollection<Species>(db.Species.Where(x => x.IsDeleted.Equals(false)));
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    return new BindableCollection<Species>(db.Species.Where(x => x.IsDeleted.Equals(false)));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<Species>();
             }
         }
 
 
         public void SaveSpecies()
         {
-            if (SpeciesName != null)
-            {
-                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try 
+            { 
+                if (SpeciesName != null)
                 {
-                    Species species = new Species
+                    using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                     {
-                        SpeciesName = SpeciesName,
-                        IsDeleted = false
-                    };
-                    db.Species.InsertOnSubmit(species);
-                    db.SubmitChanges();
+                        Species species = new Species
+                        {
+                            SpeciesName = SpeciesName,
+                            IsDeleted = false
+                        };
+                        db.Species.InsertOnSubmit(species);
+                        db.SubmitChanges();
 
-                    ID = species.Id;
+                        ID = species.Id;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
         }
 
         public static void MarkAsDeleted(int id)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var species = db.Species.Single(x => x.Id == id);
-                species.IsDeleted = true;
-                db.SubmitChanges();
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var species = db.Species.Single(x => x.Id == id);
+                    species.IsDeleted = true;
+                    db.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

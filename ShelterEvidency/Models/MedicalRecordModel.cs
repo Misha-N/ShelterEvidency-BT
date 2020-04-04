@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.Models
 {
@@ -23,80 +24,108 @@ namespace ShelterEvidency.Models
 
         public void SaveMedicalRecord()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                MedicalRecords medicalRecord = new MedicalRecords
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    AnimalID = AnimalID,
-                    RecordName = RecordName,
-                    Description = Description,
-                    CostID = CostID,
-                    Date = Date,
-                    VetID = VetID
-                };
-                db.MedicalRecords.InsertOnSubmit(medicalRecord);
-                db.SubmitChanges();
+                    MedicalRecords medicalRecord = new MedicalRecords
+                    {
+                        AnimalID = AnimalID,
+                        RecordName = RecordName,
+                        Description = Description,
+                        CostID = CostID,
+                        Date = Date,
+                        VetID = VetID
+                    };
+                    db.MedicalRecords.InsertOnSubmit(medicalRecord);
+                    db.SubmitChanges();
 
-                ID = medicalRecord.Id;
+                    ID = medicalRecord.Id;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         public static BindableCollection<MedicalRecordInfo> GetAnimalMedicalRecords(int animalID)
         {
-
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var results = (from record in db.MedicalRecords
-                               where (record.AnimalID.Equals(animalID) && (record.IsDeleted.Equals(false)))
-                               select new MedicalRecordInfo
-                               {
-                                   ID = record.Id,
-                                   Date = record.Date,
-                                   RecordName = record.RecordName,
-                                   AnimalID = record.AnimalID,
-                                   AnimalName = record.Animals.Name,
-                                   Description = record.Description,
-                                   VetID = record.VetID,
-                                   VetName = record.People.FirstName + " " + record.People.LastName,
-                                   CostID = record.CostID,
-                               });
-                return new BindableCollection<MedicalRecordInfo>(results);
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var results = (from record in db.MedicalRecords
+                                   where (record.AnimalID.Equals(animalID) && (record.IsDeleted.Equals(false)))
+                                   select new MedicalRecordInfo
+                                   {
+                                       ID = record.Id,
+                                       Date = record.Date,
+                                       RecordName = record.RecordName,
+                                       AnimalID = record.AnimalID,
+                                       AnimalName = record.Animals.Name,
+                                       Description = record.Description,
+                                       VetID = record.VetID,
+                                       VetName = record.People.FirstName + " " + record.People.LastName,
+                                       CostID = record.CostID,
+                                   });
+                    return new BindableCollection<MedicalRecordInfo>(results);
 
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<MedicalRecordInfo>();
             }
         }
 
         public static BindableCollection<MedicalRecordInfo> GetDatedMedicalRecords(int animalID, DateTime? since, DateTime? to)
         {
-
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var results = (from record in db.MedicalRecords
-                               where (record.AnimalID.Equals(animalID) && (record.Date >= since && record.Date <= to) && (record.IsDeleted.Equals(false)))
-                               select new MedicalRecordInfo
-                               {
-                                   ID = record.Id,
-                                   Date = record.Date,
-                                   RecordName = record.RecordName,
-                                   AnimalID = record.AnimalID,
-                                   AnimalName = record.Animals.Name,
-                                   Description = record.Description,
-                                   VetID = record.VetID,
-                                   VetName = record.People.FirstName + " " + record.People.LastName,
-                                   CostID = record.CostID,
-                               });
-                return new BindableCollection<MedicalRecordInfo>(results);
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var results = (from record in db.MedicalRecords
+                                   where (record.AnimalID.Equals(animalID) && (record.Date >= since && record.Date <= to) && (record.IsDeleted.Equals(false)))
+                                   select new MedicalRecordInfo
+                                   {
+                                       ID = record.Id,
+                                       Date = record.Date,
+                                       RecordName = record.RecordName,
+                                       AnimalID = record.AnimalID,
+                                       AnimalName = record.Animals.Name,
+                                       Description = record.Description,
+                                       VetID = record.VetID,
+                                       VetName = record.People.FirstName + " " + record.People.LastName,
+                                       CostID = record.CostID,
+                                   });
+                    return new BindableCollection<MedicalRecordInfo>(results);
 
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<MedicalRecordInfo>();
             }
         }
 
         public void GetMedicalRecord(int? medicalRecordID)
         {
-            ID = medicalRecordID;
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var medicalRecord = db.MedicalRecords.FirstOrDefault(i => i.Id == medicalRecordID);
-                if (medicalRecord != null)
-                    SetInformations(medicalRecord);
+                ID = medicalRecordID;
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var medicalRecord = db.MedicalRecords.FirstOrDefault(i => i.Id == medicalRecordID);
+                    if (medicalRecord != null)
+                        SetInformations(medicalRecord);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
         public void SetInformations(MedicalRecords medicalRecord)
@@ -111,26 +140,40 @@ namespace ShelterEvidency.Models
 
         public void UpdateMedicalRecord()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                MedicalRecords medicalRecord = db.MedicalRecords.FirstOrDefault(i => i.Id == ID);
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    MedicalRecords medicalRecord = db.MedicalRecords.FirstOrDefault(i => i.Id == ID);
 
-                medicalRecord.RecordName = RecordName;
-                medicalRecord.VetID = VetID;
-                medicalRecord.Description = Description;
-                medicalRecord.Date = Date;
+                    medicalRecord.RecordName = RecordName;
+                    medicalRecord.VetID = VetID;
+                    medicalRecord.Description = Description;
+                    medicalRecord.Date = Date;
 
-                db.SubmitChanges();
+                    db.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         public static void MarkAsDeleted(int id)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var record = db.MedicalRecords.Single(x => x.Id == id);
-                record.IsDeleted = true;
-                db.SubmitChanges();
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var record = db.MedicalRecords.Single(x => x.Id == id);
+                    record.IsDeleted = true;
+                    db.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

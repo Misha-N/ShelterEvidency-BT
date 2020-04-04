@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.Models
 {
@@ -18,42 +19,66 @@ namespace ShelterEvidency.Models
         #endregion
         public static BindableCollection<Breeds> ReturnBreeds(int? speciesID)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                if (speciesID is null)
-                    return new BindableCollection<Breeds>(db.Breeds.Where(x => x.IsDeleted.Equals(false)));
-                else
-                    return  new BindableCollection<Breeds>(db.Breeds.Where(x => x.SpeciesID.Equals(speciesID) && x.IsDeleted.Equals(false)));
+
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    if (speciesID is null)
+                        return new BindableCollection<Breeds>(db.Breeds.Where(x => x.IsDeleted.Equals(false)));
+                    else
+                        return new BindableCollection<Breeds>(db.Breeds.Where(x => x.SpeciesID.Equals(speciesID) && x.IsDeleted.Equals(false)));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<Breeds>();
             }
         }
         public void SaveBreed()
         {
-            if (BreedName != null)
+            try
             {
-                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                if (BreedName != null)
                 {
-                    Breeds breed = new Breeds
+                    using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                     {
-                        BreedName = BreedName,
-                        SpeciesID = SpeciesID,
-                        IsDeleted = false
-                    };
-                    db.Breeds.InsertOnSubmit(breed);
-                    db.SubmitChanges();
+                        Breeds breed = new Breeds
+                        {
+                            BreedName = BreedName,
+                            SpeciesID = SpeciesID,
+                            IsDeleted = false
+                        };
+                        db.Breeds.InsertOnSubmit(breed);
+                        db.SubmitChanges();
 
-                    ID = breed.Id;
+                        ID = breed.Id;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
 
         public static void MarkAsDeleted(int id)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var breed = db.Breeds.Single(x => x.Id == id);
-                breed.IsDeleted = true;
-                db.SubmitChanges();
+
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var breed = db.Breeds.Single(x => x.Id == id);
+                    breed.IsDeleted = true;
+                    db.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

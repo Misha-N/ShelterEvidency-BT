@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.Models
 {
@@ -16,39 +17,61 @@ namespace ShelterEvidency.Models
         #endregion
         public static BindableCollection<FurColors> ReturnFurColors()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                return new BindableCollection<FurColors>(db.FurColors.Where(x => x.IsDeleted.Equals(false)));
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    return new BindableCollection<FurColors>(db.FurColors.Where(x => x.IsDeleted.Equals(false)));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<FurColors>();
             }
         }
         public void SaveFurColor()
         {
-            if (FurColorName != null)
+            try
             {
-
-                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                if (FurColorName != null)
                 {
-                    FurColors furColor = new FurColors
-                    {
-                        FurColorName = FurColorName,
-                        IsDeleted = false
-                    };
-                    db.FurColors.InsertOnSubmit(furColor);
-                    db.SubmitChanges();
 
-                    ID = furColor.Id;
+                    using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                    {
+                        FurColors furColor = new FurColors
+                        {
+                            FurColorName = FurColorName,
+                            IsDeleted = false
+                        };
+                        db.FurColors.InsertOnSubmit(furColor);
+                        db.SubmitChanges();
+
+                        ID = furColor.Id;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
         }
 
         public static void MarkAsDeleted(int id)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var furColor = db.FurColors.Single(x => x.Id == id);
-                furColor.IsDeleted = true;
-                db.SubmitChanges();
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var furColor = db.FurColors.Single(x => x.Id == id);
+                    furColor.IsDeleted = true;
+                    db.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

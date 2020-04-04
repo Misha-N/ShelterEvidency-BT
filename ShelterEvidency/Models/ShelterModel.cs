@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.Models
 {
@@ -32,17 +33,24 @@ namespace ShelterEvidency.Models
 
         public void GetInfo()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                Shelter shelter = db.Shelter.FirstOrDefault();
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    Shelter shelter = db.Shelter.FirstOrDefault();
 
-                ID = shelter.Id;
-                Name = shelter.Name;
-                Phone = shelter.Phone;
-                Phone2 = shelter.Phone2;
-                Mail = shelter.Mail;
-                Account = shelter.Account;
-                Adress = shelter.Adress;
+                    ID = shelter.Id;
+                    Name = shelter.Name;
+                    Phone = shelter.Phone;
+                    Phone2 = shelter.Phone2;
+                    Mail = shelter.Mail;
+                    Account = shelter.Account;
+                    Adress = shelter.Adress;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
         }
@@ -50,18 +58,25 @@ namespace ShelterEvidency.Models
 
         public void UpdateInfo()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                Shelter shelter = db.Shelter.FirstOrDefault();
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    Shelter shelter = db.Shelter.FirstOrDefault();
 
-                shelter.Name = Name;
-                shelter.Phone = Phone;
-                shelter.Phone2 = Phone2;
-                shelter.Mail = Mail;
-                shelter.Adress = Adress;
-                shelter.Account = Account;
+                    shelter.Name = Name;
+                    shelter.Phone = Phone;
+                    shelter.Phone2 = Phone2;
+                    shelter.Mail = Mail;
+                    shelter.Adress = Adress;
+                    shelter.Account = Account;
 
-                db.SubmitChanges();
+                    db.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

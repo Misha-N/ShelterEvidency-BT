@@ -34,9 +34,9 @@ namespace ShelterEvidency.Models
                         System.IO.File.Copy(ImagePath, path);
                         return path;
                     }
-                    catch (IOException e)
+                    catch (IOException)
                     {
-                        MessageBox.Show(e.Message);
+                        SaveImage();
                     }
                 }
 

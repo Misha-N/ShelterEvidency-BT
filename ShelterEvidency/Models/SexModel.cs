@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.Models
 {
@@ -17,9 +18,17 @@ namespace ShelterEvidency.Models
 
         public static BindableCollection<Sexes> ReturnSexes()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                return new BindableCollection<Sexes>(db.Sexes);
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    return new BindableCollection<Sexes>(db.Sexes);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<Sexes>();
             }
         }
     }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShelterEvidency.Models
 {
@@ -49,296 +50,380 @@ namespace ShelterEvidency.Models
 
         public void SavePerson()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                People person = new People
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    Title = Title,
-                    FirstName = FirstName,
-                    LastName = LastName,
-                    Phone = Phone,
-                    Mail = Mail,
-                    Note = Note,
-                    AdressCity = AdressCity,
-                    AdressStreet = AdressStreet,
-                    AdressZip = AdressZip,
-                    IsOwner = IsOwner,
-                    IsVet = IsVet,
-                    IsWalker = IsWalker,
-                    IsSponsor = IsSponsor,
-                    IsVolunteer = IsVolunteer
+                    People person = new People
+                    {
+                        Title = Title,
+                        FirstName = FirstName,
+                        LastName = LastName,
+                        Phone = Phone,
+                        Mail = Mail,
+                        Note = Note,
+                        AdressCity = AdressCity,
+                        AdressStreet = AdressStreet,
+                        AdressZip = AdressZip,
+                        IsOwner = IsOwner,
+                        IsVet = IsVet,
+                        IsWalker = IsWalker,
+                        IsSponsor = IsSponsor,
+                        IsVolunteer = IsVolunteer
 
-                };
-                db.People.InsertOnSubmit(person);
-                db.SubmitChanges();
+                    };
+                    db.People.InsertOnSubmit(person);
+                    db.SubmitChanges();
 
-                ID = person.Id;
+                    ID = person.Id;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
         }
 
         public static BindableCollection<PersonInfo> ReturnPeople()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var results = (from person in db.People
-                               select new PersonInfo
-                               {
-                                   ID = person.Id,
-                                   Title = person.Title,
-                                   FirstName = person.FirstName,
-                                   LastName = person.LastName,
-                                   Phone = person.Phone,
-                                   Mail = person.Mail,
-                                   Note = person.Note,
-                                   AdressCity = person.AdressCity,
-                                   AdressStreet = person.AdressStreet,
-                                   AdressZip = person.AdressZip,
-                                   IsOwner = person.IsOwner,
-                                   IsVet = person.IsVet,
-                                   IsWalker = person.IsWalker,
-                                   IsSponsor = person.IsSponsor,
-                                   IsVolunteer = person.IsVolunteer
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var results = (from person in db.People
+                                   select new PersonInfo
+                                   {
+                                       ID = person.Id,
+                                       Title = person.Title,
+                                       FirstName = person.FirstName,
+                                       LastName = person.LastName,
+                                       Phone = person.Phone,
+                                       Mail = person.Mail,
+                                       Note = person.Note,
+                                       AdressCity = person.AdressCity,
+                                       AdressStreet = person.AdressStreet,
+                                       AdressZip = person.AdressZip,
+                                       IsOwner = person.IsOwner,
+                                       IsVet = person.IsVet,
+                                       IsWalker = person.IsWalker,
+                                       IsSponsor = person.IsSponsor,
+                                       IsVolunteer = person.IsVolunteer
 
-                               });
+                                   });
 
-                return new BindableCollection<PersonInfo>(results);
+                    return new BindableCollection<PersonInfo>(results);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<PersonInfo>();
             }
         }
 
 
         public static BindableCollection<PersonInfo> ReturnSpecificPeople(string searchValue)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var results = (from person in db.People
-                               where ((person.LastName.Contains(searchValue)) ||
-                                      (person.Id.ToString().Equals(searchValue)))
-                               select new PersonInfo
-                               {
-                                   ID = person.Id,
-                                   Title = person.Title,
-                                   FirstName = person.FirstName,
-                                   LastName = person.LastName,
-                                   Phone = person.Phone,
-                                   Mail = person.Mail,
-                                   Note = person.Note,
-                                   AdressCity = person.AdressCity,
-                                   AdressStreet = person.AdressStreet,
-                                   AdressZip = person.AdressZip,
-                                   IsOwner = person.IsOwner,
-                                   IsVet = person.IsVet,
-                                   IsWalker = person.IsWalker,
-                                   IsSponsor = person.IsSponsor,
-                                   IsVolunteer = person.IsVolunteer
-                               });
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var results = (from person in db.People
+                                   where ((person.LastName.Contains(searchValue)) ||
+                                          (person.Id.ToString().Equals(searchValue)))
+                                   select new PersonInfo
+                                   {
+                                       ID = person.Id,
+                                       Title = person.Title,
+                                       FirstName = person.FirstName,
+                                       LastName = person.LastName,
+                                       Phone = person.Phone,
+                                       Mail = person.Mail,
+                                       Note = person.Note,
+                                       AdressCity = person.AdressCity,
+                                       AdressStreet = person.AdressStreet,
+                                       AdressZip = person.AdressZip,
+                                       IsOwner = person.IsOwner,
+                                       IsVet = person.IsVet,
+                                       IsWalker = person.IsWalker,
+                                       IsSponsor = person.IsSponsor,
+                                       IsVolunteer = person.IsVolunteer
+                                   });
 
-                return new BindableCollection<PersonInfo>(results);
+                    return new BindableCollection<PersonInfo>(results);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<PersonInfo>();
             }
         }
 
         public void GetPerson(int personID)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var person = db.People.FirstOrDefault(i => i.Id == personID);
-                if (person != null)
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    ID = person.Id;
-                    Title = person.Title;
-                    FirstName = person.FirstName;
-                    LastName = person.LastName;
-                    Phone = person.Phone;
-                    Mail = person.Mail;
-                    Note = person.Note;
-                    AdressCity = person.AdressCity;
-                    AdressStreet = person.AdressStreet;
-                    AdressZip = person.AdressZip;
-                    IsOwner = person.IsOwner;
-                    IsVet = person.IsVet;
-                    IsWalker = person.IsWalker;
-                    IsSponsor = person.IsSponsor;
-                    IsVolunteer = person.IsVolunteer;
+                    var person = db.People.FirstOrDefault(i => i.Id == personID);
+                    if (person != null)
+                    {
+                        ID = person.Id;
+                        Title = person.Title;
+                        FirstName = person.FirstName;
+                        LastName = person.LastName;
+                        Phone = person.Phone;
+                        Mail = person.Mail;
+                        Note = person.Note;
+                        AdressCity = person.AdressCity;
+                        AdressStreet = person.AdressStreet;
+                        AdressZip = person.AdressZip;
+                        IsOwner = person.IsOwner;
+                        IsVet = person.IsVet;
+                        IsWalker = person.IsWalker;
+                        IsSponsor = person.IsSponsor;
+                        IsVolunteer = person.IsVolunteer;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         public static PersonInfo GetPersonInfo(int? personID)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var person = db.People.FirstOrDefault(i => i.Id == personID);
-                if (person != null)
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    PersonInfo info = new PersonInfo
+                    var person = db.People.FirstOrDefault(i => i.Id == personID);
+                    if (person != null)
                     {
-                        ID = person.Id,
-                        Title = person.Title,
-                        FirstName = person.FirstName,
-                        LastName = person.LastName,
-                        Phone = person.Phone,
-                        Mail = person.Mail,
-                        Note = person.Note,
-                        AdressCity = person.AdressCity,
-                        AdressStreet = person.AdressStreet,
-                        AdressZip = person.AdressZip,
-                        IsOwner = person.IsOwner,
-                        IsVet = person.IsVet,
-                        IsWalker = person.IsWalker,
-                        IsSponsor = person.IsSponsor,
-                        IsVolunteer = person.IsVolunteer
-                    };
-                    return info;
+                        PersonInfo info = new PersonInfo
+                        {
+                            ID = person.Id,
+                            Title = person.Title,
+                            FirstName = person.FirstName,
+                            LastName = person.LastName,
+                            Phone = person.Phone,
+                            Mail = person.Mail,
+                            Note = person.Note,
+                            AdressCity = person.AdressCity,
+                            AdressStreet = person.AdressStreet,
+                            AdressZip = person.AdressZip,
+                            IsOwner = person.IsOwner,
+                            IsVet = person.IsVet,
+                            IsWalker = person.IsWalker,
+                            IsSponsor = person.IsSponsor,
+                            IsVolunteer = person.IsVolunteer
+                        };
+                        return info;
+                    }
+                    else
+                        return new PersonInfo();
                 }
-                else
-                    return new PersonInfo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new PersonInfo();
             }
         }
 
         public void UpdatePerson()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                People person = db.People.FirstOrDefault(i => i.Id == ID);
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    People person = db.People.FirstOrDefault(i => i.Id == ID);
 
-                person.Title = Title;
-                person.FirstName = FirstName;
-                person.LastName = LastName;
-                person.Phone = Phone;
-                person.Mail = Mail;
-                person.Note = Note;
-                person.AdressCity = AdressCity;
-                person.AdressStreet = AdressStreet;
-                person.AdressZip = AdressZip;
-                person.IsOwner = IsOwner;
-                person.IsSponsor = IsSponsor;
-                person.IsVet = IsVet;
-                person.IsWalker = IsWalker;
-                person.IsVolunteer = IsVolunteer;
+                    person.Title = Title;
+                    person.FirstName = FirstName;
+                    person.LastName = LastName;
+                    person.Phone = Phone;
+                    person.Mail = Mail;
+                    person.Note = Note;
+                    person.AdressCity = AdressCity;
+                    person.AdressStreet = AdressStreet;
+                    person.AdressZip = AdressZip;
+                    person.IsOwner = IsOwner;
+                    person.IsSponsor = IsSponsor;
+                    person.IsVet = IsVet;
+                    person.IsWalker = IsWalker;
+                    person.IsVolunteer = IsVolunteer;
 
-                db.SubmitChanges();
+                    db.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         public static BindableCollection<PersonInfo> ReturnVets()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var results = (from person in db.People
-                               where ((person.IsVet.Equals(true)))
-                               select new PersonInfo
-                               {
-                                   ID = person.Id,
-                                   Title = person.Title,
-                                   FirstName = person.FirstName,
-                                   LastName = person.LastName,
-                                   Phone = person.Phone,
-                                   Mail = person.Mail,
-                                   Note = person.Note,
-                                   AdressCity = person.AdressCity,
-                                   AdressStreet = person.AdressStreet,
-                                   AdressZip = person.AdressZip,
-                                   IsOwner = person.IsOwner,
-                                   IsVet = person.IsVet,
-                                   IsWalker = person.IsWalker,
-                                   IsSponsor = person.IsSponsor,
-                                   IsVolunteer = person.IsVolunteer
-                               });
-                return new BindableCollection<PersonInfo>(results);
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var results = (from person in db.People
+                                   where ((person.IsVet.Equals(true)))
+                                   select new PersonInfo
+                                   {
+                                       ID = person.Id,
+                                       Title = person.Title,
+                                       FirstName = person.FirstName,
+                                       LastName = person.LastName,
+                                       Phone = person.Phone,
+                                       Mail = person.Mail,
+                                       Note = person.Note,
+                                       AdressCity = person.AdressCity,
+                                       AdressStreet = person.AdressStreet,
+                                       AdressZip = person.AdressZip,
+                                       IsOwner = person.IsOwner,
+                                       IsVet = person.IsVet,
+                                       IsWalker = person.IsWalker,
+                                       IsSponsor = person.IsSponsor,
+                                       IsVolunteer = person.IsVolunteer
+                                   });
+                    return new BindableCollection<PersonInfo>(results);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<PersonInfo>();
             }
         }
 
         public static BindableCollection<PersonInfo> ReturnDonators()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var results = (from person in db.People
-                               where ((person.IsSponsor.Equals(true)))
-                               select new PersonInfo
-                               {
-                                   ID = person.Id,
-                                   Title = person.Title,
-                                   FirstName = person.FirstName,
-                                   LastName = person.LastName,
-                                   Phone = person.Phone,
-                                   Mail = person.Mail,
-                                   Note = person.Note,
-                                   AdressCity = person.AdressCity,
-                                   AdressStreet = person.AdressStreet,
-                                   AdressZip = person.AdressZip,
-                                   IsOwner = person.IsOwner,
-                                   IsVet = person.IsVet,
-                                   IsWalker = person.IsWalker,
-                                   IsSponsor = person.IsSponsor,
-                                   IsVolunteer = person.IsVolunteer
-                               });
-                return new BindableCollection<PersonInfo>(results);
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var results = (from person in db.People
+                                   where ((person.IsSponsor.Equals(true)))
+                                   select new PersonInfo
+                                   {
+                                       ID = person.Id,
+                                       Title = person.Title,
+                                       FirstName = person.FirstName,
+                                       LastName = person.LastName,
+                                       Phone = person.Phone,
+                                       Mail = person.Mail,
+                                       Note = person.Note,
+                                       AdressCity = person.AdressCity,
+                                       AdressStreet = person.AdressStreet,
+                                       AdressZip = person.AdressZip,
+                                       IsOwner = person.IsOwner,
+                                       IsVet = person.IsVet,
+                                       IsWalker = person.IsWalker,
+                                       IsSponsor = person.IsSponsor,
+                                       IsVolunteer = person.IsVolunteer
+                                   });
+                    return new BindableCollection<PersonInfo>(results);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<PersonInfo>();
             }
         }
 
         public static BindableCollection<PersonInfo> ReturnWalkers()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var results = (from person in db.People
-                               where ((person.IsWalker.Equals(true)))
-                               select new PersonInfo
-                               {
-                                   ID = person.Id,
-                                   Title = person.Title,
-                                   FirstName = person.FirstName,
-                                   LastName = person.LastName,
-                                   Phone = person.Phone,
-                                   Mail = person.Mail,
-                                   Note = person.Note,
-                                   AdressCity = person.AdressCity,
-                                   AdressStreet = person.AdressStreet,
-                                   AdressZip = person.AdressZip,
-                                   IsOwner = person.IsOwner,
-                                   IsVet = person.IsVet,
-                                   IsWalker = person.IsWalker,
-                                   IsSponsor = person.IsSponsor,
-                                   IsVolunteer = person.IsVolunteer
-                               });
-                return new BindableCollection<PersonInfo>(results);
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var results = (from person in db.People
+                                   where ((person.IsWalker.Equals(true)))
+                                   select new PersonInfo
+                                   {
+                                       ID = person.Id,
+                                       Title = person.Title,
+                                       FirstName = person.FirstName,
+                                       LastName = person.LastName,
+                                       Phone = person.Phone,
+                                       Mail = person.Mail,
+                                       Note = person.Note,
+                                       AdressCity = person.AdressCity,
+                                       AdressStreet = person.AdressStreet,
+                                       AdressZip = person.AdressZip,
+                                       IsOwner = person.IsOwner,
+                                       IsVet = person.IsVet,
+                                       IsWalker = person.IsWalker,
+                                       IsSponsor = person.IsSponsor,
+                                       IsVolunteer = person.IsVolunteer
+                                   });
+                    return new BindableCollection<PersonInfo>(results);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<PersonInfo>();
             }
         }
 
         public static BindableCollection<PersonInfo> ReturnOwners()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var results = (from person in db.People
-                               where ((person.IsOwner.Equals(true)))
-                               select new PersonInfo
-                               {
-                                   ID = person.Id,
-                                   Title = person.Title,
-                                   FirstName = person.FirstName,
-                                   LastName = person.LastName,
-                                   Phone = person.Phone,
-                                   Mail = person.Mail,
-                                   Note = person.Note,
-                                   AdressCity = person.AdressCity,
-                                   AdressStreet = person.AdressStreet,
-                                   AdressZip = person.AdressZip,
-                                   IsOwner = person.IsOwner,
-                                   IsVet = person.IsVet,
-                                   IsWalker = person.IsWalker,
-                                   IsSponsor = person.IsSponsor,
-                                   IsVolunteer = person.IsVolunteer
-                               });
-                return new BindableCollection<PersonInfo>(results);
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var results = (from person in db.People
+                                   where ((person.IsOwner.Equals(true)))
+                                   select new PersonInfo
+                                   {
+                                       ID = person.Id,
+                                       Title = person.Title,
+                                       FirstName = person.FirstName,
+                                       LastName = person.LastName,
+                                       Phone = person.Phone,
+                                       Mail = person.Mail,
+                                       Note = person.Note,
+                                       AdressCity = person.AdressCity,
+                                       AdressStreet = person.AdressStreet,
+                                       AdressZip = person.AdressZip,
+                                       IsOwner = person.IsOwner,
+                                       IsVet = person.IsVet,
+                                       IsWalker = person.IsWalker,
+                                       IsSponsor = person.IsSponsor,
+                                       IsVolunteer = person.IsVolunteer
+                                   });
+                    return new BindableCollection<PersonInfo>(results);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new BindableCollection<PersonInfo>();
             }
         }
 
         public static void MarkAsDeleted(int id)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var person = db.People.Single(x => x.Id == id);
-                person.IsDeleted = true;
-                db.SubmitChanges();
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    var person = db.People.Single(x => x.Id == id);
+                    person.IsDeleted = true;
+                    db.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
