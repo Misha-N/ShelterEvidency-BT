@@ -26,7 +26,7 @@ namespace ShelterEvidency.ViewModels
         public CreateDeathViewModel(int animalID, StayEndViewModel parent)
         {
             Prnt1 = parent;
-            Prnt.IsWorking = true;
+            Prnt1.IsWorking = true;
             Death = new DeathModel();
             AnimalID = animalID;
         }
@@ -115,7 +115,7 @@ namespace ShelterEvidency.ViewModels
             {
                 Death.CreateDeath();
                 MessageBox.Show("Záznam vytvořen.");
-                AnimalModel.AnimalDied(AnimalID);
+                AnimalModel.AnimalDied((int)AnimalID);
                 if (Prnt != null)
                     Prnt.IsWorking = false;
                 if (Prnt1 != null)

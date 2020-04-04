@@ -26,14 +26,16 @@ namespace ShelterEvidency
 
             foreach (AdoptionInfo adoption in adoptions)
             {
-                List<string> ls = new List<string>();
-                ls.Add(adoption.ID.ToString());
-                ls.Add(adoption.Date.ToString());
-                ls.Add(adoption.AnimalName);
-                ls.Add(adoption.OwnerName);
-                ls.Add(adoption.Returned.ToString());
-                ls.Add(adoption.ReturnDate.ToString());
-                ls.Add(adoption.ReturnReason);
+                List<string> ls = new List<string>
+                {
+                    adoption.ID.ToString(),
+                    adoption.Date.ToString(),
+                    adoption.AnimalName,
+                    adoption.OwnerName,
+                    adoption.Returned.ToString(),
+                    adoption.ReturnDate.ToString(),
+                    adoption.ReturnReason
+                };
 
                 result.Add(ls);
             }

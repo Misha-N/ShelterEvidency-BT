@@ -42,26 +42,28 @@ namespace ShelterEvidency
 
             foreach (AnimalInfo animal in animals)
             {
-                List<string> ls = new List<string>();
-                ls.Add(animal.ID.ToString());
-                ls.Add(animal.Name);
-                ls.Add(animal.ChipNumber);
-                ls.Add(animal.BirthDate.ToString());
-                ls.Add(animal.Sex);
-                ls.Add(animal.Owner);
-                ls.Add(animal.NewOwner);
-                ls.Add(animal.Vet);
-                ls.Add(animal.Species);
-                ls.Add(animal.Breed);
-                ls.Add(animal.CrossBreed);
-                ls.Add(animal.FurColor);
-                ls.Add(animal.CoatType);
-                ls.Add(animal.FeedRation.ToString());
-                ls.Add(animal.Weight.ToString());
-                ls.Add(animal.Note);
-                ls.Add(animal.Castration.ToString());
-                ls.Add(animal.InShelter.ToString());
-                ls.Add(animal.IsDead.ToString());
+                List<string> ls = new List<string>
+                {
+                    animal.ID.ToString(),
+                    animal.Name,
+                    animal.ChipNumber,
+                    animal.BirthDate.ToString(),
+                    animal.Sex,
+                    animal.Owner,
+                    animal.NewOwner,
+                    animal.Vet,
+                    animal.Species,
+                    animal.Breed,
+                    animal.CrossBreed,
+                    animal.FurColor,
+                    animal.CoatType,
+                    animal.FeedRation.ToString(),
+                    animal.Weight.ToString(),
+                    animal.Note,
+                    animal.Castration.ToString(),
+                    animal.InShelter.ToString(),
+                    animal.IsDead.ToString()
+                };
 
                 result.Add(ls);
             }

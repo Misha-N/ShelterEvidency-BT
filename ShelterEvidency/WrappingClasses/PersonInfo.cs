@@ -1,4 +1,5 @@
-﻿using ShelterEvidency.WrappingClasses;
+﻿using Caliburn.Micro;
+using ShelterEvidency.WrappingClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,8 +25,6 @@ namespace ShelterEvidency
         public bool? IsWalker { get; set; }
         public bool? IsSponsor { get; set; }
         public bool? IsVolunteer { get; set; }
-
-        private string _titledFullName;
         public string TitledFullName
         {
             get
@@ -33,10 +32,39 @@ namespace ShelterEvidency
                 string titledFullName = Title + " " + FirstName + " " + LastName;
                 return titledFullName;
             }
-            set
+
+        }
+
+        public static List<List<string>> ConvertToList(BindableCollection<PersonInfo> people)
+        {
+            List<List<string>> result = new List<List<string>>();
+            List<string> headers = new List<string> { "ID", "Titul", "Jméno", "Příjmení", "Telefon", "E-mail", "Město", "Ulice a číslo domu", "PSČ",
+                "Poznámka", "Majitel", "Veterinář", "Venčitel", "Sponzor", "Dobrovolník" };
+            result.Add(headers);
+
+            foreach (PersonInfo person in people)
             {
-                _titledFullName = value;
+                List<string> ls = new List<string>
+                {
+                    person.ID.ToString(),
+                    person.Title.ToString(),
+                    person.FirstName.ToString(),
+                    person.LastName.ToString(),
+                    person.Phone.ToString(),
+                    person.Mail.ToString(),
+                    person.AdressCity,
+                    person.AdressStreet.ToString(),
+                    person.AdressZip.ToString(),
+                    person.Note.ToString(),
+                    person.IsOwner.ToString(),
+                    person.IsVet.ToString(),
+                    person.IsWalker.ToString(),
+                    person.IsVolunteer.ToString()
+                };
+
+                result.Add(ls);
             }
+            return result;
         }
     }
 }

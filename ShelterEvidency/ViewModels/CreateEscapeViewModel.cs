@@ -25,7 +25,7 @@ namespace ShelterEvidency.ViewModels
         public CreateEscapeViewModel(int animalID, StayEndViewModel parent)
         {
             Prnt1 = parent;
-            Prnt.IsWorking = true;
+            Prnt1.IsWorking = true;
             Escape = new EscapeModel();
             AnimalID = animalID;
         }
@@ -38,7 +38,7 @@ namespace ShelterEvidency.ViewModels
             }
             set
             {
-                Escape.AnimalID = value;
+                Escape.AnimalID = (int)value;
                 NotifyOfPropertyChange(() => Date);
             }
         }

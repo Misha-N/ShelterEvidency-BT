@@ -25,13 +25,15 @@ namespace ShelterEvidency.WrappingClasses
 
             foreach (EscapeInfo escape in escapes)
             {
-                List<string> ls = new List<string>();
-                ls.Add(escape.ID.ToString());
-                ls.Add(escape.AnimalID.ToString());
-                ls.Add(escape.AnimalName);
-                ls.Add(escape.Date.ToString());
-                ls.Add(escape.Description);
-                
+                List<string> ls = new List<string>
+                {
+                    escape.ID.ToString(),
+                    escape.AnimalID.ToString(),
+                    escape.AnimalName,
+                    escape.Date.ToString(),
+                    escape.Description
+                };
+
                 result.Add(ls);
             }
             return result;

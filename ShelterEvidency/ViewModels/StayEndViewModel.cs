@@ -276,11 +276,51 @@ namespace ShelterEvidency.ViewModels
                 MessageBox.Show("Žádná data pro export.");
         }
 
+        public void CreateDeath()
+        {
+            ActivateItem(new CreateDeathViewModel(0, this));
+        }
+
+        public void CreateEscape()
+        {
+            ActivateItem(new CreateEscapeViewModel(0, this));
+        }
+
+        public void ExportEscapesExcell()
+        {
+            if (Escapes != null && Escapes.Count() != 0)
+                DocumentManager.ExportDataExcell(EscapeInfo.ConvertToList(Escapes), "Export zvířata");
+            else
+                MessageBox.Show("Žádná data pro export.");
+        }
+
+        public void ExportEscapesPDF()
+        {
+            if (Escapes != null && Escapes.Count() != 0)
+                DocumentManager.ExportDataPDF(EscapeInfo.ConvertToList(Escapes), "Export zvířata");
+            else
+                MessageBox.Show("Žádná data pro export.");
+        }
+
+        public void ExportDeathsExcell()
+        {
+            if (Deaths != null && Deaths.Count() != 0)
+                DocumentManager.ExportDataExcell(DeathInfo.ConvertToList(Deaths), "Export zvířata");
+            else
+                MessageBox.Show("Žádná data pro export.");
+        }
+
+        public void ExportDeathsPDF()
+        {
+            if (Deaths != null && Deaths.Count() != 0)
+                DocumentManager.ExportDataPDF(DeathInfo.ConvertToList(Deaths), "Export zvířata");
+            else
+                MessageBox.Show("Žádná data pro export.");
+        }
 
 
 
+        #endregion
 
-    #endregion
-
-}
+    }
 }
