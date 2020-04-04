@@ -412,7 +412,7 @@ namespace ShelterEvidency.ViewModels
                 Animal.Adopt(SelectedOwner.ID);
                 Adoption.SaveAdoption();
 
-                //DocumentManager.CreateAdoptionList(Animal, Owner, Adoption);
+                DocumentManager.CreateAdoptionList(Animal, Owner, Adoption);
                 prnt.UpdateAdoptions();
 
                 IsWorking = false;
