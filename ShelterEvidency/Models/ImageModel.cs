@@ -1,12 +1,6 @@
-﻿using ShelterEvidency.Database;
-using ShelterEvidency.Helpers;
+﻿using ShelterEvidency.Helpers;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace ShelterEvidency.Models

@@ -1,16 +1,11 @@
 ﻿using Caliburn.Micro;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using ShelterEvidency.Models;
 using System.Windows;
 using Microsoft.Win32;
 using System.Windows.Media.Imaging;
-using System.Windows.Controls;
 using System.IO;
-using ShelterEvidency.Database;
 
 namespace ShelterEvidency.ViewModels
 {

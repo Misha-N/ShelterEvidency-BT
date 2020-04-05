@@ -1,10 +1,7 @@
 ﻿using Caliburn.Micro;
 using ShelterEvidency.Database;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ShelterEvidency.Models
@@ -185,6 +182,38 @@ namespace ShelterEvidency.Models
             {
                 MessageBox.Show(ex.Message);
                 return new BindableCollection<AdoptionInfo>();
+            }
+        }
+
+        public static AdoptionInfo GetAdoptionInfo(int? animalID)
+        {
+            try
+            {
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    db.DeferredLoadingEnabled = false;
+
+                    var result =
+                    (from adoption in db.Adoptions
+                     where adoption.ID.Equals(animalID)
+                     select new AdoptionInfo
+                     {
+                         ID = adoption.ID,
+                         Date = adoption.Date,
+                         OwnerName = adoption.People.FirstName + " " + adoption.People.LastName,
+                         AnimalName = adoption.Animals.Name,
+                         Returned = adoption.Returned,
+                         ReturnDate = adoption.ReturnDate,
+                         ReturnReason = adoption.ReturnReason
+
+                     });
+                    return result.FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new AdoptionInfo();
             }
         }
 

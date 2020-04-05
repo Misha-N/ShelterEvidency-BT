@@ -1,10 +1,6 @@
 ﻿using Caliburn.Micro;
 using ShelterEvidency.Models;
 using ShelterEvidency.WrappingClasses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -14,10 +10,10 @@ namespace ShelterEvidency.ViewModels
     {
         #region Initialization
         public PersonModel Person { get; set; }
-        public SearchPersonViewModel prnt { get; set; }
+        public SearchPersonViewModel Prnt { get; set; }
         public PersonInfoViewModel(int personID, SearchPersonViewModel vm)
         {
-            prnt = vm;
+            Prnt = vm;
             Person = new PersonModel();
             Person.GetPerson(personID);
 
@@ -307,7 +303,7 @@ namespace ShelterEvidency.ViewModels
             {
                 Person.UpdatePerson();
                 MessageBox.Show("Aktualizováno.");
-                prnt.UpdatePeople();
+                Prnt.UpdatePeople();
             }
             else
                 MessageBox.Show("Vyplňte prosím jméno a příjmení.");

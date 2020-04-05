@@ -1,11 +1,8 @@
 ﻿using Caliburn.Micro;
-using ShelterEvidency.Database;
 using ShelterEvidency.Models;
 using ShelterEvidency.WrappingClasses;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 

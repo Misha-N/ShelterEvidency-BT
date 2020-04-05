@@ -3,20 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Win32;
-/*
-using PdfSharp;
-using PdfSharp.Drawing;
-using PdfSharp.Pdf;
-*/
 using ShelterEvidency.Models;
-using iTextSharp;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
-using Caliburn.Micro;
-using ShelterEvidency.WrappingClasses;
 using ClosedXML.Excel;
 using System.Windows;
 
@@ -31,6 +21,7 @@ namespace ShelterEvidency
             {
                 AnimalInfo animalInfo = AnimalModel.GetAnimalInfo(animal.ID);
                 PersonInfo personInfo = PersonModel.GetPersonInfo(owner.ID);
+                AdoptionInfo adoptionInfo = AdoptionModel.GetAdoptionInfo(adoption.ID);
 
                 string FONT = "c:/windows/fonts/arial.ttf";
                 BaseFont bf = BaseFont.CreateFont(
