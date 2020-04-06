@@ -141,6 +141,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_30F1161B6647403796BB76E6B40C623A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_325F90F626A6C3EBAF25221EFD9B518D"
         "OwnerKey" = "8:_482F51263E8D4DF38B6EF38A09CC93D3"
         "MsmSig" = "8:_UNDEFINED"
@@ -1779,10 +1785,10 @@
                     "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 a x64)"
                     "ProductCode" = "8:.NETFramework,Version=v4.7.2"
                     }
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.SqlServer.SqlLocalDB.11.1"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.SqlServer.SqlLocalDB.14.0"
                     {
-                    "Name" = "8:SQL Server 2012 Express LocalDB"
-                    "ProductCode" = "8:Microsoft.SqlServer.SqlLocalDB.11.1"
+                    "Name" = "8:SQL Server 2017 Express LocalDB"
+                    "ProductCode" = "8:Microsoft.SqlServer.SqlLocalDB.14.0"
                     }
                 }
             }
@@ -1809,6 +1815,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
     }
@@ -2457,6 +2471,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_30F1161B6647403796BB76E6B40C623A"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\Desktop\\SqlLocalDB.msi"
+            "TargetName" = "8:SqlLocalDB.msi"
+            "Tag" = "8:"
+            "Folder" = "8:_070EFF7312E44A99A6DF143AC8F07E90"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_325F90F626A6C3EBAF25221EFD9B518D"
@@ -6101,7 +6135,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ShelterEvidencySetup"
         "ProductCode" = "8:{FD0A61AF-1EBF-4EB1-8B6B-1EE1F3C96206}"
-        "PackageCode" = "8:{8C79EE6B-7511-4FF7-9F66-BD370C9A7D47}"
+        "PackageCode" = "8:{97D938AC-B2FE-472D-AD40-5E4CDF81A10E}"
         "UpgradeCode" = "8:{92EFDFEB-B6A8-409E-B363-07064F9E2100}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

@@ -91,8 +91,8 @@
                         </StackPanel>
                     </materialDesign:PopupBox>
 
-                    <DatePicker Margin="5" materialDesign:HintAssist.Hint="Od data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=StaySince, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
-                    <DatePicker Grid.Column="1" Margin="5" materialDesign:HintAssist.Hint="Do data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=StayTo, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+                    <DatePicker Margin="5" Height="Auto" Width="Auto" materialDesign:HintAssist.Hint="Od data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=StaySince, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+                    <DatePicker Grid.Column="1" Height="Auto" Width="Auto" Margin="5" materialDesign:HintAssist.Hint="Do data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=StayTo, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
 
                     <Button x:Name="DeleteStay" IsEnabled="{Binding StayIsSelected}" Grid.Column="5"  Style="{StaticResource MaterialDesignIconForegroundButton}">
                         <materialDesign:PackIcon

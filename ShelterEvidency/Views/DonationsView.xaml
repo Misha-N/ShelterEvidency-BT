@@ -20,7 +20,7 @@
 
     </UserControl.Resources>
 
-    <Grid Margin="5" IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
+    <Grid Margin="5" Height="Auto" Width="Auto" IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -32,20 +32,20 @@
 
         <Grid Grid.Column="1" Grid.RowSpan="2" Margin="5">
             <Grid.RowDefinitions>
-                <RowDefinition Height="80"/>
+                <RowDefinition Height="0.1*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Grid>
+            <Grid Height="Auto" Width="Auto">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="90"/>
-                    <ColumnDefinition Width="90"/>
-                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.3*"/>
                 </Grid.ColumnDefinitions>
 
-                <materialDesign:PopupBox Grid.Row="1" Grid.Column="7" HorizontalAlignment="Right" Width="50" Height="50"
+                <materialDesign:PopupBox Grid.Row="1" Grid.Column="7" HorizontalAlignment="Center" Height="Auto" Width="Auto"
                   Style="{StaticResource MaterialDesignPopupBox}"
                   PlacementMode="BottomAndAlignRightEdges">
                     <StackPanel>
@@ -74,20 +74,20 @@
                     </StackPanel>
                 </materialDesign:PopupBox>
 
-                <Button x:Name="DeleteDonation" IsEnabled="{Binding IsSelected}" Grid.Column="3"  Style="{StaticResource MaterialDesignIconForegroundButton}">
-                    <materialDesign:PackIcon
+                <Button x:Name="DeleteDonation" Height="Auto" Width="Auto" IsEnabled="{Binding IsSelected}" Grid.Column="3"  Style="{StaticResource MaterialDesignIconForegroundButton}">
+                    <materialDesign:PackIcon Margin="5"
                 Kind="DeleteForever"
                 Height="24"
                 Width="24" />
                 </Button>
 
-                <DatePicker Margin="5" materialDesign:HintAssist.Hint="Od data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=Since, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
-                <DatePicker Grid.Column="1" Margin="5" materialDesign:HintAssist.Hint="Do data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=To, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+                <DatePicker Margin="5" Height="Auto" Width="Auto" materialDesign:HintAssist.Hint="Od data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=Since, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+                <DatePicker Grid.Column="1" Height="Auto" Width="Auto" Margin="5" materialDesign:HintAssist.Hint="Do data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=To, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
 
 
-                <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Grid.Column="2"
+                <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Grid.Column="2" Height="Auto" Width="Auto"
                 x:Name="Filter" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,2,2" >
-                    <materialDesign:PackIcon
+                    <materialDesign:PackIcon Margin="5"
                 Kind="Update"
                 Height="30"
                 Width="30" />
@@ -115,13 +115,13 @@
         <materialDesign:Card Margin="10"
                     materialDesign:ShadowAssist.ShadowDepth="Depth1">
 
-            <Grid  IsEnabled="{Binding IsSelected}" >
+            <Grid Height="Auto" Width="Auto" IsEnabled="{Binding IsSelected}" >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="0.2*"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="15,10,0,0">
+                <StackPanel Height="Auto" Width="Auto" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,10,0,0">
 
                     <materialDesign:PackIcon Kind="FileDocumentEditOutline" VerticalAlignment="Center" HorizontalAlignment="Center" Width="50" Height="50" Opacity="0.3" Margin="0" />
 
@@ -134,24 +134,24 @@
                 </StackPanel>
 
 
-                <Grid Grid.Row="1" Margin="15,0">
+                <Grid Height="Auto" Width="Auto" Grid.Row="1" Margin="15,0">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
-                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="1.5*"/>
                         <RowDefinition Height="1.3*"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <TextBox x:Name="DonationName" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Název" Grid.Row="0" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=DonationName, Mode=TwoWay}"/>
+                    <TextBox x:Name="DonationName" Height="Auto" Width="Auto" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Název" Grid.Row="0" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=DonationName, Mode=TwoWay}"/>
 
-                    <TextBox x:Name="Amount" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Částka" Grid.Row="1" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Amount, Mode=TwoWay}"/>
+                    <TextBox x:Name="Amount" Height="Auto" Width="Auto" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Částka" Grid.Row="1" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Amount, Mode=TwoWay}"/>
 
-                    <DatePicker Grid.Row="3" Margin="5" materialDesign:HintAssist.Hint="Datum" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=Date, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+                    <DatePicker Grid.Row="3" Margin="5" Height="Auto" Width="Auto" materialDesign:HintAssist.Hint="Datum" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=Date, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
 
-                    <ComboBox Margin="5,0,5,5" Grid.Row="2"  VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Sponzor" ItemsSource="{Binding Path=DonatorList, Mode=OneWay}" DisplayMemberPath="TitledFullName" SelectedValuePath="ID" SelectedValue="{Binding Path=Donator, Mode=TwoWay}"/>
+                    <ComboBox Margin="5,0,5,5" Grid.Row="2" Height="Auto" Width="Auto" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Sponzor" ItemsSource="{Binding Path=DonatorList, Mode=OneWay}" DisplayMemberPath="TitledFullName" SelectedValuePath="ID" SelectedValue="{Binding Path=Donator, Mode=TwoWay}"/>
 
-                    <TextBox x:Name="Description" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Popis" Grid.Row="4" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="50" Text="{Binding Path=Description, Mode=TwoWay}"/>
+                    <TextBox x:Name="Description" Height="Auto" Width="Auto" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Popis" Grid.Row="4" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="50" Text="{Binding Path=Description, Mode=TwoWay}"/>
 
                     <Button x:Name="UpdateDonation" Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="100"  Grid.Row="5" Content="Upravit"/>
                 </Grid>
@@ -162,13 +162,13 @@
         <materialDesign:Card Grid.Row="1" Margin="10"
                     materialDesign:ShadowAssist.ShadowDepth="Depth1">
 
-            <Grid>
+            <Grid Height="Auto" Width="Auto">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="0.2*"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="15,10,0,0">
+                <StackPanel Height="Auto" Width="Auto" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,10,0,0">
 
                     <materialDesign:PackIcon Kind="FileDocumentBoxPlusOutline" VerticalAlignment="Center" HorizontalAlignment="Center" Width="50" Height="50" Opacity="0.3" Margin="0" />
 
@@ -180,25 +180,25 @@
 
                 </StackPanel>
 
-                <Grid Grid.Row="1" Margin="15,0">
+                <Grid Grid.Row="1" Margin="15,0" Height="Auto" Width="Auto">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
-                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="1.5*"/>
                         <RowDefinition Height="1.3*"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <TextBox x:Name="NewDonationName" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Název" Grid.Row="0" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=NewDonationName, Mode=TwoWay}"/>
+                    <TextBox x:Name="NewDonationName" Height="Auto" Width="Auto" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Název" Grid.Row="0" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=NewDonationName, Mode=TwoWay}"/>
 
-                    <TextBox x:Name="NewAmount" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Částka" Grid.Row="1" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=NewAmount, Mode=TwoWay}"/>
+                    <TextBox x:Name="NewAmount" Height="Auto" Width="Auto" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Částka" Grid.Row="1" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=NewAmount, Mode=TwoWay}"/>
 
-                    <DatePicker Grid.Row="3" Margin="5" materialDesign:HintAssist.Hint="Datum" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=NewDate, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+                    <DatePicker Grid.Row="3" Height="Auto" Width="Auto" Margin="5" materialDesign:HintAssist.Hint="Datum" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=NewDate, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
 
-                    <ComboBox Margin="5,0,5,5" Grid.Row="2"  VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Sponzor" ItemsSource="{Binding Path=NewDonatorList, Mode=OneWay}" DisplayMemberPath="TitledFullName" SelectedValuePath="ID" SelectedValue="{Binding Path=NewDonator, Mode=TwoWay}"/>
+                    <ComboBox Margin="5,0,5,5" Height="Auto" Width="Auto" Grid.Row="2"  VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Sponzor" ItemsSource="{Binding Path=NewDonatorList, Mode=OneWay}" DisplayMemberPath="TitledFullName" SelectedValuePath="ID" SelectedValue="{Binding Path=NewDonator, Mode=TwoWay}"/>
 
 
-                    <TextBox x:Name="NewDescription" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Popis" Grid.Row="4" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="50" Text="{Binding Path=NewDescription, Mode=TwoWay}"/>
+                    <TextBox x:Name="NewDescription" Height="Auto" Width="Auto" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Popis" Grid.Row="4" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="50" Text="{Binding Path=NewDescription, Mode=TwoWay}"/>
 
                     <Button x:Name="CreateNewDonation" Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="100"  Grid.Row="5" Content="Vytvořit"/>
                 </Grid>

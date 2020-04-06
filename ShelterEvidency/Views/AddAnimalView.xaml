@@ -19,8 +19,8 @@
 
 
     </UserControl.Resources>
-    
-    <Grid IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
+
+    <Grid Height="Auto" Width="Auto" IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -43,11 +43,11 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.ColumnSpan="2" Grid.RowSpan="2">
+                <StackPanel Height="Auto" Grid.ColumnSpan="2" Grid.RowSpan="2">
                     <GroupBox Header="Základní údaje" Padding="50,20,50,9"  Style="{DynamicResource MaterialDesignGroupBox}"
                           materialDesign:ShadowAssist.ShadowDepth="Depth3"
                           BorderThickness="0" FontSize="14">
-                        <StackPanel>
+                        <StackPanel Height="Auto">
                             <TextBox x:Name="AnimalName" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Jméno" TextWrapping="Wrap" Margin="5" Padding="2"/>
 
                             <TextBox x:Name="ChipNumber" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Číslo čipu/tetování:" TextWrapping="Wrap" Margin="5" Padding="2"/>
@@ -87,10 +87,10 @@
                         </StackPanel>
                     </GroupBox>
 
-                    <GroupBox Header="Další údaje" Margin="0,30,0,0" Padding="50,9"  Style="{DynamicResource MaterialDesignGroupBox}"
+                    <GroupBox Header="Další údaje" Margin="0,30,0,0" Padding="50,9" Height="Auto"  Style="{DynamicResource MaterialDesignGroupBox}"
                           materialDesign:ShadowAssist.ShadowDepth="Depth3"
                           BorderThickness="0" Grid.IsSharedSizeScope="True" FontSize="13" >
-                        <StackPanel>
+                        <StackPanel Height="Auto">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
@@ -131,11 +131,11 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <DatePicker Margin="5" VerticalAlignment="Center"  materialDesign:HintAssist.Hint="Datum narození" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=BirthDate, Mode=OneWayToSource}" SelectedDateFormat="Short"/>
+                                <DatePicker Margin="5" Height="Auto" Width="Auto" VerticalAlignment="Center"  materialDesign:HintAssist.Hint="Datum narození" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=BirthDate, Mode=OneWayToSource}" SelectedDateFormat="Short"/>
                             </Grid>
 
 
-                            <TextBox Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Poznámka"  x:Name="Note" TextWrapping="Wrap" Margin="5" Padding="2" Height="100"/>
+                            <TextBox Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Poznámka"  x:Name="Note" TextWrapping="Wrap" Margin="5" Padding="2" Height="Auto" />
 
                         </StackPanel>
                     </GroupBox>

@@ -10,7 +10,7 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
-             d:DesignHeight="900" d:DesignWidth="1200">
+             d:DesignHeight="1024" d:DesignWidth="1280">
 
     <UserControl.Resources>
         <helpers:InvertBooleanConverter  x:Key="boolConvert"/>
@@ -31,7 +31,7 @@
 
 
 
-    <Grid IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
+    <Grid Height="Auto" Width="Auto" IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="6*"/>
@@ -123,9 +123,8 @@
         </DataGrid>
 
         <materialDesign:Card Grid.Row="2" Margin="5"
-    materialDesign:ShadowAssist.ShadowDepth="Depth1"
-    Padding="32,32,32,15" FontSize="14">
-            <Grid >
+    materialDesign:ShadowAssist.ShadowDepth="Depth1" FontSize="14">
+            <Grid Height="Auto" Margin="15">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="50"/>
@@ -179,8 +178,8 @@
                         </Grid>
                     </GroupBox>
                 </Grid>
-                
-                <Grid Grid.Column="1">
+
+                <Grid Grid.Column="1" Height="Auto">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="3*"/>
                         <RowDefinition/>

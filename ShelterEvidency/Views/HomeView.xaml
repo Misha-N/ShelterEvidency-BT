@@ -132,27 +132,31 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <StackPanel>
+                            <Grid Height="Auto">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="2.5*"/>
+                                </Grid.RowDefinitions>
 
 
-                                <TextBlock VerticalAlignment="Bottom" x:Name="ShelterName" TextAlignment="Center" TextWrapping="Wrap"
-    Style="{StaticResource MaterialDesignHeadline3TextBlock}" Margin="15,15,15,0"/>
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Height="Auto" x:Name="ShelterName" TextWrapping="Wrap"
+    Style="{StaticResource MaterialDesignHeadline5TextBlock}" Margin="15,15,15,0"/>
 
 
-                                <materialDesign:Card Margin="15,15,15,60" MaxWidth="180" Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                                <materialDesign:Card Margin="15" Grid.Row="1" Height="Auto" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
                     materialDesign:ShadowAssist.ShadowDepth="Depth5" UniformCornerRadius="400">
-                                    <Image Source="/Graphics/logo-loz.jpg" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Width="195" Height="190"/>
+                                    <Image Source="/Graphics/logo-loz.jpg" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="195" MaxHeight="190"/>
                                 </materialDesign:Card>
 
-                            </StackPanel>
+                            </Grid>
                             
 
-                            <StackPanel Margin="40, 0" Grid.Row="1">
-                                <TextBox x:Name="ShelterPhone" VerticalAlignment="Center" IsReadOnly="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon útulku" TextWrapping="Wrap" Margin="5" Padding="2"/>
-                                <TextBox x:Name="ShelterEmergencyPhone" VerticalAlignment="Center" IsReadOnly="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Pohotovost útulku" TextWrapping="Wrap" Margin="5" Padding="2"/>
-                                <TextBox x:Name="ShelterMail" VerticalAlignment="Center" IsReadOnly="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="E-mail útulku" TextWrapping="Wrap" Margin="5" Padding="2"/>
-                                <TextBox x:Name="ShelterAdress" VerticalAlignment="Center" IsReadOnly="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Adresa útulku" TextWrapping="Wrap" Margin="5" Padding="2"/>
-                                <TextBox x:Name="ShelterAccount" VerticalAlignment="Center" IsReadOnly="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Číslo účtu útulku" TextWrapping="Wrap" Margin="5" Padding="2"/>
+                            <StackPanel Margin="10" Grid.Row="1" Height="Auto">
+                                <TextBox x:Name="ShelterPhone" Height="Auto" VerticalAlignment="Center" IsReadOnly="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon útulku" TextWrapping="Wrap" Margin="5" Padding="2"/>
+                                <TextBox x:Name="ShelterEmergencyPhone" Height="Auto" VerticalAlignment="Center" IsReadOnly="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Pohotovost útulku" TextWrapping="Wrap" Margin="5" Padding="2"/>
+                                <TextBox x:Name="ShelterMail" Height="Auto" VerticalAlignment="Center" IsReadOnly="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="E-mail útulku" TextWrapping="Wrap" Margin="5" Padding="2"/>
+                                <TextBox x:Name="ShelterAdress" Height="Auto" VerticalAlignment="Center" IsReadOnly="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Adresa útulku" TextWrapping="Wrap" Margin="5" Padding="2"/>
+                                <TextBox x:Name="ShelterAccount" Height="Auto" VerticalAlignment="Center" IsReadOnly="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Číslo účtu útulku" TextWrapping="Wrap" Margin="5" Padding="2"/>
 
 
                             </StackPanel>
@@ -164,7 +168,7 @@
                     <materialDesign:Card Margin="20" Grid.ColumnSpan="3" Grid.Row="4" Grid.RowSpan="2"
                         materialDesign:ShadowAssist.ShadowDepth="Depth1">
 
-                        <Grid Margin="35, 10">
+                        <Grid Margin="10">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition Height="0.5*"/>
@@ -202,21 +206,21 @@
                                 </Grid.ColumnDefinitions>
 
                                 <DatePicker
-                              Width="140" SelectedDate="{Binding Path=Since, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"
+                              Width="Auto" Height="Auto" SelectedDate="{Binding Path=Since, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"
                               materialDesign:HintAssist.Hint="Od data"
-                              Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                              Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="10,0" />
 
                                 <DatePicker  Grid.Column="1"
-                              Width="140" SelectedDate="{Binding Path=To, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"
+                              Width="Auto" Height="Auto" SelectedDate="{Binding Path=To, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"
                               materialDesign:HintAssist.Hint="Do data"
-                              Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                              Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="10,0" />
 
-                                <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Grid.Column="2"
+                                <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Width="Auto" Height="Auto"  Grid.Column="2"
                                 x:Name="Filter" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,2,2" >
                                                     <materialDesign:PackIcon
                                 Kind="Update"
                                 Height="30"
-                                Width="30" />
+                                Width="30" Margin="5" />
                                 </Button>
                             </Grid>
 
@@ -255,7 +259,7 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <materialDesign:Card Background="{DynamicResource SecondaryAccentBrush}" Margin="15" Width="80" Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                            <materialDesign:Card Background="{DynamicResource SecondaryAccentBrush}" Margin="15" Height="Auto" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
                     materialDesign:ShadowAssist.ShadowDepth="Depth5" UniformCornerRadius="250"
                     >
                                 <materialDesign:PackIcon Kind="HouseMapMarker" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="60" />
@@ -286,17 +290,21 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel VerticalAlignment="Center">
-                                <materialDesign:Card Background="{DynamicResource PrimaryHueMidBrush}" Width="60" Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <materialDesign:Card Margin="3" Background="{DynamicResource PrimaryHueMidBrush}" Height="Auto" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
                     materialDesign:ShadowAssist.ShadowDepth="Depth5" UniformCornerRadius="250"
                     >
-                                    <materialDesign:PackIcon Kind="Dog" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" />
+                                    <materialDesign:PackIcon Margin="5" Kind="Dog" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Height="Auto" />
                                 </materialDesign:Card>
-                                <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                                <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
     Style="{StaticResource MaterialDesignBody1TextBlock}">                                 
                                 V útulku
                                 </TextBlock>
-                            </StackPanel>
+                            </Grid>
 
 
                             <TextBlock x:Name="AnimalCount"  Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
@@ -339,8 +347,8 @@
 
                 </Grid>
 
-
                 <ContentControl x:Name="ActiveItem"/>
+
             </Grid>
 
             <materialDesign:Card Grid.Column="1" Grid.Row="1" IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
@@ -459,7 +467,7 @@
 
                     <ListView IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}" x:Name="ListViewMenu" Foreground="White" Background="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
-                        <Button x:Name="Home" Height="60"  Padding="14,4,16,4">
+                        <Button x:Name="Home" Height="Auto"  Padding="14,4,16,4">
                             <Grid Width="225">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -469,7 +477,7 @@
                                 <TextBlock Grid.Column="1" Text="Úvodní obrazovka" VerticalAlignment="Center" Margin="20 10"/>
                             </Grid>
                         </Button>
-                        <Button x:Name="LoadAddAnimalPage" Height="60"  Padding="14,4,16,4">
+                        <Button x:Name="LoadAddAnimalPage" Height="Auto"  Padding="14,4,16,4">
                             <Grid Width="225">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -479,7 +487,7 @@
                                 <TextBlock Text="Přidat zvíře" Grid.Column="1" VerticalAlignment="Center" Margin="20 10"/>
                             </Grid>
                         </Button>
-                        <Button x:Name="LoadSearchAnimalPage" Height="60"  Padding="14,4,16,4">
+                        <Button x:Name="LoadSearchAnimalPage" Height="Auto"  Padding="14,4,16,4">
                             <Grid Width="225">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -489,7 +497,7 @@
                                 <TextBlock Text="Vyhledat zvíře" Grid.Column="1" VerticalAlignment="Center"  Margin="20 10"/>
                             </Grid>
                         </Button>
-                        <Button Height="60" x:Name="LoadPersonPage"  Padding="14,4,16,4">
+                        <Button Height="Auto" x:Name="LoadPersonPage"  Padding="14,4,16,4">
                             <Grid Width="225">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -499,7 +507,7 @@
                                 <TextBlock Text="Správa osob" Grid.Column="1" VerticalAlignment="Center"  Margin="20 10"/>
                             </Grid>
                         </Button>
-                        <Button Height="60" x:Name="LoadAdoptionsPage" Padding="14,4,16,4">
+                        <Button Height="Auto" x:Name="LoadAdoptionsPage" Padding="14,4,16,4">
                             <Grid Width="225">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -509,7 +517,7 @@
                                 <TextBlock Text="Adopce" Grid.Column="1" VerticalAlignment="Center"  Margin="20 10"/>
                             </Grid>
                         </Button>
-                        <Button Height="60" x:Name="LoadEconomyPage"  Padding="14,4,16,4">
+                        <Button Height="Auto" x:Name="LoadEconomyPage"  Padding="14,4,16,4">
                             <Grid Width="225">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -520,7 +528,7 @@
                             </Grid>
                         </Button>
 
-                        <Button Height="60" x:Name="LoadGeneralStaysPage"  Padding="14,4,16,4">
+                        <Button Height="Auto" x:Name="LoadGeneralStaysPage"  Padding="14,4,16,4">
                             <Grid Width="225">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -531,7 +539,7 @@
                             </Grid>
                         </Button>
 
-                        <Button Height="60" x:Name="LoadStayEndPage"  Padding="14,4,16,4">
+                        <Button Height="Auto" x:Name="LoadStayEndPage"  Padding="14,4,16,4">
                             <Grid Width="225">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -542,7 +550,7 @@
                             </Grid>
                         </Button>
 
-                        <Button Height="60" x:Name="LoadStatisticsPage"  Padding="14,4,16,4">
+                        <Button Height="Auto" x:Name="LoadStatisticsPage"  Padding="14,4,16,4">
                             <Grid Width="225">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -553,7 +561,7 @@
                             </Grid>
                         </Button>
 
-                        <Button Height="60" x:Name="LoadSettingsPage"  Padding="14,4,16,4">
+                        <Button Height="Auto" x:Name="LoadSettingsPage"  Padding="14,4,16,4">
                             <Grid Width="225">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>

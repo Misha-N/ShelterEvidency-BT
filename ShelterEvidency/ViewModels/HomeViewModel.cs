@@ -437,17 +437,24 @@ namespace ShelterEvidency.ViewModels
 
         private void LoadDatabase()
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                db.Animals.FirstOrDefault();
-                db.People.FirstOrDefault();
-                db.Breeds.FirstOrDefault();
-                db.CoatTypes.FirstOrDefault();
-                db.FurColors.FirstOrDefault();
-                db.Sexes.FirstOrDefault();
-                db.Species.FirstOrDefault();
-                db.DiaryRecords.FirstOrDefault();
-                db.Adoptions.FirstOrDefault();
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    db.Animals.FirstOrDefault();
+                    db.People.FirstOrDefault();
+                    db.Breeds.FirstOrDefault();
+                    db.CoatTypes.FirstOrDefault();
+                    db.FurColors.FirstOrDefault();
+                    db.Sexes.FirstOrDefault();
+                    db.Species.FirstOrDefault();
+                    db.DiaryRecords.FirstOrDefault();
+                    db.Adoptions.FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
             // první query bývá pomalá, načítají se metadata a query plány

@@ -18,9 +18,11 @@
 
 
     </UserControl.Resources>
-    <Grid>
 
-        <Grid Margin="5" IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
+
+    <Grid Height="Auto" Width="Auto">
+
+            <Grid Margin="5" IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -33,14 +35,14 @@
         <materialDesign:Card Margin="10"
     materialDesign:ShadowAssist.ShadowDepth="Depth1">
 
-            <Grid Margin="5">
+                <Grid Margin="5" Height="Auto">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="80"/>
                     <RowDefinition Height="80"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Grid>
+                    <Grid Height="Auto">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="5*"/>
@@ -56,27 +58,27 @@
 
                 </Grid>
 
-                <Grid Grid.Row="1">
+                    <Grid Grid.Row="1" Height="Auto">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.3*"/>
                     </Grid.ColumnDefinitions>
 
-                    <DatePicker Margin="5" materialDesign:HintAssist.Hint="Od data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=EscapeSince, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
-                    <DatePicker Grid.Column="1" Margin="5" materialDesign:HintAssist.Hint="Do data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=EscapeTo, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+                        <DatePicker Margin="5" Height="Auto" materialDesign:HintAssist.Hint="Od data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=EscapeSince, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+                        <DatePicker Grid.Column="1" Height="Auto" Margin="5" materialDesign:HintAssist.Hint="Do data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=EscapeTo, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
 
-                    <Button x:Name="DeleteEscape" IsEnabled="{Binding EscapeIsSelected}" Grid.Column="4"  Style="{StaticResource MaterialDesignIconForegroundButton}">
-                        <materialDesign:PackIcon
+                    <Button x:Name="DeleteEscape" Width="Auto" Height="Auto"  HorizontalAlignment="Center" VerticalAlignment="Center"  IsEnabled="{Binding EscapeIsSelected}" Grid.Column="4"  Style="{StaticResource MaterialDesignIconForegroundButton}">
+                        <materialDesign:PackIcon Margin="5"
                 Kind="DeleteForever"
                 Height="24"
                 Width="24" />
                     </Button>
 
-                        <materialDesign:PopupBox Grid.Row="1" Grid.Column="5" HorizontalAlignment="Right" Width="50" Height="50"
+                        <materialDesign:PopupBox Grid.Row="1" Width="Auto" Height="Auto" HorizontalAlignment="Center" Grid.Column="5"
                   Style="{StaticResource MaterialDesignPopupBox}"
                   PlacementMode="BottomAndAlignRightEdges">
                             <StackPanel>
@@ -105,17 +107,17 @@
                             </StackPanel>
                         </materialDesign:PopupBox>
 
-                        <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Grid.Column="2"
+                        <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Width="Auto" Height="Auto"   Grid.Column="2"
                 x:Name="FilterEscapes" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,2,2" >
-                        <materialDesign:PackIcon
+                        <materialDesign:PackIcon Margin="5"
                 Kind="Update"
                 Height="30"
                 Width="30" />
                     </Button>
 
-                        <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Grid.Column="3"
+                        <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Width="Auto" Height="Auto"   Grid.Column="3"
                 x:Name="CreateEscape" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,2,2" >
-                            <materialDesign:PackIcon
+                            <materialDesign:PackIcon Margin="5"
                 Kind="Plus"
                 Height="30"
                 Width="30" />
@@ -171,38 +173,38 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.3*"/>
                     </Grid.ColumnDefinitions>
 
-                    <DatePicker Margin="5" materialDesign:HintAssist.Hint="Od data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=DeathSince, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
-                    <DatePicker Grid.Column="1" Margin="5" materialDesign:HintAssist.Hint="Do data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=DeathTo, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+                        <DatePicker Width="Auto" Height="Auto"  Margin="5" materialDesign:HintAssist.Hint="Od data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=DeathSince, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+                        <DatePicker Width="Auto" Height="Auto"  Grid.Column="1" Margin="5" materialDesign:HintAssist.Hint="Do data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=DeathTo, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
 
-                    <Button x:Name="DeleteDeath" IsEnabled="{Binding DeathIsSelected}" Grid.Column="4"  Style="{StaticResource MaterialDesignIconForegroundButton}">
-                        <materialDesign:PackIcon
+                        <Button x:Name="DeleteDeath" Width="Auto" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{Binding DeathIsSelected}" Grid.Column="4"  Style="{StaticResource MaterialDesignIconForegroundButton}">
+                        <materialDesign:PackIcon Margin="5"
                 Kind="DeleteForever"
                 Height="24"
                 Width="24" />
                     </Button>
 
-                    <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Grid.Column="2"
+                        <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Width="Auto" Height="Auto"   Grid.Column="2"
                 x:Name="FilterDeaths" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,2,2" >
-                        <materialDesign:PackIcon
+                        <materialDesign:PackIcon Margin="5"
                 Kind="Update"
                 Height="30"
                 Width="30" />
                     </Button>
-                        <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Grid.Column="3"
+                        <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Width="Auto" Height="Auto"  Grid.Column="3"
                 x:Name="CreateDeath" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,2,2" >
-                            <materialDesign:PackIcon
+                            <materialDesign:PackIcon Margin="5"
                 Kind="Plus"
                 Height="30"
                 Width="30" />
                         </Button>
 
-                        <materialDesign:PopupBox Grid.Row="1" Grid.Column="5" HorizontalAlignment="Right" Width="50" Height="50"
+                        <materialDesign:PopupBox Grid.Row="1" Grid.Column="5" Width="Auto" Height="Auto"   HorizontalAlignment="Center"
                   Style="{StaticResource MaterialDesignPopupBox}"
                   PlacementMode="BottomAndAlignRightEdges">
                             <StackPanel>
@@ -303,5 +305,6 @@
     </Grid>
         <ContentControl VerticalAlignment="Center" HorizontalAlignment="Center" Height="400" Width="450" x:Name="ActiveItem"/>
 
+            
     </Grid>
 </UserControl>

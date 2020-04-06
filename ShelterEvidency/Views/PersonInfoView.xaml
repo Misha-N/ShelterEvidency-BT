@@ -40,7 +40,7 @@
         <materialDesign:Card Margin="5,5,7,15"
     materialDesign:ShadowAssist.ShadowDepth="Depth1"
     Padding="32,32,32,15" FontSize="14">
-            <Grid >
+            <Grid Height="Auto" Width="Auto" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -58,18 +58,18 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBox x:Name="Title" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Titul" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                    <TextBox x:Name="Title" Height="Auto" Width="Auto" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Titul" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                    <TextBox x:Name="FirstName" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Jméno" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                    <TextBox x:Name="FirstName" Height="Auto" Width="Auto" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Jméno" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                    <TextBox x:Name="LastName" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Příjmení"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                    <TextBox x:Name="LastName" Height="Auto" Width="Auto" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Příjmení"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                    <TextBox x:Name="Phone" VerticalAlignment="Center" Grid.Row="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                    <TextBox x:Name="Phone" Height="Auto" Width="Auto" VerticalAlignment="Center" Grid.Row="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                    <TextBox x:Name="Mail" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Email"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                    <TextBox x:Name="Mail" Height="Auto" Width="Auto" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Email"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
 
-                    <GroupBox Header="Role osoby" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2" Style="{DynamicResource MaterialDesignGroupBox}"
+                    <GroupBox Header="Role osoby" Height="Auto" Width="Auto" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2" Style="{DynamicResource MaterialDesignGroupBox}"
                           materialDesign:ShadowAssist.ShadowDepth="Depth3"   BorderThickness="0" Margin="0,10,0,0">
                         <Grid Margin="5">
                             <Grid.ColumnDefinitions>
@@ -79,22 +79,22 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <CheckBox Content="majitel" Style="{DynamicResource MaterialDesignAccentCheckBox}" Grid.Column="0" IsChecked="{Binding Path = IsOwner, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
-                            <CheckBox Content="veterinář" Style="{DynamicResource MaterialDesignAccentCheckBox}" Grid.Column="1" IsChecked="{Binding Path = IsVet, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
-                            <CheckBox Content="venčitel" Style="{DynamicResource MaterialDesignAccentCheckBox}" Grid.Column="2" IsChecked="{Binding Path = IsWalker, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
-                            <CheckBox Content="sponzor" Style="{DynamicResource MaterialDesignAccentCheckBox}" Grid.Column="3" IsChecked="{Binding Path = IsSponsor, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
-                            <CheckBox Content="dobrovolník" Style="{DynamicResource MaterialDesignAccentCheckBox}" Grid.Column="4" IsChecked="{Binding Path = IsVolunteer, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                            <CheckBox Content="majitel" Height="Auto" Width="Auto" Style="{DynamicResource MaterialDesignAccentCheckBox}" Grid.Column="0" IsChecked="{Binding Path = IsOwner, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                            <CheckBox Content="veterinář" Height="Auto" Width="Auto" Style="{DynamicResource MaterialDesignAccentCheckBox}" Grid.Column="1" IsChecked="{Binding Path = IsVet, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                            <CheckBox Content="venčitel" Height="Auto" Width="Auto" Style="{DynamicResource MaterialDesignAccentCheckBox}" Grid.Column="2" IsChecked="{Binding Path = IsWalker, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                            <CheckBox Content="sponzor" Height="Auto" Width="Auto" Style="{DynamicResource MaterialDesignAccentCheckBox}" Grid.Column="3" IsChecked="{Binding Path = IsSponsor, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
+                            <CheckBox Content="dobrovolník" Height="Auto" Width="Auto" Style="{DynamicResource MaterialDesignAccentCheckBox}" Grid.Column="4" IsChecked="{Binding Path = IsVolunteer, Mode = TwoWay}" Margin="0,2,0,0" IsThreeState="False"/>
                         </Grid>
                     </GroupBox>
                 </Grid>
 
-                <Grid Grid.Column="1">
+                <Grid Grid.Column="1" Height="Auto" Width="Auto">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="2.5*"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <GroupBox Header="Adresa"  Style="{DynamicResource MaterialDesignGroupBox}"
+                    <GroupBox Header="Adresa" Height="Auto" Width="Auto"  Style="{DynamicResource MaterialDesignGroupBox}"
                           materialDesign:ShadowAssist.ShadowDepth="Depth3"   BorderThickness="0" Margin="20,0,0,0">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -107,11 +107,11 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBox x:Name="City" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Město" Grid.Row="1" Grid.ColumnSpan="2"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                            <TextBox x:Name="City" Height="Auto" Width="Auto" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Město" Grid.Row="1" Grid.ColumnSpan="2"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                            <TextBox x:Name="Zip" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="PSČ" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                            <TextBox x:Name="Zip" Height="Auto" Width="Auto" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="PSČ" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
 
-                            <TextBox x:Name="Street" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Ulice a číslo domu" Grid.Row="3" Grid.ColumnSpan="2"   TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                            <TextBox x:Name="Street" Height="Auto" Width="Auto" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Ulice a číslo domu" Grid.Row="3" Grid.ColumnSpan="2"   TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
                         </Grid>
 
 
@@ -119,7 +119,7 @@
 
                     </GroupBox>
 
-                    <TextBox x:Name="Note" Margin="20,5,0,0" Grid.Row="2" materialDesign:HintAssist.Hint="Poznámka" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"  TextWrapping="Wrap" Padding="2"/>
+                    <TextBox x:Name="Note" Margin="20,5,0,0" Height="Auto" Width="Auto" Grid.Row="2" materialDesign:HintAssist.Hint="Poznámka" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"  TextWrapping="Wrap" Padding="2"/>
 
                 </Grid>
 
@@ -130,7 +130,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.5*"/>
                 <ColumnDefinition Width="1.2*"/>
-                <ColumnDefinition Width="0.9*"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
             <materialDesign:Card Grid.Column="1" Margin="5"

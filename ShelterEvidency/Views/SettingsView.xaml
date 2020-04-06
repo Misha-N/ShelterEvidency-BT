@@ -50,14 +50,14 @@
                             <RowDefinition/>
                             <RowDefinition Height="80"/>
                         </Grid.RowDefinitions>
-                        <TextBox x:Name="ShelterName" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon útulku" TextWrapping="Wrap" Margin="5,15,5,5" Padding="2"/>
+                        <TextBox x:Name="ShelterName" Width="Auto" Height="Auto" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon útulku" TextWrapping="Wrap" Margin="5,15,5,5" Padding="2"/>
 
 
-                        <TextBox x:Name="ShelterPhone" Grid.Row="1" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon útulku" TextWrapping="Wrap" Margin="5,15,5,5" Padding="2"/>
-                        <TextBox x:Name="ShelterEmergencyPhone" Grid.Row="2" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Pohotovost útulku" TextWrapping="Wrap" Margin="5,15,5,5" Padding="2"/>
-                        <TextBox x:Name="ShelterMail" Grid.Row="3" VerticalAlignment="Center"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="E-mail útulku" TextWrapping="Wrap" Margin="5,15,5,5" Padding="2"/>
-                        <TextBox x:Name="ShelterAdress" Grid.Row="4" VerticalAlignment="Center"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Adresa útulku" TextWrapping="Wrap" Margin="5,15,5,5" Padding="2"/>
-                        <TextBox x:Name="ShelterAccount" Grid.Row="5" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Číslo účtu útulku" TextWrapping="Wrap" Margin="5,15,5,5" Padding="2"/>
+                        <TextBox x:Name="ShelterPhone" Width="Auto" Height="Auto" Grid.Row="1" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon útulku" TextWrapping="Wrap" Margin="5,15,5,5" Padding="2"/>
+                        <TextBox x:Name="ShelterEmergencyPhone" Width="Auto" Height="Auto" Grid.Row="2" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Pohotovost útulku" TextWrapping="Wrap" Margin="5,15,5,5" Padding="2"/>
+                        <TextBox x:Name="ShelterMail" Width="Auto" Height="Auto" Grid.Row="3" VerticalAlignment="Center"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="E-mail útulku" TextWrapping="Wrap" Margin="5,15,5,5" Padding="2"/>
+                        <TextBox x:Name="ShelterAdress" Width="Auto" Height="Auto" Grid.Row="4" VerticalAlignment="Center"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Adresa útulku" TextWrapping="Wrap" Margin="5,15,5,5" Padding="2"/>
+                        <TextBox x:Name="ShelterAccount" Width="Auto" Height="Auto" Grid.Row="5" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Číslo účtu útulku" TextWrapping="Wrap" Margin="5,15,5,5" Padding="2"/>
 
                         <Button Grid.Row="6" Style="{StaticResource MaterialDesignRaisedAccentButton}" VerticalAlignment="Bottom" x:Name="UpdateShelterInfo"  Height="50" Margin="30,10">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">

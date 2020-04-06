@@ -31,7 +31,7 @@ namespace ShelterEvidency
                 Font czFont = new Font(bf, 14);
                 // Save document
                 string documentName = string.Format("adopční_smlouva_{0}.pdf", DateTime.Now.ToShortDateString());
-                string fileName = Path.Combine(animalInfo.FolderPath, documentName);
+                string fileName = Path.Combine(animal.FolderPath, documentName);
 
                 Document myDocument = new Document(iTextSharp.text.PageSize.A4, 10, 10, 42, 35);
                 PdfWriter.GetInstance(myDocument, new FileStream(fileName, FileMode.Create));

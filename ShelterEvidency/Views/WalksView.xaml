@@ -20,7 +20,7 @@
 
     </UserControl.Resources>
 
-    <Grid Margin="5" IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
+    <Grid Height="Auto" Width="Auto" Margin="5" IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -30,22 +30,22 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Column="1" Grid.RowSpan="2" Margin="5">
+        <Grid Grid.Column="1" Height="Auto" Width="Auto" Grid.RowSpan="2" Margin="5">
             <Grid.RowDefinitions>
-                <RowDefinition Height="80"/>
+                <RowDefinition Height="0.1*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Grid>
+            <Grid Height="Auto" Width="Auto">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="90"/>
-                    <ColumnDefinition Width="90"/>
-                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.3*"/>
                 </Grid.ColumnDefinitions>
 
-                <materialDesign:PopupBox Grid.Row="1" Grid.Column="7" HorizontalAlignment="Right" Width="50" Height="50"
+                <materialDesign:PopupBox Grid.Row="1" Grid.Column="7" HorizontalAlignment="Center" Height="Auto" Width="Auto"
                   Style="{StaticResource MaterialDesignPopupBox}"
                   PlacementMode="BottomAndAlignRightEdges">
                     <StackPanel>
@@ -74,19 +74,19 @@
                     </StackPanel>
                 </materialDesign:PopupBox>
 
-                <DatePicker Margin="5" materialDesign:HintAssist.Hint="Od data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=Since, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
-                <DatePicker Grid.Column="1" Margin="5" materialDesign:HintAssist.Hint="Do data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=To, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+                <DatePicker Margin="5" Height="Auto" Width="Auto" materialDesign:HintAssist.Hint="Od data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=Since, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+                <DatePicker Grid.Column="1" Height="Auto" Width="Auto" Margin="5" materialDesign:HintAssist.Hint="Do data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=To, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
 
-                <Button x:Name="DeleteWalk" IsEnabled="{Binding IsSelected}" Grid.Column="3"  Style="{StaticResource MaterialDesignIconForegroundButton}">
-                    <materialDesign:PackIcon
+                <Button x:Name="DeleteWalk" Height="Auto" Width="Auto" IsEnabled="{Binding IsSelected}" Grid.Column="3"  Style="{StaticResource MaterialDesignIconForegroundButton}">
+                    <materialDesign:PackIcon Margin="5"
                 Kind="DeleteForever"
                 Height="24"
                 Width="24" />
                 </Button>
 
-                <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Grid.Column="2"
+                <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Grid.Column="2" Height="Auto" Width="Auto"
                 x:Name="Filter" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,2,2" >
-                    <materialDesign:PackIcon
+                    <materialDesign:PackIcon Margin="5"
                 Kind="Update"
                 Height="30"
                 Width="30" />
@@ -113,9 +113,9 @@
         <materialDesign:Card Margin="10"
                     materialDesign:ShadowAssist.ShadowDepth="Depth1">
 
-            <Grid  IsEnabled="{Binding IsSelected}" >
+            <Grid Height="Auto" Width="Auto"  IsEnabled="{Binding IsSelected}" >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="0.2*"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
@@ -132,7 +132,7 @@
                 </StackPanel>
 
 
-                <Grid Grid.Row="1" Margin="15,0">
+                <Grid Height="Auto" Width="Auto" Grid.Row="1" Margin="15,0">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition Height="70"/>
@@ -140,11 +140,11 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <DatePicker Grid.Row="1" Margin="5" materialDesign:HintAssist.Hint="Datum procházky" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Long"/>
+                    <DatePicker Grid.Row="1" Height="Auto" Width="Auto" Margin="5" materialDesign:HintAssist.Hint="Datum procházky" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Long"/>
 
-                    <ComboBox Margin="5,0,5,5" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Venčitel" ItemsSource="{Binding Path=WalkerList, Mode=OneWay}" DisplayMemberPath="TitledFullName" SelectedValuePath="ID" SelectedValue="{Binding Path=Walker, Mode=TwoWay}"/>
+                    <ComboBox Margin="5,0,5,5" Height="Auto" Width="Auto" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Venčitel" ItemsSource="{Binding Path=WalkerList, Mode=OneWay}" DisplayMemberPath="TitledFullName" SelectedValuePath="ID" SelectedValue="{Binding Path=Walker, Mode=TwoWay}"/>
 
-                    <TextBox x:Name="Note" Grid.Row="2" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Poznámka" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="50" Text="{Binding Path=Note, Mode=TwoWay}"/>
+                    <TextBox x:Name="Note" Height="Auto" Width="Auto" Grid.Row="2" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Poznámka" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="50" Text="{Binding Path=Note, Mode=TwoWay}"/>
 
                     <Button x:Name="UpdateWalk" Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="100"  Grid.Row="5" Content="Upravit"/>
                 </Grid>
@@ -155,9 +155,9 @@
         <materialDesign:Card Grid.Row="1" Margin="10"
                     materialDesign:ShadowAssist.ShadowDepth="Depth1">
 
-            <Grid>
+            <Grid Height="Auto" Width="Auto">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="0.2*"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
@@ -173,7 +173,7 @@
 
                 </StackPanel>
 
-                <Grid Grid.Row="1" Margin="15,0">
+                <Grid Grid.Row="1" Margin="15,0" Height="Auto" Width="Auto">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition Height="70"/>
@@ -181,11 +181,11 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <DatePicker Grid.Row="1" Margin="5" materialDesign:HintAssist.Hint="Datum procházky" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=NewDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Long"/>
+                    <DatePicker Grid.Row="1" Height="Auto" Width="Auto" Margin="5" materialDesign:HintAssist.Hint="Datum procházky" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=NewDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Long"/>
 
-                    <ComboBox Margin="5,0,5,5" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Venčitel" ItemsSource="{Binding Path=NewWalkerList, Mode=OneWay}" DisplayMemberPath="TitledFullName" SelectedValuePath="ID" SelectedValue="{Binding Path=NewWalker, Mode=TwoWay}"/>
+                    <ComboBox Margin="5,0,5,5" Height="Auto" Width="Auto" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Venčitel" ItemsSource="{Binding Path=NewWalkerList, Mode=OneWay}" DisplayMemberPath="TitledFullName" SelectedValuePath="ID" SelectedValue="{Binding Path=NewWalker, Mode=TwoWay}"/>
 
-                    <TextBox x:Name="NewNote" Grid.Row="2" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Poznámka" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="50" Text="{Binding Path=NewNote, Mode=TwoWay}"/>
+                    <TextBox x:Name="NewNote" Height="Auto" Width="Auto" Grid.Row="2" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Poznámka" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" MinHeight="50" Text="{Binding Path=NewNote, Mode=TwoWay}"/>
 
                     <Button x:Name="CreateNewWalk" Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="100"  Grid.Row="5" Content="Vytvořit"/>
                 </Grid>

@@ -9,7 +9,7 @@
             FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1200">
-    <Grid>
+    <Grid Height="Auto" Width="Auto">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -19,7 +19,7 @@
         <materialDesign:Card Grid.Column="1" Padding="2"
             materialDesign:ShadowAssist.ShadowDepth="Depth1">
 
-            <Grid>
+            <Grid Height="Auto">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="1.5*"/>
@@ -27,10 +27,10 @@
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
 
-                <GroupBox Margin="10" Header="Základní informace o adoptovaném zvířeti:"   Style="{DynamicResource MaterialDesignGroupBox}"
+                <GroupBox Margin="10" Height="Auto" Header="Základní informace o adoptovaném zvířeti:"   Style="{DynamicResource MaterialDesignGroupBox}"
                   materialDesign:ShadowAssist.ShadowDepth="Depth3"
                   BorderThickness="0">
-                    <Grid>
+                    <Grid Height="Auto">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
@@ -41,28 +41,28 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBox x:Name="ID" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="ID" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=ID, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                        <TextBox x:Name="ID" Height="Auto" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="ID" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=ID, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
 
-                        <TextBox x:Name="AnimalName" Grid.Column="1"  VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Jméno" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=AnimalName, Mode=OneWay}" IsReadOnly="True"/>
+                        <TextBox x:Name="AnimalName" Height="Auto" Grid.Column="1"  VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Jméno" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=AnimalName, Mode=OneWay}" IsReadOnly="True"/>
 
-                        <TextBox x:Name="ChipNumber" Grid.Row="1" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Číslo čipu" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=ChipNumber, Mode=OneWay}" IsReadOnly="True"/>
+                        <TextBox x:Name="ChipNumber" Height="Auto" Grid.Row="1" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Číslo čipu" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=ChipNumber, Mode=OneWay}" IsReadOnly="True"/>
 
-                        <TextBox x:Name="BirthDate" Grid.Row="3" Grid.Column="1" materialDesign:HintAssist.Hint="Datum narození" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=BirthDate, Mode=OneWay}" IsReadOnly="True"/>
+                        <TextBox x:Name="BirthDate" Height="Auto" Grid.Row="3" Grid.Column="1" materialDesign:HintAssist.Hint="Datum narození" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=BirthDate, Mode=OneWay}" IsReadOnly="True"/>
 
-                        <TextBox x:Name="Sex" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Pohlaví" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Sex, Mode=OneWay}" IsReadOnly="True"/>
+                        <TextBox x:Name="Sex" Height="Auto" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Pohlaví" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Sex, Mode=OneWay}" IsReadOnly="True"/>
 
-                        <TextBox x:Name="Species" Grid.Row="2"  VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Druh" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Species, Mode=OneWay}" IsReadOnly="True"/>
+                        <TextBox x:Name="Species" Height="Auto" Grid.Row="2"  VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Druh" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Species, Mode=OneWay}" IsReadOnly="True"/>
 
-                        <TextBox x:Name="Breed" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Plemeno"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Breed, Mode=OneWay}" IsReadOnly="True"/>
+                        <TextBox x:Name="Breed" Height="Auto" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Plemeno"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Breed, Mode=OneWay}" IsReadOnly="True"/>
 
-                        <TextBox x:Name="FurColor" Grid.Row="3"  VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Barva srsti" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=FurColor, Mode=OneWay}" IsReadOnly="True"/>
+                        <TextBox x:Name="FurColor" Height="Auto" Grid.Row="3"  VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Barva srsti" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=FurColor, Mode=OneWay}" IsReadOnly="True"/>
                     </Grid>
                 </GroupBox>
 
-                <GroupBox Margin="10" Grid.Row="1" Header="Základní informace o majiteli:" Style="{DynamicResource MaterialDesignGroupBox}"
+                <GroupBox Margin="10" Grid.Row="1" Height="Auto" Header="Základní informace o majiteli:" Style="{DynamicResource MaterialDesignGroupBox}"
                   materialDesign:ShadowAssist.ShadowDepth="Depth3"
                   BorderThickness="0">
-                    <Grid>
+                    <Grid Height="Auto">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
@@ -72,23 +72,23 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBox x:Name="FullName" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Jméno a příjmení" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=FullName, Mode=OneWay}" IsReadOnly="True"/>
+                        <TextBox x:Name="FullName" Height="Auto" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Jméno a příjmení" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=FullName, Mode=OneWay}" IsReadOnly="True"/>
 
-                        <TextBox x:Name="Phone" Grid.Row="1" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Phone, Mode=OneWay}" IsReadOnly="True"/>
+                        <TextBox x:Name="Phone" Height="Auto" Grid.Row="1" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Telefon" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Phone, Mode=OneWay}" IsReadOnly="True"/>
 
-                        <TextBox x:Name="Mail" Grid.Row="2" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="E-mail" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Mail, Mode=OneWay}" IsReadOnly="True"/>
+                        <TextBox x:Name="Mail" Height="Auto" Grid.Row="2" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="E-mail" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2" Text="{Binding Path=Mail, Mode=OneWay}" IsReadOnly="True"/>
 
-                        <materialDesign:Card Grid.Column="1" Grid.RowSpan="3" Margin="5"
+                        <materialDesign:Card Grid.Column="1" Height="Auto" Grid.RowSpan="3" Margin="5"
                             materialDesign:ShadowAssist.ShadowDepth="Depth1" Padding="10,0">
-                            <Grid>
+                            <Grid Height="Auto">
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <TextBox x:Name="City"  Grid.Row="0" IsReadOnly="True" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Město"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
-                                <TextBox x:Name="Zip"  Grid.Row="1" IsReadOnly="True"  VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="PSČ" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
-                                <TextBox x:Name="Street"  Grid.Row="2" IsReadOnly="True"  VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Ulice a číslo domu"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                                <TextBox x:Name="City" Height="Auto" Grid.Row="0" IsReadOnly="True" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Město"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                                <TextBox x:Name="Zip" Height="Auto" Grid.Row="1" IsReadOnly="True"  VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="PSČ" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                                <TextBox x:Name="Street" Height="Auto" Grid.Row="2" IsReadOnly="True"  VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Ulice a číslo domu"  TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
                         </Grid>
                         </materialDesign:Card>
 
@@ -102,27 +102,27 @@
 
 
 
-                <Grid Grid.Row="2">
+                <Grid Grid.Row="2" Height="Auto">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">
                         <ToggleButton VerticalAlignment="Center"
                                   Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
                                   IsChecked="{Binding Path = Returned, Mode = TwoWay}" Margin="5" IsThreeState="False"/>
                         <TextBlock VerticalAlignment="Center" Text="zvíře vráceno z adopce" Margin="10,0,0,0"></TextBlock>
                     </StackPanel>
 
-                    <GroupBox Margin="10" Grid.Row="1" Style="{DynamicResource MaterialDesignGroupBox}" materialDesign:ColorZoneAssist.Mode="Accent"  Header="Informace o vrácení" IsEnabled="{Binding Path = Returned}">
+                    <GroupBox Margin="10" Height="Auto" Grid.Row="1" Style="{DynamicResource MaterialDesignGroupBox}" materialDesign:ColorZoneAssist.Mode="Accent"  Header="Informace o vrácení" IsEnabled="{Binding Path = Returned}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition Height="2*"/>
                             </Grid.RowDefinitions>
-                            <DatePicker Margin="5,0,5,5" materialDesign:HintAssist.Hint="Datum vrácení" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=ReturnDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            <TextBox Grid.Row="1" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Důvod vrácení"  x:Name="ReturnReason" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
+                            <DatePicker Margin="5,0,5,5" Height="Auto" materialDesign:HintAssist.Hint="Datum vrácení" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=ReturnDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox Grid.Row="1" Height="Auto" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Důvod vrácení"  x:Name="ReturnReason" TextWrapping="Wrap" Margin="5,0,5,5" Padding="2"/>
                         </Grid>
                     </GroupBox>
 

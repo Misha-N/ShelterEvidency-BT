@@ -11,7 +11,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1200">
     <DockPanel>
-        <Grid DockPanel.Dock="Top">
+        <Grid DockPanel.Dock="Top" Width="Auto" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -22,14 +22,14 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="BasicInfo" Grid.Column="0" Content="Základní informace" Margin="5,2,5,-3"/>
-            <Button x:Name="Stays" Grid.Column="1"  Content="Pobyty" Margin="5,2,5,-3" />
-            <Button x:Name="MedicalInfo" Grid.Column="2" Content="Zdravotní informace" Margin="5,2,5,-3" />
-            <Button x:Name="Costs" Grid.Column="3" Content="Náklady" Margin="5,2,5,-3"/>
-            <Button x:Name="Incidents" Grid.Column="4" Content="Incidenty" Margin="5,2,5,-3"/>
-            <Button x:Name="Walks" Grid.Column="5" Content="Venčení" Margin="5,2,5,-3"/>
-            <Button x:Name="People" Grid.Column="6" Content="Navázané osoby"  Margin="5,2,5,-3"/>
-            <Button x:Name="Documents" Grid.Column="7" Content="Dokumenty" Margin="5,2,5,-3"/>
+            <Button x:Name="BasicInfo" Width="Auto"  Grid.Column="0" Content="Základní informace" Margin="5,2,5,-3"/>
+            <Button x:Name="Stays" Width="Auto"  Grid.Column="1"  Content="Pobyty" Margin="5,2,5,-3" />
+            <Button x:Name="MedicalInfo" Width="Auto"  Grid.Column="2" Content="Zdravotní informace" Margin="5,2,5,-3" />
+            <Button x:Name="Costs" Width="Auto"  Grid.Column="3" Content="Náklady" Margin="5,2,5,-3"/>
+            <Button x:Name="Incidents" Width="Auto"  Grid.Column="4" Content="Incidenty" Margin="5,2,5,-3"/>
+            <Button x:Name="Walks" Width="Auto"  Grid.Column="5" Content="Venčení" Margin="5,2,5,-3"/>
+            <Button x:Name="People" Width="Auto"  Grid.Column="6" Content="Navázané osoby"  Margin="5,2,5,-3"/>
+            <Button x:Name="Documents" Width="Auto" Grid.Column="7" Content="Dokumenty" Margin="5,2,5,-3"/>
 
         </Grid>
 
