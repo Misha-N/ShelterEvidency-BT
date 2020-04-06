@@ -62,11 +62,11 @@
       <Association Name="Breeds_Animals1" Member="Breeds1" ThisKey="CrossBreedID" OtherKey="Id" Type="Breeds" IsForeignKey="true" />
       <Association Name="CoatTypes_Animals" Member="CoatTypes" ThisKey="CoatTypeID" OtherKey="Id" Type="CoatTypes" IsForeignKey="true" />
       <Association Name="FurColors_Animals" Member="FurColors" ThisKey="FurColorID" OtherKey="Id" Type="FurColors" IsForeignKey="true" />
+      <Association Name="Sexes_Animals" Member="Sexes" ThisKey="SexID" OtherKey="Id" Type="Sexes" IsForeignKey="true" />
+      <Association Name="Species_Animals" Member="Species" ThisKey="SpeciesID" OtherKey="Id" Type="Species" IsForeignKey="true" />
       <Association Name="People_Animals" Member="People" ThisKey="NewOwnerID" OtherKey="Id" Type="People" IsForeignKey="true" />
       <Association Name="People_Animals1" Member="People1" ThisKey="OwnerID" OtherKey="Id" Type="People" IsForeignKey="true" />
       <Association Name="People_Animals2" Member="People2" ThisKey="VetID" OtherKey="Id" Type="People" IsForeignKey="true" />
-      <Association Name="Sexes_Animals" Member="Sexes" ThisKey="SexID" OtherKey="Id" Type="Sexes" IsForeignKey="true" />
-      <Association Name="Species_Animals" Member="Species" ThisKey="SpeciesID" OtherKey="Id" Type="Species" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Breeds" Member="Breeds">
@@ -164,34 +164,6 @@
       <Association Name="People_MedicalRecords" Member="People" ThisKey="VetID" OtherKey="Id" Type="People" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.People" Member="People">
-    <Type Name="People">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="LastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="RoleID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Phone" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="Mail" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Note" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Title" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="AdressCity" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="AdressStreet" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="AdressZip" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="IsOwner" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IsVet" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IsSponsor" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IsVolunteer" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IsWalker" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="People_Adoptions" Member="Adoptions" ThisKey="Id" OtherKey="PersonID" Type="Adoptions" />
-      <Association Name="People_Walks" Member="Walks" ThisKey="Id" OtherKey="PersonID" Type="Walks" />
-      <Association Name="People_Animals" Member="Animals" ThisKey="Id" OtherKey="NewOwnerID" Type="Animals" />
-      <Association Name="People_Animals1" Member="Animals1" ThisKey="Id" OtherKey="OwnerID" Type="Animals" />
-      <Association Name="People_Animals2" Member="Animals2" ThisKey="Id" OtherKey="VetID" Type="Animals" />
-      <Association Name="People_Donations" Member="Donations" ThisKey="Id" OtherKey="DonatorID" Type="Donations" />
-      <Association Name="People_MedicalRecords" Member="MedicalRecords" ThisKey="Id" OtherKey="VetID" Type="MedicalRecords" />
-    </Type>
-  </Table>
   <Table Name="dbo.Sexes" Member="Sexes">
     <Type Name="Sexes">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -245,6 +217,33 @@
       <Column Name="Other" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="Animals_Deaths" Member="Animals" ThisKey="AnimalID" OtherKey="ID" Type="Animals" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.People" Member="People">
+    <Type Name="People">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Mail" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Note" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="AdressCity" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="AdressStreet" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="AdressZip" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="IsOwner" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsVet" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsSponsor" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsVolunteer" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsWalker" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="People_Adoptions" Member="Adoptions" ThisKey="Id" OtherKey="PersonID" Type="Adoptions" />
+      <Association Name="People_Walks" Member="Walks" ThisKey="Id" OtherKey="PersonID" Type="Walks" />
+      <Association Name="People_Animals" Member="Animals" ThisKey="Id" OtherKey="NewOwnerID" Type="Animals" />
+      <Association Name="People_Animals1" Member="Animals1" ThisKey="Id" OtherKey="OwnerID" Type="Animals" />
+      <Association Name="People_Animals2" Member="Animals2" ThisKey="Id" OtherKey="VetID" Type="Animals" />
+      <Association Name="People_Donations" Member="Donations" ThisKey="Id" OtherKey="DonatorID" Type="Donations" />
+      <Association Name="People_MedicalRecords" Member="MedicalRecords" ThisKey="Id" OtherKey="VetID" Type="MedicalRecords" />
     </Type>
   </Table>
 </Database>
