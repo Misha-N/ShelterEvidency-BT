@@ -21,9 +21,9 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     if (speciesID is null)
-                        return new BindableCollection<Breeds>(db.Breeds.Where(x => x.IsDeleted.Equals(false)));
+                        return new BindableCollection<Breeds>(db.Breeds.Where(x => x.IsDeleted.Equals(null)));
                     else
-                        return new BindableCollection<Breeds>(db.Breeds.Where(x => x.SpeciesID.Equals(speciesID) && x.IsDeleted.Equals(false)));
+                        return new BindableCollection<Breeds>(db.Breeds.Where(x => x.SpeciesID.Equals(speciesID) && x.IsDeleted.Equals(null)));
                 }
             }
             catch (Exception ex)
@@ -44,7 +44,7 @@ namespace ShelterEvidency.Models
                         {
                             BreedName = BreedName,
                             SpeciesID = SpeciesID,
-                            IsDeleted = false
+                            IsDeleted = null
                         };
                         db.Breeds.InsertOnSubmit(breed);
                         db.SubmitChanges();
@@ -68,13 +68,31 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var breed = db.Breeds.Single(x => x.Id == id);
-                    breed.IsDeleted = true;
+                    breed.IsDeleted = DateTime.Now;
                     db.SubmitChanges();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        public static void RestoreDeleted(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var records = (from record in db.Breeds
+                               where record.IsDeleted >= since && record.IsDeleted <= to
+                               select record).ToList();
+
+                foreach (var record in records)
+                {
+                    record.IsDeleted = null;
+                }
+
+
+                db.SubmitChanges();
             }
         }
 

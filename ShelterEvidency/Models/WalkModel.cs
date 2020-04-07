@@ -53,7 +53,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var results = (from walk in db.Walks
-                                   where (walk.AnimalID.Equals(animalID)) && (walk.IsDeleted.Equals(false))
+                                   where (walk.AnimalID.Equals(animalID)) && (walk.IsDeleted.Equals(null))
                                    select new WalkInfo
                                    {
                                        ID = walk.ID,
@@ -82,7 +82,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var results = (from walk in db.Walks
-                                   where (walk.Date >= since && walk.Date <= to) && (walk.IsDeleted.Equals(false))
+                                   where (walk.Date >= since && walk.Date <= to) && (walk.IsDeleted.Equals(null))
                                    select new WalkInfo
                                    {
                                        ID = walk.ID,
@@ -112,7 +112,7 @@ namespace ShelterEvidency.Models
                 {
                     var results = (from walk in db.Walks
                                    where (walk.AnimalID.Equals(animalID) && (walk.Date >= since && walk.Date <= to))
-                                    && (walk.IsDeleted.Equals(false))
+                                    && (walk.IsDeleted.Equals(null))
                                    select new WalkInfo
                                    {
                                        ID = walk.ID,
@@ -189,7 +189,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var results = (from walk in db.Walks
-                                   where (walk.PersonID.Equals(personID)) && (walk.IsDeleted.Equals(false))
+                                   where (walk.PersonID.Equals(personID)) && (walk.IsDeleted.Equals(null))
                                    select new WalkInfo
                                    {
                                        ID = walk.ID,
@@ -216,7 +216,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var walk = db.Walks.Single(x => x.ID == id);
-                    walk.IsDeleted = true;
+                    walk.IsDeleted = DateTime.Now;
                     db.SubmitChanges();
                 }
             }
@@ -232,6 +232,24 @@ namespace ShelterEvidency.Models
                 return true;
             else
                 return false;
+        }
+
+        public static void RestoreDeleted(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var records = (from record in db.Walks
+                               where record.IsDeleted >= since && record.IsDeleted <= to
+                               select record).ToList();
+
+                foreach (var record in records)
+                {
+                    record.IsDeleted = null;
+                }
+
+
+                db.SubmitChanges();
+            }
         }
     }
 }

@@ -64,6 +64,7 @@ namespace ShelterEvidency
             try
             {
                 string folder = AnimalModel.ReturnFolder(animalID);
+                System.IO.Directory.CreateDirectory(folder);
                 return new DirectoryInfo(folder).GetFiles(); 
             }
             catch (Exception ex)

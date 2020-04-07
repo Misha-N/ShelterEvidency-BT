@@ -20,7 +20,7 @@
 
     </UserControl.Resources>
 
-    <Grid Height="Auto" Width="Auto" IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
+    <Grid Margin="10" Height="Auto" Width="Auto" IsEnabled="{Binding IsWorking, Converter={StaticResource boolConvert}}">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>

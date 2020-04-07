@@ -20,7 +20,7 @@ namespace ShelterEvidency.Models
             {
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    return new BindableCollection<CoatTypes>(db.CoatTypes.Where(x => x.IsDeleted.Equals(false)));
+                    return new BindableCollection<CoatTypes>(db.CoatTypes.Where(x => x.IsDeleted.Equals(null)));
                 }
             }
             catch (Exception ex)
@@ -39,7 +39,7 @@ namespace ShelterEvidency.Models
                     CoatTypes coatType = new CoatTypes
                     {
                         CoatTypeName = CoatTypeName,
-                        IsDeleted = false
+                        IsDeleted = null
                     };
                     db.CoatTypes.InsertOnSubmit(coatType);
                     db.SubmitChanges();
@@ -55,7 +55,25 @@ namespace ShelterEvidency.Models
             using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
             {
                 var coatType = db.CoatTypes.Single(x => x.Id == id);
-                coatType.IsDeleted = true;
+                coatType.IsDeleted = DateTime.Now;
+                db.SubmitChanges();
+            }
+        }
+
+        public static void RestoreDeleted(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var records = (from record in db.CoatTypes
+                               where record.IsDeleted >= since && record.IsDeleted <= to
+                               select record).ToList();
+
+                foreach (var record in records)
+                {
+                    record.IsDeleted = null;
+                }
+
+
                 db.SubmitChanges();
             }
         }

@@ -52,7 +52,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var results = (from cost in db.Costs
-                                   where (cost.AnimalID.Equals(animalID)) && (cost.IsDeleted.Equals(false))
+                                   where (cost.AnimalID.Equals(animalID)) && (cost.IsDeleted.Equals(null))
                                    select new CostInfo
                                    {
                                        ID = cost.Id,
@@ -82,7 +82,7 @@ namespace ShelterEvidency.Models
                 {
 
                     var results = (from cost in db.Costs
-                                   where (cost.Date >= since && cost.Date <= to) && (cost.IsDeleted.Equals(false))
+                                   where (cost.Date >= since && cost.Date <= to) && (cost.IsDeleted.Equals(null))
                                    select new CostInfo
                                    {
                                        ID = cost.Id,
@@ -112,7 +112,7 @@ namespace ShelterEvidency.Models
                 {
 
                     var results = (from cost in db.Costs
-                                   where (cost.Date >= since && cost.Date <= to) && (cost.AnimalID.Equals(animalID) && (cost.IsDeleted.Equals(false)))
+                                   where (cost.Date >= since && cost.Date <= to) && (cost.AnimalID.Equals(animalID) && (cost.IsDeleted.Equals(null)))
                                    select new CostInfo
                                    {
                                        ID = cost.Id,
@@ -142,7 +142,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var results = (from cost in db.Costs
-                                   where ((cost.IsDeleted.Equals(false)))
+                                   where ((cost.IsDeleted.Equals(null)))
                                    select new CostInfo
                                    {
                                        ID = cost.Id,
@@ -222,7 +222,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var cost = db.Costs.Single(x => x.Id == id);
-                    cost.IsDeleted = true;
+                    cost.IsDeleted = DateTime.Now;
                     db.SubmitChanges();
                 }
             }
@@ -239,6 +239,24 @@ namespace ShelterEvidency.Models
                 return true;
             else
                 return false;
+        }
+
+        public static void RestoreDeleted(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var records = (from record in db.Costs
+                               where record.IsDeleted >= since && record.IsDeleted <= to
+                               select record).ToList();
+
+                foreach (var record in records)
+                {
+                    record.IsDeleted = null;
+                }
+
+
+                db.SubmitChanges();
+            }
         }
 
     }

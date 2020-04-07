@@ -21,6 +21,8 @@ namespace ShelterEvidency.Models
 
         public string Account { get; set; }
 
+        public string LogoPath { get; set; }
+
         #endregion
 
         public ShelterModel()
@@ -43,6 +45,7 @@ namespace ShelterEvidency.Models
                     Mail = shelter.Mail;
                     Account = shelter.Account;
                     Adress = shelter.Adress;
+                    LogoPath = shelter.LogoPath;
                 }
             }
             catch (Exception ex)
@@ -67,6 +70,26 @@ namespace ShelterEvidency.Models
                     shelter.Mail = Mail;
                     shelter.Adress = Adress;
                     shelter.Account = Account;
+
+                    db.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public static void SetLogo(string path)
+        {
+            try
+            {
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+                {
+                    Shelter shelter = db.Shelter.FirstOrDefault();
+
+                    shelter.LogoPath = path;
+
 
                     db.SubmitChanges();
                 }

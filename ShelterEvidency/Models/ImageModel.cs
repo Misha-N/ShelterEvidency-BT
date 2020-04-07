@@ -1,6 +1,7 @@
 ﻿using ShelterEvidency.Helpers;
 using System;
 using System.IO;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace ShelterEvidency.Models
@@ -41,10 +42,20 @@ namespace ShelterEvidency.Models
 
         public void GetImage(string imagePath)
         {
-            if(imagePath != null)
+            try
             {
-                ImagePath = imagePath;
-                Image = new BitmapImage(new Uri(ImagePath));
+                if (imagePath != null)
+                {
+                    ImagePath = imagePath;
+                    Image = new BitmapImage(new Uri(ImagePath));
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Obrázek nenalezen.");
+                ImagePath = null;
+                Image = new BitmapImage();
+
             }
         }
     }

@@ -205,7 +205,7 @@ namespace ShelterEvidency.ViewModels
 
         public void FilterDeaths()
         {
-            if (Deaths == null || DeathTo == null)
+            if (DeathSince == null || DeathTo == null)
             {
                 IsWorking = true;
                 Deaths = DeathModel.GetDatedDeaths(DateTime.Now.AddYears(-100), DateTime.Now.AddYears(100));

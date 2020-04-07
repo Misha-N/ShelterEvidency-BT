@@ -48,6 +48,9 @@ namespace ShelterEvidency.Database
     partial void InsertCosts(Costs instance);
     partial void UpdateCosts(Costs instance);
     partial void DeleteCosts(Costs instance);
+    partial void InsertDeaths(Deaths instance);
+    partial void UpdateDeaths(Deaths instance);
+    partial void DeleteDeaths(Deaths instance);
     partial void InsertDiaryRecords(DiaryRecords instance);
     partial void UpdateDiaryRecords(DiaryRecords instance);
     partial void DeleteDiaryRecords(DiaryRecords instance);
@@ -60,34 +63,34 @@ namespace ShelterEvidency.Database
     partial void InsertFurColors(FurColors instance);
     partial void UpdateFurColors(FurColors instance);
     partial void DeleteFurColors(FurColors instance);
+    partial void InsertImages(Images instance);
+    partial void UpdateImages(Images instance);
+    partial void DeleteImages(Images instance);
     partial void InsertIncidents(Incidents instance);
     partial void UpdateIncidents(Incidents instance);
     partial void DeleteIncidents(Incidents instance);
     partial void InsertMedicalRecords(MedicalRecords instance);
     partial void UpdateMedicalRecords(MedicalRecords instance);
     partial void DeleteMedicalRecords(MedicalRecords instance);
+    partial void InsertPeople(People instance);
+    partial void UpdatePeople(People instance);
+    partial void DeletePeople(People instance);
     partial void InsertSexes(Sexes instance);
     partial void UpdateSexes(Sexes instance);
     partial void DeleteSexes(Sexes instance);
-    partial void InsertShelter(Shelter instance);
-    partial void UpdateShelter(Shelter instance);
-    partial void DeleteShelter(Shelter instance);
     partial void InsertSpecies(Species instance);
     partial void UpdateSpecies(Species instance);
     partial void DeleteSpecies(Species instance);
     partial void InsertStays(Stays instance);
     partial void UpdateStays(Stays instance);
     partial void DeleteStays(Stays instance);
-    partial void InsertDeaths(Deaths instance);
-    partial void UpdateDeaths(Deaths instance);
-    partial void DeleteDeaths(Deaths instance);
-    partial void InsertPeople(People instance);
-    partial void UpdatePeople(People instance);
-    partial void DeletePeople(People instance);
+    partial void InsertShelter(Shelter instance);
+    partial void UpdateShelter(Shelter instance);
+    partial void DeleteShelter(Shelter instance);
     #endregion
 		
 		public ShelterDatabaseLINQDataContext() : 
-				base(global::ShelterEvidency.Properties.Settings.Default.ShelterDatabaseConnectionString, mappingSource)
+				base(global::ShelterEvidency.Properties.Settings.Default.ShelterDatabaseConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -164,6 +167,14 @@ namespace ShelterEvidency.Database
 			}
 		}
 		
+		public System.Data.Linq.Table<Deaths> Deaths
+		{
+			get
+			{
+				return this.GetTable<Deaths>();
+			}
+		}
+		
 		public System.Data.Linq.Table<DiaryRecords> DiaryRecords
 		{
 			get
@@ -196,6 +207,14 @@ namespace ShelterEvidency.Database
 			}
 		}
 		
+		public System.Data.Linq.Table<Images> Images
+		{
+			get
+			{
+				return this.GetTable<Images>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Incidents> Incidents
 		{
 			get
@@ -212,19 +231,19 @@ namespace ShelterEvidency.Database
 			}
 		}
 		
+		public System.Data.Linq.Table<People> People
+		{
+			get
+			{
+				return this.GetTable<People>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Sexes> Sexes
 		{
 			get
 			{
 				return this.GetTable<Sexes>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Shelter> Shelter
-		{
-			get
-			{
-				return this.GetTable<Shelter>();
 			}
 		}
 		
@@ -244,19 +263,11 @@ namespace ShelterEvidency.Database
 			}
 		}
 		
-		public System.Data.Linq.Table<Deaths> Deaths
+		public System.Data.Linq.Table<Shelter> Shelter
 		{
 			get
 			{
-				return this.GetTable<Deaths>();
-			}
-		}
-		
-		public System.Data.Linq.Table<People> People
-		{
-			get
-			{
-				return this.GetTable<People>();
+				return this.GetTable<Shelter>();
 			}
 		}
 	}
@@ -281,7 +292,7 @@ namespace ShelterEvidency.Database
 		
 		private string _ReturnReason;
 		
-		private bool _IsDeleted;
+		private System.Nullable<System.DateTime> _IsDeleted;
 		
 		private EntityRef<Animals> _Animals;
 		
@@ -305,7 +316,7 @@ namespace ShelterEvidency.Database
     partial void OnReturnDateChanged();
     partial void OnReturnReasonChanging(string value);
     partial void OnReturnReasonChanged();
-    partial void OnIsDeletedChanging(bool value);
+    partial void OnIsDeletedChanging(System.Nullable<System.DateTime> value);
     partial void OnIsDeletedChanged();
     #endregion
 		
@@ -464,8 +475,8 @@ namespace ShelterEvidency.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
-		public bool IsDeleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="DateTime")]
+		public System.Nullable<System.DateTime> IsDeleted
 		{
 			get
 			{
@@ -589,7 +600,7 @@ namespace ShelterEvidency.Database
 		
 		private System.Nullable<int> _PersonID;
 		
-		private bool _IsDeleted;
+		private System.Nullable<System.DateTime> _IsDeleted;
 		
 		private EntityRef<Animals> _Animals;
 		
@@ -609,7 +620,7 @@ namespace ShelterEvidency.Database
     partial void OnAnimalIDChanged();
     partial void OnPersonIDChanging(System.Nullable<int> value);
     partial void OnPersonIDChanged();
-    partial void OnIsDeletedChanging(bool value);
+    partial void OnIsDeletedChanging(System.Nullable<System.DateTime> value);
     partial void OnIsDeletedChanged();
     #endregion
 		
@@ -728,8 +739,8 @@ namespace ShelterEvidency.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
-		public bool IsDeleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="DateTime")]
+		public System.Nullable<System.DateTime> IsDeleted
 		{
 			get
 			{
@@ -881,7 +892,7 @@ namespace ShelterEvidency.Database
 		
 		private System.Nullable<bool> _IsDead;
 		
-		private bool _IsDeleted;
+		private System.Nullable<System.DateTime> _IsDeleted;
 		
 		private string _FolderPath;
 		
@@ -893,6 +904,8 @@ namespace ShelterEvidency.Database
 		
 		private EntitySet<Costs> _Costs;
 		
+		private EntitySet<Deaths> _Deaths;
+		
 		private EntitySet<Escapes> _Escapes;
 		
 		private EntitySet<Incidents> _Incidents;
@@ -900,8 +913,6 @@ namespace ShelterEvidency.Database
 		private EntitySet<MedicalRecords> _MedicalRecords;
 		
 		private EntitySet<Stays> _Stays;
-		
-		private EntitySet<Deaths> _Deaths;
 		
 		private EntityRef<Breeds> _Breeds;
 		
@@ -911,15 +922,15 @@ namespace ShelterEvidency.Database
 		
 		private EntityRef<FurColors> _FurColors;
 		
-		private EntityRef<Sexes> _Sexes;
-		
-		private EntityRef<Species> _Species;
-		
 		private EntityRef<People> _People;
 		
 		private EntityRef<People> _People1;
 		
 		private EntityRef<People> _People2;
+		
+		private EntityRef<Sexes> _Sexes;
+		
+		private EntityRef<Species> _Species;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -963,7 +974,7 @@ namespace ShelterEvidency.Database
     partial void OnInShelterChanged();
     partial void OnIsDeadChanging(System.Nullable<bool> value);
     partial void OnIsDeadChanged();
-    partial void OnIsDeletedChanging(bool value);
+    partial void OnIsDeletedChanging(System.Nullable<System.DateTime> value);
     partial void OnIsDeletedChanged();
     partial void OnFolderPathChanging(string value);
     partial void OnFolderPathChanged();
@@ -976,20 +987,20 @@ namespace ShelterEvidency.Database
 			this._Adoptions = new EntitySet<Adoptions>(new Action<Adoptions>(this.attach_Adoptions), new Action<Adoptions>(this.detach_Adoptions));
 			this._Walks = new EntitySet<Walks>(new Action<Walks>(this.attach_Walks), new Action<Walks>(this.detach_Walks));
 			this._Costs = new EntitySet<Costs>(new Action<Costs>(this.attach_Costs), new Action<Costs>(this.detach_Costs));
+			this._Deaths = new EntitySet<Deaths>(new Action<Deaths>(this.attach_Deaths), new Action<Deaths>(this.detach_Deaths));
 			this._Escapes = new EntitySet<Escapes>(new Action<Escapes>(this.attach_Escapes), new Action<Escapes>(this.detach_Escapes));
 			this._Incidents = new EntitySet<Incidents>(new Action<Incidents>(this.attach_Incidents), new Action<Incidents>(this.detach_Incidents));
 			this._MedicalRecords = new EntitySet<MedicalRecords>(new Action<MedicalRecords>(this.attach_MedicalRecords), new Action<MedicalRecords>(this.detach_MedicalRecords));
 			this._Stays = new EntitySet<Stays>(new Action<Stays>(this.attach_Stays), new Action<Stays>(this.detach_Stays));
-			this._Deaths = new EntitySet<Deaths>(new Action<Deaths>(this.attach_Deaths), new Action<Deaths>(this.detach_Deaths));
 			this._Breeds = default(EntityRef<Breeds>);
 			this._Breeds1 = default(EntityRef<Breeds>);
 			this._CoatTypes = default(EntityRef<CoatTypes>);
 			this._FurColors = default(EntityRef<FurColors>);
-			this._Sexes = default(EntityRef<Sexes>);
-			this._Species = default(EntityRef<Species>);
 			this._People = default(EntityRef<People>);
 			this._People1 = default(EntityRef<People>);
 			this._People2 = default(EntityRef<People>);
+			this._Sexes = default(EntityRef<Sexes>);
+			this._Species = default(EntityRef<Species>);
 			OnCreated();
 		}
 		
@@ -1409,8 +1420,8 @@ namespace ShelterEvidency.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
-		public bool IsDeleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="DateTime")]
+		public System.Nullable<System.DateTime> IsDeleted
 		{
 			get
 			{
@@ -1508,6 +1519,19 @@ namespace ShelterEvidency.Database
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Animals_Deaths", Storage="_Deaths", ThisKey="ID", OtherKey="AnimalID")]
+		public EntitySet<Deaths> Deaths
+		{
+			get
+			{
+				return this._Deaths;
+			}
+			set
+			{
+				this._Deaths.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Animals_Escapes", Storage="_Escapes", ThisKey="ID", OtherKey="AnimalID")]
 		public EntitySet<Escapes> Escapes
 		{
@@ -1557,19 +1581,6 @@ namespace ShelterEvidency.Database
 			set
 			{
 				this._Stays.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Animals_Deaths", Storage="_Deaths", ThisKey="ID", OtherKey="AnimalID")]
-		public EntitySet<Deaths> Deaths
-		{
-			get
-			{
-				return this._Deaths;
-			}
-			set
-			{
-				this._Deaths.Assign(value);
 			}
 		}
 		
@@ -1709,74 +1720,6 @@ namespace ShelterEvidency.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Sexes_Animals", Storage="_Sexes", ThisKey="SexID", OtherKey="Id", IsForeignKey=true)]
-		public Sexes Sexes
-		{
-			get
-			{
-				return this._Sexes.Entity;
-			}
-			set
-			{
-				Sexes previousValue = this._Sexes.Entity;
-				if (((previousValue != value) 
-							|| (this._Sexes.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Sexes.Entity = null;
-						previousValue.Animals.Remove(this);
-					}
-					this._Sexes.Entity = value;
-					if ((value != null))
-					{
-						value.Animals.Add(this);
-						this._SexID = value.Id;
-					}
-					else
-					{
-						this._SexID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Sexes");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Species_Animals", Storage="_Species", ThisKey="SpeciesID", OtherKey="Id", IsForeignKey=true)]
-		public Species Species
-		{
-			get
-			{
-				return this._Species.Entity;
-			}
-			set
-			{
-				Species previousValue = this._Species.Entity;
-				if (((previousValue != value) 
-							|| (this._Species.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Species.Entity = null;
-						previousValue.Animals.Remove(this);
-					}
-					this._Species.Entity = value;
-					if ((value != null))
-					{
-						value.Animals.Add(this);
-						this._SpeciesID = value.Id;
-					}
-					else
-					{
-						this._SpeciesID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Species");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="People_Animals", Storage="_People", ThisKey="NewOwnerID", OtherKey="Id", IsForeignKey=true)]
 		public People People
 		{
@@ -1879,6 +1822,74 @@ namespace ShelterEvidency.Database
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Sexes_Animals", Storage="_Sexes", ThisKey="SexID", OtherKey="Id", IsForeignKey=true)]
+		public Sexes Sexes
+		{
+			get
+			{
+				return this._Sexes.Entity;
+			}
+			set
+			{
+				Sexes previousValue = this._Sexes.Entity;
+				if (((previousValue != value) 
+							|| (this._Sexes.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Sexes.Entity = null;
+						previousValue.Animals.Remove(this);
+					}
+					this._Sexes.Entity = value;
+					if ((value != null))
+					{
+						value.Animals.Add(this);
+						this._SexID = value.Id;
+					}
+					else
+					{
+						this._SexID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Sexes");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Species_Animals", Storage="_Species", ThisKey="SpeciesID", OtherKey="Id", IsForeignKey=true)]
+		public Species Species
+		{
+			get
+			{
+				return this._Species.Entity;
+			}
+			set
+			{
+				Species previousValue = this._Species.Entity;
+				if (((previousValue != value) 
+							|| (this._Species.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Species.Entity = null;
+						previousValue.Animals.Remove(this);
+					}
+					this._Species.Entity = value;
+					if ((value != null))
+					{
+						value.Animals.Add(this);
+						this._SpeciesID = value.Id;
+					}
+					else
+					{
+						this._SpeciesID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Species");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1935,6 +1946,18 @@ namespace ShelterEvidency.Database
 			entity.Animals = null;
 		}
 		
+		private void attach_Deaths(Deaths entity)
+		{
+			this.SendPropertyChanging();
+			entity.Animals = this;
+		}
+		
+		private void detach_Deaths(Deaths entity)
+		{
+			this.SendPropertyChanging();
+			entity.Animals = null;
+		}
+		
 		private void attach_Escapes(Escapes entity)
 		{
 			this.SendPropertyChanging();
@@ -1982,18 +2005,6 @@ namespace ShelterEvidency.Database
 			this.SendPropertyChanging();
 			entity.Animals = null;
 		}
-		
-		private void attach_Deaths(Deaths entity)
-		{
-			this.SendPropertyChanging();
-			entity.Animals = this;
-		}
-		
-		private void detach_Deaths(Deaths entity)
-		{
-			this.SendPropertyChanging();
-			entity.Animals = null;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Breeds")]
@@ -2008,7 +2019,7 @@ namespace ShelterEvidency.Database
 		
 		private System.Nullable<int> _SpeciesID;
 		
-		private bool _IsDeleted;
+		private System.Nullable<System.DateTime> _IsDeleted;
 		
 		private EntitySet<Animals> _Animals;
 		
@@ -2024,7 +2035,7 @@ namespace ShelterEvidency.Database
     partial void OnBreedNameChanged();
     partial void OnSpeciesIDChanging(System.Nullable<int> value);
     partial void OnSpeciesIDChanged();
-    partial void OnIsDeletedChanging(bool value);
+    partial void OnIsDeletedChanging(System.Nullable<System.DateTime> value);
     partial void OnIsDeletedChanged();
     #endregion
 		
@@ -2095,8 +2106,8 @@ namespace ShelterEvidency.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
-		public bool IsDeleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="DateTime")]
+		public System.Nullable<System.DateTime> IsDeleted
 		{
 			get
 			{
@@ -2196,7 +2207,7 @@ namespace ShelterEvidency.Database
 		
 		private string _CoatTypeName;
 		
-		private bool _IsDeleted;
+		private System.Nullable<System.DateTime> _IsDeleted;
 		
 		private EntitySet<Animals> _Animals;
 		
@@ -2208,7 +2219,7 @@ namespace ShelterEvidency.Database
     partial void OnIdChanged();
     partial void OnCoatTypeNameChanging(string value);
     partial void OnCoatTypeNameChanged();
-    partial void OnIsDeletedChanging(bool value);
+    partial void OnIsDeletedChanging(System.Nullable<System.DateTime> value);
     partial void OnIsDeletedChanged();
     #endregion
 		
@@ -2258,8 +2269,8 @@ namespace ShelterEvidency.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
-		public bool IsDeleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="DateTime")]
+		public System.Nullable<System.DateTime> IsDeleted
 		{
 			get
 			{
@@ -2342,7 +2353,7 @@ namespace ShelterEvidency.Database
 		
 		private System.Nullable<System.DateTime> _Date;
 		
-		private bool _IsDeleted;
+		private System.Nullable<System.DateTime> _IsDeleted;
 		
 		private EntitySet<MedicalRecords> _MedicalRecords;
 		
@@ -2364,7 +2375,7 @@ namespace ShelterEvidency.Database
     partial void OnAnimalIDChanged();
     partial void OnDateChanging(System.Nullable<System.DateTime> value);
     partial void OnDateChanged();
-    partial void OnIsDeletedChanging(bool value);
+    partial void OnIsDeletedChanging(System.Nullable<System.DateTime> value);
     partial void OnIsDeletedChanged();
     #endregion
 		
@@ -2499,8 +2510,8 @@ namespace ShelterEvidency.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
-		public bool IsDeleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="DateTime")]
+		public System.Nullable<System.DateTime> IsDeleted
 		{
 			get
 			{
@@ -2599,6 +2610,277 @@ namespace ShelterEvidency.Database
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Deaths")]
+	public partial class Deaths : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _AnimalID;
+		
+		private System.Nullable<System.DateTime> _Date;
+		
+		private string _Description;
+		
+		private System.Nullable<bool> _Natural;
+		
+		private System.Nullable<bool> _Euthanasia;
+		
+		private System.Nullable<bool> _Other;
+		
+		private System.Nullable<System.DateTime> _IsDeleted;
+		
+		private EntityRef<Animals> _Animals;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnAnimalIDChanging(System.Nullable<int> value);
+    partial void OnAnimalIDChanged();
+    partial void OnDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    partial void OnNaturalChanging(System.Nullable<bool> value);
+    partial void OnNaturalChanged();
+    partial void OnEuthanasiaChanging(System.Nullable<bool> value);
+    partial void OnEuthanasiaChanged();
+    partial void OnOtherChanging(System.Nullable<bool> value);
+    partial void OnOtherChanged();
+    partial void OnIsDeletedChanging(System.Nullable<System.DateTime> value);
+    partial void OnIsDeletedChanged();
+    #endregion
+		
+		public Deaths()
+		{
+			this._Animals = default(EntityRef<Animals>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AnimalID", DbType="Int")]
+		public System.Nullable<int> AnimalID
+		{
+			get
+			{
+				return this._AnimalID;
+			}
+			set
+			{
+				if ((this._AnimalID != value))
+				{
+					if (this._Animals.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAnimalIDChanging(value);
+					this.SendPropertyChanging();
+					this._AnimalID = value;
+					this.SendPropertyChanged("AnimalID");
+					this.OnAnimalIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Date
+		{
+			get
+			{
+				return this._Date;
+			}
+			set
+			{
+				if ((this._Date != value))
+				{
+					this.OnDateChanging(value);
+					this.SendPropertyChanging();
+					this._Date = value;
+					this.SendPropertyChanged("Date");
+					this.OnDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(MAX)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Natural]", Storage="_Natural", DbType="Bit")]
+		public System.Nullable<bool> Natural
+		{
+			get
+			{
+				return this._Natural;
+			}
+			set
+			{
+				if ((this._Natural != value))
+				{
+					this.OnNaturalChanging(value);
+					this.SendPropertyChanging();
+					this._Natural = value;
+					this.SendPropertyChanged("Natural");
+					this.OnNaturalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Euthanasia", DbType="Bit")]
+		public System.Nullable<bool> Euthanasia
+		{
+			get
+			{
+				return this._Euthanasia;
+			}
+			set
+			{
+				if ((this._Euthanasia != value))
+				{
+					this.OnEuthanasiaChanging(value);
+					this.SendPropertyChanging();
+					this._Euthanasia = value;
+					this.SendPropertyChanged("Euthanasia");
+					this.OnEuthanasiaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Other", DbType="Bit")]
+		public System.Nullable<bool> Other
+		{
+			get
+			{
+				return this._Other;
+			}
+			set
+			{
+				if ((this._Other != value))
+				{
+					this.OnOtherChanging(value);
+					this.SendPropertyChanging();
+					this._Other = value;
+					this.SendPropertyChanged("Other");
+					this.OnOtherChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="DateTime")]
+		public System.Nullable<System.DateTime> IsDeleted
+		{
+			get
+			{
+				return this._IsDeleted;
+			}
+			set
+			{
+				if ((this._IsDeleted != value))
+				{
+					this.OnIsDeletedChanging(value);
+					this.SendPropertyChanging();
+					this._IsDeleted = value;
+					this.SendPropertyChanged("IsDeleted");
+					this.OnIsDeletedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Animals_Deaths", Storage="_Animals", ThisKey="AnimalID", OtherKey="ID", IsForeignKey=true)]
+		public Animals Animals
+		{
+			get
+			{
+				return this._Animals.Entity;
+			}
+			set
+			{
+				Animals previousValue = this._Animals.Entity;
+				if (((previousValue != value) 
+							|| (this._Animals.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Animals.Entity = null;
+						previousValue.Deaths.Remove(this);
+					}
+					this._Animals.Entity = value;
+					if ((value != null))
+					{
+						value.Deaths.Add(this);
+						this._AnimalID = value.ID;
+					}
+					else
+					{
+						this._AnimalID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Animals");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DiaryRecords")]
 	public partial class DiaryRecords : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2611,7 +2893,7 @@ namespace ShelterEvidency.Database
 		
 		private string _Record;
 		
-		private bool _IsDeleted;
+		private System.Nullable<System.DateTime> _IsDeleted;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2623,7 +2905,7 @@ namespace ShelterEvidency.Database
     partial void OnDateChanged();
     partial void OnRecordChanging(string value);
     partial void OnRecordChanged();
-    partial void OnIsDeletedChanging(bool value);
+    partial void OnIsDeletedChanging(System.Nullable<System.DateTime> value);
     partial void OnIsDeletedChanged();
     #endregion
 		
@@ -2692,8 +2974,8 @@ namespace ShelterEvidency.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
-		public bool IsDeleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="DateTime")]
+		public System.Nullable<System.DateTime> IsDeleted
 		{
 			get
 			{
@@ -2751,7 +3033,7 @@ namespace ShelterEvidency.Database
 		
 		private System.Nullable<System.DateTime> _Date;
 		
-		private bool _IsDeleted;
+		private System.Nullable<System.DateTime> _IsDeleted;
 		
 		private EntityRef<People> _People;
 		
@@ -2771,7 +3053,7 @@ namespace ShelterEvidency.Database
     partial void OnDonationNameChanged();
     partial void OnDateChanging(System.Nullable<System.DateTime> value);
     partial void OnDateChanged();
-    partial void OnIsDeletedChanging(bool value);
+    partial void OnIsDeletedChanging(System.Nullable<System.DateTime> value);
     partial void OnIsDeletedChanged();
     #endregion
 		
@@ -2905,8 +3187,8 @@ namespace ShelterEvidency.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
-		public bool IsDeleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="DateTime")]
+		public System.Nullable<System.DateTime> IsDeleted
 		{
 			get
 			{
@@ -2994,7 +3276,7 @@ namespace ShelterEvidency.Database
 		
 		private string _Description;
 		
-		private bool _IsDeleted;
+		private System.Nullable<System.DateTime> _IsDeleted;
 		
 		private EntityRef<Animals> _Animals;
 		
@@ -3010,7 +3292,7 @@ namespace ShelterEvidency.Database
     partial void OnDateChanged();
     partial void OnDescriptionChanging(string value);
     partial void OnDescriptionChanged();
-    partial void OnIsDeletedChanging(bool value);
+    partial void OnIsDeletedChanging(System.Nullable<System.DateTime> value);
     partial void OnIsDeletedChanged();
     #endregion
 		
@@ -3104,8 +3386,8 @@ namespace ShelterEvidency.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
-		public bool IsDeleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="DateTime")]
+		public System.Nullable<System.DateTime> IsDeleted
 		{
 			get
 			{
@@ -3189,7 +3471,7 @@ namespace ShelterEvidency.Database
 		
 		private string _FurColorName;
 		
-		private bool _IsDeleted;
+		private System.Nullable<System.DateTime> _IsDeleted;
 		
 		private EntitySet<Animals> _Animals;
 		
@@ -3201,7 +3483,7 @@ namespace ShelterEvidency.Database
     partial void OnIdChanged();
     partial void OnFurColorNameChanging(string value);
     partial void OnFurColorNameChanged();
-    partial void OnIsDeletedChanging(bool value);
+    partial void OnIsDeletedChanging(System.Nullable<System.DateTime> value);
     partial void OnIsDeletedChanged();
     #endregion
 		
@@ -3251,8 +3533,8 @@ namespace ShelterEvidency.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
-		public bool IsDeleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="DateTime")]
+		public System.Nullable<System.DateTime> IsDeleted
 		{
 			get
 			{
@@ -3317,6 +3599,116 @@ namespace ShelterEvidency.Database
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Images")]
+	public partial class Images : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _AnimalID;
+		
+		private string _ImagePath;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnAnimalIDChanging(System.Nullable<int> value);
+    partial void OnAnimalIDChanged();
+    partial void OnImagePathChanging(string value);
+    partial void OnImagePathChanged();
+    #endregion
+		
+		public Images()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AnimalID", DbType="Int")]
+		public System.Nullable<int> AnimalID
+		{
+			get
+			{
+				return this._AnimalID;
+			}
+			set
+			{
+				if ((this._AnimalID != value))
+				{
+					this.OnAnimalIDChanging(value);
+					this.SendPropertyChanging();
+					this._AnimalID = value;
+					this.SendPropertyChanged("AnimalID");
+					this.OnAnimalIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImagePath", DbType="NVarChar(MAX)")]
+		public string ImagePath
+		{
+			get
+			{
+				return this._ImagePath;
+			}
+			set
+			{
+				if ((this._ImagePath != value))
+				{
+					this.OnImagePathChanging(value);
+					this.SendPropertyChanging();
+					this._ImagePath = value;
+					this.SendPropertyChanged("ImagePath");
+					this.OnImagePathChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Incidents")]
 	public partial class Incidents : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -3333,7 +3725,7 @@ namespace ShelterEvidency.Database
 		
 		private System.Nullable<int> _Severity;
 		
-		private bool _IsDeleted;
+		private System.Nullable<System.DateTime> _IsDeleted;
 		
 		private EntityRef<Animals> _Animals;
 		
@@ -3351,7 +3743,7 @@ namespace ShelterEvidency.Database
     partial void OnAnimalIDChanged();
     partial void OnSeverityChanging(System.Nullable<int> value);
     partial void OnSeverityChanged();
-    partial void OnIsDeletedChanging(bool value);
+    partial void OnIsDeletedChanging(System.Nullable<System.DateTime> value);
     partial void OnIsDeletedChanged();
     #endregion
 		
@@ -3465,8 +3857,8 @@ namespace ShelterEvidency.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
-		public bool IsDeleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="DateTime")]
+		public System.Nullable<System.DateTime> IsDeleted
 		{
 			get
 			{
@@ -3560,7 +3952,7 @@ namespace ShelterEvidency.Database
 		
 		private System.Nullable<int> _VetID;
 		
-		private bool _IsDeleted;
+		private System.Nullable<System.DateTime> _IsDeleted;
 		
 		private EntityRef<Animals> _Animals;
 		
@@ -3586,7 +3978,7 @@ namespace ShelterEvidency.Database
     partial void OnDateChanged();
     partial void OnVetIDChanging(System.Nullable<int> value);
     partial void OnVetIDChanged();
-    partial void OnIsDeletedChanging(bool value);
+    partial void OnIsDeletedChanging(System.Nullable<System.DateTime> value);
     partial void OnIsDeletedChanged();
     #endregion
 		
@@ -3750,8 +4142,8 @@ namespace ShelterEvidency.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
-		public bool IsDeleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="DateTime")]
+		public System.Nullable<System.DateTime> IsDeleted
 		{
 			get
 			{
@@ -3893,1078 +4285,6 @@ namespace ShelterEvidency.Database
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Sexes")]
-	public partial class Sexes : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _SexName;
-		
-		private EntitySet<Animals> _Animals;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnSexNameChanging(string value);
-    partial void OnSexNameChanged();
-    #endregion
-		
-		public Sexes()
-		{
-			this._Animals = new EntitySet<Animals>(new Action<Animals>(this.attach_Animals), new Action<Animals>(this.detach_Animals));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SexName", DbType="NVarChar(20)")]
-		public string SexName
-		{
-			get
-			{
-				return this._SexName;
-			}
-			set
-			{
-				if ((this._SexName != value))
-				{
-					this.OnSexNameChanging(value);
-					this.SendPropertyChanging();
-					this._SexName = value;
-					this.SendPropertyChanged("SexName");
-					this.OnSexNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Sexes_Animals", Storage="_Animals", ThisKey="Id", OtherKey="SexID")]
-		public EntitySet<Animals> Animals
-		{
-			get
-			{
-				return this._Animals;
-			}
-			set
-			{
-				this._Animals.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Animals(Animals entity)
-		{
-			this.SendPropertyChanging();
-			entity.Sexes = this;
-		}
-		
-		private void detach_Animals(Animals entity)
-		{
-			this.SendPropertyChanging();
-			entity.Sexes = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Shelter")]
-	public partial class Shelter : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Name;
-		
-		private string _Phone;
-		
-		private string _Phone2;
-		
-		private string _Mail;
-		
-		private string _Adress;
-		
-		private string _Account;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnPhoneChanging(string value);
-    partial void OnPhoneChanged();
-    partial void OnPhone2Changing(string value);
-    partial void OnPhone2Changed();
-    partial void OnMailChanging(string value);
-    partial void OnMailChanged();
-    partial void OnAdressChanging(string value);
-    partial void OnAdressChanged();
-    partial void OnAccountChanging(string value);
-    partial void OnAccountChanged();
-    #endregion
-		
-		public Shelter()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(MAX)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="NVarChar(50)")]
-		public string Phone
-		{
-			get
-			{
-				return this._Phone;
-			}
-			set
-			{
-				if ((this._Phone != value))
-				{
-					this.OnPhoneChanging(value);
-					this.SendPropertyChanging();
-					this._Phone = value;
-					this.SendPropertyChanged("Phone");
-					this.OnPhoneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone2", DbType="NVarChar(50)")]
-		public string Phone2
-		{
-			get
-			{
-				return this._Phone2;
-			}
-			set
-			{
-				if ((this._Phone2 != value))
-				{
-					this.OnPhone2Changing(value);
-					this.SendPropertyChanging();
-					this._Phone2 = value;
-					this.SendPropertyChanged("Phone2");
-					this.OnPhone2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mail", DbType="NVarChar(50)")]
-		public string Mail
-		{
-			get
-			{
-				return this._Mail;
-			}
-			set
-			{
-				if ((this._Mail != value))
-				{
-					this.OnMailChanging(value);
-					this.SendPropertyChanging();
-					this._Mail = value;
-					this.SendPropertyChanged("Mail");
-					this.OnMailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adress", DbType="NVarChar(MAX)")]
-		public string Adress
-		{
-			get
-			{
-				return this._Adress;
-			}
-			set
-			{
-				if ((this._Adress != value))
-				{
-					this.OnAdressChanging(value);
-					this.SendPropertyChanging();
-					this._Adress = value;
-					this.SendPropertyChanged("Adress");
-					this.OnAdressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Account", DbType="NVarChar(50)")]
-		public string Account
-		{
-			get
-			{
-				return this._Account;
-			}
-			set
-			{
-				if ((this._Account != value))
-				{
-					this.OnAccountChanging(value);
-					this.SendPropertyChanging();
-					this._Account = value;
-					this.SendPropertyChanged("Account");
-					this.OnAccountChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Species")]
-	public partial class Species : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _SpeciesName;
-		
-		private bool _IsDeleted;
-		
-		private EntitySet<Animals> _Animals;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnSpeciesNameChanging(string value);
-    partial void OnSpeciesNameChanged();
-    partial void OnIsDeletedChanging(bool value);
-    partial void OnIsDeletedChanged();
-    #endregion
-		
-		public Species()
-		{
-			this._Animals = new EntitySet<Animals>(new Action<Animals>(this.attach_Animals), new Action<Animals>(this.detach_Animals));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SpeciesName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string SpeciesName
-		{
-			get
-			{
-				return this._SpeciesName;
-			}
-			set
-			{
-				if ((this._SpeciesName != value))
-				{
-					this.OnSpeciesNameChanging(value);
-					this.SendPropertyChanging();
-					this._SpeciesName = value;
-					this.SendPropertyChanged("SpeciesName");
-					this.OnSpeciesNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
-		public bool IsDeleted
-		{
-			get
-			{
-				return this._IsDeleted;
-			}
-			set
-			{
-				if ((this._IsDeleted != value))
-				{
-					this.OnIsDeletedChanging(value);
-					this.SendPropertyChanging();
-					this._IsDeleted = value;
-					this.SendPropertyChanged("IsDeleted");
-					this.OnIsDeletedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Species_Animals", Storage="_Animals", ThisKey="Id", OtherKey="SpeciesID")]
-		public EntitySet<Animals> Animals
-		{
-			get
-			{
-				return this._Animals;
-			}
-			set
-			{
-				this._Animals.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Animals(Animals entity)
-		{
-			this.SendPropertyChanging();
-			entity.Species = this;
-		}
-		
-		private void detach_Animals(Animals entity)
-		{
-			this.SendPropertyChanging();
-			entity.Species = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Stays")]
-	public partial class Stays : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<System.DateTime> _StartDate;
-		
-		private System.Nullable<System.DateTime> _FinishDate;
-		
-		private System.Nullable<int> _AnimalID;
-		
-		private string _FindPlace;
-		
-		private System.Nullable<System.DateTime> _FindDate;
-		
-		private string _Note;
-		
-		private System.Nullable<bool> _Adopted;
-		
-		private System.Nullable<bool> _Escaped;
-		
-		private System.Nullable<bool> _Died;
-		
-		private bool _IsDeleted;
-		
-		private EntityRef<Animals> _Animals;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnStartDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnStartDateChanged();
-    partial void OnFinishDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnFinishDateChanged();
-    partial void OnAnimalIDChanging(System.Nullable<int> value);
-    partial void OnAnimalIDChanged();
-    partial void OnFindPlaceChanging(string value);
-    partial void OnFindPlaceChanged();
-    partial void OnFindDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnFindDateChanged();
-    partial void OnNoteChanging(string value);
-    partial void OnNoteChanged();
-    partial void OnAdoptedChanging(System.Nullable<bool> value);
-    partial void OnAdoptedChanged();
-    partial void OnEscapedChanging(System.Nullable<bool> value);
-    partial void OnEscapedChanged();
-    partial void OnDiedChanging(System.Nullable<bool> value);
-    partial void OnDiedChanged();
-    partial void OnIsDeletedChanging(bool value);
-    partial void OnIsDeletedChanged();
-    #endregion
-		
-		public Stays()
-		{
-			this._Animals = default(EntityRef<Animals>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> StartDate
-		{
-			get
-			{
-				return this._StartDate;
-			}
-			set
-			{
-				if ((this._StartDate != value))
-				{
-					this.OnStartDateChanging(value);
-					this.SendPropertyChanging();
-					this._StartDate = value;
-					this.SendPropertyChanged("StartDate");
-					this.OnStartDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FinishDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FinishDate
-		{
-			get
-			{
-				return this._FinishDate;
-			}
-			set
-			{
-				if ((this._FinishDate != value))
-				{
-					this.OnFinishDateChanging(value);
-					this.SendPropertyChanging();
-					this._FinishDate = value;
-					this.SendPropertyChanged("FinishDate");
-					this.OnFinishDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AnimalID", DbType="Int")]
-		public System.Nullable<int> AnimalID
-		{
-			get
-			{
-				return this._AnimalID;
-			}
-			set
-			{
-				if ((this._AnimalID != value))
-				{
-					if (this._Animals.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnAnimalIDChanging(value);
-					this.SendPropertyChanging();
-					this._AnimalID = value;
-					this.SendPropertyChanged("AnimalID");
-					this.OnAnimalIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FindPlace", DbType="NVarChar(MAX)")]
-		public string FindPlace
-		{
-			get
-			{
-				return this._FindPlace;
-			}
-			set
-			{
-				if ((this._FindPlace != value))
-				{
-					this.OnFindPlaceChanging(value);
-					this.SendPropertyChanging();
-					this._FindPlace = value;
-					this.SendPropertyChanged("FindPlace");
-					this.OnFindPlaceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FindDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FindDate
-		{
-			get
-			{
-				return this._FindDate;
-			}
-			set
-			{
-				if ((this._FindDate != value))
-				{
-					this.OnFindDateChanging(value);
-					this.SendPropertyChanging();
-					this._FindDate = value;
-					this.SendPropertyChanged("FindDate");
-					this.OnFindDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="NVarChar(MAX)")]
-		public string Note
-		{
-			get
-			{
-				return this._Note;
-			}
-			set
-			{
-				if ((this._Note != value))
-				{
-					this.OnNoteChanging(value);
-					this.SendPropertyChanging();
-					this._Note = value;
-					this.SendPropertyChanged("Note");
-					this.OnNoteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adopted", DbType="Bit")]
-		public System.Nullable<bool> Adopted
-		{
-			get
-			{
-				return this._Adopted;
-			}
-			set
-			{
-				if ((this._Adopted != value))
-				{
-					this.OnAdoptedChanging(value);
-					this.SendPropertyChanging();
-					this._Adopted = value;
-					this.SendPropertyChanged("Adopted");
-					this.OnAdoptedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Escaped", DbType="Bit")]
-		public System.Nullable<bool> Escaped
-		{
-			get
-			{
-				return this._Escaped;
-			}
-			set
-			{
-				if ((this._Escaped != value))
-				{
-					this.OnEscapedChanging(value);
-					this.SendPropertyChanging();
-					this._Escaped = value;
-					this.SendPropertyChanged("Escaped");
-					this.OnEscapedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Died", DbType="Bit")]
-		public System.Nullable<bool> Died
-		{
-			get
-			{
-				return this._Died;
-			}
-			set
-			{
-				if ((this._Died != value))
-				{
-					this.OnDiedChanging(value);
-					this.SendPropertyChanging();
-					this._Died = value;
-					this.SendPropertyChanged("Died");
-					this.OnDiedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
-		public bool IsDeleted
-		{
-			get
-			{
-				return this._IsDeleted;
-			}
-			set
-			{
-				if ((this._IsDeleted != value))
-				{
-					this.OnIsDeletedChanging(value);
-					this.SendPropertyChanging();
-					this._IsDeleted = value;
-					this.SendPropertyChanged("IsDeleted");
-					this.OnIsDeletedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Animals_Stays", Storage="_Animals", ThisKey="AnimalID", OtherKey="ID", IsForeignKey=true)]
-		public Animals Animals
-		{
-			get
-			{
-				return this._Animals.Entity;
-			}
-			set
-			{
-				Animals previousValue = this._Animals.Entity;
-				if (((previousValue != value) 
-							|| (this._Animals.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Animals.Entity = null;
-						previousValue.Stays.Remove(this);
-					}
-					this._Animals.Entity = value;
-					if ((value != null))
-					{
-						value.Stays.Add(this);
-						this._AnimalID = value.ID;
-					}
-					else
-					{
-						this._AnimalID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Animals");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Deaths")]
-	public partial class Deaths : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<int> _AnimalID;
-		
-		private System.Nullable<System.DateTime> _Date;
-		
-		private string _Description;
-		
-		private System.Nullable<bool> _Natural;
-		
-		private System.Nullable<bool> _Euthanasia;
-		
-		private System.Nullable<bool> _Other;
-		
-		private bool _IsDeleted;
-		
-		private EntityRef<Animals> _Animals;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnAnimalIDChanging(System.Nullable<int> value);
-    partial void OnAnimalIDChanged();
-    partial void OnDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnDateChanged();
-    partial void OnDescriptionChanging(string value);
-    partial void OnDescriptionChanged();
-    partial void OnNaturalChanging(System.Nullable<bool> value);
-    partial void OnNaturalChanged();
-    partial void OnEuthanasiaChanging(System.Nullable<bool> value);
-    partial void OnEuthanasiaChanged();
-    partial void OnOtherChanging(System.Nullable<bool> value);
-    partial void OnOtherChanged();
-    partial void OnIsDeletedChanging(bool value);
-    partial void OnIsDeletedChanged();
-    #endregion
-		
-		public Deaths()
-		{
-			this._Animals = default(EntityRef<Animals>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AnimalID", DbType="Int")]
-		public System.Nullable<int> AnimalID
-		{
-			get
-			{
-				return this._AnimalID;
-			}
-			set
-			{
-				if ((this._AnimalID != value))
-				{
-					if (this._Animals.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnAnimalIDChanging(value);
-					this.SendPropertyChanging();
-					this._AnimalID = value;
-					this.SendPropertyChanged("AnimalID");
-					this.OnAnimalIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Date
-		{
-			get
-			{
-				return this._Date;
-			}
-			set
-			{
-				if ((this._Date != value))
-				{
-					this.OnDateChanging(value);
-					this.SendPropertyChanging();
-					this._Date = value;
-					this.SendPropertyChanged("Date");
-					this.OnDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(MAX)")]
-		public string Description
-		{
-			get
-			{
-				return this._Description;
-			}
-			set
-			{
-				if ((this._Description != value))
-				{
-					this.OnDescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._Description = value;
-					this.SendPropertyChanged("Description");
-					this.OnDescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Natural]", Storage="_Natural", DbType="Bit")]
-		public System.Nullable<bool> Natural
-		{
-			get
-			{
-				return this._Natural;
-			}
-			set
-			{
-				if ((this._Natural != value))
-				{
-					this.OnNaturalChanging(value);
-					this.SendPropertyChanging();
-					this._Natural = value;
-					this.SendPropertyChanged("Natural");
-					this.OnNaturalChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Euthanasia", DbType="Bit")]
-		public System.Nullable<bool> Euthanasia
-		{
-			get
-			{
-				return this._Euthanasia;
-			}
-			set
-			{
-				if ((this._Euthanasia != value))
-				{
-					this.OnEuthanasiaChanging(value);
-					this.SendPropertyChanging();
-					this._Euthanasia = value;
-					this.SendPropertyChanged("Euthanasia");
-					this.OnEuthanasiaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Other", DbType="Bit")]
-		public System.Nullable<bool> Other
-		{
-			get
-			{
-				return this._Other;
-			}
-			set
-			{
-				if ((this._Other != value))
-				{
-					this.OnOtherChanging(value);
-					this.SendPropertyChanging();
-					this._Other = value;
-					this.SendPropertyChanged("Other");
-					this.OnOtherChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
-		public bool IsDeleted
-		{
-			get
-			{
-				return this._IsDeleted;
-			}
-			set
-			{
-				if ((this._IsDeleted != value))
-				{
-					this.OnIsDeletedChanging(value);
-					this.SendPropertyChanging();
-					this._IsDeleted = value;
-					this.SendPropertyChanged("IsDeleted");
-					this.OnIsDeletedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Animals_Deaths", Storage="_Animals", ThisKey="AnimalID", OtherKey="ID", IsForeignKey=true)]
-		public Animals Animals
-		{
-			get
-			{
-				return this._Animals.Entity;
-			}
-			set
-			{
-				Animals previousValue = this._Animals.Entity;
-				if (((previousValue != value) 
-							|| (this._Animals.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Animals.Entity = null;
-						previousValue.Deaths.Remove(this);
-					}
-					this._Animals.Entity = value;
-					if ((value != null))
-					{
-						value.Deaths.Add(this);
-						this._AnimalID = value.ID;
-					}
-					else
-					{
-						this._AnimalID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Animals");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.People")]
 	public partial class People : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -5001,7 +4321,7 @@ namespace ShelterEvidency.Database
 		
 		private System.Nullable<bool> _IsWalker;
 		
-		private bool _IsDeleted;
+		private System.Nullable<System.DateTime> _IsDeleted;
 		
 		private EntitySet<Adoptions> _Adoptions;
 		
@@ -5051,7 +4371,7 @@ namespace ShelterEvidency.Database
     partial void OnIsVolunteerChanged();
     partial void OnIsWalkerChanging(System.Nullable<bool> value);
     partial void OnIsWalkerChanged();
-    partial void OnIsDeletedChanging(bool value);
+    partial void OnIsDeletedChanging(System.Nullable<System.DateTime> value);
     partial void OnIsDeletedChanged();
     #endregion
 		
@@ -5367,8 +4687,8 @@ namespace ShelterEvidency.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
-		public bool IsDeleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="DateTime")]
+		public System.Nullable<System.DateTime> IsDeleted
 		{
 			get
 			{
@@ -5580,6 +4900,831 @@ namespace ShelterEvidency.Database
 		{
 			this.SendPropertyChanging();
 			entity.People = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Sexes")]
+	public partial class Sexes : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _SexName;
+		
+		private EntitySet<Animals> _Animals;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnSexNameChanging(string value);
+    partial void OnSexNameChanged();
+    #endregion
+		
+		public Sexes()
+		{
+			this._Animals = new EntitySet<Animals>(new Action<Animals>(this.attach_Animals), new Action<Animals>(this.detach_Animals));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SexName", DbType="NVarChar(20)")]
+		public string SexName
+		{
+			get
+			{
+				return this._SexName;
+			}
+			set
+			{
+				if ((this._SexName != value))
+				{
+					this.OnSexNameChanging(value);
+					this.SendPropertyChanging();
+					this._SexName = value;
+					this.SendPropertyChanged("SexName");
+					this.OnSexNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Sexes_Animals", Storage="_Animals", ThisKey="Id", OtherKey="SexID")]
+		public EntitySet<Animals> Animals
+		{
+			get
+			{
+				return this._Animals;
+			}
+			set
+			{
+				this._Animals.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Animals(Animals entity)
+		{
+			this.SendPropertyChanging();
+			entity.Sexes = this;
+		}
+		
+		private void detach_Animals(Animals entity)
+		{
+			this.SendPropertyChanging();
+			entity.Sexes = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Species")]
+	public partial class Species : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _SpeciesName;
+		
+		private System.Nullable<System.DateTime> _IsDeleted;
+		
+		private EntitySet<Animals> _Animals;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnSpeciesNameChanging(string value);
+    partial void OnSpeciesNameChanged();
+    partial void OnIsDeletedChanging(System.Nullable<System.DateTime> value);
+    partial void OnIsDeletedChanged();
+    #endregion
+		
+		public Species()
+		{
+			this._Animals = new EntitySet<Animals>(new Action<Animals>(this.attach_Animals), new Action<Animals>(this.detach_Animals));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SpeciesName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string SpeciesName
+		{
+			get
+			{
+				return this._SpeciesName;
+			}
+			set
+			{
+				if ((this._SpeciesName != value))
+				{
+					this.OnSpeciesNameChanging(value);
+					this.SendPropertyChanging();
+					this._SpeciesName = value;
+					this.SendPropertyChanged("SpeciesName");
+					this.OnSpeciesNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="DateTime")]
+		public System.Nullable<System.DateTime> IsDeleted
+		{
+			get
+			{
+				return this._IsDeleted;
+			}
+			set
+			{
+				if ((this._IsDeleted != value))
+				{
+					this.OnIsDeletedChanging(value);
+					this.SendPropertyChanging();
+					this._IsDeleted = value;
+					this.SendPropertyChanged("IsDeleted");
+					this.OnIsDeletedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Species_Animals", Storage="_Animals", ThisKey="Id", OtherKey="SpeciesID")]
+		public EntitySet<Animals> Animals
+		{
+			get
+			{
+				return this._Animals;
+			}
+			set
+			{
+				this._Animals.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Animals(Animals entity)
+		{
+			this.SendPropertyChanging();
+			entity.Species = this;
+		}
+		
+		private void detach_Animals(Animals entity)
+		{
+			this.SendPropertyChanging();
+			entity.Species = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Stays")]
+	public partial class Stays : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<System.DateTime> _StartDate;
+		
+		private System.Nullable<System.DateTime> _FinishDate;
+		
+		private System.Nullable<int> _AnimalID;
+		
+		private string _FindPlace;
+		
+		private System.Nullable<System.DateTime> _FindDate;
+		
+		private string _Note;
+		
+		private System.Nullable<bool> _Adopted;
+		
+		private System.Nullable<bool> _Escaped;
+		
+		private System.Nullable<bool> _Died;
+		
+		private System.Nullable<System.DateTime> _IsDeleted;
+		
+		private EntityRef<Animals> _Animals;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnStartDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnStartDateChanged();
+    partial void OnFinishDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnFinishDateChanged();
+    partial void OnAnimalIDChanging(System.Nullable<int> value);
+    partial void OnAnimalIDChanged();
+    partial void OnFindPlaceChanging(string value);
+    partial void OnFindPlaceChanged();
+    partial void OnFindDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnFindDateChanged();
+    partial void OnNoteChanging(string value);
+    partial void OnNoteChanged();
+    partial void OnAdoptedChanging(System.Nullable<bool> value);
+    partial void OnAdoptedChanged();
+    partial void OnEscapedChanging(System.Nullable<bool> value);
+    partial void OnEscapedChanged();
+    partial void OnDiedChanging(System.Nullable<bool> value);
+    partial void OnDiedChanged();
+    partial void OnIsDeletedChanging(System.Nullable<System.DateTime> value);
+    partial void OnIsDeletedChanged();
+    #endregion
+		
+		public Stays()
+		{
+			this._Animals = default(EntityRef<Animals>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> StartDate
+		{
+			get
+			{
+				return this._StartDate;
+			}
+			set
+			{
+				if ((this._StartDate != value))
+				{
+					this.OnStartDateChanging(value);
+					this.SendPropertyChanging();
+					this._StartDate = value;
+					this.SendPropertyChanged("StartDate");
+					this.OnStartDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FinishDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FinishDate
+		{
+			get
+			{
+				return this._FinishDate;
+			}
+			set
+			{
+				if ((this._FinishDate != value))
+				{
+					this.OnFinishDateChanging(value);
+					this.SendPropertyChanging();
+					this._FinishDate = value;
+					this.SendPropertyChanged("FinishDate");
+					this.OnFinishDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AnimalID", DbType="Int")]
+		public System.Nullable<int> AnimalID
+		{
+			get
+			{
+				return this._AnimalID;
+			}
+			set
+			{
+				if ((this._AnimalID != value))
+				{
+					if (this._Animals.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAnimalIDChanging(value);
+					this.SendPropertyChanging();
+					this._AnimalID = value;
+					this.SendPropertyChanged("AnimalID");
+					this.OnAnimalIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FindPlace", DbType="NVarChar(MAX)")]
+		public string FindPlace
+		{
+			get
+			{
+				return this._FindPlace;
+			}
+			set
+			{
+				if ((this._FindPlace != value))
+				{
+					this.OnFindPlaceChanging(value);
+					this.SendPropertyChanging();
+					this._FindPlace = value;
+					this.SendPropertyChanged("FindPlace");
+					this.OnFindPlaceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FindDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FindDate
+		{
+			get
+			{
+				return this._FindDate;
+			}
+			set
+			{
+				if ((this._FindDate != value))
+				{
+					this.OnFindDateChanging(value);
+					this.SendPropertyChanging();
+					this._FindDate = value;
+					this.SendPropertyChanged("FindDate");
+					this.OnFindDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="NVarChar(MAX)")]
+		public string Note
+		{
+			get
+			{
+				return this._Note;
+			}
+			set
+			{
+				if ((this._Note != value))
+				{
+					this.OnNoteChanging(value);
+					this.SendPropertyChanging();
+					this._Note = value;
+					this.SendPropertyChanged("Note");
+					this.OnNoteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adopted", DbType="Bit")]
+		public System.Nullable<bool> Adopted
+		{
+			get
+			{
+				return this._Adopted;
+			}
+			set
+			{
+				if ((this._Adopted != value))
+				{
+					this.OnAdoptedChanging(value);
+					this.SendPropertyChanging();
+					this._Adopted = value;
+					this.SendPropertyChanged("Adopted");
+					this.OnAdoptedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Escaped", DbType="Bit")]
+		public System.Nullable<bool> Escaped
+		{
+			get
+			{
+				return this._Escaped;
+			}
+			set
+			{
+				if ((this._Escaped != value))
+				{
+					this.OnEscapedChanging(value);
+					this.SendPropertyChanging();
+					this._Escaped = value;
+					this.SendPropertyChanged("Escaped");
+					this.OnEscapedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Died", DbType="Bit")]
+		public System.Nullable<bool> Died
+		{
+			get
+			{
+				return this._Died;
+			}
+			set
+			{
+				if ((this._Died != value))
+				{
+					this.OnDiedChanging(value);
+					this.SendPropertyChanging();
+					this._Died = value;
+					this.SendPropertyChanged("Died");
+					this.OnDiedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="DateTime")]
+		public System.Nullable<System.DateTime> IsDeleted
+		{
+			get
+			{
+				return this._IsDeleted;
+			}
+			set
+			{
+				if ((this._IsDeleted != value))
+				{
+					this.OnIsDeletedChanging(value);
+					this.SendPropertyChanging();
+					this._IsDeleted = value;
+					this.SendPropertyChanged("IsDeleted");
+					this.OnIsDeletedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Animals_Stays", Storage="_Animals", ThisKey="AnimalID", OtherKey="ID", IsForeignKey=true)]
+		public Animals Animals
+		{
+			get
+			{
+				return this._Animals.Entity;
+			}
+			set
+			{
+				Animals previousValue = this._Animals.Entity;
+				if (((previousValue != value) 
+							|| (this._Animals.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Animals.Entity = null;
+						previousValue.Stays.Remove(this);
+					}
+					this._Animals.Entity = value;
+					if ((value != null))
+					{
+						value.Stays.Add(this);
+						this._AnimalID = value.ID;
+					}
+					else
+					{
+						this._AnimalID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Animals");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Shelter")]
+	public partial class Shelter : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Name;
+		
+		private string _Phone;
+		
+		private string _Phone2;
+		
+		private string _Mail;
+		
+		private string _Adress;
+		
+		private string _Account;
+		
+		private string _LogoPath;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnPhoneChanging(string value);
+    partial void OnPhoneChanged();
+    partial void OnPhone2Changing(string value);
+    partial void OnPhone2Changed();
+    partial void OnMailChanging(string value);
+    partial void OnMailChanged();
+    partial void OnAdressChanging(string value);
+    partial void OnAdressChanged();
+    partial void OnAccountChanging(string value);
+    partial void OnAccountChanged();
+    partial void OnLogoPathChanging(string value);
+    partial void OnLogoPathChanged();
+    #endregion
+		
+		public Shelter()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(MAX)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="NVarChar(50)")]
+		public string Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this.OnPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._Phone = value;
+					this.SendPropertyChanged("Phone");
+					this.OnPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone2", DbType="NVarChar(50)")]
+		public string Phone2
+		{
+			get
+			{
+				return this._Phone2;
+			}
+			set
+			{
+				if ((this._Phone2 != value))
+				{
+					this.OnPhone2Changing(value);
+					this.SendPropertyChanging();
+					this._Phone2 = value;
+					this.SendPropertyChanged("Phone2");
+					this.OnPhone2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mail", DbType="NVarChar(50)")]
+		public string Mail
+		{
+			get
+			{
+				return this._Mail;
+			}
+			set
+			{
+				if ((this._Mail != value))
+				{
+					this.OnMailChanging(value);
+					this.SendPropertyChanging();
+					this._Mail = value;
+					this.SendPropertyChanged("Mail");
+					this.OnMailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adress", DbType="NVarChar(MAX)")]
+		public string Adress
+		{
+			get
+			{
+				return this._Adress;
+			}
+			set
+			{
+				if ((this._Adress != value))
+				{
+					this.OnAdressChanging(value);
+					this.SendPropertyChanging();
+					this._Adress = value;
+					this.SendPropertyChanged("Adress");
+					this.OnAdressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Account", DbType="NVarChar(50)")]
+		public string Account
+		{
+			get
+			{
+				return this._Account;
+			}
+			set
+			{
+				if ((this._Account != value))
+				{
+					this.OnAccountChanging(value);
+					this.SendPropertyChanging();
+					this._Account = value;
+					this.SendPropertyChanged("Account");
+					this.OnAccountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LogoPath", DbType="NVarChar(MAX)")]
+		public string LogoPath
+		{
+			get
+			{
+				return this._LogoPath;
+			}
+			set
+			{
+				if ((this._LogoPath != value))
+				{
+					this.OnLogoPathChanging(value);
+					this.SendPropertyChanging();
+					this._LogoPath = value;
+					this.SendPropertyChanged("LogoPath");
+					this.OnLogoPathChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

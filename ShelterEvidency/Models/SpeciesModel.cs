@@ -19,7 +19,7 @@ namespace ShelterEvidency.Models
             {
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    return new BindableCollection<Species>(db.Species.Where(x => x.IsDeleted.Equals(false)));
+                    return new BindableCollection<Species>(db.Species.Where(x => x.IsDeleted.Equals(null)));
                 }
             }
             catch (Exception ex)
@@ -41,7 +41,7 @@ namespace ShelterEvidency.Models
                         Species species = new Species
                         {
                             SpeciesName = SpeciesName,
-                            IsDeleted = false
+                            IsDeleted = null
                         };
                         db.Species.InsertOnSubmit(species);
                         db.SubmitChanges();
@@ -64,13 +64,31 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var species = db.Species.Single(x => x.Id == id);
-                    species.IsDeleted = true;
+                    species.IsDeleted = DateTime.Now;
                     db.SubmitChanges();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        public static void RestoreDeleted(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var records = (from record in db.Species
+                               where record.IsDeleted >= since && record.IsDeleted <= to
+                               select record).ToList();
+
+                foreach (var record in records)
+                {
+                    record.IsDeleted = null;
+                }
+
+
+                db.SubmitChanges();
             }
         }
     }

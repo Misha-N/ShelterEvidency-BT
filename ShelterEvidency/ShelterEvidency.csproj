@@ -430,7 +430,6 @@
       <DependentUpon>ShelterDatabase.mdf</DependentUpon>
     </Content>
     <Resource Include="Graphics\icon.png" />
-    <Resource Include="Graphics\logo-loz.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

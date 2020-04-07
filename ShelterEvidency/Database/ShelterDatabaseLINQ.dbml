@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ShelterDatabase" Class="ShelterDatabaseLINQDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database\ShelterDatabase.mdf;Integrated Security=True" SettingsObjectName="ShelterEvidency.Properties.Settings" SettingsPropertyName="ShelterDatabaseConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS01;AttachDbFilename=|DataDirectory|\Database\ShelterDatabase.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="ShelterEvidency.Properties.Settings" SettingsPropertyName="ShelterDatabaseConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Adoptions" Member="Adoptions">
     <Type Name="Adoptions">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -9,7 +9,7 @@
       <Column Name="Returned" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="ReturnDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="ReturnReason" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="Animals_Adoptions" Member="Animals" ThisKey="AnimalID" OtherKey="ID" Type="Animals" IsForeignKey="true" />
       <Association Name="People_Adoptions" Member="People" ThisKey="PersonID" OtherKey="Id" Type="People" IsForeignKey="true" />
     </Type>
@@ -21,7 +21,7 @@
       <Column Name="Note" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="AnimalID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="PersonID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="Animals_Walks" Member="Animals" ThisKey="AnimalID" OtherKey="ID" Type="Animals" IsForeignKey="true" />
       <Association Name="People_Walks" Member="People" ThisKey="PersonID" OtherKey="Id" Type="People" IsForeignKey="true" />
     </Type>
@@ -47,26 +47,26 @@
       <Column Name="Weight" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="InShelter" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="IsDead" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="FolderPath" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="ImagePath" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Association Name="Animals_Adoptions" Member="Adoptions" ThisKey="ID" OtherKey="AnimalID" Type="Adoptions" />
       <Association Name="Animals_Walks" Member="Walks" ThisKey="ID" OtherKey="AnimalID" Type="Walks" />
       <Association Name="Animals_Costs" Member="Costs" ThisKey="ID" OtherKey="AnimalID" Type="Costs" />
+      <Association Name="Animals_Deaths" Member="Deaths" ThisKey="ID" OtherKey="AnimalID" Type="Deaths" />
       <Association Name="Animals_Escapes" Member="Escapes" ThisKey="ID" OtherKey="AnimalID" Type="Escapes" />
       <Association Name="Animals_Incidents" Member="Incidents" ThisKey="ID" OtherKey="AnimalID" Type="Incidents" />
       <Association Name="Animals_MedicalRecords" Member="MedicalRecords" ThisKey="ID" OtherKey="AnimalID" Type="MedicalRecords" />
       <Association Name="Animals_Stays" Member="Stays" ThisKey="ID" OtherKey="AnimalID" Type="Stays" />
-      <Association Name="Animals_Deaths" Member="Deaths" ThisKey="ID" OtherKey="AnimalID" Type="Deaths" />
       <Association Name="Breeds_Animals" Member="Breeds" ThisKey="BreedID" OtherKey="Id" Type="Breeds" IsForeignKey="true" />
       <Association Name="Breeds_Animals1" Member="Breeds1" ThisKey="CrossBreedID" OtherKey="Id" Type="Breeds" IsForeignKey="true" />
       <Association Name="CoatTypes_Animals" Member="CoatTypes" ThisKey="CoatTypeID" OtherKey="Id" Type="CoatTypes" IsForeignKey="true" />
       <Association Name="FurColors_Animals" Member="FurColors" ThisKey="FurColorID" OtherKey="Id" Type="FurColors" IsForeignKey="true" />
-      <Association Name="Sexes_Animals" Member="Sexes" ThisKey="SexID" OtherKey="Id" Type="Sexes" IsForeignKey="true" />
-      <Association Name="Species_Animals" Member="Species" ThisKey="SpeciesID" OtherKey="Id" Type="Species" IsForeignKey="true" />
       <Association Name="People_Animals" Member="People" ThisKey="NewOwnerID" OtherKey="Id" Type="People" IsForeignKey="true" />
       <Association Name="People_Animals1" Member="People1" ThisKey="OwnerID" OtherKey="Id" Type="People" IsForeignKey="true" />
       <Association Name="People_Animals2" Member="People2" ThisKey="VetID" OtherKey="Id" Type="People" IsForeignKey="true" />
+      <Association Name="Sexes_Animals" Member="Sexes" ThisKey="SexID" OtherKey="Id" Type="Sexes" IsForeignKey="true" />
+      <Association Name="Species_Animals" Member="Species" ThisKey="SpeciesID" OtherKey="Id" Type="Species" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Breeds" Member="Breeds">
@@ -74,7 +74,7 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="BreedName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="SpeciesID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="Breeds_Animals" Member="Animals" ThisKey="Id" OtherKey="BreedID" Type="Animals" />
       <Association Name="Breeds_Animals1" Member="Animals1" ThisKey="Id" OtherKey="CrossBreedID" Type="Animals" />
     </Type>
@@ -83,7 +83,7 @@
     <Type Name="CoatTypes">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CoatTypeName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="CoatTypes_Animals" Member="Animals" ThisKey="Id" OtherKey="CoatTypeID" Type="Animals" />
     </Type>
   </Table>
@@ -95,9 +95,22 @@
       <Column Name="Price" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="AnimalID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="Costs_MedicalRecords" Member="MedicalRecords" ThisKey="Id" OtherKey="CostID" Type="MedicalRecords" />
       <Association Name="Animals_Costs" Member="Animals" ThisKey="AnimalID" OtherKey="ID" Type="Animals" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Deaths" Member="Deaths">
+    <Type Name="Deaths">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AnimalID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[Natural]" Member="Natural" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Euthanasia" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Other" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Animals_Deaths" Member="Animals" ThisKey="AnimalID" OtherKey="ID" Type="Animals" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.DiaryRecords" Member="DiaryRecords">
@@ -105,7 +118,7 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Record" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Donations" Member="Donations">
@@ -116,7 +129,7 @@
       <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="DonationName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="People_Donations" Member="People" ThisKey="DonatorID" OtherKey="Id" Type="People" IsForeignKey="true" />
     </Type>
   </Table>
@@ -126,7 +139,7 @@
       <Column Name="AnimalID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="Animals_Escapes" Member="Animals" ThisKey="AnimalID" OtherKey="ID" Type="Animals" IsForeignKey="true" />
     </Type>
   </Table>
@@ -134,8 +147,15 @@
     <Type Name="FurColors">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="FurColorName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="FurColors_Animals" Member="Animals" ThisKey="Id" OtherKey="FurColorID" Type="Animals" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Images" Member="Images">
+    <Type Name="Images">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AnimalID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ImagePath" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Incidents" Member="Incidents">
@@ -145,7 +165,7 @@
       <Column Name="Description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="AnimalID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Severity" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="Animals_Incidents" Member="Animals" ThisKey="AnimalID" OtherKey="ID" Type="Animals" IsForeignKey="true" />
     </Type>
   </Table>
@@ -158,65 +178,10 @@
       <Column Name="AnimalID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="VetID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="Animals_MedicalRecords" Member="Animals" ThisKey="AnimalID" OtherKey="ID" Type="Animals" IsForeignKey="true" />
       <Association Name="Costs_MedicalRecords" Member="Costs" ThisKey="CostID" OtherKey="Id" Type="Costs" IsForeignKey="true" />
       <Association Name="People_MedicalRecords" Member="People" ThisKey="VetID" OtherKey="Id" Type="People" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Sexes" Member="Sexes">
-    <Type Name="Sexes">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="SexName" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Association Name="Sexes_Animals" Member="Animals" ThisKey="Id" OtherKey="SexID" Type="Animals" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Shelter" Member="Shelter">
-    <Type Name="Shelter">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Phone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Phone2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Mail" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Adress" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Account" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Species" Member="Species">
-    <Type Name="Species">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="SpeciesName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Species_Animals" Member="Animals" ThisKey="Id" OtherKey="SpeciesID" Type="Animals" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Stays" Member="Stays">
-    <Type Name="Stays">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="FinishDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="AnimalID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="FindPlace" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="FindDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Note" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Adopted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Escaped" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Died" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Animals_Stays" Member="Animals" ThisKey="AnimalID" OtherKey="ID" Type="Animals" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Deaths" Member="Deaths">
-    <Type Name="Deaths">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="AnimalID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="[Natural]" Member="Natural" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Euthanasia" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Other" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Animals_Deaths" Member="Animals" ThisKey="AnimalID" OtherKey="ID" Type="Animals" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.People" Member="People">
@@ -236,7 +201,7 @@
       <Column Name="IsSponsor" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="IsVolunteer" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="IsWalker" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="People_Adoptions" Member="Adoptions" ThisKey="Id" OtherKey="PersonID" Type="Adoptions" />
       <Association Name="People_Walks" Member="Walks" ThisKey="Id" OtherKey="PersonID" Type="Walks" />
       <Association Name="People_Animals" Member="Animals" ThisKey="Id" OtherKey="NewOwnerID" Type="Animals" />
@@ -244,6 +209,49 @@
       <Association Name="People_Animals2" Member="Animals2" ThisKey="Id" OtherKey="VetID" Type="Animals" />
       <Association Name="People_Donations" Member="Donations" ThisKey="Id" OtherKey="DonatorID" Type="Donations" />
       <Association Name="People_MedicalRecords" Member="MedicalRecords" ThisKey="Id" OtherKey="VetID" Type="MedicalRecords" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sexes" Member="Sexes">
+    <Type Name="Sexes">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SexName" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Association Name="Sexes_Animals" Member="Animals" ThisKey="Id" OtherKey="SexID" Type="Animals" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Species" Member="Species">
+    <Type Name="Species">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SpeciesName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Species_Animals" Member="Animals" ThisKey="Id" OtherKey="SpeciesID" Type="Animals" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Stays" Member="Stays">
+    <Type Name="Stays">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FinishDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="AnimalID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FindPlace" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="FindDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Note" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Adopted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Escaped" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Died" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Animals_Stays" Member="Animals" ThisKey="AnimalID" OtherKey="ID" Type="Animals" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Shelter" Member="Shelter">
+    <Type Name="Shelter">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Phone2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Mail" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Adress" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Account" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LogoPath" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

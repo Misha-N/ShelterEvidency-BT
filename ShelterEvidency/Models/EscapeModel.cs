@@ -48,7 +48,7 @@ namespace ShelterEvidency.Models
                 {
 
                     var results = (from escape in db.Escapes
-                                   where (escape.Date >= since && escape.Date <= to) && (escape.IsDeleted.Equals(false))
+                                   where (escape.Date >= since && escape.Date <= to) && (escape.IsDeleted.Equals(null))
                                    select new EscapeInfo
                                    {
                                        ID = escape.Id,
@@ -75,7 +75,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var escape = db.Escapes.Single(x => x.Id == id);
-                    escape.IsDeleted = true;
+                    escape.IsDeleted = DateTime.Now;
                     db.SubmitChanges();
                 }
             }
@@ -91,6 +91,24 @@ namespace ShelterEvidency.Models
                 return true;
             else
                 return false;
+        }
+
+        public static void RestoreDeleted(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var records = (from record in db.Escapes
+                               where record.IsDeleted >= since && record.IsDeleted <= to
+                               select record).ToList();
+
+                foreach (var record in records)
+                {
+                    record.IsDeleted = null;
+                }
+
+
+                db.SubmitChanges();
+            }
         }
     }
 }

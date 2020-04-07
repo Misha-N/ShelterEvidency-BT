@@ -50,7 +50,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var results = (from record in db.DiaryRecords
-                                   where (record.Date.Equals(selectedDate)) && (record.IsDeleted.Equals(false))
+                                   where (record.Date.Equals(selectedDate)) && (record.IsDeleted.Equals(null))
                                    select new DiaryRecordInfo
                                    {
                                        ID = record.Id,
@@ -75,7 +75,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var record = db.DiaryRecords.Single(x => x.Id == id);
-                    record.IsDeleted = true;
+                    record.IsDeleted = DateTime.Now;
                     db.SubmitChanges();
                 }
             }
@@ -92,6 +92,24 @@ namespace ShelterEvidency.Models
                 return true;
             else
                 return false;
+        }
+
+        public static void RestoreDeleted(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var records = (from record in db.DiaryRecords
+                               where record.IsDeleted >= since && record.IsDeleted <= to
+                               select record).ToList();
+
+                foreach (var record in records)
+                {
+                    record.IsDeleted = null;
+                }
+
+
+                db.SubmitChanges();
+            }
         }
         #endregion
     }

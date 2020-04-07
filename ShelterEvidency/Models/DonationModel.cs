@@ -53,7 +53,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var results = (from donation in db.Donations
-                                   where ((donation.IsDeleted.Equals(false)))
+                                   where ((donation.IsDeleted.Equals(null)))
                                    select new DonationInfo
                                    {
                                        ID = donation.ID,
@@ -83,7 +83,7 @@ namespace ShelterEvidency.Models
                     //return db.Donations.Where(x => x.Date >= since && x.Date <= to).ToList();
 
                     var results = (from donation in db.Donations
-                                   where (donation.Date >= since && donation.Date <= to) && (donation.IsDeleted.Equals(false))
+                                   where (donation.Date >= since && donation.Date <= to) && (donation.IsDeleted.Equals(null))
                                    select new DonationInfo
                                    {
                                        ID = donation.ID,
@@ -160,7 +160,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var results = (from donation in db.Donations
-                                   where (donation.DonatorID.Equals(personID)) && (donation.IsDeleted.Equals(false))
+                                   where (donation.DonatorID.Equals(personID)) && (donation.IsDeleted.Equals(null))
                                    select new DonationInfo
                                    {
                                        ID = donation.ID,
@@ -187,7 +187,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var incident = db.Incidents.Single(x => x.ID == id);
-                    incident.IsDeleted = true;
+                    incident.IsDeleted = DateTime.Now;
                     db.SubmitChanges();
                 }
             }
@@ -204,6 +204,24 @@ namespace ShelterEvidency.Models
                 return true;
             else
                 return false;
+        }
+
+        public static void RestoreDeleted(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var records = (from record in db.Donations
+                               where record.IsDeleted >= since && record.IsDeleted <= to
+                               select record).ToList();
+
+                foreach (var record in records)
+                {
+                    record.IsDeleted = null;
+                }
+
+
+                db.SubmitChanges();
+            }
         }
     }
 }

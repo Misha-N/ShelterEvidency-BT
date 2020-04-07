@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace ShelterEvidency.ViewModels
 {
@@ -211,7 +212,9 @@ namespace ShelterEvidency.ViewModels
             ShelterMail = ShelterModel.Mail;
             ShelterAdress = ShelterModel.Adress;
             ShelterAccount = ShelterModel.Account;
+            ShelterLogo = ShelterModel.LogoPath;
         }
+
 
 
         private string _shelterName;
@@ -225,6 +228,20 @@ namespace ShelterEvidency.ViewModels
             {
                 _shelterName = value;
                 NotifyOfPropertyChange(() => ShelterName);
+            }
+        }
+
+        private string _shelterLogoPath;
+        public string ShelterLogo
+        {
+            get
+            {
+                return _shelterLogoPath;
+            }
+            set
+            {
+                _shelterLogoPath = value;
+                NotifyOfPropertyChange(() => ShelterLogo);
             }
         }
 

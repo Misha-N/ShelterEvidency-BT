@@ -135,7 +135,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var animal = db.Animals.FirstOrDefault(i => i.ID == animalID);
-                    if (animal != null && animal.IsDeleted != true)
+                    if (animal != null && animal.IsDeleted == null)
                     {
                         ID = animal.ID;
                         Name = animal.Name;
@@ -211,7 +211,7 @@ namespace ShelterEvidency.Models
                 {
                     var results =
                         (from animal in db.Animals
-                         where (animal.IsDeleted.Equals(false))
+                         where (animal.IsDeleted.Equals(null))
                          select new AnimalInfo
                          {
                              ID = animal.ID,
@@ -255,7 +255,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var results = (from animal in db.Animals
-                                   where ((animal.IsDeleted.Equals(false)) &&
+                                   where ((animal.IsDeleted.Equals(null)) &&
                                           ((animal.Name.Contains(searchValue)) ||
                                           (animal.ID.ToString().Equals(searchValue)) ||
                                           (animal.Species.SpeciesName.Contains(searchValue)) ||
@@ -301,7 +301,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var results = (from animal in db.Animals
-                                   where ((animal.InShelter.Equals(true)) && animal.IsDeleted.Equals(false))
+                                   where ((animal.InShelter.Equals(true)) && animal.IsDeleted.Equals(null))
                                    select new AnimalInfo
                                    {
                                        ID = animal.ID,
@@ -344,7 +344,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var results = (from animal in db.Animals
-                                   where ((animal.InShelter.Equals(true)) && animal.IsDeleted.Equals(false))
+                                   where ((animal.InShelter.Equals(true)) && animal.IsDeleted.Equals(null))
                                    select new AnimalInfo
                                    {
                                        ID = animal.ID,
@@ -453,7 +453,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var animal = db.Animals.Single(x => x.ID == id);
-                    animal.IsDeleted = true;
+                    animal.IsDeleted = DateTime.Now;
                     db.SubmitChanges();
                 }
             }
@@ -469,6 +469,24 @@ namespace ShelterEvidency.Models
                 return true;
             else
                 return false;
+        }
+
+        public static void RestoreDeleted(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var records = (from record in db.Animals
+                               where record.IsDeleted >= since && record.IsDeleted <= to
+                               select record).ToList();
+
+                foreach (var record in records)
+                {
+                    record.IsDeleted = null;
+                }
+
+
+                db.SubmitChanges();
+            }
         }
 
     }

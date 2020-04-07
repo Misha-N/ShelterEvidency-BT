@@ -55,7 +55,7 @@ namespace ShelterEvidency.Models
                 {
 
                     var results = (from death in db.Deaths
-                                   where (death.Date >= since && death.Date <= to) && (death.IsDeleted.Equals(false))
+                                   where (death.Date >= since && death.Date <= to) && (death.IsDeleted.Equals(null))
                                    select new DeathInfo
                                    {
                                        ID = death.Id,
@@ -85,7 +85,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var death = db.Deaths.Single(x => x.Id == id);
-                    death.IsDeleted = true;
+                    death.IsDeleted = DateTime.Now;
                     db.SubmitChanges();
                 }
             }
@@ -101,6 +101,24 @@ namespace ShelterEvidency.Models
                 return true;
             else
                 return false;
+        }
+
+        public static void RestoreDeleted(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var records = (from record in db.Deaths
+                               where record.IsDeleted >= since && record.IsDeleted <= to
+                               select record).ToList();
+
+                foreach (var record in records)
+                {
+                    record.IsDeleted = null;
+                }
+
+
+                db.SubmitChanges();
+            }
         }
     }
 }

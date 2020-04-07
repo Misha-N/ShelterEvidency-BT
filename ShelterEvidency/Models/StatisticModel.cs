@@ -15,7 +15,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from animal in db.Animals
-                         where (animal.InShelter == true) && animal.IsDeleted.Equals(false)
+                         where (animal.InShelter == true) && animal.IsDeleted.Equals(null)
                          select animal)
                         .Count();
                     if (total != null)
@@ -39,7 +39,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from adoption in db.Adoptions
-                         where (adoption.Returned == false) && adoption.IsDeleted.Equals(false)
+                         where (adoption.Returned == false) && adoption.IsDeleted.Equals(null)
                          select adoption)
                         .Count();
                     if (total != null)
@@ -63,7 +63,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from cost in db.Costs
-                         where cost.IsDeleted.Equals(false)
+                         where cost.IsDeleted.Equals(null)
                          select cost.Price)
                         .Sum();
                     if (total != null)
@@ -87,7 +87,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from cost in db.Costs
-                         where cost.AnimalID.Equals(animalID) && cost.IsDeleted.Equals(false)
+                         where cost.AnimalID.Equals(animalID) && cost.IsDeleted.Equals(null)
                          select cost.Price)
                         .Sum();
                     if (total != null)
@@ -111,7 +111,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from stay in db.Stays
-                         where stay.AnimalID.Equals(animalID) && stay.IsDeleted.Equals(false) && !stay.FinishDate.Equals(null)
+                         where stay.AnimalID.Equals(animalID) && stay.IsDeleted.Equals(null) && !stay.FinishDate.Equals(null)
                          select (int?)((DateTime)stay.FinishDate - (DateTime)stay.StartDate).TotalDays)
                         .Sum();
 
@@ -144,7 +144,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from stay in db.Stays
-                         where stay.AnimalID.Equals(animalID) && stay.IsDeleted.Equals(false)
+                         where stay.AnimalID.Equals(animalID) && stay.IsDeleted.Equals(null)
                          select stay)
                         .Count();
                     if (total != null)
@@ -169,7 +169,7 @@ namespace ShelterEvidency.Models
                 {
                     bool? result =
                         (from adoption in db.Adoptions
-                         where adoption.AnimalID.Equals(animalID) && adoption.IsDeleted.Equals(false)
+                         where adoption.AnimalID.Equals(animalID) && adoption.IsDeleted.Equals(null)
                          select adoption.Returned)
                         .Contains(false);
                     if (result != null)
@@ -193,7 +193,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from incident in db.Incidents
-                         where incident.AnimalID.Equals(animalID) && incident.IsDeleted.Equals(false)
+                         where incident.AnimalID.Equals(animalID) && incident.IsDeleted.Equals(null)
                          select incident)
                         .Count();
                     if (total != null)
@@ -217,7 +217,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from record in db.MedicalRecords
-                         where record.AnimalID.Equals(animalID) && record.IsDeleted.Equals(false)
+                         where record.AnimalID.Equals(animalID) && record.IsDeleted.Equals(null)
                          select record)
                         .Count();
                     if (total != null)
@@ -241,7 +241,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from escape in db.Escapes
-                         where escape.AnimalID.Equals(animalID) && escape.IsDeleted.Equals(false)
+                         where escape.AnimalID.Equals(animalID) && escape.IsDeleted.Equals(null)
                          select escape)
                         .Count();
                     if (total != null)
@@ -265,7 +265,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from walk in db.Walks
-                         where walk.AnimalID.Equals(animalID) && walk.IsDeleted.Equals(false)
+                         where walk.AnimalID.Equals(animalID) && walk.IsDeleted.Equals(null)
                          select walk)
                         .Count();
                     if (total != null)
@@ -289,7 +289,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from cost in db.Costs
-                         where (cost.Date >= since) && (cost.Date <= to) && cost.IsDeleted.Equals(false)
+                         where (cost.Date >= since) && (cost.Date <= to) && cost.IsDeleted.Equals(null)
                          select cost.Price)
                         .Sum();
                     if (total != null)
@@ -313,7 +313,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from donation in db.Donations
-                         where donation.IsDeleted.Equals(false)
+                         where donation.IsDeleted.Equals(null)
                          select donation.Amount)
                         .Sum();
                     if (total != null)
@@ -337,7 +337,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from donation in db.Donations
-                         where (donation.Date >= since) && (donation.Date <= to) && donation.IsDeleted.Equals(false)
+                         where (donation.Date >= since) && (donation.Date <= to) && donation.IsDeleted.Equals(null)
                          select donation.Amount)
                         .Sum();
                     if (total != null)
@@ -361,7 +361,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from escape in db.Escapes
-                         where (escape.Date >= since) && (escape.Date <= to) && escape.IsDeleted.Equals(false)
+                         where (escape.Date >= since) && (escape.Date <= to) && escape.IsDeleted.Equals(null)
                          select escape)
                         .Count();
                     if (total != null)
@@ -385,7 +385,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from walk in db.Walks
-                         where (walk.Date >= since) && (walk.Date <= to) && walk.IsDeleted.Equals(false)
+                         where (walk.Date >= since) && (walk.Date <= to) && walk.IsDeleted.Equals(null)
                          select walk)
                         .Count();
                     if (total != null)
@@ -409,7 +409,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from stay in db.Stays
-                         where (stay.StartDate >= since) && (stay.StartDate <= to) && stay.IsDeleted.Equals(false)
+                         where (stay.StartDate >= since) && (stay.StartDate <= to) && stay.IsDeleted.Equals(null)
                          select stay)
                         .Count();
                     if (total != null)
@@ -433,7 +433,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from incident in db.Incidents
-                         where (incident.IncidentDate >= since) && (incident.IncidentDate <= to) && incident.IsDeleted.Equals(false)
+                         where (incident.IncidentDate >= since) && (incident.IncidentDate <= to) && incident.IsDeleted.Equals(null)
                          select incident)
                         .Count();
                     if (total != null)
@@ -457,7 +457,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from record in db.MedicalRecords
-                         where (record.Date >= since) && (record.Date <= to) && record.IsDeleted.Equals(false)
+                         where (record.Date >= since) && (record.Date <= to) && record.IsDeleted.Equals(null)
                          select record)
                         .Count();
                     if (total != null)
@@ -481,7 +481,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from stay in db.Stays
-                         where (stay.FinishDate >= since) && (stay.FinishDate <= to) && stay.IsDeleted.Equals(false) && stay.Died.Equals(true)
+                         where (stay.FinishDate >= since) && (stay.FinishDate <= to) && stay.IsDeleted.Equals(null) && stay.Died.Equals(true)
                          select stay)
                         .Count();
                     if (total != null)
@@ -505,7 +505,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from adoption in db.Adoptions
-                         where (adoption.Date >= since) && (adoption.Date <= to) && adoption.IsDeleted.Equals(false)
+                         where (adoption.Date >= since) && (adoption.Date <= to) && adoption.IsDeleted.Equals(null)
                          select adoption)
                         .Count();
                     if (total != null)
@@ -529,7 +529,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from adoption in db.Adoptions
-                         where (adoption.Date >= since) && (adoption.Date <= to) && adoption.IsDeleted.Equals(false) && adoption.Returned.Equals(false)
+                         where (adoption.Date >= since) && (adoption.Date <= to) && adoption.IsDeleted.Equals(null) && adoption.Returned.Equals(false)
                          select adoption)
                         .Count();
                     if (total != null)
@@ -553,7 +553,7 @@ namespace ShelterEvidency.Models
                 {
                     int? total =
                         (from adoption in db.Adoptions
-                         where (adoption.ReturnDate >= since) && (adoption.ReturnDate <= to) && adoption.IsDeleted.Equals(false)
+                         where (adoption.ReturnDate >= since) && (adoption.ReturnDate <= to) && adoption.IsDeleted.Equals(null)
                          select adoption)
                         .Count();
                     if (total != null)

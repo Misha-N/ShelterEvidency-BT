@@ -89,6 +89,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var results = (from person in db.People
+                                   where person.IsDeleted.Equals(null)
                                    select new PersonInfo
                                    {
                                        ID = person.Id,
@@ -127,7 +128,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var results = (from person in db.People
-                                   where ((person.LastName.Contains(searchValue)) ||
+                                   where person.IsDeleted.Equals(null) && (person.LastName.Contains(searchValue) ||
                                           (person.Id.ToString().Equals(searchValue)))
                                    select new PersonInfo
                                    {
@@ -164,7 +165,7 @@ namespace ShelterEvidency.Models
             {
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    var person = db.People.FirstOrDefault(i => i.Id == personID);
+                    var person = db.People.FirstOrDefault(i => i.Id == personID && i.IsDeleted.Equals(null));
                     if (person != null)
                     {
                         ID = person.Id;
@@ -414,7 +415,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var person = db.People.Single(x => x.Id == id);
-                    person.IsDeleted = true;
+                    person.IsDeleted = DateTime.Now;
                     db.SubmitChanges();
                 }
             }
@@ -430,6 +431,24 @@ namespace ShelterEvidency.Models
                 return true;
             else
                 return false;
+        }
+
+        public static void RestoreDeleted(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var records = (from record in db.People
+                               where record.IsDeleted >= since && record.IsDeleted <= to
+                               select record).ToList();
+
+                foreach (var record in records)
+                {
+                    record.IsDeleted = null;
+                }
+
+
+                db.SubmitChanges();
+            }
         }
     }
 }

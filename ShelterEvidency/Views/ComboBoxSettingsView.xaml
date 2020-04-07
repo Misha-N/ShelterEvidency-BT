@@ -159,7 +159,7 @@
                   Nastavení typů srsti
                     </TextBlock>
 
-                    <Button Grid.Column="1" x:Name="DeleteCoatType" IsEnabled="{Binding CoatTypeSelected}"
+                    <Button Grid.Column="1" x:Name="DeleteCoatType"  IsEnabled="{Binding CoatTypeSelected}"
                         Style="{StaticResource MaterialDesignIconForegroundButton}" VerticalAlignment="Center" >
                         <materialDesign:PackIcon
                         Kind="DeleteForever"

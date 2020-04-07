@@ -18,7 +18,7 @@ namespace ShelterEvidency.Models
             {
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    return new BindableCollection<FurColors>(db.FurColors.Where(x => x.IsDeleted.Equals(false)));
+                    return new BindableCollection<FurColors>(db.FurColors.Where(x => x.IsDeleted.Equals(null)));
                 }
             }
             catch (Exception ex)
@@ -39,7 +39,7 @@ namespace ShelterEvidency.Models
                         FurColors furColor = new FurColors
                         {
                             FurColorName = FurColorName,
-                            IsDeleted = false
+                            IsDeleted = null
                         };
                         db.FurColors.InsertOnSubmit(furColor);
                         db.SubmitChanges();
@@ -62,13 +62,31 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var furColor = db.FurColors.Single(x => x.Id == id);
-                    furColor.IsDeleted = true;
+                    furColor.IsDeleted = DateTime.Now;
                     db.SubmitChanges();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        public static void RestoreDeleted(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var records = (from record in db.FurColors
+                               where record.IsDeleted >= since && record.IsDeleted <= to
+                               select record).ToList();
+
+                foreach (var record in records)
+                {
+                    record.IsDeleted = null;
+                }
+
+
+                db.SubmitChanges();
             }
         }
     }

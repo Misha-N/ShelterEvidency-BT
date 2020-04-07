@@ -145,7 +145,10 @@
 
                                 <materialDesign:Card Margin="15" Grid.Row="1" Height="Auto" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
                     materialDesign:ShadowAssist.ShadowDepth="Depth5" UniformCornerRadius="400">
-                                    <Image Source="/Graphics/logo-loz.jpg" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="195" MaxHeight="190"/>
+                                    <Grid>
+                                        <materialDesign:PackIcon Kind="ImageFrame" Width="Auto" Height="Auto" Margin="25" Opacity="0.1" />
+                                    <Image Source="{Binding ShelterLogo}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="195" MaxHeight="190"/>
+                                    </Grid>
                                 </materialDesign:Card>
 
                             </Grid>
@@ -347,7 +350,9 @@
 
                 </Grid>
 
-                <ContentControl x:Name="ActiveItem"/>
+                <ScrollViewer>
+                    <ContentControl x:Name="ActiveItem"/>
+                </ScrollViewer>
 
             </Grid>
 

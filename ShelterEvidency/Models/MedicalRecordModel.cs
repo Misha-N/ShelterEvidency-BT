@@ -53,7 +53,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var results = (from record in db.MedicalRecords
-                                   where (record.AnimalID.Equals(animalID) && (record.IsDeleted.Equals(false)))
+                                   where (record.AnimalID.Equals(animalID) && (record.IsDeleted.Equals(null)))
                                    select new MedicalRecordInfo
                                    {
                                        ID = record.Id,
@@ -84,7 +84,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var results = (from record in db.MedicalRecords
-                                   where (record.AnimalID.Equals(animalID) && (record.Date >= since && record.Date <= to) && (record.IsDeleted.Equals(false)))
+                                   where (record.AnimalID.Equals(animalID) && (record.Date >= since && record.Date <= to) && (record.IsDeleted.Equals(null)))
                                    select new MedicalRecordInfo
                                    {
                                        ID = record.Id,
@@ -164,7 +164,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var record = db.MedicalRecords.Single(x => x.Id == id);
-                    record.IsDeleted = true;
+                    record.IsDeleted = DateTime.Now;
                     db.SubmitChanges();
                 }
             }
@@ -181,6 +181,24 @@ namespace ShelterEvidency.Models
                 return true;
             else
                 return false;
+        }
+
+        public static void RestoreDeleted(DateTime since, DateTime to)
+        {
+            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            {
+                var records = (from record in db.MedicalRecords
+                               where record.IsDeleted >= since && record.IsDeleted <= to
+                               select record).ToList();
+
+                foreach (var record in records)
+                {
+                    record.IsDeleted = null;
+                }
+
+
+                db.SubmitChanges();
+            }
         }
     }
 }

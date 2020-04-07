@@ -10,7 +10,7 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
-             d:DesignHeight="900" d:DesignWidth="1200">
+             d:DesignHeight="1080" d:DesignWidth="1200">
     <UserControl.Resources>
 
         <helpers:InvertBooleanConverter  x:Key="boolConvert"/>
@@ -30,8 +30,82 @@
             <materialDesign:PackIcon Kind="Cogs" Margin="30,30,0,0"  Width="150" Opacity="0.2" Height="150"/>
 
 
-            <materialDesign:Card VerticalAlignment="Bottom"
-    materialDesign:ShadowAssist.ShadowDepth="Depth1" Margin="20,0,20,75">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <materialDesign:Card Grid.Row="2" 
+    materialDesign:ShadowAssist.ShadowDepth="Depth1" Margin="20">
+                    <Grid Height="Auto" Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="4"
+    Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+  Změna loga na úvodní obrazovce
+                        </TextBlock>
+
+                        <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" x:Name="ChangeLogo" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"  Height="Auto" Margin="10">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="ImageEditOutline"  Width="20" Height="20"/>
+                                <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Vybrat obrázek</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                    </Grid>
+                    </materialDesign:Card>
+
+                <materialDesign:Card Grid.Row="1" 
+    materialDesign:ShadowAssist.ShadowDepth="Depth1" Margin="20">
+                    <Grid Height="Auto" Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="4"
+    Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+  Obnovit smazané záznamy
+                        </TextBlock>
+
+                        <DatePicker Width="Auto" Grid.Row="1" Height="Auto"  Margin="5" materialDesign:HintAssist.Hint="Od data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=Since, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+                        <DatePicker Width="Auto" Grid.Row="1" Height="Auto"  Grid.Column="1" Margin="5" materialDesign:HintAssist.Hint="Do data" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=To, Mode=OneWayToSource,  UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+
+                        <Button x:Name="Restore" Grid.Row="1" Grid.Column="2" Height="Auto" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"
+  Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+  ToolTip="MaterialDesignFloatingActionAccentButton">
+                            <materialDesign:PackIcon Margin="10"
+    Kind="RestoreFromTrash"
+    Height="24"
+    Width="24" />
+                        </Button>
+                    </Grid>
+                </materialDesign:Card>
+
+
+
+
+                <materialDesign:Card Grid.Row="3" Grid.RowSpan="3"
+    materialDesign:ShadowAssist.ShadowDepth="Depth1" Margin="20">
                 <GroupBox FontSize="15"
                       Header="Úprava základních údajů o útulku" 
                           
@@ -70,10 +144,10 @@
 
                 </GroupBox>
             </materialDesign:Card>
+            </Grid>
 
-            <ScrollViewer Grid.Column="1">
-                <ContentControl  x:Name="ActiveItem"/>
-            </ScrollViewer>
+                <ContentControl Grid.Column="1"  x:Name="ActiveItem"/>
+
 
             <ProgressBar  
               Visibility="{Binding IsWorking, Converter={StaticResource VisibleIfTrueConverter}, Mode=OneWay}"
