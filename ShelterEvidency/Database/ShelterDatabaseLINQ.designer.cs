@@ -90,7 +90,7 @@ namespace ShelterEvidency.Database
     #endregion
 		
 		public ShelterDatabaseLINQDataContext() : 
-				base(global::ShelterEvidency.Properties.Settings.Default.ShelterDatabaseConnectionString1, mappingSource)
+				base(global::ShelterEvidency.Properties.Settings.Default.ShelterDatabaseConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

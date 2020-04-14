@@ -104,7 +104,7 @@
 
 
 
-                        <DatePicker Margin="5" Height="Auto" Width="Auto" VerticalAlignment="Center" Grid.Column="2"  materialDesign:HintAssist.Hint="Datum narození" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
+                        <DatePicker Margin="5" Height="Auto" Width="Auto" VerticalAlignment="Center" Grid.Column="2"  materialDesign:HintAssist.Hint="Datum narození" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDate="{Binding Path=BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Long"/>
                     </Grid>
 
 

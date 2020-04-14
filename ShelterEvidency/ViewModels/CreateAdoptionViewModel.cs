@@ -62,7 +62,6 @@ namespace ShelterEvidency.ViewModels
         #region List setting
 
         private BindableCollection<AnimalInfo> _animals;
-
         public BindableCollection<AnimalInfo> Animals
         {
             get
