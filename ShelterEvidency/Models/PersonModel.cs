@@ -271,7 +271,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var results = (from person in db.People
-                                   where ((person.IsVet.Equals(true)))
+                                   where ((person.IsVet.Equals(true)) && person.IsDeleted.Equals(null))
                                    select new PersonInfo
                                    {
                                        ID = person.Id,
@@ -307,7 +307,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var results = (from person in db.People
-                                   where ((person.IsSponsor.Equals(true)))
+                                   where ((person.IsSponsor.Equals(true)) && person.IsDeleted.Equals(null))
                                    select new PersonInfo
                                    {
                                        ID = person.Id,
@@ -343,7 +343,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var results = (from person in db.People
-                                   where ((person.IsWalker.Equals(true)))
+                                   where ((person.IsWalker.Equals(true)) && person.IsDeleted.Equals(null))
                                    select new PersonInfo
                                    {
                                        ID = person.Id,
@@ -379,7 +379,7 @@ namespace ShelterEvidency.Models
                 using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
                     var results = (from person in db.People
-                                   where ((person.IsOwner.Equals(true)))
+                                   where ((person.IsOwner.Equals(true)) && person.IsDeleted.Equals(null))
                                    select new PersonInfo
                                    {
                                        ID = person.Id,
