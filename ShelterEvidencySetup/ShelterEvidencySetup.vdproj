@@ -6086,7 +6086,7 @@
         {
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_070EFF7312E44A99A6DF143AC8F07E90"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[AppDataFolder][Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -6135,7 +6135,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ShelterEvidencySetup"
         "ProductCode" = "8:{FD0A61AF-1EBF-4EB1-8B6B-1EE1F3C96206}"
-        "PackageCode" = "8:{97D938AC-B2FE-472D-AD40-5E4CDF81A10E}"
+        "PackageCode" = "8:{5C5F7A42-FF2F-4DBA-934F-98BE3771D88A}"
         "UpgradeCode" = "8:{92EFDFEB-B6A8-409E-B363-07064F9E2100}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

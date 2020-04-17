@@ -62,19 +62,26 @@ namespace ShelterEvidency.Models
 
         public static void RestoreDeleted(DateTime since, DateTime to)
         {
-            using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
+            try
             {
-                var records = (from record in db.CoatTypes
-                               where record.IsDeleted >= since && record.IsDeleted <= to
-                               select record).ToList();
-
-                foreach (var record in records)
+                using (ShelterDatabaseLINQDataContext db = new ShelterDatabaseLINQDataContext())
                 {
-                    record.IsDeleted = null;
+                    var records = (from record in db.CoatTypes
+                                   where record.IsDeleted >= since && record.IsDeleted <= to
+                                   select record).ToList();
+
+                    foreach (var record in records)
+                    {
+                        record.IsDeleted = null;
+                    }
+
+
+                    db.SubmitChanges();
                 }
-
-
-                db.SubmitChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

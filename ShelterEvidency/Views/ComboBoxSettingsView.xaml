@@ -122,7 +122,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBox x:Name="NewBreedName"  Width="Auto" Height="Auto" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  materialDesign:HintAssist.Hint="Název nového plemena" TextWrapping="Wrap" Margin="0,5" Padding="2"/>
 
-                    <ComboBox Margin="5"  Width="Auto" Height="Auto" VerticalAlignment="Center" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Druh" ItemsSource="{Binding Path=SpeciesList, Mode=OneWay}" DisplayMemberPath="SpeciesName" SelectedValuePath="Id" SelectedValue="{Binding Path=NewBreedSpecies, Mode=OneWayToSource}"/>
+                    <ComboBox Margin="5"  Width="Auto" Height="Auto" VerticalAlignment="Center" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Druh" ItemsSource="{Binding Path=SpeciesList, Mode=OneWay}" DisplayMemberPath="SpeciesName" SelectedValuePath="Id" SelectedValue="{Binding Path=NewBreedSpecies, Mode=TwoWay}"/>
 
 
                     <Button Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="2" x:Name="AddBreed" IsEnabled="{Binding NewBreedSelected}"

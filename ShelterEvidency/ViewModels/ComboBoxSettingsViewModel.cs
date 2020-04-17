@@ -193,6 +193,7 @@ namespace ShelterEvidency.ViewModels
         public void ClearNewBreed()
         {
             NewBreed = new BreedModel();
+            NewBreedSpecies = null;
             NotifyOfPropertyChange(() => NewBreedName);
             NotifyOfPropertyChange(() => NewBreedSpecies);
             NotifyOfPropertyChange(() => NewBreedSelected);
