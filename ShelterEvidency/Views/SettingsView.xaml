@@ -149,6 +149,7 @@
                 <ContentControl Grid.Column="1"  x:Name="ActiveItem"/>
 
 
+
             <ProgressBar  
               Visibility="{Binding IsWorking, Converter={StaticResource VisibleIfTrueConverter}, Mode=OneWay}"
               Grid.RowSpan="2" Grid.ColumnSpan="3"

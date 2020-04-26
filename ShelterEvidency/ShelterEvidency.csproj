@@ -122,10 +122,14 @@
     <Compile Include="Models\DeathModel.cs" />
     <Compile Include="Models\EscapeModel.cs" />
     <Compile Include="Models\ShelterModel.cs" />
+    <Compile Include="ViewModels\CardPageViewModel.cs" />
     <Compile Include="ViewModels\CreateDeathViewModel.cs" />
     <Compile Include="ViewModels\CreateEscapeViewModel.cs" />
     <Compile Include="ViewModels\GeneralStaysViewModel.cs" />
     <Compile Include="ViewModels\StayEndViewModel.cs" />
+    <Compile Include="Views\CardPageView.xaml.cs">
+      <DependentUpon>CardPageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreateDeathView.xaml.cs">
       <DependentUpon>CreateDeathView.xaml</DependentUpon>
     </Compile>
@@ -288,6 +292,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BasicInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CardPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

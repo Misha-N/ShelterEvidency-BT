@@ -17,10 +17,19 @@ namespace ShelterEvidency.ViewModels
         public StayModel Stay { get; set; }
 
         readonly SearchAnimalViewModel prnt;
+        readonly HomeViewModel prnt1;
 
-        public AddAnimalViewModel(SearchAnimalViewModel parent = null)
+        public AddAnimalViewModel(SearchAnimalViewModel parent)
         {
             prnt = parent;
+            Image = new ImageModel();
+            Animal = new AnimalModel();
+            Stay = new StayModel();
+        }
+
+        public AddAnimalViewModel(HomeViewModel parent)
+        {
+            prnt1 = parent;
             Image = new ImageModel();
             Animal = new AnimalModel();
             Stay = new StayModel();
@@ -377,6 +386,8 @@ namespace ShelterEvidency.ViewModels
                 MessageBox.Show(Animal.Name + " přidán do evidence.");
                 if (prnt != null)
                     prnt.UpdateAnimals();
+                if (prnt1 != null)
+                    prnt1.Home();
                 TryClose();
             }
             else
@@ -401,6 +412,8 @@ namespace ShelterEvidency.ViewModels
         }
         public void Cancel()
         {
+            if (prnt1 != null)
+                prnt1.Home();
             TryClose();
         }
 
