@@ -157,7 +157,7 @@ namespace ShelterEvidency.Models
                 {
 
                     var results = (from stay in db.Stays
-                                   where (stay.StartDate >= since && stay.StartDate <= to) && (stay.IsDeleted.Equals(null))
+                                   where (stay.StartDate >= since && stay.StartDate <= to) && (stay.IsDeleted.Equals(null) && (stay.Animals.IsDeleted.Equals(null)))
                                    select new StayInfo
                                    {
                                        ID = stay.Id,
